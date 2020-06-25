@@ -17,7 +17,7 @@ class HomeScreen extends React.Component{
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    Learn React
+                    Bible App
                 </a>
                 </header>
       </div>

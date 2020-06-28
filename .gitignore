@@ -56,3 +56,4 @@ desktop.ini
 
 /node_modules/*
 .cache
+*.svg

@@ -79,4 +79,4 @@ Thumbs.db
 desktop.ini
 
 .cache
-*.svg
+*.css.map

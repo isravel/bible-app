@@ -1,1 +1,0 @@
-{"version":3,"sources":["styles.scss"],"names":[],"mappings":"AAAA,EACE,mBAAA,WAAA,WAAA;AAEF,KACE,YAAA,IAAA,CAAA,WACA,UAAA","file":"../../styles-rtl.css","sourcesContent":["*{\n  box-sizing: border-box;\n}\nhtml {\n  font-family: 'Lato', sans-serif;\n  font-size: 14px;\n\n}\n"]}

@@ -103,7 +103,7 @@ gulp.task('rtl', done => {
         .pipe(rename({
             suffix: '-rtl'
         }))
-        .pipe(sourcemaps.write(cssMapPath + '/css-rtl'))
+        .pipe(sourcemaps.write(cssMapPath))
         .pipe(gulp.dest(cssPath + '/css-rtl'));
     done();
 });
@@ -156,7 +156,7 @@ gulp.task('metadata', done => {
             var $ = cheerio.load(file.contents.toString(), {
                 xmlMode: true
             });
-            var data = $('svg > symbol').map(done => {
+            var data = $('svg > symbol').map(function() {
                 return {
                     name: $(this).attr('id'),
                     viewBox: $(this).attr('viewBox')
@@ -174,21 +174,17 @@ gulp.task('metadata', done => {
     done();
 });
 
-/*! SVG Compile function */
-
-gulp.task('svg', done => {
-    gulp.series('metadata', 'svginlinehtml')
-    done();
-});
-
 /*! Watch files function */
 
 gulp.task('watch', done => {
-
     gulp.watch(scssPath, gulp.series('sass'));
     gulp.watch(iconPath, gulp.series('metadata', 'svginlinehtml'));
     done();
 });
+
+/*! SVG Compile function */
+
+gulp.task('svg', gulp.parallel('metadata', 'svginlinehtml'));
 
 /*! Compile all files */
 

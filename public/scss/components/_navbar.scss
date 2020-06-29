@@ -1,0 +1,46 @@
+.navbar{
+  display: flex;
+  align-items: center;
+  padding: 10px 50px;
+  border-bottom: 1px solid $clr-grey-200;
+  > .left{
+    margin-right: auto;
+  }
+  > .right{
+    margin-left: auto;
+  }
+  >.center{
+    margin: 0 auto;
+  }
+  svg{
+    width: 30px;
+    height: 30px;
+    fill: $clr-grey-700;
+  }
+  .logo{
+    display: inline-flex;
+    align-items: center;
+    font-size: 1.75rem;
+    svg{
+      margin-right: 15px;
+    }
+  }
+  .chapter__nav{
+    display: inline-flex;
+    align-items: center;
+    &__next, &__prev{
+      cursor: pointer;
+    }
+    &__name{
+      margin: 0 30px;
+      text-transform: uppercase;
+    }
+  }
+  .nav__icons{
+    display: inline-flex;
+    align-items: center;
+    svg{
+      margin: 0 10px;
+    }
+  }
+}

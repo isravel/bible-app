@@ -83,112 +83,108 @@ gulp.task('sass', done => {
 
 /*! RTL support */
 gulp.task('rtl', done => {
-  return gulp.src(scssPath)
-    .pipe(sourcemaps.init())
-    .pipe(sass({
-      outputStyle: compresstype
-    }).on('error', sass.logError))
-    .pipe(postcss(processors, {
-      syntax: scss
-    }))
-    .pipe(autoprefixer({
-      overrideBrowserslist: autoprefixBrowsers,
-      grid: true
-    }))
-    /* .pipe(cleanCSS({
-      format: 'keep-breaks',
-      afterComment: true,
-    })) */
-    .pipe(rtlcss())
-    .pipe(rename({
-      suffix: '-rtl'
-    }))
-    .pipe(sourcemaps.write(cssMapPath + '/css-rtl'))
-    .pipe(gulp.dest(cssPath + '/css-rtl'));
+    return gulp.src(scssPath)
+        .pipe(sourcemaps.init())
+        .pipe(sass({
+            outputStyle: compresstype
+        }).on('error', sass.logError))
+        .pipe(postcss(processors, {
+            syntax: scss
+        }))
+        .pipe(autoprefixer({
+            overrideBrowserslist: autoprefixBrowsers,
+            grid: true
+        }))
+        .pipe(cleanCSS({
+            format: 'keep-breaks',
+            afterComment: true,
+        }))
+        .pipe(rtlcss())
+        .pipe(rename({
+            suffix: '-rtl'
+        }))
+        .pipe(sourcemaps.write(cssMapPath))
+        .pipe(gulp.dest(cssPath + '/css-rtl'));
     done();
 });
 
 /*! SVG HTML Function  */
 
 gulp.task('svginlinehtml', done => {
-  var svgs = gulp
-    .src(iconPath)
+    var svgs = gulp
+        .src(iconPath)
 
-  function fileContents(filePath, file) {
-    return file.contents.toString();
-  }
-  return gulp
-    .src(svgHtmlPath)
-    .pipe(inject(svgs, {
-      transform: fileContents
-    }))
-    .pipe(gulp.dest(iconDestPath));
-  done();
+    function fileContents(filePath, file) {
+        return file.contents.toString();
+    }
+    return gulp
+        .src(svgHtmlPath)
+        .pipe(inject(svgs, {
+            transform: fileContents
+        }))
+        .pipe(gulp.dest(iconDestPath));
+    done();
 });
 
 /*! SVG JSON Function  */
 
 gulp.task('metadata', done => {
-  return gulp
-    .src(iconPath)
-    .pipe(svgmin(function(file) {
-      var prefix = path.basename(file.relative, path.extname(file.relative));
-      return {
-        plugins: [{
-            removeViewBox: false
-          },
-          {
-            cleanupIDs: {
-              prefix: prefix + '-',
-              minify: true
+    return gulp
+        .src(iconPath)
+        .pipe(svgmin(function(file) {
+            var prefix = path.basename(file.relative, path.extname(file.relative));
+            return {
+                plugins: [{
+                        removeViewBox: false
+                    },
+                    {
+                        cleanupIDs: {
+                            prefix: prefix + '-',
+                            minify: true
+                        }
+                    }
+                ]
             }
-          }
-        ]
-      }
-    }))
-    .pipe(svgstore({
-      inlineSvg: true
-    }))
-    .pipe(rename({
-      prefix: 'sprite-'
-    }))
-    .pipe(through2.obj(function(file, encoding, cb) {
-      var $ = cheerio.load(file.contents.toString(), {
-        xmlMode: true
-      });
-      var data = $('svg > symbol').map(done => {
-        return {
-          name: $(this).attr('id'),
-          viewBox: $(this).attr('viewBox')
-        };
-      }).get();
-      var jsonFile = new Vinyl({
-        path: svgJsonPath,
-        contents: Buffer.from(JSON.stringify(data))
-      });
-      this.push(jsonFile);
-      this.push(file);
-      cb();
-    }))
-    .pipe(gulp.dest(iconDestPath));
-  done();
-});
-
-/*! SVG Compile function */
-
-gulp.task('svg', done => {
-  gulp.series('metadata', 'svginlinehtml')
-  done();
+        }))
+        .pipe(svgstore({
+            inlineSvg: true
+        }))
+        .pipe(rename({
+            prefix: 'sprite-'
+        }))
+        .pipe(through2.obj(function(file, encoding, cb) {
+            var $ = cheerio.load(file.contents.toString(), {
+                xmlMode: true
+            });
+            var data = $('svg > symbol').map(function() {
+                return {
+                    name: $(this).attr('id'),
+                    viewBox: $(this).attr('viewBox')
+                };
+            }).get();
+            var jsonFile = new Vinyl({
+                path: svgJsonPath,
+                contents: Buffer.from(JSON.stringify(data))
+            });
+            this.push(jsonFile);
+            this.push(file);
+            cb();
+        }))
+        .pipe(gulp.dest(iconDestPath));
+    done();
 });
 
 /*! Watch files function */
 
 gulp.task('watch', done => {
-
-  gulp.watch(scssPath, gulp.series('sass'));
-  gulp.watch(iconPath, gulp.series('metadata', 'svginlinehtml'));
-  done();
+    gulp.watch(scssPath, gulp.series('sass'));
+    gulp.watch(iconPath, gulp.series('metadata', 'svginlinehtml'));
+    done();
 });
+
+/*! SVG Compile function */
+
+gulp.task('svg', gulp.parallel('metadata', 'svginlinehtml'));
 
 /*! Compile all files */
 

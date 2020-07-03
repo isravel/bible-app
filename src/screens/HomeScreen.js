@@ -9,7 +9,7 @@ class HomeScreen extends React.Component{
     render(){
         return (
             <div className="App">
-                
+                <NavScreen/>
       </div>
         );
     }

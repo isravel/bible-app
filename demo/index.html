@@ -1,72 +1,271 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en"  dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <link rel="icon" href="/public/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta name="description" content="" />
-    <link rel="apple-touch-icon" href="/public/logo192.png" />
-    <link rel="manifest" href="/public/manifest.json" />
-    <link rel="stylesheet" href="/public/css/styles.css">
-    <title>Bible App</title>
-    <script src="/public/js/vendor/modernizr-2.8.3.min.js"></script>
-  </head>
-  <body>
-    <!--[if lt IE 10]>
+<html class="no-js" lang="en" dir="ltr">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<link rel="icon" href="/public/favicon.ico" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="theme-color" content="#000000" />
+	<meta name="description" content="" />
+	<link rel="apple-touch-icon" href="/public/logo192.png" />
+	<link rel="manifest" href="/public/manifest.json" />
+	<link rel="stylesheet" href="/public/css/styles.css">
+	<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+	<title>Bible App</title>
+	<script src="/public/js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+
+<body>
+	<!--[if lt IE 10]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+	<noscript>You need to enable JavaScript to run this app.</noscript>
 
-    <div class="application">
-      <header>
-        <nav class="navbar">
-          <div class="left">
-            <div class="logo">
-              <em class="svgIcon"><svg><use xlink:href="/public/svg/sprite-icons.svg#book"/></svg></em>
-              BIBLE
-            </div>
-          </div>
-          <div class="center">
-            <div class="chapter__nav">
-              <div class="chapter__nav__prev">
-                <em class="svgIcon"><svg><use xlink:href="/public/svg/sprite-icons.svg#chevron-back-outline"/></svg></em>
-              </div>
-              <div class="chapter__nav__name">
-                Psalm 91
-              </div>
-              <div class="chapter__nav__next">
-                <em class="svgIcon"><svg><use xlink:href="/public/svg/sprite-icons.svg#chevron-forward-outline"/></svg></em>
-              </div>
-            </div>
-          </div>
-          <div class="right">
-            <div class="nav__icons">
-              <div class="search__icon">
-                <em class="svgIcon"><svg><use xlink:href="/public/svg/sprite-icons.svg#search-outline"/></svg></em>
-              </div>
-              <div class="cog__icon">
-                <em class="svgIcon"><svg><use xlink:href="/public/svg/sprite-icons.svg#cog-outline"/></svg></em>
-              </div>
-            </div>
-          </div>
-        </nav>
-      </header>
-      <section class="">
-        <aside class="sidebar left">
+	<div class="application fixed-layout">
+		<header>
+			<nav class="navbar">
+				<div class="left">
+					<div class="logo">
+						<em class="svgIcon"><svg>
+								<use xlink:href="/public/svg/sprite-icons.svg#book" /></svg>
+						</em>
+						BIBLE
+					</div>
+				</div>
+				<div class="center">
+					<div class="chapter__nav">
+						<div class="chapter__nav__prev">
+							<em class="svgIcon"><svg>
+									<use xlink:href="/public/svg/sprite-icons.svg#chevron-back-outline" /></svg>
+							</em>
+						</div>
+						<div class="chapter__nav__name">
+							Psalm 91
+						</div>
+						<div class="chapter__nav__next">
+							<em class="svgIcon"><svg>
+									<use xlink:href="/public/svg/sprite-icons.svg#chevron-forward-outline" /></svg>
+							</em>
+						</div>
+					</div>
+				</div>
+				<div class="right">
+					<div class="nav__icons">
+						<div class="search__icon">
+							<em class="svgIcon"><svg>
+									<use xlink:href="/public/svg/sprite-icons.svg#search-outline" /></svg>
+							</em>
+						</div>
+						<div class="cog__icon">
+							<em class="svgIcon"><svg>
+									<use xlink:href="/public/svg/sprite-icons.svg#cog" /></svg>
+							</em>
+						</div>
+					</div>
+				</div>
+			</nav>
+		</header>
+		<main class="verse-viewport">
+			<aside class="sidebar left">
+				<div class="books_list">
+					<div class="list_title">Books</div>
+					<ul>
+						<li title='Genesis'>Genesis</li>
+						<li title='Exodus'>Exodus</li>
+						<li title='Leviticus'>Leviticus</li>
+						<li class="active" title='Numbers'>Numbers</li>
+						<li title='Deuteronomy'>Deuteronomy</li>
+						<li title='Joshua'>Joshua</li>
+						<li title='Judges'>Judges</li>
+						<li title='Ruth'>Ruth</li>
+						<li title='1 Samuel'>1 Samuel</li>
+						<li title='2 Samuel'>2 Samuel</li>
+						<li title='1 Kings'>1 Kings</li>
+						<li title='2 Kings'>2 Kings</li>
+						<li title='1 Chronicles'>1 Chronicles</li>
+						<li title='2 Chronicles'>2 Chronicles</li>
+						<li title='Ezra'>Ezra</li>
+						<li title='Nehemiah'>Nehemiah</li>
+						<li title='Esther'>Esther</li>
+						<li title='Job'>Job</li>
+						<li title='Psalms'>Psalms</li>
+						<li title='Proverbs'>Proverbs</li>
+						<li title='Ecclesiastes'>Ecclesiastes</li>
+						<li title='Song of Solomon'>Song of Solomon</li>
+						<li title='Isaiah'>Isaiah</li>
+						<li title='Jeremiah'>Jeremiah</li>
+						<li title='Lamentations'>Lamentations</li>
+						<li title='Ezekiel'>Ezekiel</li>
+						<li title='Daniel'>Daniel</li>
+						<li title='Hosea'>Hosea</li>
+						<li title='Joel'>Joel</li>
+						<li title='Amos'>Amos</li>
+						<li title='Obadiah'>Obadiah</li>
+						<li title='Jonah'>Jonah</li>
+						<li title='Micah'>Micah</li>
+						<li title='Nahum'>Nahum</li>
+						<li title='Habakkuk'>Habakkuk</li>
+						<li title='Zephaniah'>Zephaniah</li>
+						<li title='Haggai'>Haggai</li>
+						<li title='Zechariah'>Zechariah</li>
+						<li title='Malachi'>Malachi</li>
+						<li class='divider'>New Testament</li>
+						<li title='Matthew'>Matthew</li>
+						<li title='Mark'>Mark</li>
+						<li title='Luke'>Luke</li>
+						<li title='John'>John</li>
+						<li title='Acts'>Acts</li>
+						<li title='Romans'>Romans</li>
+						<li title='1 Corinthians'>1 Corinthians</li>
+						<li title='2 Corinthians'>2 Corinthians</li>
+						<li title='Galatians'>Galatians</li>
+						<li title='Ephesians'>Ephesians</li>
+						<li title='Philippians'>Philippians</li>
+						<li title='Colossians'>Colossians</li>
+						<li title='1 Thessalonians'>1 Thessalonians</li>
+						<li title='2 Thessalonians'>2 Thessalonians</li>
+						<li title='1 Timothy'>1 Timothy</li>
+						<li title='2 Timothy'>2 Timothy</li>
+						<li title='Titus'>Titus</li>
+						<li title='Philemon'>Philemon</li>
+						<li title='Hebrews'>Hebrews</li>
+						<li title='James'>James</li>
+						<li title='1 Peter'>1 Peter</li>
+						<li title='2 Peter'>2 Peter</li>
+						<li title='1 John'>1 John</li>
+						<li title='2 John'>2 John</li>
+						<li title='3 John'>3 John</li>
+						<li title='Jude'>Jude</li>
+						<li title='Revelation'>Revelation</li>
+					</ul>
+				</div>
+				<div class="chapters_list">
+					<div class="list_title">Chapter</div>
+					<ul>
+						<li>1</li>
+						<li>2</li>
+						<li>3</li>
+						<li>4</li>
+						<li>5</li>
+						<li>6</li>
+						<li>7</li>
+						<li class="active">8</li>
+						<li>9</li>
+						<li>10</li>
+						<li>11</li>
+						<li>12</li>
+						<li>13</li>
+						<li>14</li>
+						<li>15</li>
+						<li>16</li>
+						<li>17</li>
+						<li>18</li>
+						<li>19</li>
+						<li>20</li>
+						<li>21</li>
+						<li>22</li>
+						<li>23</li>
+						<li>24</li>
+						<li>25</li>
+						<li>26</li>
+						<li>27</li>
+						<li>28</li>
+					</ul>
+				</div>
+				<div class="verse_list">
+					<div class="list_title">Verse</div>
+					<ul>
+						<li class="active">1</li>
+						<li>2</li>
+						<li>3</li>
+						<li>4</li>
+						<li>5</li>
+						<li>6</li>
+						<li>7</li>
+						<li>8</li>
+						<li>9</li>
+						<li>10</li>
+						<li>11</li>
+						<li>12</li>
+						<li>13</li>
+						<li>14</li>
+						<li>15</li>
+						<li>16</li>
+						<li>17</li>
+						<li>18</li>
+						<li>19</li>
+						<li>20</li>
+						<li>21</li>
+						<li>22</li>
+						<li>23</li>
+						<li>24</li>
+						<li>25</li>
+						<li>26</li>
+						<li>27</li>
+						<li>28</li>
+						<li>29</li>
+						<li>30</li>
+						<li>31</li>
+						<li>32</li>
+						<li>33</li>
+						<li>34</li>
+						<li>35</li>
+					</ul>
+				</div>
+			</aside>
+			<article class="bible__chapters">
+				<div class="container">
+					<div class="bible__chapters__chapter serif">
+						<ul class="bible__chapters__verses">
+							<li><span class="verse_number">1</span>He that dwells in the secret place of the most High shall abide under the shadow of the Almighty.</li>
+							<li><span class="verse_number">2</span>I will say of the LORD, He is my refuge and my fortress: my God; in him will I trust.</li>
+							<li><span class="verse_number">3</span>Surely he shall deliver you from the snare of the fowler, and from the dangerous pestilence.</li>
+							<li><span class="verse_number">4</span>He shall cover you with his feathers, and under his wings shall you trust: his truth shall be your shield and buckler.</li>
+							<li><span class="verse_number">5</span>You shall not be afraid for the terror by night; nor for the arrow that flies by day;</li>
+							<li><span class="verse_number">6</span>Nor for the pestilence that walks in darkness; nor for the destruction that wastes at noonday.</li>
+							<li><span class="verse_number">7</span>A thousand shall fall at your side, and ten thousand at your right hand; but it shall not come nigh you.</li>
+							<li><span class="verse_number">8</span>Only with yours eyes shall you behold and see the reward of the wicked.</li>
+							<li><span class="verse_number">9</span>Because you have made the LORD, which is my refuge, even the most High, your habitation;</li>
+							<li><span class="verse_number">10</span>There shall no evil befall you, neither shall any plague come nigh your dwelling.</li>
+							<li><span class="verse_number">11</span>For he shall give his angels charge over you, to keep you in all your ways.</li>
+							<li><span class="verse_number">12</span>They shall bear you up in their hands, lest you dash your foot against a stone.</li>
+							<li><span class="verse_number">13</span>You shall tread upon the lion and adder: the young lion and the dragon shall you trample under feet.</li>
+							<li><span class="verse_number">14</span>Because he has set his love upon me, therefore will I deliver him: I will set him on high, because he has known my name.</li>
+							<li><span class="verse_number">15</span>He shall call upon me, and I will answer him: I will be with him in trouble; I will deliver him, and honour him.</li>
+							<li><span class="verse_number">16</span>With long life will I satisfy him, and show him my salvation.</li>
+						</ul>
+					</div>
+          <div class="bible__chapters__chapter serif">
+            <div class="bible__chapters__title">Psalm 92</div>
+						<ul class="bible__chapters__verses">
+							<li><span class="verse_number">1</span>IT IS A GOOD THING TO GIVE THANKS UNTO THE LORD, AND TO SING PRAISES UNTO Your NAME, O MOST HIGH:</li>
+							<li><span class="verse_number">2</span>To show forth your loving kindness in the morning, and your faithfulness every night,</li>
+							<li><span class="verse_number">3</span>Upon an instrument of ten strings, and upon the psaltery; upon the harp with a solemn sound.</li>
+							<li><span class="verse_number">4</span>For you, LORD, have made me glad through your work: I will triumph in the works of your hands.</li>
+							<li><span class="verse_number">5</span>O LORD, how great are your works! and your thoughts are very deep.</li>
+							<li><span class="verse_number">6</span>A brutish man knows not; neither does a fool understand this.</li>
+							<li><span class="verse_number">7</span>When the wicked spring as the grass, and when all the workers of iniquity do flourish; it is that they shall be destroyed for ever:</li>
+							<li><span class="verse_number">8</span>But you, LORD, are most high for evermore.</li>
+							<li><span class="verse_number">9</span>For, lo, yours enemies, O LORD, for, lo, yours enemies shall perish; all the workers of iniquity shall be scattered.</li>
+							<li><span class="verse_number">10</span>But my horn shall you exalt like the horn of an unicorn : I shall be anointed with fresh oil.</li>
+							<li><span class="verse_number">11</span>Mine eye also shall see my desire on mine enemies, and mine ears shall hear my desire of the wicked that rise up against me.</li>
+							<li><span class="verse_number">12</span>The righteous shall flourish like the palm tree: he shall grow like a cedar in Lebanon.</li>
+							<li><span class="verse_number">13</span>Those that be planted in the house of the LORD shall flourish in the courts of our God.</li>
+							<li><span class="verse_number">14</span>They shall still bring forth fruit in old age; they shall be fat and flourishing;</li>
+							<li><span class="verse_number">15</span>To show that the LORD is upright: he is my rock, and there is no unrighteousness in him.</li>
+						</ul>
+					</div>
+				</div>
+			</article>
+			<aside class="sidebar right">
+			</aside>
+		</main>
+		<footer></footer>
+	</div>
 
-        </aside>
-        <main>
+	<script src="/public/js/vendor/jquery-1.11.2.min.js"></script>
+	<script src="/public/js/vendor/svg4everybody.js" charset="utf-8"></script>
+</body>
 
-        </main>
-        <aside class="sidebar right">
-
-        </aside>
-      </section>
-    </div>
-
-    <script src="/public/js/vendor/jquery-1.11.2.min.js"></script>
-    <script src="/public/js/vendor/sv4everybody.js" charset="utf-8"></script>
-  </body>
 </html>

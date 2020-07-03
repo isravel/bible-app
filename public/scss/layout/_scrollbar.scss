@@ -1,0 +1,29 @@
+* {
+	scrollbar-width: thin;
+	scroll-behavior: smooth;
+	@include css4 {
+		scrollbar-color: var(--scrollbar-bg) var(--bg);
+	};
+}
+
+body:not(.MacOS) *::-webkit-scrollbar-track {
+	@include css4 {
+		background-color: var(--bg);
+	};
+}
+
+body:not(.MacOS) *::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+	@include css4 {
+		background-color: var(--bg);
+	};
+}
+
+body:not(.MacOS) *::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	@include css4 {
+		background-color: var(--scrollbar-bg);
+		border: 2px solid var(--bg);
+	};
+}

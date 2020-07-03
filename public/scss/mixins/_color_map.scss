@@ -1,36 +1,32 @@
-@mixin color($name, $property: color) {
-  // If you want to do just one particular color
-  @if $name != "all" {
-    $list: map-get($clr-list-all, $name);
-    @each $clr, $var in $list {
-      @if $clr == "base" {
-        .#{$name} {
-          #{$property}: $var;
-        }
-      }
-      @else {
-        .#{$name}-#{$clr} {
-          #{$property}: $var;
-        }
-      }
-    }
-  }
+// Color Classes
 
-  //If you wanted to do all the colors
-  @else {
-    @each $clrl, $varl in $clr-list-all {
-      @each $clr, $var in $varl {
-        @if $clr == "base" {
-          .#{$clrl} {
-            #{$property}: $var;
-          }
-        }
-        @else {
-          .#{$clrl}-#{$clr} {
-            #{$property}: $var;
-          }
-        }
-      }
-    }
-  }
-}
+
+// @each $color_name, $color in $colors {
+//   @each $color_type, $color_value in $color {
+//     @if $color_type == "base" {
+//       .#{$color_name} {
+//         background-color: $color_value !important;
+//       }
+//       .#{$color_name}-text {
+//         color: $color_value !important;
+//       }
+//     }
+//     @else if $color_name != "shades" {
+//       .#{$color_name}.#{$color_type} {
+//         background-color: $color_value !important;
+//       }
+//       .#{$color_name}-text.text-#{$color_type} {
+//         color: $color_value !important;
+//       }
+//     }
+//   }
+// }
+//
+// @each $color, $color_value in $shades {
+//   .#{$color} {
+//     background-color: $color_value !important;
+//   }
+//   .#{$color}-text {
+//     color: $color_value !important;
+//   }
+// }

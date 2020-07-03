@@ -1,0 +1,15 @@
+//it is nessesary to define the variables in sass map instead of :root, for compatibility reasons.
+$variables: (
+	--font: sans-serif,
+	--bg: $bg,
+	--color: $text-color,
+	--border-color: $border-color,
+	--hover-color: $hover_color,
+	--icon-color: $icon-color,
+	--bg-secondary: $bg-secondary,
+  --primary-color: $primary-color,
+	// components color specific
+	--navbar-bg: $bg,
+	--scrollbar-bg: $scrollbar-bg,
+  --list-line-height: $list-line-height,
+);

@@ -1,0 +1,13 @@
+@mixin ellipsis($line) {
+  @if $line > 1 {
+    -webkit-line-clamp: calc(#{$line} + 1);
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: unset;
+  } @else {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

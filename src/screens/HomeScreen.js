@@ -7,9 +7,13 @@ import BookList from './BookListScreen';
 import ChapterList from './ChaperListScreen';
 import VerseList from './VerseListScreen';
 import ChapterScreen from './ChapterScreen';
+
+import React from "react";
+import initSqlJs from "sql.js";
+import fs from 'fs'
 // import initSqlJs from "sql.js";
 // import fs from "fs";
-var fs = require('fs');
+// var fs = require('fs');
 // var initSqlJs = require('sql-wasm.js');
 
 var filebuffer = fs.readFileSync('test.sqlite');
@@ -127,9 +131,6 @@ var filebuffer = fs.readFileSync('test.sqlite');
 
 
 
-
-import React from "react";
-import initSqlJs from "sql.js";
 
 export default class App extends React.Component {
 

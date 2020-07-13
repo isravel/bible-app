@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Icons view</title>
+</head>
+<style>
+    body{font-family:sans-serif;text-align:center}
+  .svg-block{-ms-flex-item-align:normal;align-self:normal;border-radius:3px;margin:0 10px 30px;display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;border:1px solid transparent;-webkit-box-flex:0;-ms-flex:0 0 100px;flex:0 0 100px;width:100px}
+  .svg-block span{word-break:break-all;text-align:center;display:block;color:#999;font-size:13px;padding:8px 10px 15px;text-overflow:ellipsis;white-space:nowrap;overflow:hidden}
+  .svg-block svg{width:50px;height:50px}
+  .svg-block>div{padding:20px 25px 0}
+  .svg-block.active{border:1px solid #26a69a}
+  .svg-block:hover{cursor:pointer}
+  .main{margin:50px auto 70px}
+  .svghtml{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-top:25px}
+  pre{overflow:scroll;margin:0 auto}
+  .nav-wrapper>div{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center}
+  .nav-wrapper span{margin:0 15px}
+  #toast-container{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;top:unset;bottom:100px}
+  #copyBtn{border-radius:30px; background-color: #CDDC39; padding: 10px 30px;}
+  *{box-sizing: border-box;}
+  nav{position: fixed;
+    bottom: 0;
+    z-index: 999;
+    display: none;
+    background: white;
+    text-align: center;
+    padding: 20px 40px;
+    width: 100%;
+    box-shadow: 0 -10px 40px #eee;
+    left: 0;
+    box-sizing: border-box;}
+</style>
+<script src="../js/vendor/svg4everybody.js"></script>
+<script type="text/javascript">
+    svg4everybody();
+</script>
+</head>
+
+<body>
+    <nav class="white-text grey darken-3 z-depth-4">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div>
+                    <span class="svgcode"></span>
+                    <span><a id="copyBtn" class="btn green white-text">Copy</a></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container main">
+        <div class="svghtml"></div>
+    </div>
+    <script src="../js/vendor/jquery-1.11.2.min.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        function copy(element_id) {
+            var aux = document.createElement("div");
+            aux.setAttribute("contentEditable", true);
+            aux.innerHTML = document.getElementById(element_id).innerHTML;
+            aux.setAttribute("onfocus", "document.execCommand('selectAll',false,null)");
+            document.body.appendChild(aux);
+            aux.focus();
+            document.execCommand("copy");
+            document.body.removeChild(aux);
+            alert("Copied")
+        }
+        jQuery(document).ready(function($) {
+            $(document).on('click', '#copyBtn', function() {
+                copy('copyContent');
+            });
+            $(document).on('click', '.svg-block', function() {
+                $('.svg-block').removeClass('active');
+                $('nav').show();
+                $(this).addClass('active');
+                var iD = $(this).attr('id');
+                var svgPre = `<pre><code id="copyContent">&lt;em class="svgIcon"&gt;&lt;svg&gt;&lt;use xlink:href="/public/svg/sprite-icons.svg#` + iD + `"/&gt;&lt;/svg&gt;&lt;/em&gt;</code></pre>`;
+                $('.svgcode').html(svgPre);
+            });
+            var jqxhr = $.getJSON("metadata.json", function(result) {
+                console.log("success");
+                $.each(result, function(i, field) {
+                    svghtml = `
+                      <div class="svg-block card z-depth-0" number=` + i + ` id=` + field.name + ` title=` + field.name + `>
+                        <div><svg><use xlink:href="sprite-icons.svg#` + field.name + `"/></svg></div>
+                        <span>` + field.name + `</span>
+                      </div>`;
+                    $(".svghtml").append(svghtml);
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

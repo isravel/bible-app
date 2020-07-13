@@ -20,6 +20,7 @@ var cheerio = require('cheerio');
 var svgstore = require('gulp-svgstore');
 var through2 = require('through2');
 var postcss = require('gulp-postcss');
+var postcss_scss = require('postcss-scss');
 var scss;
 sass.compiler = require('node-sass');
 var stripInlineComments = require('postcss-strip-inline-comments');
@@ -27,18 +28,18 @@ var processors = [stripInlineComments];
 
 /*! Variable Declaration  */
 
-var webPath = 'app';
-var cssPath = './app/dest';
-var scssPath = './app/src/scss/**/*.scss';
+var webPath = '';
+var cssPath = './public';
+var scssPath = './public/scss/**/*.scss';
 var cssMapPath = './maps'; // Map path is RELATIVE to the css path
 // var compresstype = 'compressed';
 var compresstype = 'compact';
 var autoprefixBrowsers = ["last 10 version", "> 1%", "IE 10"];
 
-var iconPath = 'app/src/svg/icons/*.svg';
-var svgHtmlPath = 'app/dest/svg/inline-svg.html';
+var iconPath = 'public/svg/icons/*.svg';
+var svgHtmlPath = 'public/svg/inline-svg.html';
 var svgJsonPath = 'metadata.json';
-var iconDestPath = 'app/dest/svg';
+var iconDestPath = 'public/svg';
 
 
 /*! Webserver Function  */
@@ -50,7 +51,7 @@ gulp.task('webserver', done => {
       open: true,
       port: 1800,
       directoryListing: {
-        enable: false,
+        enable: true,
         path: webPath
       }
     }));
@@ -65,7 +66,7 @@ gulp.task('sass', done => {
       outputStyle: compresstype
     }).on('error', sass.logError))
     .pipe(postcss(processors, {
-      syntax: require('postcss-scss')
+      syntax: postcss_scss
     }))
     .pipe(autoprefixer({
       overrideBrowserslist: autoprefixBrowsers,
@@ -102,7 +103,7 @@ gulp.task('rtl', done => {
         .pipe(rename({
             suffix: '-rtl'
         }))
-        .pipe(sourcemaps.write(cssMapPath + '/css-rtl'))
+        .pipe(sourcemaps.write(cssMapPath))
         .pipe(gulp.dest(cssPath + '/css-rtl'));
     done();
 });
@@ -155,7 +156,7 @@ gulp.task('metadata', done => {
             var $ = cheerio.load(file.contents.toString(), {
                 xmlMode: true
             });
-            var data = $('svg > symbol').map(done => {
+            var data = $('svg > symbol').map(function() {
                 return {
                     name: $(this).attr('id'),
                     viewBox: $(this).attr('viewBox')
@@ -173,21 +174,17 @@ gulp.task('metadata', done => {
     done();
 });
 
-/*! SVG Compile function */
-
-gulp.task('svg', done => {
-    gulp.series('metadata', 'svginlinehtml')
-    done();
-});
-
 /*! Watch files function */
 
 gulp.task('watch', done => {
-
     gulp.watch(scssPath, gulp.series('sass'));
     gulp.watch(iconPath, gulp.series('metadata', 'svginlinehtml'));
     done();
 });
+
+/*! SVG Compile function */
+
+gulp.task('svg', gulp.parallel('metadata', 'svginlinehtml'));
 
 /*! Compile all files */
 
@@ -195,4 +192,8 @@ gulp.task('build', gulp.parallel('sass', 'rtl', 'svg'));
 
 /*! Start the server */
 
-gulp.task('start', gulp.parallel('sass', 'rtl', 'svg', 'webserver', 'watch'));
+gulp.task('start', gulp.parallel('sass', 'rtl', 'svg', 'watch'));
+
+/*! Guulp server for HTML */
+
+gulp.task('serve', gulp.parallel('sass', 'rtl', 'svg', 'webserver', 'watch'));

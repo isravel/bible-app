@@ -1,8 +1,8 @@
 .navbar{
   display: flex;
   align-items: center;
-  padding: 10px 50px;
-  // height: $navbar-height;
+  padding: 8px 16px;
+  height: $navbar-height;
   width: 100%;
   @include css4{
     border-bottom: 1px solid var(--border-color);
@@ -18,10 +18,9 @@
     margin: 0 auto;
   }
   svg{
-    width: 30px;
-    height: 30px;
+    width: 24px;
+    height: 24px;
     fill: var(--icon-color);
-    stroke: var(--icon-color);
   }
   .logo{
     display: inline-flex;

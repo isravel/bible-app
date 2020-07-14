@@ -1,3 +1,7 @@
+/* Units */
+$navbar_height: 52px;
+$list-line-height: 2rem;
+$footer-line-height: 2.4rem;
 //it is nessesary to define the variables in sass map instead of :root, for compatibility reasons.
 $variables: (
 	--font: sans-serif,
@@ -12,4 +16,5 @@ $variables: (
 	--navbar-bg: $bg,
 	--scrollbar-bg: $scrollbar-bg,
   --list-line-height: $list-line-height,
+	--footer-line-height: $footer-line-height,
 );

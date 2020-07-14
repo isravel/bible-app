@@ -22,3 +22,26 @@
 }());
 
 // Place any jQuery/helper plugins in here.
+jQuery(document).ready(function($) {
+  $(document).on('click', '.books_list > ul > li', function(){
+    $('.books_list > ul > li').removeClass('active');
+    $(this).addClass('active');
+    let selector = $(this).text();
+    console.log(selector);
+  });
+  $(document).on('click', '.chapters_list > ul > li', function(){
+    $('.chapters_list > ul > li').removeClass('active');
+    $(this).addClass('active');
+    let selector = $(this).text();
+    console.log(selector);
+  });
+  $(document).on('click', '.verses_list > ul > li', function(){
+    $('.verses_list > ul > li').removeClass('active');
+    $(this).addClass('active');
+    let selector = $(this).text();
+    console.log(selector);
+  });
+  $(document).on('click', '.bible__chapters__verses > li', function(){
+    $(this).toggleClass('selected');
+  });
+});

@@ -1,10 +1,27 @@
 import React from 'react';
 
 class VerseList extends React.Component{
+
+	state = {
+        activeIndex: 1
+    }
+
+    onClickHandler(itemId) {
+        this.setState({
+            activeIndex :itemId
+        })
+        this.props.onClicks(itemId)
+    }
+
     render(){
         return(
 					<ul>
-						<li class="active">1</li>
+						{this.props.verse.map(verseNos => {
+							const className = this.state.activeIndex === verseNos.VerseCount ? 'active' : null;
+							return (
+							<li class={className} key={verseNos.VerseCount} onClick={() => this.onClickHandler(verseNos.VerseCount)}>{verseNos.VerseCount}</li>);
+							})}
+						{/* <li class="active">1</li>
 						<li>2</li>
 						<li>3</li>
 						<li>4</li>
@@ -38,7 +55,7 @@ class VerseList extends React.Component{
 						<li>32</li>
 						<li>33</li>
 						<li>34</li>
-						<li>35</li>
+						<li>35</li> */}
 					</ul>
         );
     }

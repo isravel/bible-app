@@ -1,10 +1,26 @@
 import React from 'react';
 
 class ChapterList extends React.Component {
+
+    state = {
+        activeIndex: 1
+    }
+
+    onClickHandler(itemId) {
+        this.setState({
+            activeIndex :itemId
+        })
+        this.props.onClick(itemId)
+    }
+
     render() {
         return (
             <ul>
-                <li>1</li>
+                {this.props.chapters.map(chap => {
+                    const className = this.state.activeIndex === chap.Chapter ? 'active' : null;
+                    return (<li class={className} key={chap.Chapter} onClick={() => this.onClickHandler(chap.Chapter)}>{chap.Chapter}</li>);
+                })}
+                {/* <li>1</li>
                 <li>2</li>
                 <li>3</li>
                 <li>4</li>
@@ -31,7 +47,7 @@ class ChapterList extends React.Component {
                 <li>25</li>
                 <li>26</li>
                 <li>27</li>
-                <li>28</li>
+                <li>28</li> */}
             </ul>
         );
     }

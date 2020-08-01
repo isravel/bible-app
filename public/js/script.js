@@ -1,7 +1,7 @@
 // Avoid `console` errors in browsers that lack a console.
-(function() {
+(function () {
 	var method;
-	var noop = function() {};
+	var noop = function () { };
 	var methods = [
 		'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error',
 		'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log',
@@ -20,8 +20,14 @@
 }());
 
 // Place any jQuery/helper plugins in here.
-$.get("/svg/sprite-icons.svg", function(data) {
+$.get("/svg/sprite-icons.svg", function (data) {
 	var div = document.createElement("SVGicons");
 	div.innerHTML = new XMLSerializer().serializeToString(data.documentElement);
 	document.body.insertBefore(div, document.body.childNodes[0]);
 });
+
+function scroll_into_view(id) {
+	console.log('id', id);
+	var elmnt = document.getElementById(id);
+	elmnt.scrollIntoView();
+}

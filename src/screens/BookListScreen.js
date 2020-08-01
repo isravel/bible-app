@@ -1,10 +1,31 @@
 import React from 'react';
 
-class BookList extends React.Component{
-    render(){
-        return(
+class BookList extends React.Component {
+   
+    state = {
+        activeIndex: 0
+    }
+
+    onClickHandler(itemId, book) {
+        this.setState({
+            activeIndex :itemId
+        })
+        this.props.onClick(itemId, book)
+    }
+
+
+    render() {
+        return (
             <ul>
-                <li title='Genesis'>Genesis</li>
+                {
+                    this.props.books.map(item => {
+                        const className = this.state.activeIndex === item.id ? 'active' : null;
+                        return (
+                            // <li title={item.human} key={item.id} onClick={this.props.onClick.bind(this, item.id)}>{item.human}</li>);
+                            <li className={className} title={item.human} key={item.id} onClick={() => this.onClickHandler(item.id, item.human)}>{item.human}</li>);
+                    })
+                }
+                {/* <li title='Genesis'>Genesis</li>
                 <li title='Exodus'>Exodus</li>
                 <li title='Leviticus'>Leviticus</li>
                 <li class="active" title='Numbers'>Numbers</li>
@@ -70,7 +91,7 @@ class BookList extends React.Component{
                 <li title='2 John'>2 John</li>
                 <li title='3 John'>3 John</li>
                 <li title='Jude'>Jude</li>
-                <li title='Revelation'>Revelation</li>
+                <li title='Revelation'>Revelation</li> */}
             </ul>
         );
     }

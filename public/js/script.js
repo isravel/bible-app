@@ -44,4 +44,7 @@ jQuery(document).ready(function($) {
   $(document).on('click', '.bible__chapters__verses > li', function(){
     $(this).toggleClass('selected');
   });
+  $(document).on('click', '.viewport-settings__toggle', function () {
+    $('.viewport-settings__dropdown').toggleClass('active');
+  });
 });

@@ -1,0 +1,155 @@
+.viewport-settings {
+	$self: &;
+
+	#{$self}__wrapper {
+		position: relative;
+	}
+
+	position: absolute;
+	font-size: 14px;
+	right: 1em;
+	top: 1em;
+
+	#{$self}__toggle {
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+		width: 3em;
+		height: 3em;
+		border-radius: 50%;
+		position: absolute;
+		right: 0;
+		top: 0;
+
+		@include css4 {
+			background-color: var(--bg-secondary);
+		}
+
+		.svg-icon {
+			width: 1.5em;
+			height: 1.5em;
+		}
+	}
+
+	#{$self}__dropdown {
+		display: none;
+		width: 230px;
+		height: auto;
+		position: absolute;
+		top: 3.5rem;
+		right: 0;
+		padding: 0.5rem 0;
+		border-radius: 6px;
+		box-shadow: 0px 11px 15px transparentize($text-color, 0.8);
+
+		@include css4 {
+			background-color: var(--bg);
+		}
+		&.active{
+			display: block;
+		}
+	}
+}
+
+.settings-group {
+	$self: &;
+	padding: 0.7em 1em;
+	@extend %flex-center;
+	justify-content: space-between;
+	flex-direction: row;
+	flex-wrap: wrap;
+
+	#{$self}__label {
+		margin-bottom: 1em;
+		flex: 0 0 100%;
+
+		@include css4 {
+			color: var(--label-color);
+		}
+	}
+
+	#{$self}__input-field {
+		label {
+			width: 2.3em;
+			height: 2.3em;
+			@extend %flex-center;
+			border-radius: 3em;
+			font-size: 0.8em;
+			line-height: 1;
+			cursor: pointer;
+			.svg-icon {
+				width: 1.3em;
+				height: 1.3em;
+			}
+		}
+
+		input {
+			display: none;
+
+			&:checked {
+				+label {
+					@include css4 {
+						background-color: var(--primary-color);
+						color: var(--bg)
+					}
+
+					svg {
+						@include css4 {
+							fill: var(--bg);
+						}
+					}
+				}
+			}
+
+		}
+
+	}
+
+	&.alignment {
+		#{$self}__input-field {
+			label {
+				width: 2.8em;
+				height: 2.8em;
+
+				.svg-icon {
+					width: 1.5em;
+					height: 1.5em;
+				}
+			}
+		}
+	}
+
+	&.font-variant {
+		justify-content: space-between;
+
+		#{$self}__input-field {
+			flex: 0 0 47%;
+			margin: 0.3em 0.2em;
+
+			&:nth-child(even) {
+				margin-right: 0;
+			}
+
+			label {
+				width: 100%;
+				font-size: 1em;
+
+				&[for*='1'] {
+					font-family: "EB Garamond", Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+				}
+
+				&[for*='2'] {
+					font-family: Georgia, 'Times New Roman', Times, serif;
+				}
+
+				&[for*='3'] {
+					font-family: 'Nunito sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+				}
+
+				&[for*='4'] {
+					font-family: Arial, Helvetica, sans-serif;
+				}
+			}
+		}
+	}
+}

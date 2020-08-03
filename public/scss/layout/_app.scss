@@ -1,28 +1,33 @@
 .application {
 	@include css4 {
 		background-color: var(--bg);
-	};
+	}
+
+	;
 
 	&.fixed-layout {
-    header{
-      position: fixed;
-      top: 0;
-    }
-    .verse-viewport{
-      margin-top: $navbar-height;
-      overflow: hidden;
-      .sidebar{
-        height: 100%;
-      }
-    }
-  }
-}
-header{
-  height: $navbar-height;
-  width: 100%;
+		header {
+			position: fixed;
+			top: 0;
+		}
+
+		.verse-viewport {
+			margin-top: $navbar-height;
+			overflow: hidden;
+
+			.sidebar {
+				height: 100%;
+			}
+		}
+	}
 }
 
-footer{
+header {
+	height: $navbar-height;
+	width: 100%;
+}
+
+footer {
 	position: fixed;
 	bottom: 0;
 	width: 100%;
@@ -31,14 +36,23 @@ footer{
 	font-size: 0.8rem;
 	text-transform: uppercase;
 	letter-spacing: 0.4rem;
-	@include css4{
+	pointer-events: none;
+	user-select: none;
+	@include css4 {
 		border-top: 1px solid var(--border-color);
 		background-color: var(--bg);
 	}
-	svg{
-		color: color('red', 'darken-1');
-		width: 1rem;
-		height: 1rem;
-		margin: 0 0.6rem 0 0.4rem;
+
+	.foot__credits {
+
+		.svg-icon {
+			color: color('red', 'darken-1');
+			width: 1rem;
+			height: 1rem;
+			margin: 0 0.6rem 0 0.4rem;
+			svg{
+				vertical-align: middle;
+			}
+		}
 	}
 }

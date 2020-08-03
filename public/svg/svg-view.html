@@ -75,7 +75,7 @@
                 $('nav').show();
                 $(this).addClass('active');
                 var iD = $(this).attr('id');
-                var svgPre = `<pre><code id="copyContent">&lt;em class="svgIcon"&gt;&lt;svg&gt;&lt;use xlink:href="/public/svg/sprite-icons.svg#` + iD + `"/&gt;&lt;/svg&gt;&lt;/em&gt;</code></pre>`;
+                var svgPre = `<pre><code id="copyContent">&lt;em class="svg-icon"&gt;&lt;svg&gt;&lt;use xlink:href="/public/svg/sprite-icons.svg#` + iD + `"/&gt;&lt;/svg&gt;&lt;/em&gt;</code></pre>`;
                 $('.svgcode').html(svgPre);
             });
             var jqxhr = $.getJSON("metadata.json", function(result) {

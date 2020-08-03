@@ -1,0 +1,10 @@
+.svg-icon{
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    svg{
+        width: inherit;
+        height: inherit;
+        vertical-align: unset;
+    }
+}

@@ -49,6 +49,7 @@ body{margin:0}
 audio,canvas,iframe,img,svg,video{vertical-align:middle}
 .browserupgrade{margin:.2em 0;padding:.2em 0;background:#fff;color:#212121;background:var(--bg);color:var(--color)}
 ul{list-style-type:none;margin:0;padding:0}
+svgicons{display:none}
 *{scrollbar-width:thin;scroll-behavior:smooth;scrollbar-color:#e0e0e0 #fff;scrollbar-color:var(--scrollbar-bg) var(--bg)}
 body:not(.MacOS) ::-webkit-scrollbar-track{background-color:#fff;background-color:var(--bg)}
 body:not(.MacOS) ::-webkit-scrollbar{width:10px;height:10px;background-color:#fff;background-color:var(--bg)}

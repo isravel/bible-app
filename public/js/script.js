@@ -20,6 +20,7 @@
 }());
 
 // Place any jQuery/helper plugins in here.
+<<<<<<< HEAD
 $.get("/svg/sprite-icons.svg", function (data) {
 	var div = document.createElement("SVGicons");
 	div.innerHTML = new XMLSerializer().serializeToString(data.documentElement);
@@ -31,3 +32,31 @@ function scroll_into_view(id) {
 	var elmnt = document.getElementById(id);
 	elmnt.scrollIntoView();
 }
+=======
+jQuery(document).ready(function($) {
+  $(document).on('click', '.books_list > ul > li', function(){
+    $('.books_list > ul > li').removeClass('active');
+    $(this).addClass('active');
+    let selector = $(this).text();
+    console.log(selector);
+  });
+  $(document).on('click', '.chapters_list > ul > li', function(){
+    $('.chapters_list > ul > li').removeClass('active');
+    $(this).addClass('active');
+    let selector = $(this).text();
+    console.log(selector);
+  });
+  $(document).on('click', '.verses_list > ul > li', function(){
+    $('.verses_list > ul > li').removeClass('active');
+    $(this).addClass('active');
+    let selector = $(this).text();
+    console.log(selector);
+  });
+  $(document).on('click', '.bible__chapters__verses > li', function(){
+    $(this).toggleClass('selected');
+  });
+  $(document).on('click', '.viewport-settings__toggle', function () {
+    $('.viewport-settings__dropdown').toggleClass('active');
+  });
+});
+>>>>>>> origin/master

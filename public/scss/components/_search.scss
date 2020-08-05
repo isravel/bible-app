@@ -1,0 +1,23 @@
+.search-coming-soon{
+    height: 100%;
+    text-align: center;
+    pointer-events: none;
+    user-select: none;
+    img{
+        width: 150px;
+        opacity: 1;
+    }
+    .svg-icon{
+        width: 2rem;
+        height: 2rem;
+        margin-right: 0.7rem;
+    }
+    h1{
+        margin-top: 2rem;
+        margin-bottom: 0;
+    }
+    p{
+        font-size: 1.2rem;
+        margin-top: 0.5rem;
+    }
+}

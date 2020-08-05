@@ -1,5 +1,6 @@
 import React from 'react';
 import logo from '../logo.svg';
+import ReactDOM from 'react-dom';
 import '../App.css';
 import home from './HomeScreen.module.css';
 import NavScreen from './NavScreen';
@@ -11,8 +12,16 @@ import fieldConstants from '../utils/FieldConstants';
 
 class HomeScreen extends React.Component {
 	constructor(props) {
-        super(props);
-		fieldConstants.Book ="";
+		super(props);
+		
+		this.element1 = React.createRef()
+		this.verseDetailRef = React.createRef()
+		// this.myRef = React.createRef();
+		// this.myRef = element => {
+		// 	this.verselist = element;
+			
+		//   };
+		// fieldConstants.Book ="";
         // this.onClick = this.onClick.bind(this);
     }
 	state = {
@@ -52,7 +61,19 @@ class HomeScreen extends React.Component {
 				verseHeader : res.data.books[0].human +' '+ res.data.chapters[0].chapters[0].Chapter
 				// verseHeader : res.data.books[0].human
 			});	
+			// console.log('this element ssss', this.element1);
+			if(this.element1)
+			this.element1.current.addEventListener("scroll", () => {			
+					// console.log('Scrolls');
+					if (this.element1.current.scrollTop + this.element1.current.clientHeight >=this.element1.current.scrollHeight){
+					  console.log('Scrolls');
+					}else if (this.element1.current.scrollBottom + this.element1.current.clientHeight >=this.element1.current.scrollHeight){
+						console.log('Scrollssss');
+					  }
+				  });
+			// this.element1.current.addEventListener("scroll", this.handleNvEnter);
 			window.scroll_into_view(1);
+			
 		}).catch(res => {
 			console.log(res);
 			this.setState({
@@ -60,8 +81,22 @@ class HomeScreen extends React.Component {
 				result : false
 			});
 		});
+		
+		
+		// ReactDOM.findDOMNode(this.element).addEventListener("nv-enter", this.handleNvEnter);
+		// console.log('this element ', this.element1);
+		// if(this.element)
+		// this.element1.current.addEventListener("scroll", () => {			
+		// 	console.log('Scrolls');
+		// 	if (this.refs.iScroll.scrollTop + this.refs.iScroll.clientHeight >=this.refs.iScroll.scrollHeight){
+		// 	  console.log('Scrolls');
+		// 	}
+		//   });
 	}
 
+	handleNvEnter = (event) => {
+		console.log("Nv Enter:", event);
+	  }
 
 	onBookClickHandler = (bookId, book) =>{	   
 		this.setState({bookId: bookId})
@@ -152,7 +187,9 @@ class HomeScreen extends React.Component {
 		this.setState({
 			verseId: verseId
 		})
-		this.refs.child.callChildFunction(verseId);
+		// this.refs.child.callChildFunction(verseId);
+		console.log('verseDetailRef',this.verseDetailRef)
+		this.verseDetailRef.current.callChildFunction(verseId);
 	}
 		
 	render() {
@@ -189,12 +226,14 @@ class HomeScreen extends React.Component {
 				</div>
 			</aside>
 
-			<article className="bible__chapters">
+			<article className="bible__chapters" ref={this.element1} >
 				<div className="container">
 					{this.state.verses.map(verse =>{
 						return(<VerseScreen 
 							key={verse.bookId} 
-							ref="child" 
+							// ref="child" 
+							ref={this.verseDetailRef}
+							// ref={el => this.element = el}
 							onVerseClickHandler={this.state.verseId} 
 							verses={verse.chapters}/>);
 					})}

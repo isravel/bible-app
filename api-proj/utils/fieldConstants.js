@@ -6,6 +6,7 @@ module.exports = {
     chapters :"chapters",
 
     // bible en & bible_ta columns
+    Id :"Id",
     Book :"Book",
     Chapter :"Chapter",
     VerseCount: "VerseCount",

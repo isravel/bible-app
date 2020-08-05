@@ -20,6 +20,7 @@
 }());
 
 // Place any jQuery/helper plugins in here.
+<<<<<<< HEAD
 
 $.get("/svg/sprite-icons.svg", function (data) {
 	var div = document.createElement("SVGicons");
@@ -32,6 +33,9 @@ function scroll_into_view(id) {
 	var elmnt = document.getElementById(id);
 	elmnt.scrollIntoView();
 }
+=======
+
+>>>>>>> e91c448cfaf9f8733df699fec4bbb897d7e5362e
 jQuery(document).ready(function($) {
   $(document).on('click', '.books_list > ul > li', function(){
     $('.books_list > ul > li').removeClass('active');
@@ -58,3 +62,19 @@ jQuery(document).ready(function($) {
     $('.viewport-settings__dropdown').toggleClass('active');
   });
 });
+<<<<<<< HEAD
+=======
+
+$.get("/svg/sprite-icons.svg", function (data) {
+	var div = document.createElement("SVGicons");
+	div.innerHTML = new XMLSerializer().serializeToString(data.documentElement);
+	document.body.insertBefore(div, document.body.childNodes[0]);
+});
+
+function scroll_into_view(id) {
+	console.log('id', id);
+	var elmnt = document.getElementById(id);
+	elmnt.scrollIntoView();
+}
+
+>>>>>>> e91c448cfaf9f8733df699fec4bbb897d7e5362e

@@ -15,6 +15,12 @@ module.exports = {
     // Chapters columns
     id :"id",
     english :"english",
-    tamil: "tamil"
+    tamil: "tamil",
+
+    // Ids
+    bookId :"B00",
+    chapterId :"C00",
+    verseId: "V00",
+    versesId: "Vs00",
 
 }

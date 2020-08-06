@@ -668,7 +668,8 @@ router.post('/getDynamicDetails', function (req, res, next) {
 					if (err) return parallel_done(err);
 					var chapList = [];
 					var chapObj = {};
-					chapObj.bookId = bookId;
+					chapObj.bookId = fieldConstant.bookId + bookId;
+					chapObj.bookNo = bookId;
 					chapObj.chapters = results
 					chapList.push(chapObj);
 					data.chapters = chapList;
@@ -683,7 +684,13 @@ router.post('/getDynamicDetails', function (req, res, next) {
 					var verseList = [];
 					var verseNoObj = {};
 					verseNoObj.chapter = chapterId;
-					verseNoObj.verse = results
+					verseNoObj.verseItems = results.map(res => {
+						console.log('resultssss ',res);
+						var verseCount = {};
+						verseCount.verseId= fieldConstant.verseId + res.VerseCount;
+						verseCount.verseNo =res.VerseCount;
+						return verseCount;
+					})
 					verseList.push(verseNoObj);
 					data.versecounts = verseList;
 					// data.versecounts = results;
@@ -754,7 +761,7 @@ router.post('/getDynamicDetails', function (req, res, next) {
 							let chapterList = [];
 							let chapters = {};
 							chapters.book = book;
-							chapters.chapter = 1;
+							chapters.chapter = chapterId;
 							chapters.verseData = verseData;
 							chapterList.push(chapters);
 							bookList.chapters = chapterList;

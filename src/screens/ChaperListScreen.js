@@ -18,7 +18,7 @@ class ChapterList extends React.Component {
             <ul>
                 {this.props.chapters.map(chap => {
                     const className = this.state.activeIndex === chap.Chapter ? 'active' : null;
-                    return (<li class={className} key={chap.Chapter} onClick={() => this.onClickHandler(chap.Chapter)}>{chap.Chapter}</li>);
+                    return (<li class={className} key={chap.Chapter} onClick={() => this.onClickHandler(chap.Chapter)}><span>{chap.Chapter}</span></li>);
                 })}
                 {/* <li>1</li>
                 <li>2</li>

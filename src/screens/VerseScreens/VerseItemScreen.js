@@ -42,7 +42,7 @@ class VerseItemScreen extends React.Component {
                 <ul className="bible__chapters__verses">
                     {
                     this.props.verse.map(res => {
-                        return (<li id={res.verseCount} key={res.verseCount} ref={refs[res.verseCount]} ><span className="verse_number">{res.verseCount}</span>{res.verse}</li>);
+                        return (<li id={res.verseCount} key={res.verseCount} ref={refs[res.verseCount]} ><span className="verse_number">{res.verseCount}</span><span class='verse_text'>{res.verse}</span></li>);
                     })
                     
                     }

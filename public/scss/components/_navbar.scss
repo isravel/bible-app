@@ -11,10 +11,13 @@
   > .left{
     margin-right: auto;
     line-height: 1;
+    width: 300px;
   }
   > .right{
     margin-left: auto;
     display: inline-flex;
+    align-self: flex-start;
+    width: 300px;
   }
   >.center{
     margin: 0 auto;
@@ -53,5 +56,9 @@
     .svg-icon{
       margin: 0 1rem;
     }
+  }
+  .lang-select{
+    position: relative;
+    margin-left: auto;
   }
 }

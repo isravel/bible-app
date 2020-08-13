@@ -175,7 +175,7 @@ class HomeScreen extends React.Component {
 		// }
 
 		// fetch(fieldConstants.baseUrl+this.apiUrl(fieldConstants.verseDetails), requestOptions)
-		// // fetch("http://localhost:5000/api/getFullDetails?lang=en&limit=50")
+		/// fetch("http://localhost:5000/api/getFullDetails?lang=en&limit=50")
 		// .then(result => result.json()).then(res => {
 		// 	// console.log('url')
 		// 	this.setState({
@@ -235,7 +235,122 @@ class HomeScreen extends React.Component {
 				</aside>
 
 				<article className="bible__chapters" ref={this.element1} role="main">
-					<div className="container">
+					<div class="viewport-settings">
+						<div class="viewport-settings__wrapper">
+							<button class="viewport-settings__toggle">
+								<em class="svg-icon">
+									<svg>
+										<use xlinkHref={process.env.PUBLIC_URL + "/svg/sprite-icons.svg#tune"} />
+									</svg>
+								</em>
+							</button>
+							<form class="viewport-settings__dropdown" id="viewport-settings">
+								<div class="settings-group alignment">
+									<div class="settings-group__label">Alignment</div>
+									<div class="settings-group__input-field">
+										<input type="radio" id="alignment-left" name="alignment" checked />
+										<label for="alignment-left">
+											<em class="svg-icon"><svg>
+													<use xlinkHref={"/public/svg/sprite-icons.svg#format-left"} /></svg></em>
+										</label>
+									</div>
+									<div class="settings-group__input-field">
+										<input type="radio" id="alignment-justify" name="alignment" />
+										<label for="alignment-justify">
+											<em class="svg-icon"><svg>
+													<use xlinkHref={process.env.PUBLIC_URL + "/svg/sprite-icons.svg#format-justify" }/>
+													</svg></em>
+										</label>
+									</div>
+									<div class="settings-group__input-field">
+										<input type="radio" id="alignment-center" name="alignment" />
+										<label for="alignment-center">
+											<em class="svg-icon"><svg>
+													<use xlinkHref={process.env.PUBLIC_URL + "/svg/sprite-icons.svg#format-center"} />
+													</svg></em>
+										</label>
+									</div>
+								</div>
+								<div class="settings-group text-size">
+									<div class="settings-group__label">Text size</div>
+									<div class="settings-group__input-field">
+										<input type="radio" id="font-size-14" name="font-size" />
+										<label for="font-size-14">
+											14
+										</label>
+									</div>
+									<div class="settings-group__input-field">
+										<input type="radio" id="font-size-16" name="font-size" />
+										<label for="font-size-16">
+											16
+										</label>
+									</div>
+									<div class="settings-group__input-field">
+										<input type="radio" id="font-size-18" name="font-size" checked />
+										<label for="font-size-18">
+											18
+										</label>
+									</div>
+									<div class="settings-group__input-field">
+										<input type="radio" id="font-size-20" name="font-size" />
+										<label for="font-size-20">
+											20
+										</label>
+									</div>
+									<div class="settings-group__input-field">
+										<input type="radio" id="font-size-22" name="font-size" />
+										<label for="font-size-22">
+											22
+										</label>
+									</div>
+								</div>
+								<div class="settings-group font-variant">
+									<div class="settings-group__label">Text size</div>
+									<div class="settings-group__input-field">
+										<input type="radio" id="font-variant-1" name="font-variant" checked />
+										<label for="font-variant-1">
+											EB Garamond
+										</label>
+									</div>
+									<div class="settings-group__input-field">
+										<input type="radio" id="font-variant-2" name="font-variant" />
+										<label for="font-variant-2">
+											Georgia
+										</label>
+									</div>
+									<div class="settings-group__input-field">
+										<input type="radio" id="font-variant-3" name="font-variant" />
+										<label for="font-variant-3">
+											Nunito Sans
+										</label>
+									</div>
+									<div class="settings-group__input-field">
+										<input type="radio" id="font-variant-4" name="font-variant" />
+										<label for="font-variant-4">
+											Arial
+										</label>
+									</div>
+								</div>
+								<div class="settings-group font-variant">
+									<div class="settings-group__label">Mode</div>
+									<div class="settings-group__input-field">
+										<input type="radio" id="night-mode-1" name="night-mode" checked />
+										<label for="night-mode-1">
+											Light mode
+										</label>
+									</div>
+									<div class="settings-group__input-field">
+										<input type="radio" id="night-mode-2" name="night-mode" />
+										<label for="night-mode-2">
+											Night mode
+										</label>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+
+					<div className="container font-size alignment">
 						{this.state.verses.map(verse => {
 							return (<VerseScreen
 								key={verse.bookId}
@@ -248,106 +363,7 @@ class HomeScreen extends React.Component {
 
 						
 					</div>
-				<div class="viewport-settings">
-					<div class="viewport-settings__wrapper">
-						<button class="viewport-settings__toggle">
-							<em class="svg-icon">
-								<svg>
-									<use xlinkHref={process.env.PUBLIC_URL + "/svg/sprite-icons.svg#tune"} />
-								</svg>
-							</em>
-						</button>
-						<div class="viewport-settings__dropdown">
-							<div class="settings-group alignment">
-								<div class="settings-group__label">Alignment</div>
-								<div class="settings-group__input-field">
-									<input type="radio" id="alignment-left" name="alignment" checked />
-									<label for="alignment-left">
-										<em class="svg-icon"><svg>
-												<use xlinkHref={"/public/svg/sprite-icons.svg#format-left"} /></svg></em>
-									</label>
-								</div>
-								<div class="settings-group__input-field">
-									<input type="radio" id="alignment-justify" name="alignment" />
-									<label for="alignment-justify">
-										<em class="svg-icon"><svg>
-												<use xlinkHref={process.env.PUBLIC_URL + "/svg/sprite-icons.svg#format-justify" }/>
-												</svg></em>
-									</label>
-								</div>
-								<div class="settings-group__input-field">
-									<input type="radio" id="alignment-center" name="alignment" />
-									<label for="alignment-center">
-										<em class="svg-icon"><svg>
-												<use xlinkHref={process.env.PUBLIC_URL + "/svg/sprite-icons.svg#format-center"} />
-												</svg></em>
-									</label>
-								</div>
-							</div>
-							<div class="settings-group text-size">
-								<div class="settings-group__label">Text size</div>
-								<div class="settings-group__input-field">
-									<input type="radio" id="font-size-10" name="font-size" />
-									<label for="font-size-10">
-										10
-									</label>
-								</div>
-								<div class="settings-group__input-field">
-									<input type="radio" id="font-size-12" name="font-size" />
-									<label for="font-size-12">
-										12
-									</label>
-								</div>
-								<div class="settings-group__input-field">
-									<input type="radio" id="font-size-14" name="font-size" checked />
-									<label for="font-size-14">
-										14
-									</label>
-								</div>
-								<div class="settings-group__input-field">
-									<input type="radio" id="font-size-16" name="font-size" />
-									<label for="font-size-16">
-										16
-									</label>
-								</div>
-								<div class="settings-group__input-field">
-									<input type="radio" id="font-size-18" name="font-size" />
-									<label for="font-size-18">
-										18
-									</label>
-								</div>
-							</div>
-							<div class="settings-group font-variant">
-								<div class="settings-group__label">Text size</div>
-								<div class="settings-group__input-field">
-									<input type="radio" id="font-variant-1" name="font-variant" checked />
-									<label for="font-variant-1">
-										EB Garamond
-									</label>
-								</div>
-								<div class="settings-group__input-field">
-									<input type="radio" id="font-variant-2" name="font-variant" />
-									<label for="font-variant-2">
-										Georgia
-									</label>
-								</div>
-								<div class="settings-group__input-field">
-									<input type="radio" id="font-variant-3" name="font-variant" />
-									<label for="font-variant-3">
-										Nunito Sans
-									</label>
-								</div>
-								<div class="settings-group__input-field">
-									<input type="radio" id="font-variant-4" name="font-variant" />
-									<label for="font-variant-4">
-										Arial
-									</label>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
+				
 					
 				</article>
 

@@ -21,6 +21,7 @@ html {
 	@include css4 {
 		font-family: var(--font);
 		color: var(--color);
+		background-color: var(--bg);
 	}
 }
 

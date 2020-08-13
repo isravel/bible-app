@@ -6,9 +6,11 @@
 	}
 
 	position: absolute;
+	position: sticky;
 	font-size: 14px;
-	right: 1em;
 	top: 1em;
+	right: 1em;
+	padding-right: 1em;
 
 	#{$self}__toggle {
 		display: inline-flex;
@@ -28,6 +30,9 @@
 		.svg-icon {
 			width: 1.5em;
 			height: 1.5em;
+			@include css4{
+				fill: var(--icon-color);
+			}
 		}
 	}
 
@@ -40,12 +45,13 @@
 		right: 0;
 		padding: 0.5rem 0;
 		border-radius: 6px;
-		box-shadow: 0px 11px 15px transparentize($text-color, 0.8);
-
+		
 		@include css4 {
+			box-shadow: $box-shadow;
 			background-color: var(--bg);
 		}
-		&.active{
+
+		&.active {
 			display: block;
 		}
 	}
@@ -77,6 +83,7 @@
 			font-size: 0.8em;
 			line-height: 1;
 			cursor: pointer;
+			transition: all ease-in $timing;
 			.svg-icon {
 				width: 1.3em;
 				height: 1.3em;
@@ -89,14 +96,7 @@
 			&:checked {
 				+label {
 					@include css4 {
-						background-color: var(--primary-color);
-						color: var(--bg)
-					}
-
-					svg {
-						@include css4 {
-							fill: var(--bg);
-						}
+						background-color: var(--hover-color);
 					}
 				}
 			}
@@ -135,19 +135,19 @@
 				font-size: 1em;
 
 				&[for*='1'] {
-					font-family: "EB Garamond", Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+					@include font-varient(garamond);
 				}
 
 				&[for*='2'] {
-					font-family: Georgia, 'Times New Roman', Times, serif;
+					@include font-varient(georgia);
 				}
 
 				&[for*='3'] {
-					font-family: 'Nunito sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+					@include font-varient(nunito);
 				}
 
 				&[for*='4'] {
-					font-family: Arial, Helvetica, sans-serif;
+					@include font-varient(sans);
 				}
 			}
 		}

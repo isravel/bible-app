@@ -303,6 +303,18 @@ $grey: (
     "darken-3": #424242,
     "darken-4": #212121
 );
+$dark-mode: (
+    "base": #F4F5F6,
+    "lighten-5": #E8EAEC,
+    "lighten-4": #C6CBD0,
+    "lighten-3": #A3ABB3,
+    "lighten-2": #5F6C7B,
+    "lighten-1": #1A2D42,
+    "darken-1": #17293B,
+    "darken-2": #101B28,
+    "darken-3": #0C141E,
+    "darken-4": #080E14
+);
 $shades: (
     "black": #000000,
     "white": #FFFFFF,
@@ -329,10 +341,12 @@ $colors: (
     "brown": $brown,
     "blue-grey": $blue-grey,
     "grey": $grey,
+    "dark-mode": $dark-mode,
     "shades": $shades
 )
 !default;
 $white: #fff;
+$black: #111111;
 // usage: color("name_of_color", "type_of_color")
 // to avoid to repeating map-get($colors, ...)
 @function color($color, $type) {

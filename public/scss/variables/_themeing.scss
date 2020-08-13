@@ -4,7 +4,7 @@ $bg-secondary: color("grey", "lighten-4");
 $text-color: color('grey','darken-4');
 
 $primary-color: color('red', 'darken-1');
-
+$navbar-bg: #fbfbfb;
 $hover_color: color('grey', 'lighten-2');
 $border-color: color("grey","lighten-3");
 
@@ -14,3 +14,5 @@ $scrollbar-bg: color('grey', 'lighten-2');
 $label-color: color('grey', 'lighten-1');
 
 $font: 'Nunito Sans', Arial, Helvetica, sans-serif;
+
+$box-shadow: 0px 11px 15px hsla(0, 0, 0, 0.2);

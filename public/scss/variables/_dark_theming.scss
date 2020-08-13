@@ -1,0 +1,56 @@
+$dark-bg: color('dark-mode', 'darken-2');
+$dark-bg-secondary: color('dark-mode', 'darken-4');
+$dark-text-color: color('dark-mode', 'lighten-5');
+$dark-hover_color: color('dark-mode', 'darken-1');
+$dark-border-color: $black;
+$dark-icon-color: color('dark-mode', 'lighten-5');
+$dark-scrollbar-bg: color('dark-mode', 'darken-3');
+$dark-label-color: color('dark-mode', 'lighten-3');
+$dark-navbar-bg: color('dark-mode', 'darken-3');
+
+@media screen and (prefers-color-scheme: dark) {
+    :root{
+        --bg: #{$dark-bg};
+        --color: #{$dark-text-color};
+        --bg-secondary: #{$dark-bg-secondary};
+
+        // Global
+        --border-color: #{$dark-border-color};
+        --hover-color: #{$dark-hover_color};
+
+        // Icons
+        --icon-color: #{$dark-icon-color};
+
+        // Navbar
+        --navbar-bg: #{$dark-navbar-bg};
+
+        // Scrollbar
+        --scrollbar-bg: #{$dark-scrollbar-bg};
+
+        // Viewport settings 
+        --label-color: #{$dark-label-color};
+    }
+}
+
+
+.dark-mode:root{
+    --bg: #{$dark-bg};
+	--color: #{$dark-text-color};
+	--bg-secondary: #{$dark-bg-secondary};
+
+	// Global
+	--border-color: #{$dark-border-color};
+	--hover-color: #{$dark-hover_color};
+
+	// Icons
+	--icon-color: #{$dark-icon-color};
+
+	// Navbar
+	--navbar-bg: #{$dark-navbar-bg};
+
+	// Scrollbar
+	--scrollbar-bg: #{$dark-scrollbar-bg};
+
+	// Viewport settings 
+	--label-color: #{$dark-label-color};
+}

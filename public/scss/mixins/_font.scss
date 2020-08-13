@@ -1,0 +1,62 @@
+@mixin font-varient($font-choice: 'auto') {
+
+	@if $font-choice=='garamond' {
+        font-family: "EB Garamond", Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+	}
+
+	@else if $font-choice=='georgia' {
+        font-family: Georgia, 'Times New Roman', Times, serif;
+	}
+
+	@else if $font-choice=='nunito' {
+        font-family: 'Nunito sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	}
+
+	@else if $font-choice=='sans' {
+        font-family: 'Nirmala UI', 'Segoe UI', Tahoma, Arial, sans-serif
+	}
+
+	@else {
+		font-family: Arial, Helvetica, sans-serif;
+	}
+}
+
+@mixin font-size($font-size: 18) {
+
+	@if $font-size==14 {
+		font-size: 14px;
+	}
+
+	@else if $font-size==16 {
+		font-size: 16px;
+	}
+
+	@else if $font-size==18 {
+		font-size: 18px;
+	}
+
+	@else if $font-size==20 {
+		font-size: 20px;
+	}
+
+	@else if $font-size==22 {
+		font-size: 22px;
+	}
+
+}
+
+@mixin alignment($aligment: left) {
+
+	@if $aligment==left {
+		text-align: left;
+	}
+
+	@else if $aligment==justify{
+		text-align: justify;
+	}
+
+	@else if $aligment==center{
+		text-align: center;
+	}
+
+}

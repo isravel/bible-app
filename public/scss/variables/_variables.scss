@@ -2,6 +2,7 @@
 $navbar_height: 52px;
 $list-line-height: 2rem;
 $footer-line-height: 2.4rem;
+$timing: .2s;
 //it is nessesary to define the variables in sass map instead of :root, for compatibility reasons.
 $variables: (
 	
@@ -22,17 +23,19 @@ $variables: (
 	// components color specific
 	
 	// Navbar
-	--navbar-bg: $bg,
+	--navbar-bg: $navbar-bg,
 	
 	// Scrollbar
 	--scrollbar-bg: $scrollbar-bg,
 
-	// Sidebar
-	--list-line-height: $list-line-height,
-
+	
 	// Viewport settings 
 	--label-color: $label-color,
+	
+	// Sidebar
+	--list-line-height: $list-line-height,
 
 	// Footer
 	--footer-line-height: $footer-line-height, 
 );
+

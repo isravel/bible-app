@@ -18,7 +18,7 @@
 	<script src="/public/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 
-<body>
+<body data-font data-font-size='18' data-alignment='left'>
 	<!--[if lt IE 10]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -46,7 +46,7 @@
 								</svg>
 							</em>
 						</div>
-						<div class="chapter__nav__name serif">
+						<div class="chapter__nav__name font-switch">
 							Psalm 91
 						</div>
 						<div class="chapter__nav__next">
@@ -59,7 +59,7 @@
 					</div>
 				</div>
 				<div class="right">
-					<div class="nav__icons">
+					<!-- <div class="nav__icons">
 						<div class="search__icon">
 							<em class="svg-icon" role="button">
 								<svg>
@@ -74,6 +74,20 @@
 								</svg>
 							</em>
 						</div>
+					</div> -->
+					<div class="lang-select">
+						<span class="dropdown-el">
+							<input type="radio" name="lang-switch" checked="checked" value="eng" id="English" />
+							<label for="English">English</label>
+							<input type="radio" name="lang-switch" value="tamil" id="Tamil" />
+							<label for="Tamil">Tamil</label>
+							<input type="radio" name="lang-switch" value="malayalam" id="Malayalam" />
+							<label for="Malayalam">Malayalam</label>
+							<input type="radio" name="lang-switch" value="telugu" id="Telugu" />
+							<label for="Telugu">Telugu</label>
+							<input type="radio" name="lang-switch" value="hindi" id="Hindi" />
+							<label for="Hindi">Hindi</label>
+						</span>
 					</div>
 				</div>
 			</nav>
@@ -227,170 +241,6 @@
 				</div>
 			</aside>
 			<article class="bible__chapters" role="main">
-				<div class="container">
-					<div class="bible__chapters__chapter serif">
-						<div class="bible__chapters__title bold">Psalm 91</div>
-						<ul class="bible__chapters__verses">
-							<li><span class="verse_number">1</span> <span class='verse_text'>He that dwells in the
-									secret place of the most High shall abide under the shadow of the Almighty.</span>
-							</li>
-							<li><span class="verse_number">2</span> <span class='verse_text'>I will say of the LORD, He
-									is my refuge and my fortress: my God; in him will I trust.</span> </li>
-							<li><span class="verse_number">3</span> <span class='verse_text'>Surely he shall deliver you
-									from the snare of the fowler, and from the dangerous pestilence.</span> </li>
-							<li><span class="verse_number">4</span> <span class='verse_text'>He shall cover you with his
-									feathers, and under his wings shall you trust: his truth shall be your shield and
-									buckler.</span> </li>
-							<li><span class="verse_number">5</span> <span class='verse_text'>You shall not be afraid for
-									the terror by night; nor for the arrow that flies by day;</span> </li>
-							<li><span class="verse_number">6</span> <span class='verse_text'>Nor for the pestilence that
-									walks in darkness; nor for the destruction that wastes at noonday.</span> </li>
-							<li><span class="verse_number">7</span> <span class='verse_text'>A thousand shall fall at
-									your side, and ten thousand at your right hand; but it shall not come nigh
-									you.</span> </li>
-							<li><span class="verse_number">8</span> <span class='verse_text'>Only with yours eyes shall
-									you behold and see the reward of the wicked.</span> </li>
-							<li><span class="verse_number">9</span> <span class='verse_text'>Because you have made the
-									LORD, which is my refuge, even the most High, your habitation;</span> </li>
-							<li><span class="verse_number">10</span> <span class='verse_text'>There shall no evil befall
-									you, neither shall any plague come nigh your dwelling.</span> </li>
-							<li><span class="verse_number">11</span> <span class='verse_text'>For he shall give his
-									angels charge over you, to keep you in all your ways.</span> </li>
-							<li><span class="verse_number">12</span> <span class='verse_text'>They shall bear you up in
-									their hands, lest you dash your foot against a stone.</span> </li>
-							<li><span class="verse_number">13</span> <span class='verse_text'>You shall tread upon the
-									lion and adder: the young lion and the dragon shall you trample under feet.</span>
-							</li>
-							<li><span class="verse_number">14</span> <span class='verse_text'>Because he has set his
-									love upon me, therefore will I deliver him: I will set him on high, because he has
-									known my name.</span> </li>
-							<li><span class="verse_number">15</span> <span class='verse_text'>He shall call upon me, and
-									I will answer him: I will be with him in trouble; I will deliver him, and honour
-									him.</span> </li>
-							<li><span class="verse_number">16</span> <span class='verse_text'>With long life will I
-									satisfy him, and show him my salvation.</span> </li>
-						</ul>
-					</div>
-					<div class="bible__chapters__chapter serif">
-						<div class="bible__chapters__title bold">Psalm 92</div>
-						<ul class="bible__chapters__verses">
-							<li><span class="verse_number">1</span> <span class='verse_text'>IT IS A GOOD THING TO GIVE
-									THANKS UNTO THE LORD, AND TO SING PRAISES UNTO Your NAME, O MOST HIGH:</span> </li>
-							<li><span class="verse_number">2</span> <span class='verse_text'>To show forth your loving
-									kindness in the morning, and your faithfulness every night,</span> </li>
-							<li><span class="verse_number">3</span> <span class='verse_text'>Upon an instrument of ten
-									strings, and upon the psaltery; upon the harp with a solemn sound.</span> </li>
-							<li><span class="verse_number">4</span> <span class='verse_text'>For you, LORD, have made me
-									glad through your work: I will triumph in the works of your hands.</span> </li>
-							<li><span class="verse_number">5</span> <span class='verse_text'>O LORD, how great are your
-									works! and your thoughts are very deep.</span> </li>
-							<li><span class="verse_number">6</span> <span class='verse_text'>A brutish man knows not;
-									neither does a fool understand this.</span> </li>
-							<li><span class="verse_number">7</span> <span class='verse_text'>When the wicked spring as
-									the grass, and when all the workers of iniquity do flourish; it is that they shall
-									be destroyed for ever:</span> </li>
-							<li><span class="verse_number">8</span> <span class='verse_text'>But you, LORD, are most
-									high for evermore.</span> </li>
-							<li><span class="verse_number">9</span> <span class='verse_text'>For, lo, yours enemies, O
-									LORD, for, lo, yours enemies shall perish; all the workers of iniquity shall be
-									scattered.</span> </li>
-							<li><span class="verse_number">10</span> <span class='verse_text'>But my horn shall you
-									exalt like the horn of an unicorn : I shall be anointed with fresh oil.</span> </li>
-							<li><span class="verse_number">11</span> <span class='verse_text'>Mine eye also shall see my
-									desire on mine enemies, and mine ears shall hear my desire of the wicked that rise
-									up against me.</span> </li>
-							<li><span class="verse_number">12</span> <span class='verse_text'>The righteous shall
-									flourish like the palm tree: he shall grow like a cedar in Lebanon.</span> </li>
-							<li><span class="verse_number">13</span> <span class='verse_text'>Those that be planted in
-									the house of the LORD shall flourish in the courts of our God.</span> </li>
-							<li><span class="verse_number">14</span> <span class='verse_text'>They shall still bring
-									forth fruit in old age; they shall be fat and flourishing;</span> </li>
-							<li><span class="verse_number">15</span> <span class='verse_text'>To show that the LORD is
-									upright: he is my rock, and there is no unrighteousness in him.</span> </li>
-						</ul>
-					</div>
-					<div class="bible__chapters__chapter serif">
-						<div class="bible__chapters__title bold">Psalm 93</div>
-						<ul class="bible__chapters__verses">
-							<li><span class="verse_number">1</span> <span class='verse_text'>He that dwells in the
-									secret place of the most High shall abide under the shadow of the Almighty.</span>
-							</li>
-							<li><span class="verse_number">2</span> <span class='verse_text'>I will say of the LORD, He
-									is my refuge and my fortress: my God; in him will I trust.</span> </li>
-							<li><span class="verse_number">3</span> <span class='verse_text'>Surely he shall deliver you
-									from the snare of the fowler, and from the dangerous pestilence.</span> </li>
-							<li><span class="verse_number">4</span> <span class='verse_text'>He shall cover you with his
-									feathers, and under his wings shall you trust: his truth shall be your shield and
-									buckler.</span> </li>
-							<li><span class="verse_number">5</span> <span class='verse_text'>You shall not be afraid for
-									the terror by night; nor for the arrow that flies by day;</span> </li>
-							<li><span class="verse_number">6</span> <span class='verse_text'>Nor for the pestilence that
-									walks in darkness; nor for the destruction that wastes at noonday.</span> </li>
-							<li><span class="verse_number">7</span> <span class='verse_text'>A thousand shall fall at
-									your side, and ten thousand at your right hand; but it shall not come nigh
-									you.</span> </li>
-							<li><span class="verse_number">8</span> <span class='verse_text'>Only with yours eyes shall
-									you behold and see the reward of the wicked.</span> </li>
-							<li><span class="verse_number">9</span> <span class='verse_text'>Because you have made the
-									LORD, which is my refuge, even the most High, your habitation;</span> </li>
-							<li><span class="verse_number">10</span> <span class='verse_text'>There shall no evil befall
-									you, neither shall any plague come nigh your dwelling.</span> </li>
-							<li><span class="verse_number">11</span> <span class='verse_text'>For he shall give his
-									angels charge over you, to keep you in all your ways.</span> </li>
-							<li><span class="verse_number">12</span> <span class='verse_text'>They shall bear you up in
-									their hands, lest you dash your foot against a stone.</span> </li>
-							<li><span class="verse_number">13</span> <span class='verse_text'>You shall tread upon the
-									lion and adder: the young lion and the dragon shall you trample under feet.</span>
-							</li>
-							<li><span class="verse_number">14</span> <span class='verse_text'>Because he has set his
-									love upon me, therefore will I deliver him: I will set him on high, because he has
-									known my name.</span> </li>
-							<li><span class="verse_number">15</span> <span class='verse_text'>He shall call upon me, and
-									I will answer him: I will be with him in trouble; I will deliver him, and honour
-									him.</span> </li>
-							<li><span class="verse_number">16</span> <span class='verse_text'>With long life will I
-									satisfy him, and show him my salvation.</span> </li>
-						</ul>
-					</div>
-					<div class="bible__chapters__chapter serif">
-						<div class="bible__chapters__title bold">Psalm 94</div>
-						<ul class="bible__chapters__verses">
-							<li><span class="verse_number">1</span> <span class='verse_text'>IT IS A GOOD THING TO GIVE
-									THANKS UNTO THE LORD, AND TO SING PRAISES UNTO Your NAME, O MOST HIGH:</span> </li>
-							<li><span class="verse_number">2</span> <span class='verse_text'>To show forth your loving
-									kindness in the morning, and your faithfulness every night,</span> </li>
-							<li><span class="verse_number">3</span> <span class='verse_text'>Upon an instrument of ten
-									strings, and upon the psaltery; upon the harp with a solemn sound.</span> </li>
-							<li><span class="verse_number">4</span> <span class='verse_text'>For you, LORD, have made me
-									glad through your work: I will triumph in the works of your hands.</span> </li>
-							<li><span class="verse_number">5</span> <span class='verse_text'>O LORD, how great are your
-									works! and your thoughts are very deep.</span> </li>
-							<li><span class="verse_number">6</span> <span class='verse_text'>A brutish man knows not;
-									neither does a fool understand this.</span> </li>
-							<li><span class="verse_number">7</span> <span class='verse_text'>When the wicked spring as
-									the grass, and when all the workers of iniquity do flourish; it is that they shall
-									be destroyed for ever:</span> </li>
-							<li><span class="verse_number">8</span> <span class='verse_text'>But you, LORD, are most
-									high for evermore.</span> </li>
-							<li><span class="verse_number">9</span> <span class='verse_text'>For, lo, yours enemies, O
-									LORD, for, lo, yours enemies shall perish; all the workers of iniquity shall be
-									scattered.</span> </li>
-							<li><span class="verse_number">10</span> <span class='verse_text'>But my horn shall you
-									exalt like the horn of an unicorn : I shall be anointed with fresh oil.</span> </li>
-							<li><span class="verse_number">11</span> <span class='verse_text'>Mine eye also shall see my
-									desire on mine enemies, and mine ears shall hear my desire of the wicked that rise
-									up against me.</span> </li>
-							<li><span class="verse_number">12</span> <span class='verse_text'>The righteous shall
-									flourish like the palm tree: he shall grow like a cedar in Lebanon.</span> </li>
-							<li><span class="verse_number">13</span> <span class='verse_text'>Those that be planted in
-									the house of the LORD shall flourish in the courts of our God.</span> </li>
-							<li><span class="verse_number">14</span> <span class='verse_text'>They shall still bring
-									forth fruit in old age; they shall be fat and flourishing;</span> </li>
-							<li><span class="verse_number">15</span> <span class='verse_text'>To show that the LORD is
-									upright: he is my rock, and there is no unrighteousness in him.</span> </li>
-						</ul>
-					</div>
-				</div>
 				<div class="viewport-settings">
 					<div class="viewport-settings__wrapper">
 						<button class="viewport-settings__toggle">
@@ -400,94 +250,273 @@
 								</svg>
 							</em>
 						</button>
-						<div class="viewport-settings__dropdown">
+						<form class="viewport-settings__dropdown" id="viewport-settings">
 							<div class="settings-group alignment">
 								<div class="settings-group__label">Alignment</div>
 								<div class="settings-group__input-field">
-									<input type="radio" id="alignment-left" name="alignment" checked>
+									<input type="radio" id="alignment-left" name="alignment" checked />
 									<label for="alignment-left">
 										<em class="svg-icon"><svg>
 												<use xlink:href="/public/svg/sprite-icons.svg#format-left" /></svg></em>
 									</label>
 								</div>
 								<div class="settings-group__input-field">
-									<input type="radio" id="alignment-justify" name="alignment">
+									<input type="radio" id="alignment-justify" name="alignment" />
 									<label for="alignment-justify">
 										<em class="svg-icon"><svg>
 												<use xlink:href="/public/svg/sprite-icons.svg#format-justify" />
-												</svg></em>
+											</svg></em>
 									</label>
 								</div>
 								<div class="settings-group__input-field">
-									<input type="radio" id="alignment-center" name="alignment">
+									<input type="radio" id="alignment-center" name="alignment" />
 									<label for="alignment-center">
 										<em class="svg-icon"><svg>
 												<use xlink:href="/public/svg/sprite-icons.svg#format-center" />
-												</svg></em>
+											</svg></em>
 									</label>
 								</div>
 							</div>
 							<div class="settings-group text-size">
 								<div class="settings-group__label">Text size</div>
 								<div class="settings-group__input-field">
-									<input type="radio" id="font-size-10" name="font-size">
-									<label for="font-size-10">
-										10
-									</label>
-								</div>
-								<div class="settings-group__input-field">
-									<input type="radio" id="font-size-12" name="font-size">
-									<label for="font-size-12">
-										12
-									</label>
-								</div>
-								<div class="settings-group__input-field">
-									<input type="radio" id="font-size-14" name="font-size" checked>
+									<input type="radio" id="font-size-14" name="font-size" />
 									<label for="font-size-14">
 										14
 									</label>
 								</div>
 								<div class="settings-group__input-field">
-									<input type="radio" id="font-size-16" name="font-size">
+									<input type="radio" id="font-size-16" name="font-size" />
 									<label for="font-size-16">
 										16
 									</label>
 								</div>
 								<div class="settings-group__input-field">
-									<input type="radio" id="font-size-18" name="font-size">
+									<input type="radio" id="font-size-18" name="font-size" checked />
 									<label for="font-size-18">
 										18
+									</label>
+								</div>
+								<div class="settings-group__input-field">
+									<input type="radio" id="font-size-20" name="font-size" />
+									<label for="font-size-20">
+										20
+									</label>
+								</div>
+								<div class="settings-group__input-field">
+									<input type="radio" id="font-size-22" name="font-size" />
+									<label for="font-size-22">
+										22
 									</label>
 								</div>
 							</div>
 							<div class="settings-group font-variant">
 								<div class="settings-group__label">Text size</div>
 								<div class="settings-group__input-field">
-									<input type="radio" id="font-variant-1" name="font-variant" checked>
+									<input type="radio" id="font-variant-1" name="font-variant" checked />
 									<label for="font-variant-1">
 										EB Garamond
 									</label>
 								</div>
 								<div class="settings-group__input-field">
-									<input type="radio" id="font-variant-2" name="font-variant">
+									<input type="radio" id="font-variant-2" name="font-variant" />
 									<label for="font-variant-2">
 										Georgia
 									</label>
 								</div>
 								<div class="settings-group__input-field">
-									<input type="radio" id="font-variant-3" name="font-variant">
+									<input type="radio" id="font-variant-3" name="font-variant" />
 									<label for="font-variant-3">
 										Nunito Sans
 									</label>
 								</div>
 								<div class="settings-group__input-field">
-									<input type="radio" id="font-variant-4" name="font-variant">
+									<input type="radio" id="font-variant-4" name="font-variant" />
 									<label for="font-variant-4">
 										Arial
 									</label>
 								</div>
 							</div>
-						</div>
+							<div class="settings-group font-variant">
+								<div class="settings-group__label">Mode</div>
+								<div class="settings-group__input-field">
+									<input type="radio" id="night-mode-1" name="night-mode" checked />
+									<label for="night-mode-1">
+										Light mode
+									</label>
+								</div>
+								<div class="settings-group__input-field">
+									<input type="radio" id="night-mode-2" name="night-mode" />
+									<label for="night-mode-2">
+										Night mode
+									</label>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="container font-size alignment">
+					<div class="bible__chapters__chapter font-switch">
+						<div class="bible__chapters__title bold">Psalm 91</div>
+						<ul class="bible__chapters__verses">
+							<li><span class="verse_number">1.</span> <span class='verse_text'>He that dwells in the
+									secret place of the most High shall abide under the shadow of the Almighty.</span>
+							</li>
+							<li><span class="verse_number">2.</span> <span class='verse_text'>I will say of the LORD, He
+									is my refuge and my fortress: my God; in him will I trust.</span> </li>
+							<li><span class="verse_number">3.</span> <span class='verse_text'>Surely he shall deliver you
+									from the snare of the fowler, and from the dangerous pestilence.</span> </li>
+							<li><span class="verse_number">4.</span> <span class='verse_text'>He shall cover you with his
+									feathers, and under his wings shall you trust: his truth shall be your shield and
+									buckler.</span> </li>
+							<li><span class="verse_number">5.</span> <span class='verse_text'>You shall not be afraid for
+									the terror by night; nor for the arrow that flies by day;</span> </li>
+							<li><span class="verse_number">6.</span> <span class='verse_text'>Nor for the pestilence that
+									walks in darkness; nor for the destruction that wastes at noonday.</span> </li>
+							<li><span class="verse_number">7.</span> <span class='verse_text'>A thousand shall fall at
+									your side, and ten thousand at your right hand; but it shall not come nigh
+									you.</span> </li>
+							<li><span class="verse_number">8.</span> <span class='verse_text'>Only with yours eyes shall
+									you behold and see the reward of the wicked.</span> </li>
+							<li><span class="verse_number">9.</span> <span class='verse_text'>Because you have made the
+									LORD, which is my refuge, even the most High, your habitation;</span> </li>
+							<li><span class="verse_number">10.</span> <span class='verse_text'>There shall no evil befall
+									you, neither shall any plague come nigh your dwelling.</span> </li>
+							<li><span class="verse_number">11.</span> <span class='verse_text'>For he shall give his
+									angels charge over you, to keep you in all your ways.</span> </li>
+							<li><span class="verse_number">12.</span> <span class='verse_text'>They shall bear you up in
+									their hands, lest you dash your foot against a stone.</span> </li>
+							<li><span class="verse_number">13.</span> <span class='verse_text'>You shall tread upon the
+									lion and adder: the young lion and the dragon shall you trample under feet.</span>
+							</li>
+							<li><span class="verse_number">14.</span> <span class='verse_text'>Because he has set his
+									love upon me, therefore will I deliver him: I will set him on high, because he has
+									known my name.</span> </li>
+							<li><span class="verse_number">15.</span> <span class='verse_text'>He shall call upon me, and
+									I will answer him: I will be with him in trouble; I will deliver him, and honour
+									him.</span> </li>
+							<li><span class="verse_number">16.</span> <span class='verse_text'>With long life will I
+									satisfy him, and show him my salvation.</span> </li>
+						</ul>
+					</div>
+					<div class="bible__chapters__chapter font-switch">
+						<div class="bible__chapters__title bold">Psalm 92</div>
+						<ul class="bible__chapters__verses">
+							<li><span class="verse_number">1.</span> <span class='verse_text'>IT IS A GOOD THING TO GIVE
+									THANKS UNTO THE LORD, AND TO SING PRAISES UNTO Your NAME, O MOST HIGH:</span> </li>
+							<li><span class="verse_number">2.</span> <span class='verse_text'>To show forth your loving
+									kindness in the morning, and your faithfulness every night,</span> </li>
+							<li><span class="verse_number">3.</span> <span class='verse_text'>Upon an instrument of ten
+									strings, and upon the psaltery; upon the harp with a solemn sound.</span> </li>
+							<li><span class="verse_number">4.</span> <span class='verse_text'>For you, LORD, have made me
+									glad through your work: I will triumph in the works of your hands.</span> </li>
+							<li><span class="verse_number">5.</span> <span class='verse_text'>O LORD, how great are your
+									works! and your thoughts are very deep.</span> </li>
+							<li><span class="verse_number">6.</span> <span class='verse_text'>A brutish man knows not;
+									neither does a fool understand this.</span> </li>
+							<li><span class="verse_number">7.</span> <span class='verse_text'>When the wicked spring as
+									the grass, and when all the workers of iniquity do flourish; it is that they shall
+									be destroyed for ever:</span> </li>
+							<li><span class="verse_number">8.</span> <span class='verse_text'>But you, LORD, are most
+									high for evermore.</span> </li>
+							<li><span class="verse_number">9.</span> <span class='verse_text'>For, lo, yours enemies, O
+									LORD, for, lo, yours enemies shall perish; all the workers of iniquity shall be
+									scattered.</span> </li>
+							<li><span class="verse_number">10.</span> <span class='verse_text'>But my horn shall you
+									exalt like the horn of an unicorn : I shall be anointed with fresh oil.</span> </li>
+							<li><span class="verse_number">11.</span> <span class='verse_text'>Mine eye also shall see my
+									desire on mine enemies, and mine ears shall hear my desire of the wicked that rise
+									up against me.</span> </li>
+							<li><span class="verse_number">12.</span> <span class='verse_text'>The righteous shall
+									flourish like the palm tree: he shall grow like a cedar in Lebanon.</span> </li>
+							<li><span class="verse_number">13.</span> <span class='verse_text'>Those that be planted in
+									the house of the LORD shall flourish in the courts of our God.</span> </li>
+							<li><span class="verse_number">14.</span> <span class='verse_text'>They shall still bring
+									forth fruit in old age; they shall be fat and flourishing;</span> </li>
+							<li><span class="verse_number">15.</span> <span class='verse_text'>To show that the LORD is
+									upright: he is my rock, and there is no unrighteousness in him.</span> </li>
+						</ul>
+					</div>
+					<div class="bible__chapters__chapter font-switch">
+						<div class="bible__chapters__title bold">Psalm 93</div>
+						<ul class="bible__chapters__verses">
+							<li><span class="verse_number">1.</span> <span class='verse_text'>He that dwells in the
+									secret place of the most High shall abide under the shadow of the Almighty.</span>
+							</li>
+							<li><span class="verse_number">2.</span> <span class='verse_text'>I will say of the LORD, He
+									is my refuge and my fortress: my God; in him will I trust.</span> </li>
+							<li><span class="verse_number">3.</span> <span class='verse_text'>Surely he shall deliver you
+									from the snare of the fowler, and from the dangerous pestilence.</span> </li>
+							<li><span class="verse_number">4.</span> <span class='verse_text'>He shall cover you with his
+									feathers, and under his wings shall you trust: his truth shall be your shield and
+									buckler.</span> </li>
+							<li><span class="verse_number">5.</span> <span class='verse_text'>You shall not be afraid for
+									the terror by night; nor for the arrow that flies by day;</span> </li>
+							<li><span class="verse_number">6.</span> <span class='verse_text'>Nor for the pestilence that
+									walks in darkness; nor for the destruction that wastes at noonday.</span> </li>
+							<li><span class="verse_number">7.</span> <span class='verse_text'>A thousand shall fall at
+									your side, and ten thousand at your right hand; but it shall not come nigh
+									you.</span> </li>
+							<li><span class="verse_number">8.</span> <span class='verse_text'>Only with yours eyes shall
+									you behold and see the reward of the wicked.</span> </li>
+							<li><span class="verse_number">9.</span> <span class='verse_text'>Because you have made the
+									LORD, which is my refuge, even the most High, your habitation;</span> </li>
+							<li><span class="verse_number">10.</span> <span class='verse_text'>There shall no evil befall
+									you, neither shall any plague come nigh your dwelling.</span> </li>
+							<li><span class="verse_number">11.</span> <span class='verse_text'>For he shall give his
+									angels charge over you, to keep you in all your ways.</span> </li>
+							<li><span class="verse_number">12.</span> <span class='verse_text'>They shall bear you up in
+									their hands, lest you dash your foot against a stone.</span> </li>
+							<li><span class="verse_number">13.</span> <span class='verse_text'>You shall tread upon the
+									lion and adder: the young lion and the dragon shall you trample under feet.</span>
+							</li>
+							<li><span class="verse_number">14.</span> <span class='verse_text'>Because he has set his
+									love upon me, therefore will I deliver him: I will set him on high, because he has
+									known my name.</span> </li>
+							<li><span class="verse_number">15.</span> <span class='verse_text'>He shall call upon me, and
+									I will answer him: I will be with him in trouble; I will deliver him, and honour
+									him.</span> </li>
+							<li><span class="verse_number">16.</span> <span class='verse_text'>With long life will I
+									satisfy him, and show him my salvation.</span> </li>
+						</ul>
+					</div>
+					<div class="bible__chapters__chapter font-switch">
+						<div class="bible__chapters__title bold">Psalm 94</div>
+						<ul class="bible__chapters__verses">
+							<li><span class="verse_number">1.</span> <span class='verse_text'>IT IS A GOOD THING TO GIVE
+									THANKS UNTO THE LORD, AND TO SING PRAISES UNTO Your NAME, O MOST HIGH:</span> </li>
+							<li><span class="verse_number">2.</span> <span class='verse_text'>To show forth your loving
+									kindness in the morning, and your faithfulness every night,</span> </li>
+							<li><span class="verse_number">3.</span> <span class='verse_text'>Upon an instrument of ten
+									strings, and upon the psaltery; upon the harp with a solemn sound.</span> </li>
+							<li><span class="verse_number">4.</span> <span class='verse_text'>For you, LORD, have made me
+									glad through your work: I will triumph in the works of your hands.</span> </li>
+							<li><span class="verse_number">5.</span> <span class='verse_text'>O LORD, how great are your
+									works! and your thoughts are very deep.</span> </li>
+							<li><span class="verse_number">6.</span> <span class='verse_text'>A brutish man knows not;
+									neither does a fool understand this.</span> </li>
+							<li><span class="verse_number">7.</span> <span class='verse_text'>When the wicked spring as
+									the grass, and when all the workers of iniquity do flourish; it is that they shall
+									be destroyed for ever:</span> </li>
+							<li><span class="verse_number">8.</span> <span class='verse_text'>But you, LORD, are most
+									high for evermore.</span> </li>
+							<li><span class="verse_number">9.</span> <span class='verse_text'>For, lo, yours enemies, O
+									LORD, for, lo, yours enemies shall perish; all the workers of iniquity shall be
+									scattered.</span> </li>
+							<li><span class="verse_number">10.</span> <span class='verse_text'>But my horn shall you
+									exalt like the horn of an unicorn : I shall be anointed with fresh oil.</span> </li>
+							<li><span class="verse_number">11.</span> <span class='verse_text'>Mine eye also shall see my
+									desire on mine enemies, and mine ears shall hear my desire of the wicked that rise
+									up against me.</span> </li>
+							<li><span class="verse_number">12.</span> <span class='verse_text'>The righteous shall
+									flourish like the palm tree: he shall grow like a cedar in Lebanon.</span> </li>
+							<li><span class="verse_number">13.</span> <span class='verse_text'>Those that be planted in
+									the house of the LORD shall flourish in the courts of our God.</span> </li>
+							<li><span class="verse_number">14.</span> <span class='verse_text'>They shall still bring
+									forth fruit in old age; they shall be fat and flourishing;</span> </li>
+							<li><span class="verse_number">15.</span> <span class='verse_text'>To show that the LORD is
+									upright: he is my rock, and there is no unrighteousness in him.</span> </li>
+						</ul>
 					</div>
 				</div>
 			</article>

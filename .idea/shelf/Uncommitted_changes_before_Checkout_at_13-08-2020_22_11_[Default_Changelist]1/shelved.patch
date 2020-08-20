@@ -1,0 +1,48 @@
+Index: public/js/script.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>// Avoid `console` errors in browsers that lack a console.\r\n(function() {\r\n    var method;\r\n    var noop = function () {};\r\n    var methods = [\r\n        'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error',\r\n        'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log',\r\n        'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd',\r\n        'timeline', 'timelineEnd', 'timeStamp', 'trace', 'warn'\r\n    ];\r\n    var length = methods.length;\r\n    var console = (window.console = window.console || {});\r\n\r\n    while (length--) {\r\n        method = methods[length];\r\n\r\n        // Only stub undefined methods.\r\n        if (!console[method]) {\r\n            console[method] = noop;\r\n        }\r\n    }\r\n}());\r\n\r\n// Place any jQuery/helper plugins in here.\r\n$(document).ready(function($) {\r\n  $(document).on('click', '.books_list > ul > li', function(){\r\n    $('.books_list > ul > li').removeClass('active');\r\n    $(this).addClass('active');\r\n    let selector = $(this).text();\r\n    console.log(selector);\r\n  });\r\n  $(document).on('click', '.chapters_list > ul > li', function(){\r\n    $('.chapters_list > ul > li').removeClass('active');\r\n    $(this).addClass('active');\r\n    let selector = $(this).text();\r\n    console.log(selector);\r\n  });\r\n  $(document).on('click', '.verses_list > ul > li', function(){\r\n    $('.verses_list > ul > li').removeClass('active');\r\n    $(this).addClass('active');\r\n    let selector = $(this).text();\r\n    console.log(selector);\r\n  });\r\n  $(document).on('click', '.bible__chapters__verses > li', function(){\r\n    $(this).toggleClass('selected');\r\n  });\r\n  $(document).on('click', '.viewport-settings__toggle', function () {\r\n    $('.viewport-settings__dropdown').toggleClass('active');\r\n  });\r\n\r\n\r\n\r\n$.get(\"/svg/sprite-icons.svg\", function (data) {\r\n\tvar div = document.createElement(\"SVGicons\");\r\n\tdiv.innerHTML = new XMLSerializer().serializeToString(data.documentElement);\r\n\tdocument.body.insertBefore(div, document.body.childNodes[0]);\r\n});\r\n});\r\n\r\nfunction scroll_into_view(id) {\r\n\tconsole.log('id', id);\r\n\tvar elmnt = document.getElementById(id);\r\n\telmnt.scrollIntoView();\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- public/js/script.js	(revision b4c465757ae1d1653ca329e7e4dacb106e73e6f0)
++++ public/js/script.js	(date 1596911301904)
+@@ -58,7 +58,6 @@
+ });
+ 
+ function scroll_into_view(id) {
+-	console.log('id', id);
+ 	var elmnt = document.getElementById(id);
+ 	elmnt.scrollIntoView();
+ }
+Index: src/utils/FieldConstants.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>module.exports = {\r\n    //Root Url\r\n    baseUrl : \"http://localhost:5000/api/\",\r\n    lang:\"en\",\r\n    limit:\"50\",\r\n    fullDetails : \"getFullDetails\",\r\n    chapterAndDetails : \"getChapterAndDetails\",\r\n    verseAndDetails : \"getVerseAndDetails\",\r\n    verseDetails : \"getDetails\",\r\n    // fullDetails : \"getFullDetails?lang=\"+this.lang+\"&limit=\"+this.limit,\r\n    bible_ :\"bible_\",\r\n    bible_en :\"bible_en\",\r\n    bible_ta :\"bible_ta\",\r\n    chapters :\"chapters\",\r\n\r\n    // bible en & bible_ta columns\r\n    Book :\"Book\",\r\n    Chapter :\"Chapter\",\r\n    VerseCount: \"VerseCount\",\r\n    Verse:\"Verse\",\r\n\r\n    // Chapters columns\r\n    id :\"id\",\r\n    english :\"english\",\r\n    tamil: \"tamil\",\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/utils/FieldConstants.js	(revision b4c465757ae1d1653ca329e7e4dacb106e73e6f0)
++++ src/utils/FieldConstants.js	(date 1596863353143)
+@@ -1,12 +1,15 @@
+ module.exports = {
+     //Root Url
+     baseUrl : "http://localhost:5000/api/",
+-    lang:"en",
+-    limit:"50",
+-    fullDetails : "getFullDetails",
+-    chapterAndDetails : "getChapterAndDetails",
+-    verseAndDetails : "getVerseAndDetails",
+-    verseDetails : "getDetails",
++	//Methods
++	fullDetails : "getFullDetails",
++	chapterAndDetails : "getChapterAndDetails",
++	verseAndDetails : "getVerseAndDetails",
++	verseDetails : "getDetails",
++	dynamicDetails : "getDynamicDetails",
++    lang:"en",
++    limit:"50",
++
+     // fullDetails : "getFullDetails?lang="+this.lang+"&limit="+this.limit,
+     bible_ :"bible_",
+     bible_en :"bible_en",

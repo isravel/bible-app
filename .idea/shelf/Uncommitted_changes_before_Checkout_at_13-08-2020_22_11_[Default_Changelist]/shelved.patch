@@ -1,0 +1,1638 @@
+Index: src/screens/BookListScreen.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React from 'react';\r\n\r\nclass BookList extends React.Component {\r\n   \r\n    state = {\r\n        activeIndex: 0\r\n    }\r\n\r\n    onClickHandler(itemId, book) {\r\n        this.setState({\r\n            activeIndex :itemId\r\n        })\r\n        this.props.onClick(itemId, book)\r\n    }\r\n\r\n\r\n    render() {\r\n        return (\r\n            <ul>\r\n                {\r\n                    this.props.books.map(item => {\r\n                        const className = this.state.activeIndex === item.id ? 'active' : null;\r\n                        return (\r\n                            // <li title={item.human} key={item.id} onClick={this.props.onClick.bind(this, item.id)}>{item.human}</li>);\r\n                            <li className={className} title={item.human} key={item.id} onClick={() => this.onClickHandler(item.id, item.human)}><span>{item.human}</span></li>);\r\n                    })\r\n                }\r\n                {/* <li title='Genesis'>Genesis</li>\r\n                <li title='Exodus'>Exodus</li>\r\n                <li title='Leviticus'>Leviticus</li>\r\n                <li class=\"active\" title='Numbers'>Numbers</li>\r\n                <li title='Deuteronomy'>Deuteronomy</li>\r\n                <li title='Joshua'>Joshua</li>\r\n                <li title='Judges'>Judges</li>\r\n                <li title='Ruth'>Ruth</li>\r\n                <li title='1 Samuel'>1 Samuel</li>\r\n                <li title='2 Samuel'>2 Samuel</li>\r\n                <li title='1 Kings'>1 Kings</li>\r\n                <li title='2 Kings'>2 Kings</li>\r\n                <li title='1 Chronicles'>1 Chronicles</li>\r\n                <li title='2 Chronicles'>2 Chronicles</li>\r\n                <li title='Ezra'>Ezra</li>\r\n                <li title='Nehemiah'>Nehemiah</li>\r\n                <li title='Esther'>Esther</li>\r\n                <li title='Job'>Job</li>\r\n                <li title='Psalms'>Psalms</li>\r\n                <li title='Proverbs'>Proverbs</li>\r\n                <li title='Ecclesiastes'>Ecclesiastes</li>\r\n                <li title='Song of Solomon'>Song of Solomon</li>\r\n                <li title='Isaiah'>Isaiah</li>\r\n                <li title='Jeremiah'>Jeremiah</li>\r\n                <li title='Lamentations'>Lamentations</li>\r\n                <li title='Ezekiel'>Ezekiel</li>\r\n                <li title='Daniel'>Daniel</li>\r\n                <li title='Hosea'>Hosea</li>\r\n                <li title='Joel'>Joel</li>\r\n                <li title='Amos'>Amos</li>\r\n                <li title='Obadiah'>Obadiah</li>\r\n                <li title='Jonah'>Jonah</li>\r\n                <li title='Micah'>Micah</li>\r\n                <li title='Nahum'>Nahum</li>\r\n                <li title='Habakkuk'>Habakkuk</li>\r\n                <li title='Zephaniah'>Zephaniah</li>\r\n                <li title='Haggai'>Haggai</li>\r\n                <li title='Zechariah'>Zechariah</li>\r\n                <li title='Malachi'>Malachi</li>\r\n                <li class='divider'>New Testament</li>\r\n                <li title='Matthew'>Matthew</li>\r\n                <li title='Mark'>Mark</li>\r\n                <li title='Luke'>Luke</li>\r\n                <li title='John'>John</li>\r\n                <li title='Acts'>Acts</li>\r\n                <li title='Romans'>Romans</li>\r\n                <li title='1 Corinthians'>1 Corinthians</li>\r\n                <li title='2 Corinthians'>2 Corinthians</li>\r\n                <li title='Galatians'>Galatians</li>\r\n                <li title='Ephesians'>Ephesians</li>\r\n                <li title='Philippians'>Philippians</li>\r\n                <li title='Colossians'>Colossians</li>\r\n                <li title='1 Thessalonians'>1 Thessalonians</li>\r\n                <li title='2 Thessalonians'>2 Thessalonians</li>\r\n                <li title='1 Timothy'>1 Timothy</li>\r\n                <li title='2 Timothy'>2 Timothy</li>\r\n                <li title='Titus'>Titus</li>\r\n                <li title='Philemon'>Philemon</li>\r\n                <li title='Hebrews'>Hebrews</li>\r\n                <li title='James'>James</li>\r\n                <li title='1 Peter'>1 Peter</li>\r\n                <li title='2 Peter'>2 Peter</li>\r\n                <li title='1 John'>1 John</li>\r\n                <li title='2 John'>2 John</li>\r\n                <li title='3 John'>3 John</li>\r\n                <li title='Jude'>Jude</li>\r\n                <li title='Revelation'>Revelation</li> */}\r\n            </ul>\r\n        );\r\n    }\r\n}\r\n\r\nexport default BookList;
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/screens/BookListScreen.js	(revision b4c465757ae1d1653ca329e7e4dacb106e73e6f0)
++++ src/screens/BookListScreen.js	(date 1596911112547)
+@@ -1,28 +1,46 @@
+ import React from 'react';
+-
++var refs;
+ class BookList extends React.Component {
+-   
+-    state = {
+-        activeIndex: 0
++
++	constructor(props) {
++		super(props);
++		refs = this.props.books.reduce((acc, value) => {
++			console.log('value',value)
++			acc[value.bookId] = React.createRef();
++			return acc;
++		}, {});
++	}
++
++	components(id) {
++		// console.log('id',this.bookRef.current)
++		refs[id].current.scrollIntoView({
++		        behavior: 'smooth',
++		        block: 'start',
++		        });
++	}
++
++	state = {
++        activeIndex: 42
+     }
+ 
+-    onClickHandler(itemId, book) {
++    onClickHandler(bookNo, book, bookId) {
+         this.setState({
+-            activeIndex :itemId
++            activeIndex :bookNo
+         })
+-        this.props.onClick(itemId, book)
++        this.props.onClick(bookNo, book, bookId)
+     }
++
+ 
+ 
+-    render() {
++	render() {
+         return (
+             <ul>
+                 {
+                     this.props.books.map(item => {
+-                        const className = this.state.activeIndex === item.id ? 'active' : null;
++                        const className = this.state.activeIndex === item.bookNo ? 'active' : null;
+                         return (
+                             // <li title={item.human} key={item.id} onClick={this.props.onClick.bind(this, item.id)}>{item.human}</li>);
+-                            <li className={className} title={item.human} key={item.id} onClick={() => this.onClickHandler(item.id, item.human)}><span>{item.human}</span></li>);
++                            <li className={className} ref={refs[item.bookId]} id={item.bookId} title={item.human} key={item.bookId} onClick={() => this.onClickHandler(item.bookNo, item.human, item.bookId)}><span>{item.human}</span></li>);
+                     })
+                 }
+                 {/* <li title='Genesis'>Genesis</li>
+Index: src/screens/HomeScreen.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React from 'react';\r\nimport logo from '../logo.svg';\r\nimport ReactDOM from 'react-dom';\r\nimport '../App.css';\r\nimport home from './HomeScreen.module.css';\r\nimport NavScreen from './NavScreen';\r\nimport BookList from './BookListScreen';\r\nimport ChapterList from './ChaperListScreen';\r\nimport VerseList from './VerseListScreen';\r\nimport VerseScreen from './VerseScreens/VerseScreen';\r\nimport fieldConstants from '../utils/FieldConstants';\r\n\r\nclass HomeScreen extends React.Component {\r\n\tconstructor(props) {\r\n\t\tsuper(props);\r\n\r\n\t\tthis.element1 = React.createRef()\r\n\t\tthis.verseDetailRef = React.createRef()\r\n\t\t// this.myRef = React.createRef();\r\n\t\t// this.myRef = element => {\r\n\t\t// \tthis.verselist = element;\r\n\r\n\t\t//   };\r\n\t\t// fieldConstants.Book =\"\";\r\n\t\t// this.onClick = this.onClick.bind(this);\r\n\t}\r\n\tstate = {\r\n\t\tresult: false,\r\n\t\tisLoading: false,\r\n\t\tlang: 'en',\r\n\t\tlimit: '100',\r\n\t\tbookId: 0,\r\n\t\tchapterId: 1,\r\n\t\tverseId: 1,\r\n\t\tbooks: [],\r\n\t\tchapters: [],\r\n\t\tverseCount: [],\r\n\t\tverses: [],\r\n\t\tapi: [{ \"user\": \"Genesisss\" }]\r\n\t}\r\n\r\n\tapiUrl(method) {\r\n\t\treturn (method + '?lang=' + this.state.lang + '&limit=' + this.state.limit);\r\n\t}\r\n\r\n\tcomponentDidMount() {\r\n\t\tfetch(fieldConstants.baseUrl + this.apiUrl(fieldConstants.fullDetails))\r\n\t\t\t// fetch(\"http://localhost:5000/api/getFullDetails?lang=en&limit=50\")\r\n\t\t\t.then(result => result.json()).then(res => {\r\n\t\t\t\t// console.log('url')\r\n\t\t\t\t// console.log(res);\r\n\t\t\t\tthis.setState({\r\n\t\t\t\t\tisLoading: true,\r\n\t\t\t\t\tresult: res.success,\r\n\t\t\t\t\tbooks: res.data.books,\r\n\t\t\t\t\tchapters: res.data.chapters,\r\n\t\t\t\t\tverseCount: res.data.versecounts,\r\n\t\t\t\t\tverses: res.data.verses,\r\n\t\t\t\t\tverseHeader: res.data.books[0].human + ' ' + res.data.chapters[0].chapters[0].Chapter\r\n\t\t\t\t\t// verseHeader : res.data.books[0].human\r\n\t\t\t\t});\r\n\t\t\t\t// console.log('this element ssss', this.element1);\r\n\t\t\t\tif (this.element1)\r\n\t\t\t\t\tthis.element1.current.addEventListener(\"scroll\", (e) => {\r\n\t\t\t\t\t\tif(this.element1.current.scrollTop === 1){\r\n\t\t\t\t\t\t\tconsole.log('event ', e);\r\n\t\t\t\t\t\t\tconsole.log('this.element1.current.scrollTop', this.element1.current.scrollTop);\r\n\t\t\t\t\t\t\tconsole.log('this.element1.current.clientHeight', this.element1.current.clientHeight);\r\n\t\t\t\t\t\t\tconsole.log('this.element1.current.scrollHeight', this.element1.current.scrollHeight);\r\n\t\t\t\t\t\t}\t\t\t\t\t\t\r\n\t\t\t\t\t\telse if (this.element1.current.scrollTop + this.element1.current.clientHeight >= this.element1.current.scrollHeight) {\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\tconsole.log('this.element1.current', this.element1.current);\r\n\t\t\t\t\t\t\tconsole.log('this.element1.current.scrollTop', this.element1.current.scrollTop);\r\n\t\t\t\t\t\t\tconsole.log('this.element1.current.clientHeight', this.element1.current.clientHeight);\r\n\t\t\t\t\t\t\tconsole.log('this.element1.current.scrollHeight', this.element1.current.scrollHeight);\r\n\t\t\t\t\t\t} else if (this.element1.current.scrollBottom + this.element1.current.clientHeight >= this.element1.current.scrollHeight) {\r\n\t\t\t\t\t\t\tconsole.log('Scrollssss');\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t});\r\n\t\t\t\t// this.element1.current.addEventListener(\"scroll\", this.handleNvEnter);\r\n\t\t\t\twindow.scroll_into_view(1);\r\n\r\n\t\t\t}).catch(res => {\r\n\t\t\t\tconsole.log(res);\r\n\t\t\t\tthis.setState({\r\n\t\t\t\t\tisLoading: true,\r\n\t\t\t\t\tresult: false\r\n\t\t\t\t});\r\n\t\t\t});\r\n\r\n\r\n\t\t// ReactDOM.findDOMNode(this.element).addEventListener(\"nv-enter\", this.handleNvEnter);\r\n\t\t// console.log('this element ', this.element1);\r\n\t\t// if(this.element)\r\n\t\t// this.element1.current.addEventListener(\"scroll\", () => {\t\t\t\r\n\t\t// \tconsole.log('Scrolls');\r\n\t\t// \tif (this.refs.iScroll.scrollTop + this.refs.iScroll.clientHeight >=this.refs.iScroll.scrollHeight){\r\n\t\t// \t  console.log('Scrolls');\r\n\t\t// \t}\r\n\t\t//   });\r\n\t}\r\n\r\n\thandleNvEnter = (event) => {\r\n\t\tconsole.log(\"Nv Enter:\", event);\r\n\t}\r\n\r\n\tonBookClickHandler = (bookId, book) => {\r\n\t\tthis.setState({ bookId: bookId })\r\n\t\tconst requestOptions = {\r\n\t\t\tmethod: 'POST',\r\n\t\t\theaders: { 'Content-Type': 'application/json' },\r\n\t\t\tbody: JSON.stringify({ book: bookId })\r\n\t\t}\r\n\r\n\t\tfetch(fieldConstants.baseUrl + this.apiUrl(fieldConstants.chapterAndDetails), requestOptions)\r\n\t\t\t// fetch(\"http://localhost:5000/api/getFullDetails?lang=en&limit=50\")\r\n\t\t\t.then(result => result.json()).then(res => {\r\n\t\t\t\t// console.log('url')\r\n\t\t\t\tthis.setState({\r\n\t\t\t\t\tisLoading: true,\r\n\t\t\t\t\tresult: res.success,\r\n\t\t\t\t\tchapters: res.data.chapters,\r\n\t\t\t\t\tverseCount: res.data.versecounts,\r\n\t\t\t\t\tverses: res.data.verses,\r\n\t\t\t\t\tverseHeader: book + \" 1\"\r\n\t\t\t\t});\r\n\t\t\t\twindow.scroll_into_view(1);\r\n\t\t\t}).catch(res => {\r\n\t\t\t\tconsole.log(res);\r\n\t\t\t\tthis.setState({\r\n\t\t\t\t\tisLoading: true,\r\n\t\t\t\t\tresult: false\r\n\t\t\t\t});\r\n\t\t\t});\r\n\t}\r\n\r\n\tonChapterClickHandler = (chapId) => {\r\n\t\tthis.setState({\r\n\t\t\tchapterId: chapId\r\n\t\t})\r\n\t\tconst requestOptions = {\r\n\t\t\tmethod: 'POST',\r\n\t\t\theaders: { 'Content-Type': 'application/json' },\r\n\t\t\tbody: JSON.stringify({ book: this.state.bookId, chapter: chapId })\r\n\t\t}\r\n\r\n\t\tfetch(fieldConstants.baseUrl + this.apiUrl(fieldConstants.verseAndDetails), requestOptions)\r\n\t\t\t// fetch(\"http://localhost:5000/api/getFullDetails?lang=en&limit=50\")\r\n\t\t\t.then(result => result.json()).then(res => {\r\n\t\t\t\t// console.log('url')\r\n\t\t\t\tthis.setState({\r\n\t\t\t\t\tisLoading: true,\r\n\t\t\t\t\tresult: res.success,\r\n\t\t\t\t\tverseCount: res.data.versecounts,\r\n\t\t\t\t\tverses: res.data.verses,\r\n\t\t\t\t});\r\n\t\t\t\twindow.scroll_into_view(1);\r\n\t\t\t}).catch(res => {\r\n\t\t\t\tconsole.log(res);\r\n\t\t\t\tthis.setState({\r\n\t\t\t\t\tisLoading: true,\r\n\t\t\t\t\tresult: false\r\n\t\t\t\t});\r\n\t\t\t});\r\n\r\n\t}\r\n\r\n\tonVerseClickHandler = (verseId) => {\r\n\t\t// console.log(verseId);\r\n\t\t// const requestOptions = {\r\n\t\t// \tmethod: 'POST',\r\n\t\t// \theaders: { 'Content-Type': 'application/json' },\r\n\t\t// \tbody: JSON.stringify({ book: this.state.bookId, chapter: this.state.chapterId })\r\n\t\t// }\r\n\r\n\t\t// fetch(fieldConstants.baseUrl+this.apiUrl(fieldConstants.verseDetails), requestOptions)\r\n\t\t// // fetch(\"http://localhost:5000/api/getFullDetails?lang=en&limit=50\")\r\n\t\t// .then(result => result.json()).then(res => {\r\n\t\t// \t// console.log('url')\r\n\t\t// \tthis.setState({\r\n\t\t// \t\tisLoading : true,\r\n\t\t// \t\tresult : res.success,\r\n\t\t// \t\tverses : res.data.verses,\t\t\t\t\r\n\t\t// \t});\t\t\t\r\n\t\t// }).catch(res => {\r\n\t\t// \tconsole.log(res);\r\n\t\t// \tthis.setState({\r\n\t\t// \t\tisLoading : true,\r\n\t\t// \t\tresult : false\r\n\t\t// \t});\r\n\t\t// });\r\n\r\n\t\tthis.setState({\r\n\t\t\tverseId: verseId\r\n\t\t})\r\n\t\t// this.refs.child.callChildFunction(verseId);\r\n\t\tconsole.log('verseDetailRef', this.verseDetailRef)\r\n\t\tthis.verseDetailRef.current.callChildFunction(verseId);\r\n\t}\r\n\r\n\trender() {\r\n\t\tlet person = (\r\n\t\t<div className=\"application fixed-layout\">\r\n\t\t\t<NavScreen header={this.state.verseHeader} />\r\n\t\t\t<main className=\"verse-viewport\">\r\n\t\t\t\t<aside className=\"sidebar left\">\r\n\t\t\t\t\t<div className=\"books_list\">\r\n\t\t\t\t\t\t<div className=\"list_title\">Books</div>\r\n\t\t\t\t\t\t<BookList\r\n\t\t\t\t\t\t\tbooks={this.state.books}\r\n\t\t\t\t\t\t\tonClick={this.onBookClickHandler} />\r\n\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t<div className=\"chapters_list\">\r\n\t\t\t\t\t\t<div className=\"list_title\">Chapter</div>\r\n\t\t\t\t\t\t{this.state.chapters.map(chaps => {\r\n\t\t\t\t\t\t\treturn (<ChapterList\r\n\t\t\t\t\t\t\t\tkey={chaps.bookId}\r\n\t\t\t\t\t\t\t\tonClick={this.onChapterClickHandler}\r\n\t\t\t\t\t\t\t\tchapters={chaps.chapters} />);\r\n\t\t\t\t\t\t})}\r\n\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t<div className=\"verses_list\">\r\n\t\t\t\t\t\t<div className=\"list_title\">Verse</div>\r\n\t\t\t\t\t\t{this.state.verseCount.map(verse => {\r\n\t\t\t\t\t\t\treturn (<VerseList\r\n\t\t\t\t\t\t\t\tkey={verse.chapter}\r\n\t\t\t\t\t\t\t\tonClicks={this.onVerseClickHandler}\r\n\t\t\t\t\t\t\t\tverse={verse.verse} />);\r\n\t\t\t\t\t\t})}\r\n\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</aside>\r\n\r\n\t\t\t\t<article className=\"bible__chapters\" ref={this.element1} role=\"main\">\r\n\t\t\t\t\t<div className=\"container\">\r\n\t\t\t\t\t\t{this.state.verses.map(verse => {\r\n\t\t\t\t\t\t\treturn (<VerseScreen\r\n\t\t\t\t\t\t\t\tkey={verse.bookId}\r\n\t\t\t\t\t\t\t\t// ref=\"child\" \r\n\t\t\t\t\t\t\t\tref={this.verseDetailRef}\r\n\t\t\t\t\t\t\t\t// ref={el => this.element = el}\r\n\t\t\t\t\t\t\t\tonVerseClickHandler={this.state.verseId}\r\n\t\t\t\t\t\t\t\tverses={verse.chapters} />);\r\n\t\t\t\t\t\t})}\r\n\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t</div>\r\n\t\t\t\t<div class=\"viewport-settings\">\r\n\t\t\t\t\t<div class=\"viewport-settings__wrapper\">\r\n\t\t\t\t\t\t<button class=\"viewport-settings__toggle\">\r\n\t\t\t\t\t\t\t<em class=\"svg-icon\">\r\n\t\t\t\t\t\t\t\t<svg>\r\n\t\t\t\t\t\t\t\t\t<use xlinkHref={process.env.PUBLIC_URL + \"/svg/sprite-icons.svg#tune\"} />\r\n\t\t\t\t\t\t\t\t</svg>\r\n\t\t\t\t\t\t\t</em>\r\n\t\t\t\t\t\t</button>\r\n\t\t\t\t\t\t<div class=\"viewport-settings__dropdown\">\r\n\t\t\t\t\t\t\t<div class=\"settings-group alignment\">\r\n\t\t\t\t\t\t\t\t<div class=\"settings-group__label\">Alignment</div>\r\n\t\t\t\t\t\t\t\t<div class=\"settings-group__input-field\">\r\n\t\t\t\t\t\t\t\t\t<input type=\"radio\" id=\"alignment-left\" name=\"alignment\" checked />\r\n\t\t\t\t\t\t\t\t\t<label for=\"alignment-left\">\r\n\t\t\t\t\t\t\t\t\t\t<em class=\"svg-icon\"><svg>\r\n\t\t\t\t\t\t\t\t\t\t\t\t<use xlinkHref={\"/public/svg/sprite-icons.svg#format-left\"} /></svg></em>\r\n\t\t\t\t\t\t\t\t\t</label>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t<div class=\"settings-group__input-field\">\r\n\t\t\t\t\t\t\t\t\t<input type=\"radio\" id=\"alignment-justify\" name=\"alignment\" />\r\n\t\t\t\t\t\t\t\t\t<label for=\"alignment-justify\">\r\n\t\t\t\t\t\t\t\t\t\t<em class=\"svg-icon\"><svg>\r\n\t\t\t\t\t\t\t\t\t\t\t\t<use xlinkHref={process.env.PUBLIC_URL + \"/svg/sprite-icons.svg#format-justify\" }/>\r\n\t\t\t\t\t\t\t\t\t\t\t\t</svg></em>\r\n\t\t\t\t\t\t\t\t\t</label>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t<div class=\"settings-group__input-field\">\r\n\t\t\t\t\t\t\t\t\t<input type=\"radio\" id=\"alignment-center\" name=\"alignment\" />\r\n\t\t\t\t\t\t\t\t\t<label for=\"alignment-center\">\r\n\t\t\t\t\t\t\t\t\t\t<em class=\"svg-icon\"><svg>\r\n\t\t\t\t\t\t\t\t\t\t\t\t<use xlinkHref={process.env.PUBLIC_URL + \"/svg/sprite-icons.svg#format-center\"} />\r\n\t\t\t\t\t\t\t\t\t\t\t\t</svg></em>\r\n\t\t\t\t\t\t\t\t\t</label>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t<div class=\"settings-group text-size\">\r\n\t\t\t\t\t\t\t\t<div class=\"settings-group__label\">Text size</div>\r\n\t\t\t\t\t\t\t\t<div class=\"settings-group__input-field\">\r\n\t\t\t\t\t\t\t\t\t<input type=\"radio\" id=\"font-size-10\" name=\"font-size\" />\r\n\t\t\t\t\t\t\t\t\t<label for=\"font-size-10\">\r\n\t\t\t\t\t\t\t\t\t\t10\r\n\t\t\t\t\t\t\t\t\t</label>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t<div class=\"settings-group__input-field\">\r\n\t\t\t\t\t\t\t\t\t<input type=\"radio\" id=\"font-size-12\" name=\"font-size\" />\r\n\t\t\t\t\t\t\t\t\t<label for=\"font-size-12\">\r\n\t\t\t\t\t\t\t\t\t\t12\r\n\t\t\t\t\t\t\t\t\t</label>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t<div class=\"settings-group__input-field\">\r\n\t\t\t\t\t\t\t\t\t<input type=\"radio\" id=\"font-size-14\" name=\"font-size\" checked />\r\n\t\t\t\t\t\t\t\t\t<label for=\"font-size-14\">\r\n\t\t\t\t\t\t\t\t\t\t14\r\n\t\t\t\t\t\t\t\t\t</label>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t<div class=\"settings-group__input-field\">\r\n\t\t\t\t\t\t\t\t\t<input type=\"radio\" id=\"font-size-16\" name=\"font-size\" />\r\n\t\t\t\t\t\t\t\t\t<label for=\"font-size-16\">\r\n\t\t\t\t\t\t\t\t\t\t16\r\n\t\t\t\t\t\t\t\t\t</label>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t<div class=\"settings-group__input-field\">\r\n\t\t\t\t\t\t\t\t\t<input type=\"radio\" id=\"font-size-18\" name=\"font-size\" />\r\n\t\t\t\t\t\t\t\t\t<label for=\"font-size-18\">\r\n\t\t\t\t\t\t\t\t\t\t18\r\n\t\t\t\t\t\t\t\t\t</label>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t<div class=\"settings-group font-variant\">\r\n\t\t\t\t\t\t\t\t<div class=\"settings-group__label\">Text size</div>\r\n\t\t\t\t\t\t\t\t<div class=\"settings-group__input-field\">\r\n\t\t\t\t\t\t\t\t\t<input type=\"radio\" id=\"font-variant-1\" name=\"font-variant\" checked />\r\n\t\t\t\t\t\t\t\t\t<label for=\"font-variant-1\">\r\n\t\t\t\t\t\t\t\t\t\tEB Garamond\r\n\t\t\t\t\t\t\t\t\t</label>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t<div class=\"settings-group__input-field\">\r\n\t\t\t\t\t\t\t\t\t<input type=\"radio\" id=\"font-variant-2\" name=\"font-variant\" />\r\n\t\t\t\t\t\t\t\t\t<label for=\"font-variant-2\">\r\n\t\t\t\t\t\t\t\t\t\tGeorgia\r\n\t\t\t\t\t\t\t\t\t</label>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t<div class=\"settings-group__input-field\">\r\n\t\t\t\t\t\t\t\t\t<input type=\"radio\" id=\"font-variant-3\" name=\"font-variant\" />\r\n\t\t\t\t\t\t\t\t\t<label for=\"font-variant-3\">\r\n\t\t\t\t\t\t\t\t\t\tNunito Sans\r\n\t\t\t\t\t\t\t\t\t</label>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t<div class=\"settings-group__input-field\">\r\n\t\t\t\t\t\t\t\t\t<input type=\"radio\" id=\"font-variant-4\" name=\"font-variant\" />\r\n\t\t\t\t\t\t\t\t\t<label for=\"font-variant-4\">\r\n\t\t\t\t\t\t\t\t\t\tArial\r\n\t\t\t\t\t\t\t\t\t</label>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\r\n\t\t\t\t</article>\r\n\r\n\t\t\t\t<aside class=\"sidebar right\">\r\n\t\t\t\t\t<div class=\"search-coming-soon flex-center\">\r\n\t\t\t\t\t\t<div>\r\n\t\t\t\t\t\t<img src={process.env.PUBLIC_URL + \"/images/search_illustration.svg\"}/>\r\n\t\t\t\t\t\t\t<div class=\"flex-center\">\r\n\t\t\t\t\t\t\t\t<em class=\"svg-icon\" role=\"button\">\r\n\t\t\t\t\t\t\t\t\t<svg>\r\n\t\t\t\t\t\t\t\t\t\t<use xlinkHref={process.env.PUBLIC_URL + \"/svg/sprite-icons.svg#search\"} />\r\n\t\t\t\t\t\t\t\t\t</svg>\r\n\t\t\t\t\t\t\t\t</em>\r\n\t\t\t\t\t\t\t\tSearch\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t<p>Coming soon</p>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</aside>\r\n\t\t\t</main>\r\n\r\n\t\t\t<footer>\r\n\t\t\t<div class=\"foot__credits\">\r\n\t\t\t\tMade<em class=\"svg-icon\">\r\n\t\t\t\t\t<svg>\r\n\t\t\t\t\t\t<use xlinkHref={process.env.PUBLIC_URL + \"/svg/sprite-icons.svg#hearts\"} />\r\n\t\t\t\t\t</svg>\r\n\t\t\t\t</em>with Jesus\r\n\t\t\t</div>\r\n\t\t</footer>\r\n\t\t</div>\r\n\t\t);\r\n\t\treturn (\r\n\t\t\t<div>{\r\n\r\n\t\t\t\t<div className=\"application fixed-layout\">\r\n\t\t\t\t\t{this.state.result ? person : <div>Loading...</div>}\r\n\r\n\t\t\t\t\t<footer></footer>\r\n\t\t\t\t</div>}\r\n\t\t\t</div>);\r\n\t}\r\n}\r\n\r\nexport default HomeScreen;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/screens/HomeScreen.js	(revision b4c465757ae1d1653ca329e7e4dacb106e73e6f0)
++++ src/screens/HomeScreen.js	(date 1596911423145)
+@@ -16,6 +16,8 @@
+ 
+ 		this.element1 = React.createRef()
+ 		this.verseDetailRef = React.createRef()
++		this.verseNoRef = React.createRef()
++		this.bookRef = React.createRef()
+ 		// this.myRef = React.createRef();
+ 		// this.myRef = element => {
+ 		// 	this.verselist = element;
+@@ -27,16 +29,25 @@
+ 	state = {
+ 		result: false,
+ 		isLoading: false,
++		error:false,
++		verseLoading:false,
+ 		lang: 'en',
+ 		limit: '100',
+-		bookId: 0,
++		bookId: 'Bo42',
++		bookNo: '42',
+ 		chapterId: 1,
+-		verseId: 1,
++		chapterNo: 1,
++		verseId: 'Ve421',
+ 		books: [],
+ 		chapters: [],
+ 		verseCount: [],
+ 		verses: [],
+-		api: [{ "user": "Genesisss" }]
++		api: [{ "user": "Genesisss" }],
++		prevBook: {},
++		prevChapter: 1,
++		nextBook: {},
++		nextChapter: 1
++
+ 	}
+ 
+ 	apiUrl(method) {
+@@ -48,7 +59,7 @@
+ 			// fetch("http://localhost:5000/api/getFullDetails?lang=en&limit=50")
+ 			.then(result => result.json()).then(res => {
+ 				// console.log('url')
+-				// console.log(res);
++				console.log(res);
+ 				this.setState({
+ 					isLoading: true,
+ 					result: res.success,
+@@ -56,20 +67,27 @@
+ 					chapters: res.data.chapters,
+ 					verseCount: res.data.versecounts,
+ 					verses: res.data.verses,
+-					verseHeader: res.data.books[0].human + ' ' + res.data.chapters[0].chapters[0].Chapter
++					verseHeader: res.data.books[0].human + ' ' + res.data.chapters[0].chapters[0].Chapter,
++					prevBook:res.data.prevBook,
++					// prevChapter:res.data.prevBook.chapter,
++					nextBook:res.data.nextBook,
++					// nextChapter:res.data.nextBook.chapter,
+ 					// verseHeader : res.data.books[0].human
+ 				});
+ 				// console.log('this element ssss', this.element1);
+ 				if (this.element1)
+ 					this.element1.current.addEventListener("scroll", (e) => {
+-						if(this.element1.current.scrollTop === 1){
++						// console.log('this.element1.current.scrollTop', this.element1.current.scrollTop);
++						if(this.element1.current.scrollTop === 0){
+ 							console.log('event ', e);
++							this.prevScrollListener();
++
+ 							console.log('this.element1.current.scrollTop', this.element1.current.scrollTop);
+ 							console.log('this.element1.current.clientHeight', this.element1.current.clientHeight);
+ 							console.log('this.element1.current.scrollHeight', this.element1.current.scrollHeight);
+-						}						
++						}
+ 						else if (this.element1.current.scrollTop + this.element1.current.clientHeight >= this.element1.current.scrollHeight) {
+-							
++							this.nextScrollListener();
+ 							console.log('this.element1.current', this.element1.current);
+ 							console.log('this.element1.current.scrollTop', this.element1.current.scrollTop);
+ 							console.log('this.element1.current.clientHeight', this.element1.current.clientHeight);
+@@ -78,8 +96,10 @@
+ 							console.log('Scrollssss');
+ 						}
+ 					});
++				console.log(this.bookRef.current.components(this.state.bookId))
+ 				// this.element1.current.addEventListener("scroll", this.handleNvEnter);
+-				window.scroll_into_view(1);
++			// window.scroll_into_view(this.state.bookId);
++			setTimeout(()=>window.scroll_into_view('Ve421'),800);
+ 
+ 			}).catch(res => {
+ 				console.log(res);
+@@ -93,7 +113,7 @@
+ 		// ReactDOM.findDOMNode(this.element).addEventListener("nv-enter", this.handleNvEnter);
+ 		// console.log('this element ', this.element1);
+ 		// if(this.element)
+-		// this.element1.current.addEventListener("scroll", () => {			
++		// this.element1.current.addEventListener("scroll", () => {
+ 		// 	console.log('Scrolls');
+ 		// 	if (this.refs.iScroll.scrollTop + this.refs.iScroll.clientHeight >=this.refs.iScroll.scrollHeight){
+ 		// 	  console.log('Scrolls');
+@@ -101,16 +121,97 @@
+ 		//   });
+ 	}
+ 
++	prevScrollListener = () => {
++		console.log('prevScrollListener',this.state.prevBook)
++		if(this.state.prevBook !== undefined && this.state.prevBook != {}) {
++			const {prevBook} = this.state.prevBook;
++			const requestOptions = {
++				method: 'POST',
++				headers: {'Content-Type': 'application/json'},
++				body: JSON.stringify({book: prevBook.book, chapter: prevBook.chapter})
++			}
++
++			fetch(fieldConstants.baseUrl + this.apiUrl(fieldConstants.dynamicDetails), requestOptions)
++				// fetch("http://localhost:5000/api/getFullDetails?lang=en&limit=50")
++				.then(result => result.json()).then(res => {
++				console.log('res', res)
++				// this.setState({
++				// 	isLoading: true,
++				// 	result: res.success,
++				// 	chapters: res.data.chapters,
++				// 	verseCount: res.data.versecounts,
++				// 	verses: res.data.verses,
++				// 	verseHeader: book + " 1",
++				// 	prevBook:res.data.prevBook,
++				// 	nextBook:res.data.nextBook,
++				// });
++				// console.log('book.substr(0,2)+ bookNo + 1', book.substr(0,2)+ bookNo + 1)
++				// window.scroll_into_view('Ch'+ bookNo + 1)
++				// setTimeout(()=>window.scroll_into_view('Ch'+ bookNo + 1),50)
++				// setTimeout(()=>window.scroll_into_view('Ve'+ bookNo + 1),1000)
++				// setTimeout(()=>window.scroll_into_view('Ch'+ bookNo + 1),500)
++
++			}).catch(res => {
++				console.log(res);
++				this.setState({
++					isLoading: true,
++					result: false
++				});
++			});
++		}
++	}
++	nextScrollListener = () => {
++		console.log('prevScrollListener',this.state.nextBook)
++		if(this.state.nextBook !== undefined && this.state.nextBook != {}) {
++			// const {nextBook} = this.state.nextBook;
++			// console.log(nextBook)
++			const requestOptions = {
++				method: 'POST',
++				headers: {'Content-Type': 'application/json'},
++				body: JSON.stringify({book: this.state.nextBook.book, chapter: this.state.nextBook.chapter, verse: 1})
++			}
++
++			fetch(fieldConstants.baseUrl + this.apiUrl(fieldConstants.dynamicDetails), requestOptions)
++				// fetch("http://localhost:5000/api/getFullDetails?lang=en&limit=50")
++				.then(result => result.json()).then(res => {
++				console.log('res', res.data)
++				// this.setState({
++				// 	isLoading: true,
++				// 	result: res.success,
++				// 	chapters: res.data.chapters,
++				// 	verseCount: res.data.versecounts,
++				// 	verses: res.data.verses,
++				// 	verseHeader: book + " 1",
++				// 	prevBook:res.data.prevBook,
++				// 	nextBook:res.data.nextBook,
++				// });
++				// console.log('book.substr(0,2)+ bookNo + 1', book.substr(0,2)+ bookNo + 1)
++				// window.scroll_into_view('Ch'+ bookNo + 1)
++				// setTimeout(()=>window.scroll_into_view('Ch'+ bookNo + 1),50)
++				// setTimeout(()=>window.scroll_into_view('Ve'+ bookNo + 1),1000)
++				// setTimeout(()=>window.scroll_into_view('Ch'+ bookNo + 1),500)
++
++			}).catch(res => {
++				console.log(res);
++				this.setState({
++					isLoading: true,
++					result: false
++				});
++			});
++		}
++	}
++
++
+ 	handleNvEnter = (event) => {
+ 		console.log("Nv Enter:", event);
+ 	}
+ 
+-	onBookClickHandler = (bookId, book) => {
+-		this.setState({ bookId: bookId })
++	onBookClickHandler = (bookNo, book, bookId) => {
++		this.setState({ bookNo: bookNo, bookId:bookId })
+ 		const requestOptions = {
+ 			method: 'POST',
+ 			headers: { 'Content-Type': 'application/json' },
+-			body: JSON.stringify({ book: bookId })
++			body: JSON.stringify({ book: bookNo })
+ 		}
+ 
+ 		fetch(fieldConstants.baseUrl + this.apiUrl(fieldConstants.chapterAndDetails), requestOptions)
+@@ -123,9 +224,17 @@
+ 					chapters: res.data.chapters,
+ 					verseCount: res.data.versecounts,
+ 					verses: res.data.verses,
+-					verseHeader: book + " 1"
++					verseHeader: book + " 1",
++					prevBook:res.data.prevBook,
++					// prevChapter:res.data.prevBook.chapter,
++					nextBook:res.data.nextBook,
+ 				});
+-				window.scroll_into_view(1);
++				// console.log('book.substr(0,2)+ bookNo + 1', book.substr(0,2)+ bookNo + 1)
++			window.scroll_into_view('Ch'+ bookNo + 1)
++			// setTimeout(()=>window.scroll_into_view('Ch'+ bookNo + 1),50)
++			setTimeout(()=>window.scroll_into_view('Ve'+ bookNo + 1),100)
++			// setTimeout(()=>window.scroll_into_view('Ch'+ bookNo + 1),500)
++
+ 			}).catch(res => {
+ 				console.log(res);
+ 				this.setState({
+@@ -135,27 +244,35 @@
+ 			});
+ 	}
+ 
+-	onChapterClickHandler = (chapId) => {
++	onChapterClickHandler = (chapId, chapNo) => {
++		console.log('chapId', chapId)
++		console.log('bookId: ', this.state.bookId)
++		console.log('bookNo: ', this.state.bookNo)
+ 		this.setState({
+-			chapterId: chapId
++			chapterNo: chapNo
+ 		})
+ 		const requestOptions = {
+ 			method: 'POST',
+ 			headers: { 'Content-Type': 'application/json' },
+-			body: JSON.stringify({ book: this.state.bookId, chapter: chapId })
++			body: JSON.stringify({ book: this.state.bookNo, chapter: chapNo })
+ 		}
+ 
+ 		fetch(fieldConstants.baseUrl + this.apiUrl(fieldConstants.verseAndDetails), requestOptions)
+ 			// fetch("http://localhost:5000/api/getFullDetails?lang=en&limit=50")
+ 			.then(result => result.json()).then(res => {
+-				// console.log('url')
++				console.log('res', res.data)
+ 				this.setState({
+ 					isLoading: true,
+ 					result: res.success,
+ 					verseCount: res.data.versecounts,
+ 					verses: res.data.verses,
++					prevBook:res.data.prevBook,
++					// prevChapter:res.data.prevBook.chapter,
++					nextBook:res.data.nextBook,
+ 				});
+-				window.scroll_into_view(1);
++			console.log(this.state.verses.chapters)
++			window.scroll_into_view(chapId);
++			this.verseNoRef.current.onChapterClickHandler();
+ 			}).catch(res => {
+ 				console.log(res);
+ 				this.setState({
+@@ -181,8 +298,8 @@
+ 		// 	this.setState({
+ 		// 		isLoading : true,
+ 		// 		result : res.success,
+-		// 		verses : res.data.verses,				
+-		// 	});			
++		// 		verses : res.data.verses,
++		// 	});
+ 		// }).catch(res => {
+ 		// 	console.log(res);
+ 		// 	this.setState({
+@@ -200,7 +317,7 @@
+ 	}
+ 
+ 	render() {
+-		let person = (
++		let page = (
+ 		<div className="application fixed-layout">
+ 			<NavScreen header={this.state.verseHeader} />
+ 			<main className="verse-viewport">
+@@ -208,6 +325,7 @@
+ 					<div className="books_list">
+ 						<div className="list_title">Books</div>
+ 						<BookList
++							ref={this.bookRef}
+ 							books={this.state.books}
+ 							onClick={this.onBookClickHandler} />
+ 					</div>
+@@ -227,6 +345,7 @@
+ 						{this.state.verseCount.map(verse => {
+ 							return (<VerseList
+ 								key={verse.chapter}
++								ref={this.verseNoRef}
+ 								onClicks={this.onVerseClickHandler}
+ 								verse={verse.verse} />);
+ 						})}
+@@ -239,14 +358,15 @@
+ 						{this.state.verses.map(verse => {
+ 							return (<VerseScreen
+ 								key={verse.bookId}
+-								// ref="child" 
++								id={verse.bookId}
++								// ref="child"
+ 								ref={this.verseDetailRef}
+ 								// ref={el => this.element = el}
+ 								onVerseClickHandler={this.state.verseId}
+ 								verses={verse.chapters} />);
+ 						})}
+ 
+-						
++
+ 					</div>
+ 				<div class="viewport-settings">
+ 					<div class="viewport-settings__wrapper">
+@@ -348,7 +468,7 @@
+ 					</div>
+ 				</div>
+ 
+-					
++
+ 				</article>
+ 
+ 				<aside class="sidebar right">
+@@ -384,7 +504,7 @@
+ 			<div>{
+ 
+ 				<div className="application fixed-layout">
+-					{this.state.result ? person : <div>Loading...</div>}
++					{this.state.result ? page : <div>Loading...</div>}
+ 
+ 					<footer></footer>
+ 				</div>}
+Index: src/screens/VerseScreens/VerseScreen.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React from 'react';\r\nimport VerseItem from './VerseItemScreen';\r\n\r\nclass VerseScreen extends React.Component {\r\n\r\n    constructor(props)\r\n    {\r\n        super(props);\r\n        this.myRef = element => {\r\n            this.verseItem = element;\r\n        }\r\n\r\n    }\r\n\r\n\r\n    state = {\r\n        verses: []\r\n    }\r\n\r\n    callChildFunction = (id) => {\r\n        console.log(\"asdfsdfsd\", id);\r\n        // this.refs.child.handleClick(id);\r\n        this.verseItem.handleClick(id);\r\n        \r\n        // this.child.handleActionParent();  ///calling a child function here\r\n    }\r\n\r\n\r\n\r\n\r\n    render() {\r\n        return (\r\n            <div>\r\n                <div className=\"bible__chapters__chapter serif\">\r\n                    {\r\n                        this.props.verses.map(res => {\r\n                            return (<div id={res.chapter} key={res.chapter} >\r\n                                <div className=\"bible__chapters__title bold\" >{res.book + ' ' + (res.chapter)}</div>\r\n                                <VerseItem ref={this.myRef} onVerseClick={this.props.onVerseClickHandler} verse={res.verseData} />\r\n                            </div>);\r\n                        })\r\n\r\n                    }\r\n\r\n                </div>\r\n            </div>\r\n        );\r\n    }\r\n}\r\n\r\nexport default VerseScreen;
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/screens/VerseScreens/VerseScreen.js	(revision b4c465757ae1d1653ca329e7e4dacb106e73e6f0)
++++ src/screens/VerseScreens/VerseScreen.js	(date 1596888196139)
+@@ -12,7 +12,6 @@
+ 
+     }
+ 
+-
+     state = {
+         verses: []
+     }
+@@ -21,22 +20,19 @@
+         console.log("asdfsdfsd", id);
+         // this.refs.child.handleClick(id);
+         this.verseItem.handleClick(id);
+-        
++
+         // this.child.handleActionParent();  ///calling a child function here
+     }
+ 
+-
+-
+-
+     render() {
+         return (
+             <div>
+                 <div className="bible__chapters__chapter serif">
+                     {
+                         this.props.verses.map(res => {
+-                            return (<div id={res.chapter} key={res.chapter} >
+-                                <div className="bible__chapters__title bold" >{res.book + ' ' + (res.chapter)}</div>
+-                                <VerseItem ref={this.myRef} onVerseClick={this.props.onVerseClickHandler} verse={res.verseData} />
++                            return (<div id={res.chapterId} key={res.chapterId} >
++                                <div className="bible__chapters__title bold" >{res.book + ' ' + (res.chapterNo)}</div>
++                                <VerseItem id={res.chapterId} ref={this.myRef} onVerseClick={this.props.onVerseClickHandler} verse={res.verseData} />
+                             </div>);
+                         })
+ 
+Index: src/screens/VerseScreens/VerseItemScreen.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React from 'react';\r\nvar refs;\r\nclass VerseItemScreen extends React.Component {\r\n\r\n    constructor(props) {\r\n        super(props);\r\n        refs = this.props.verse.reduce((acc, value) => {\r\n            // console.log('value',value)\r\n            acc[value.verseCount] = React.createRef();\r\n            return acc;\r\n        }, {});\r\n    }\r\n\r\n    handleClick = (id) => {\r\n        // refs[id].current.scrollIntoView({\r\n        // behavior: 'smooth',\r\n        // block: 'start',\r\n        // });\r\n        window.scroll_into_view(id);\r\n    }\r\n\r\n    // handleClick = (id)=>{\r\n    //     console.log(id);\r\n\r\n    // }\r\n    render() {\r\n        // const id = this.props.onVerseClick;\r\n        // // console.log('id ', id);\r\n        // const refs = this.props.verse.reduce((acc, value) => {\r\n        //     // console.log('value',value)\r\n        //     acc[value.verseCount] = React.createRef();\r\n        //     return acc;\r\n        //   }, {});\r\n\r\n        //   const handleClick = (id) =>{console.log(id);\r\n        //     refs[id].current.scrollIntoView({\r\n        //     behavior: 'smooth',\r\n        //     block: 'start',\r\n        //     });}\r\n        return (\r\n            <div>\r\n                <ul className=\"bible__chapters__verses\">\r\n                    {\r\n                    this.props.verse.map(res => {\r\n                        return (<li id={res.verseCount} key={res.verseCount} ref={refs[res.verseCount]} ><span className=\"verse_number\">{res.verseCount}</span><span class='verse_text'>{res.verse}</span></li>);\r\n                    })\r\n                    \r\n                    }\r\n\r\n                </ul>\r\n            </div>\r\n        );\r\n    }\r\n}\r\n\r\nexport default VerseItemScreen;
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/screens/VerseScreens/VerseItemScreen.js	(revision b4c465757ae1d1653ca329e7e4dacb106e73e6f0)
++++ src/screens/VerseScreens/VerseItemScreen.js	(date 1596887382367)
+@@ -6,20 +6,26 @@
+         super(props);
+         refs = this.props.verse.reduce((acc, value) => {
+             // console.log('value',value)
+-            acc[value.verseCount] = React.createRef();
++            acc[value.verseId] = React.createRef();
+             return acc;
+         }, {});
++
+     }
+ 
+     handleClick = (id) => {
+-        // refs[id].current.scrollIntoView({
+-        // behavior: 'smooth',
+-        // block: 'start',
+-        // });
+-        window.scroll_into_view(id);
++
++        refs[id].current.scrollIntoView({
++        behavior: 'smooth',
++        block: 'start',
++        });
++        // window.scroll_into_view(id);
+     }
++
++    componentDidMount() {
++
++	}
+ 
+-    // handleClick = (id)=>{
++	// handleClick = (id)=>{
+     //     console.log(id);
+ 
+     // }
+@@ -42,9 +48,10 @@
+                 <ul className="bible__chapters__verses">
+                     {
+                     this.props.verse.map(res => {
+-                        return (<li id={res.verseCount} key={res.verseCount} ref={refs[res.verseCount]} ><span className="verse_number">{res.verseCount}</span><span class='verse_text'>{res.verse}</span></li>);
++						// console.log(res.verseId)
++                        return (<li id={res.verseId} key={res.verseId} ref={refs[res.verseId]} ><span className="verse_number">{res.verseNo}</span><span class='verse_text'>{res.verse}</span></li>);
+                     })
+-                    
++
+                     }
+ 
+                 </ul>
+Index: api-proj/routes/api.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>var express = require('express');\r\nvar router = express.Router();\r\nvar util = require(\"util\");\r\nvar fs = require(\"fs\");\r\nvar path = require('path');\r\nvar url = require('url');\r\nvar async = require('async');\r\nvar fieldConstant = require('../utils/fieldConstants');\r\nconst e = require('express');\r\n\r\n\r\n/* GET users listing. */\r\nrouter.get('/getFullDetails', function (req, res, next) {\r\n\tvar url = require('url');\r\n\tvar url_parts = url.parse(req.url, true);\r\n\tvar limit = url_parts.query.limit;\r\n\tvar langReceived = url_parts.query.lang;\r\n\tvar db = req.con;\r\n\tvar langColumn = '';\r\n\tif (langReceived === 'ta') {\r\n\t\tlangColumn = fieldConstant.tamil;\r\n\t}\r\n\telse {\r\n\t\tlangColumn = fieldConstant.english;\r\n\t}\r\n\tvar query1 = \"select \" + fieldConstant.english + \" , \" + langColumn + \", id from \" + fieldConstant.chapters;\r\n\tvar query2 = \"select distinct \" + fieldConstant.Chapter + \" from \" + fieldConstant.bible_ + langReceived + \" where \" + fieldConstant.Book + \" = 0\";\r\n\tvar query3 = \"select \" + fieldConstant.VerseCount + \" from \" + fieldConstant.bible_ + langReceived + \" where \" + fieldConstant.Book + \" = 0 and \" + fieldConstant.Chapter + \" = 1\";\r\n\t// var query4 = \"select \" + fieldConstant.Verse + \" from \" + fieldConstant.bible_ + langReceived + \" where \" + fieldConstant.Book + \" = 0 LIMIT \" + limit + \"\";\r\n\r\n\tvar data = {};\r\n\tasync.waterfall([\r\n\t\tfunction (parallel_done) {\r\n\t\t\tconsole.log(query1);\r\n\t\t\tconsole.log(query2);\r\n\t\t\tconsole.log(query3);\r\n\t\t\t// console.log(query4);\r\n\t\t\tdb.query(query1, {}, function (err, results) {\r\n\t\t\t\tif (err) return parallel_done(err);\r\n\t\t\t\tvar result = results.map(function (chap) {\r\n\t\t\t\t\tvar chapObj = {};\r\n\t\t\t\t\tconsole.log(chap);\r\n\t\t\t\t\tchapObj.id = chap.id;\r\n\t\t\t\t\tchapObj.user = chap.english;\r\n\t\t\t\t\tif (langReceived === 'ta') {\r\n\t\t\t\t\t\tchapObj.human = chap.tamil;\r\n\t\t\t\t\t}\r\n\t\t\t\t\telse {\r\n\t\t\t\t\t\tchapObj.human = chap.english;\r\n\t\t\t\t\t}\r\n\t\t\t\t\treturn chapObj;\r\n\t\t\t\t})\r\n\t\t\t\tdata.books = result;\r\n\t\t\t\tparallel_done();\r\n\t\t\t});\r\n\t\t},\r\n\t\tfunction (parallel_done) {\r\n\t\t\tdb.query(query2, {}, function (err, results) {\r\n\t\t\t\tif (err) return parallel_done(err);\r\n\t\t\t\tvar chapList = [];\r\n\t\t\t\tvar chapObj = {};\r\n\t\t\t\tchapObj.bookId = 0;\r\n\t\t\t\tchapObj.chapters = results\r\n\t\t\t\tchapList.push(chapObj);\r\n\t\t\t\tdata.chapters = chapList;\r\n\t\t\t\tparallel_done();\r\n\t\t\t});\r\n\t\t},\r\n\t\tfunction (parallel_done) {\r\n\t\t\tdb.query(query3, {}, function (err, results) {\r\n\t\t\t\tif (err) return parallel_done(err);\r\n\t\t\t\tvar verseList = [];\r\n\t\t\t\tvar verseNoObj = {};\r\n\t\t\t\tverseNoObj.chapter = 1;\r\n\t\t\t\tverseNoObj.verse = results\r\n\t\t\t\tverseList.push(verseNoObj);\r\n\t\t\t\tdata.versecounts = verseList;\r\n\t\t\t\tparallel_done();\r\n\t\t\t});\r\n\t\t},\r\n\t\t// function (parallel_done) {\r\n\t\t// \tPromise.all([promise1(req)])\r\n\t\t// \t\t.then(result => {\r\n\t\t// \t\t\ttry {\r\n\t\t// \t\t\t\t// data.push(result);\r\n\t\t// \t\t\t\tdata.verses = (result);\r\n\t\t// \t\t\t}\r\n\t\t// \t\t\tcatch\r\n\t\t// \t\t\t{\r\n\t\t// \t\t\t\tres.status(500).json({ success: false});\r\n\r\n\t\t// \t\t\t}\r\n\t\t// \t\t\tfinally{\r\n\t\t// \t\t\t\tparallel_done()\r\n\t\t// \t\t\t}\r\n\t\t// \t\t});\r\n\t\t// \t// \t\t\r\n\t\t// },\r\n\t\t//Works fine \r\n\t\t// function (parallel_done) {\r\n\t\t// \t// var url = require('url');\r\n\t\t// \t// var db = req.con;\r\n\t\t// \t// var url_parts = url.parse(req.url, true);\r\n\t\t// \t// var limit = url_parts.query.limit;\r\n\t\t// \t// var lang = url_parts.query.lang;\r\n\t\t// \tvar query4 = \"select \" + fieldConstant.VerseCount + \" from \" + fieldConstant.bible_ + langReceived + \" where \" + fieldConstant.Book + \" = 0 and \" + fieldConstant.Chapter + \" = 1\";\r\n\t\t// \tconsole.log(query4);\r\n\t\t// \treturn db.query(query4, {}, function (err, results, fields) {\r\n\t\t// \t\tif (err) return (err);\r\n\t\t// \t\t// var verseNoObj = {};\t\t\t\t\r\n\t\t// \t\t// verseNoObj.chapter = 1;\r\n\t\t// \t\t// verseNoObj.verse= results\r\n\t\t// \t\t// data.versecounts = verseNoObj;\r\n\t\t// \t\tvar stringFormat = JSON.stringify(results);\r\n\t\t// \t\tvar verseObj = JSON.parse(stringFormat);\r\n\t\t// \t\t// console.log(\"resultsss \" + JSON.stringify(verseObj));\r\n\t\t// \t\tvar listCount = 0;\r\n\r\n\t\t// \t\tvar verseDetails = [];\r\n\t\t// \t\tasync.forEach(results, function (verse, callBack) {\r\n\t\t// \t\t\tvar stringFormat = JSON.stringify(verse);\r\n\t\t// \t\t\tvar verseCountObj = JSON.parse(stringFormat);\r\n\t\t// \t\t\tvar sql = \"select \" + fieldConstant.Verse + \" from \" + fieldConstant.bible_ + langReceived + \" where Versecount = \" + verseCountObj.VerseCount + \" and \" + fieldConstant.Chapter + \" = 1 and \" + fieldConstant.Book + \" = 0\";\r\n\t\t// \t\t\tconsole.log(verseCountObj);\r\n\t\t// \t\t\t// data.sql =  sql;\r\n\t\t// \t\t\tdb.query(sql, {}, function (err, result, next) {\r\n\t\t// \t\t\t\tif (err) return (err);\r\n\t\t// \t\t\t\tvar stringFormat = JSON.stringify(result);\r\n\t\t// \t\t\t\tvar verseObj = JSON.parse(stringFormat);\r\n\t\t// \t\t\t\tconsole.log(\"result \" + result);\r\n\t\t// \t\t\t\tlistCount++;\r\n\t\t// \t\t\t\tlet verseList = {};\r\n\t\t// \t\t\t\tverseList.book = 0;\r\n\t\t// \t\t\t\tverseList.chapter = 1;\r\n\t\t// \t\t\t\tverseList.verseCount = verseCountObj.VerseCount;\r\n\t\t// \t\t\t\tverseList.verse = result[0].Verse;\r\n\t\t// \t\t\t\tverseDetails.push(verseList);\r\n\t\t// \t\t\t\t// console.log(\"verse \"+JSON.stringify(versesss));\r\n\t\t// \t\t\t\t// if(listCount == results.length){\r\n\t\t// \t\t\t\t// \tresolve(results);\r\n\t\t// \t\t\t\t//   }\r\n\r\n\t\t// \t\t\t\tcallBack(null);\r\n\t\t// \t\t\t});\r\n\t\t// \t\t\t// resolve(data);\r\n\t\t// \t\t}, function (datas) {\r\n\t\t// \t\t\tdata.verses = verseDetails;\r\n\t\t// \t\t\tparallel_done();\r\n\t\t// \t\t}\r\n\t\t// \t\t);\r\n\r\n\t\t// \t});\r\n\t\t// },\r\n\t\tfunction (parallel_done) {\r\n\t\t\tvar query4 = \"select \" + fieldConstant.VerseCount + \" from \" + fieldConstant.bible_ + langReceived + \" where \" + fieldConstant.Book + \" = 0 and \" + fieldConstant.Chapter + \" = 1\";\r\n\t\t\tconsole.log(query4);\r\n\t\t\treturn db.query(query4, {}, function (err, results, fields) {\r\n\t\t\t\tif (err) return (err);\r\n\t\t\t\tvar stringFormat = JSON.stringify(results);\r\n\t\t\t\tvar verseObj = JSON.parse(stringFormat);\r\n\t\t\t\t// console.log(\"resultsss \" + JSON.stringify(verseObj));\r\n\t\t\t\tvar listCount = 0;\r\n\r\n\t\t\t\tvar verseDetails = [];\r\n\t\t\t\tlet verseData = [];\r\n\t\t\t\tasync.forEach(results, function (verse, callBack) {\r\n\t\t\t\t\tvar stringFormat = JSON.stringify(verse);\r\n\t\t\t\t\tvar verseCountObj = JSON.parse(stringFormat);\r\n\t\t\t\t\tvar sql = \"select \" + fieldConstant.Verse + \" from \" + fieldConstant.bible_ + langReceived + \" where Versecount = \" + verseCountObj.VerseCount + \" and \" + fieldConstant.Chapter + \" = 1 and \" + fieldConstant.Book + \" = 0\";\r\n\t\t\t\t\tconsole.log(verseCountObj);\r\n\t\t\t\t\t// data.sql =  sql;\r\n\t\t\t\t\tdb.query(sql, {}, function (err, result, next) {\r\n\t\t\t\t\t\tif (err) return (err);\r\n\t\t\t\t\t\tvar stringFormat = JSON.stringify(result);\r\n\t\t\t\t\t\tvar verseObj = JSON.parse(stringFormat);\r\n\t\t\t\t\t\tconsole.log(\"result \" + result);\r\n\t\t\t\t\t\tlistCount++;\r\n\t\t\t\t\t\tlet verseList = {};\r\n\t\t\t\t\t\t// verseList.book = 0;\r\n\t\t\t\t\t\t// verseList.chapter = 1;\r\n\t\t\t\t\t\tverseList.verseCount = verseCountObj.VerseCount;\r\n\t\t\t\t\t\tverseList.verse = result[0].Verse;\r\n\t\t\t\t\t\t// bookList.verse(verseList);\r\n\t\t\t\t\t\tverseData.push(verseList);\r\n\t\t\t\t\t\tcallBack(null);\r\n\t\t\t\t\t});\r\n\r\n\t\t\t\t\t// resolve(data);\r\n\t\t\t\t}, function (datas) {\r\n\t\t\t\t\tconsole.log(verseData);\r\n\t\t\t\t\tvar book = \"\";\r\n\t\t\t\t\tif (langReceived === 'ta') {\r\n\t\t\t\t\t\tbook = 'ஆதியாகமம்';\r\n\t\t\t\t\t}\r\n\t\t\t\t\telse {\r\n\t\t\t\t\t\tbook = 'Genesis';\r\n\t\t\t\t\t}\r\n\t\t\t\t\tvar bookList = {};\r\n\t\t\t\t\tbookList.bookId = 0;\r\n\t\t\t\t\tlet chapterList = [];\r\n\t\t\t\t\tlet chapters = {};\r\n\t\t\t\t\tchapters.book = book;\r\n\t\t\t\t\tchapters.chapter = 1;\r\n\t\t\t\t\tchapters.verseData = verseData;\r\n\t\t\t\t\tchapterList.push(chapters);\r\n\t\t\t\t\tbookList.chapters = chapterList;\r\n\t\t\t\t\tverseDetails.push(bookList);\r\n\t\t\t\t\tdata.verses = verseDetails;\r\n\t\t\t\t\tparallel_done();\r\n\t\t\t\t}\r\n\t\t\t\t);\r\n\r\n\t\t\t});\r\n\t\t},\r\n\r\n\r\n\r\n\t], function (err) {\r\n\t\tif (err) console.log(err);\r\n\t\t// db.end();\r\n\t\tres.status(200).json({ success: true, data });\r\n\t});\r\n});\r\n\r\n\r\nrouter.post('/getChapterAndDetails', function (req, res, next) {\r\n\tvar url = require('url');\r\n\tvar url_parts = url.parse(req.url, true);\r\n\tvar limit = url_parts.query.limit;\r\n\tvar bookId = req.body.book;\r\n\tconsole.log(req.body.book);\r\n\tvar db = req.con;\r\n\tvar langReceived = url_parts.query.lang;\r\n\t// var langColumn = '';\r\n\t// if (langReceived === 'ta') {\r\n\t// \tlangColumn = fieldConstant.tamil;\r\n\t// }\r\n\t// else {\r\n\t// \tlangColumn = fieldConstant.english;\r\n\t// }\r\n\t// var query1 = \"SELECT \"+ fieldConstant.english + \" FROM \"+ fieldConstant.chapters;\r\n\t// if (bookId === 0) \r\n\t{\r\n\t\tlet query2 = \"select distinct \" + fieldConstant.Chapter + \" from \" + fieldConstant.bible_ + langReceived + \" where \" + fieldConstant.Book + \" = \" + bookId;\r\n\t\tlet query3 = \"select \" + fieldConstant.VerseCount + \" from \" + fieldConstant.bible_ + langReceived + \" where \" + fieldConstant.Book + \" = \" + bookId + \" and \" + fieldConstant.Chapter + \" = 1\";\r\n\t\tlet query4 = \"select \" + fieldConstant.Verse + \" from \" + fieldConstant.bible_ + langReceived + \" where \" + fieldConstant.Book + \" = \" + bookId + \" limit \" + limit;\r\n\r\n\t\tvar data = {};\r\n\t\tasync.parallel([\r\n\t\t\tfunction (parallel_done) {\r\n\t\t\t\tconsole.log(query2);\r\n\t\t\t\tconsole.log(query3);\r\n\t\t\t\tconsole.log(query4);\r\n\t\t\t\tdb.query(query2, {}, function (err, results) {\r\n\t\t\t\t\tif (err) return parallel_done(err);\r\n\t\t\t\t\tvar chapList = [];\r\n\t\t\t\t\tvar chapObj = {};\r\n\t\t\t\t\tchapObj.bookId = bookId;\r\n\t\t\t\t\tchapObj.chapters = results\r\n\t\t\t\t\tchapList.push(chapObj);\r\n\t\t\t\t\tdata.chapters = chapList;\r\n\t\t\t\t\tparallel_done();\r\n\t\t\t\t});\r\n\t\t\t},\r\n\t\t\tfunction (parallel_done) {\r\n\t\t\t\tdb.query(query3, {}, function (err, results) {\r\n\t\t\t\t\tif (err) return parallel_done(err);\r\n\t\t\t\t\tvar verseList = [];\r\n\t\t\t\t\tvar verseNoObj = {};\r\n\t\t\t\t\tverseNoObj.chapter = 1;\r\n\t\t\t\t\tverseNoObj.verse = results\r\n\t\t\t\t\tverseList.push(verseNoObj);\r\n\t\t\t\t\tdata.versecounts = verseList;\r\n\t\t\t\t\t// data.versecounts = results;\r\n\t\t\t\t\tparallel_done();\r\n\t\t\t\t});\r\n\t\t\t},\r\n\t\t\tfunction (parallel_done) {\r\n\t\t\t\tvar query4 = \"select \" + fieldConstant.VerseCount + \" from \" + fieldConstant.bible_ + langReceived + \" where \" + fieldConstant.Book + \" = \" + bookId + \" and \" + fieldConstant.Chapter + \" = 1\";\r\n\t\t\t\tconsole.log(query4);\r\n\t\t\t\treturn db.query(query4, {}, function (err, results, fields) {\r\n\t\t\t\t\tif (err) return (err);\r\n\t\t\t\t\tvar stringFormat = JSON.stringify(results);\r\n\t\t\t\t\tvar verseObj = JSON.parse(stringFormat);\r\n\t\t\t\t\t// console.log(\"resultsss \" + JSON.stringify(verseObj));\r\n\t\t\t\t\tvar listCount = 0;\r\n\r\n\t\t\t\t\tvar verseDetails = [];\r\n\t\t\t\t\tlet verseData = [];\r\n\t\t\t\t\tasync.forEach(results, function (verse, callBack) {\r\n\t\t\t\t\t\tvar stringFormat = JSON.stringify(verse);\r\n\t\t\t\t\t\tvar verseCountObj = JSON.parse(stringFormat);\r\n\t\t\t\t\t\tvar sql = \"select \" + fieldConstant.Verse + \" from \" + fieldConstant.bible_ + langReceived + \" where Versecount = \" + verseCountObj.VerseCount + \" and \" + fieldConstant.Chapter + \" = 1 and \" + fieldConstant.Book + \" = \" + bookId;\r\n\t\t\t\t\t\tconsole.log(verseCountObj);\r\n\t\t\t\t\t\t// data.sql =  sql;\r\n\t\t\t\t\t\tdb.query(sql, {}, function (err, result, next) {\r\n\t\t\t\t\t\t\tif (err) return (err);\r\n\t\t\t\t\t\t\tvar stringFormat = JSON.stringify(result);\r\n\t\t\t\t\t\t\tvar verseObj = JSON.parse(stringFormat);\r\n\t\t\t\t\t\t\tconsole.log(\"result \" + result);\r\n\t\t\t\t\t\t\tlistCount++;\r\n\t\t\t\t\t\t\tlet verseList = {};\r\n\t\t\t\t\t\t\t// verseList.book = 0;\r\n\t\t\t\t\t\t\t// verseList.chapter = 1;\r\n\t\t\t\t\t\t\tverseList.verseCount = verseCountObj.VerseCount;\r\n\t\t\t\t\t\t\tverseList.verse = result[0].Verse;\r\n\t\t\t\t\t\t\t// bookList.verse(verseList);\r\n\t\t\t\t\t\t\tverseData.push(verseList);\r\n\t\t\t\t\t\t\tcallBack(null);\r\n\t\t\t\t\t\t});\r\n\r\n\t\t\t\t\t\t// resolve(data);\r\n\t\t\t\t\t}, function (datas) {\r\n\t\t\t\t\t\tconsole.log(verseData);\r\n\t\t\t\t\t\tvar langColumn = '';\r\n\t\t\t\t\t\tif (langReceived === 'ta') {\r\n\t\t\t\t\t\t\tlangColumn = fieldConstant.tamil;\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t\telse {\r\n\t\t\t\t\t\t\tlangColumn = fieldConstant.english;\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t\tvar query4 = \"select \" + langColumn + \" from \" + fieldConstant.chapters + \" where \" + fieldConstant.id + \" = \" + bookId;\r\n\t\t\t\t\t\tconsole.log(query4);\r\n\t\t\t\t\t\tdb.query(query4, {}, function (err, result, next) {\r\n\t\t\t\t\t\t\tif (err) return (err);\r\n\t\t\t\t\t\t\tvar book = \"\";\r\n\t\t\t\t\t\t\tvar stringFormat = JSON.stringify(result);\r\n\t\t\t\t\t\t\tvar verseCountObj = JSON.parse(stringFormat);\r\n\t\t\t\t\t\t\tif (langReceived === 'ta') {\r\n\t\t\t\t\t\t\t\tbook = verseCountObj[0].tamil;\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t\telse {\r\n\t\t\t\t\t\t\t\tbook = verseCountObj[0].english;\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t\tvar bookList = {};\r\n\t\t\t\t\t\t\tbookList.bookId = bookId;\r\n\t\t\t\t\t\t\tlet chapterList = [];\r\n\t\t\t\t\t\t\tlet chapters = {};\r\n\t\t\t\t\t\t\tchapters.book = book;\r\n\t\t\t\t\t\t\tchapters.chapter = 1;\r\n\t\t\t\t\t\t\tchapters.verseData = verseData;\r\n\t\t\t\t\t\t\tchapterList.push(chapters);\r\n\t\t\t\t\t\t\tbookList.chapters = chapterList;\r\n\t\t\t\t\t\t\tverseDetails.push(bookList);\r\n\t\t\t\t\t\t\tdata.verses = verseDetails;\r\n\t\t\t\t\t\t\tparallel_done();\r\n\t\t\t\t\t\t});\r\n\r\n\t\t\t\t\t}\r\n\t\t\t\t\t);\r\n\r\n\t\t\t\t});\r\n\t\t\t},\r\n\r\n\t\t], function (err) {\r\n\t\t\tif (err) console.log(err);\r\n\t\t\t// db.end();\r\n\t\t\tres.status(200).json({ success: true, data });\r\n\t\t});\r\n\t}\r\n\t//  else {\r\n\t// \tlet prevBookId = bookId - 1;\r\n\t// \tlet preChap = \"select distinct \" + fieldConstant.Chapter + \" from \" + fieldConstant.bible_ + lang + \" where \" + fieldConstant.Book + \" = \" + prevBookId;\r\n\t// \tlet curChap = \"select distinct \" + fieldConstant.Chapter + \" from \" + fieldConstant.bible_ + lang + \" where \" + fieldConstant.Book + \" = \" + bookId;\r\n\t// \tlet preVers = \"select distinct \" + fieldConstant.VerseCount + \" from \" + fieldConstant.bible_ + lang + \" where \" + fieldConstant.Book + \" = \" + prevBookId + \" and \" + fieldConstant.Chapter + \" = 1\";\r\n\t// \tlet curVers = \"select distinct \" + fieldConstant.VerseCount + \" from \" + fieldConstant.bible_ + lang + \" where \" + fieldConstant.Book + \" between \" + prevBookId + \" and \" + bookId;\r\n\t// \tlet query4 = \"select \" + fieldConstant.Verse + \" from \" + fieldConstant.bible_ + lang + \" where \" + fieldConstant.Book + \" between \" + prevBookId + \" and \" + bookId + \" limit \" + limit + \"\";\r\n\t// }\r\n});\r\n\r\nrouter.post('/getVerseAndDetails', function (req, res, next) {\r\n\tvar url = require('url');\r\n\tvar url_parts = url.parse(req.url, true);\r\n\tvar limit = url_parts.query.limit;\r\n\t// var lang = url_parts.query.lang;\r\n\tvar bookId = req.body.book;\r\n\tvar chapter = req.body.chapter;\r\n\tvar langReceived = url_parts.query.lang;\r\n\tconsole.log(req.body.book);\r\n\tvar db = req.con;\r\n\tvar query3 = \"SELECT \" + fieldConstant.VerseCount + \" FROM \" + fieldConstant.bible_ + langReceived + \" where \" + fieldConstant.Book + \" = \" + bookId + \" and \" + fieldConstant.Chapter + \" = \" + chapter;\r\n\tvar query4 = \"SELECT \" + fieldConstant.Verse + \" FROM \" + fieldConstant.bible_ + langReceived + \" where \" + fieldConstant.Book + \" = \" + bookId + \" LIMIT \" + limit + \"\";\r\n\tconsole.log(query3);\r\n\tvar data = {};\r\n\tasync.parallel([\r\n\t\tfunction (parallel_done) {\r\n\t\t\tdb.query(query3, {}, function (err, results) {\r\n\t\t\t\tif (err) return parallel_done(err);\r\n\t\t\t\tvar verseList = [];\r\n\t\t\t\tvar verseNoObj = {};\r\n\t\t\t\tverseNoObj.chapter = chapter;\r\n\t\t\t\tverseNoObj.verse = results\r\n\t\t\t\tverseList.push(verseNoObj);\r\n\t\t\t\tdata.versecounts = verseList;\r\n\t\t\t\t// data.versecounts = results;\r\n\t\t\t\tparallel_done();\r\n\t\t\t});\r\n\t\t},\r\n\t\tfunction (parallel_done) {\r\n\t\t\tvar query4 = \"select \" + fieldConstant.VerseCount + \" from \" + fieldConstant.bible_ + langReceived + \" where \" + fieldConstant.Book + \" = \" + bookId + \" and \" + fieldConstant.Chapter + \" = \" + chapter;\r\n\t\t\tconsole.log(query4);\r\n\t\t\treturn db.query(query4, {}, function (err, results, fields) {\r\n\t\t\t\tif (err) return (err);\r\n\t\t\t\tvar stringFormat = JSON.stringify(results);\r\n\t\t\t\tvar verseObj = JSON.parse(stringFormat);\r\n\t\t\t\t// console.log(\"resultsss \" + JSON.stringify(verseObj));\r\n\t\t\t\tvar listCount = 0;\r\n\r\n\t\t\t\tvar verseDetails = [];\r\n\t\t\t\tlet verseData = [];\r\n\t\t\t\tasync.forEach(results, function (verse, callBack) {\r\n\t\t\t\t\tvar stringFormat = JSON.stringify(verse);\r\n\t\t\t\t\tvar verseCountObj = JSON.parse(stringFormat);\r\n\t\t\t\t\tvar sql = \"select \" + fieldConstant.Verse + \" from \" + fieldConstant.bible_ + langReceived + \" where Versecount = \" + verseCountObj.VerseCount + \" and \" + fieldConstant.Chapter + \" = \" + chapter + \" and \" + fieldConstant.Book + \" = \" + bookId;\r\n\t\t\t\t\t// console.log(\"verseCount\" +verseCountObj);\r\n\t\t\t\t\tconsole.log(\"sql\" + sql);\r\n\t\t\t\t\t// data.sql =  sql;\r\n\t\t\t\t\tdb.query(sql, {}, function (err, result, next) {\r\n\t\t\t\t\t\tif (err) return (err);\r\n\t\t\t\t\t\tvar stringFormat = JSON.stringify(result);\r\n\t\t\t\t\t\tvar verseObj = JSON.parse(stringFormat);\r\n\t\t\t\t\t\tconsole.log(\"stringFormat \" + stringFormat);\r\n\t\t\t\t\t\tconsole.log(\"verseObj \" + verseObj);\r\n\t\t\t\t\t\tconsole.log(\"result \" + result);\r\n\t\t\t\t\t\tlistCount++;\r\n\t\t\t\t\t\tlet verseList = {};\r\n\t\t\t\t\t\t// verseList.book = 0;\r\n\t\t\t\t\t\t// verseList.chapter = 1;\r\n\t\t\t\t\t\tverseList.verseCount = verseCountObj.VerseCount;\r\n\t\t\t\t\t\tverseList.verse = result[0].Verse;\r\n\t\t\t\t\t\t// bookList.verse(verseList);\r\n\t\t\t\t\t\tverseData.push(verseList);\r\n\t\t\t\t\t\tcallBack(null);\r\n\t\t\t\t\t});\r\n\r\n\t\t\t\t\t// resolve(data);\r\n\t\t\t\t}, function (datas) {\r\n\t\t\t\t\tconsole.log(verseData);\r\n\t\t\t\t\tvar langColumn = '';\r\n\t\t\t\t\tif (langReceived === 'ta') {\r\n\t\t\t\t\t\tlangColumn = fieldConstant.tamil;\r\n\t\t\t\t\t}\r\n\t\t\t\t\telse {\r\n\t\t\t\t\t\tlangColumn = fieldConstant.english;\r\n\t\t\t\t\t}\r\n\t\t\t\t\tvar query4 = \"select \" + langColumn + \" from \" + fieldConstant.chapters + \" where \" + fieldConstant.id + \" = \" + bookId;\r\n\t\t\t\t\tconsole.log(query4);\r\n\t\t\t\t\tdb.query(query4, {}, function (err, result, next) {\r\n\t\t\t\t\t\tif (err) return (err);\r\n\t\t\t\t\t\tvar book = \"\";\r\n\t\t\t\t\t\tvar stringFormat = JSON.stringify(result);\r\n\t\t\t\t\t\tvar verseCountObj = JSON.parse(stringFormat);\r\n\t\t\t\t\t\tif (langReceived === 'ta') {\r\n\t\t\t\t\t\t\tbook = verseCountObj[0].tamil;\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t\telse {\r\n\t\t\t\t\t\t\tbook = verseCountObj[0].english;\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t\tvar bookList = {};\r\n\t\t\t\t\t\tbookList.bookId = bookId;\r\n\t\t\t\t\t\tlet chapterList = [];\r\n\t\t\t\t\t\tlet chapters = {};\r\n\t\t\t\t\t\tchapters.book = book;\r\n\t\t\t\t\t\tchapters.chapter = chapter;\r\n\t\t\t\t\t\tchapters.verseData = verseData;\r\n\t\t\t\t\t\tchapterList.push(chapters);\r\n\t\t\t\t\t\tbookList.chapters = chapterList;\r\n\t\t\t\t\t\tverseDetails.push(bookList);\r\n\t\t\t\t\t\tdata.verses = verseDetails;\r\n\t\t\t\t\t\tparallel_done();\r\n\t\t\t\t\t});\r\n\r\n\t\t\t\t}\r\n\t\t\t\t);\r\n\r\n\t\t\t});\r\n\t\t}\r\n\t], function (err) {\r\n\t\tif (err) console.log(err);\r\n\t\t// db.end();\r\n\t\tres.status(200).json({ success: true, data });\r\n\t});\r\n});\r\n\r\nrouter.post('/getDetails', function (req, res, next) {\r\n\tvar url = require('url');\r\n\tvar url_parts = url.parse(req.url, true);\r\n\tvar limit = url_parts.query.limit;\r\n\tvar langReceived = url_parts.query.lang;\r\n\tvar bookId = req.body.book;\r\n\tvar chapter = req.body.chapter;\r\n\tvar verse = req.body.verse;\r\n\tconsole.log(req.body.book);\r\n\tvar db = req.con;\r\n\t// var query4 = \"SELECT \" + fieldConstant.Verse + \" FROM \" + fieldConstant.bible_ + langReceived + \" where \" + fieldConstant.Book + \" = \" + bookId + \" LIMIT \" + limit + \"\";\r\n\r\n\tvar data = {};\r\n\tasync.parallel([\r\n\t\tfunction (parallel_done) {\r\n\t\t\tvar query4 = \"select \" + fieldConstant.VerseCount + \" from \" + fieldConstant.bible_ + langReceived + \" where \" + fieldConstant.Book + \" = \" + bookId + \" and \" + fieldConstant.Chapter + \" = \" + chapter;\r\n\t\t\tconsole.log(query4);\r\n\t\t\treturn db.query(query4, {}, function (err, results, fields) {\r\n\t\t\t\tif (err) return (err);\r\n\t\t\t\tvar stringFormat = JSON.stringify(results);\r\n\t\t\t\tvar verseObj = JSON.parse(stringFormat);\r\n\t\t\t\t// console.log(\"resultsss \" + JSON.stringify(verseObj));\r\n\t\t\t\tvar listCount = 0;\r\n\r\n\t\t\t\tvar verseDetails = [];\r\n\t\t\t\tlet verseData = [];\r\n\t\t\t\tasync.forEach(results, function (verse, callBack) {\r\n\t\t\t\t\tvar stringFormat = JSON.stringify(verse);\r\n\t\t\t\t\tvar verseCountObj = JSON.parse(stringFormat);\r\n\t\t\t\t\tvar sql = \"select \" + fieldConstant.Verse + \" from \" + fieldConstant.bible_ + langReceived + \" where Versecount = \" + verseCountObj.VerseCount + \" and \" + fieldConstant.Chapter + \" = \" + chapter + \" and \" + fieldConstant.Book + \" = \" + bookId;\r\n\t\t\t\t\t// console.log(\"verseCount\" +verseCountObj);\r\n\t\t\t\t\tconsole.log(\"sql\" + sql);\r\n\t\t\t\t\t// data.sql =  sql;\r\n\t\t\t\t\tdb.query(sql, {}, function (err, result, next) {\r\n\t\t\t\t\t\tif (err) return (err);\r\n\t\t\t\t\t\tvar stringFormat = JSON.stringify(result);\r\n\t\t\t\t\t\tvar verseObj = JSON.parse(stringFormat);\r\n\t\t\t\t\t\tconsole.log(\"stringFormat \" + stringFormat);\r\n\t\t\t\t\t\tconsole.log(\"verseObj \" + verseObj);\r\n\t\t\t\t\t\tconsole.log(\"result \" + result);\r\n\t\t\t\t\t\tlistCount++;\r\n\t\t\t\t\t\tlet verseList = {};\r\n\t\t\t\t\t\t// verseList.book = 0;\r\n\t\t\t\t\t\t// verseList.chapter = 1;\r\n\t\t\t\t\t\tverseList.verseCount = verseCountObj.VerseCount;\r\n\t\t\t\t\t\tverseList.verse = result[0].Verse;\r\n\t\t\t\t\t\t// bookList.verse(verseList);\r\n\t\t\t\t\t\tverseData.push(verseList);\r\n\t\t\t\t\t\tcallBack(null);\r\n\t\t\t\t\t});\r\n\r\n\t\t\t\t\t// resolve(data);\r\n\t\t\t\t}, function (datas) {\r\n\t\t\t\t\tconsole.log(verseData);\r\n\t\t\t\t\tvar langColumn = '';\r\n\t\t\t\t\tif (langReceived === 'ta') {\r\n\t\t\t\t\t\tlangColumn = fieldConstant.tamil;\r\n\t\t\t\t\t}\r\n\t\t\t\t\telse {\r\n\t\t\t\t\t\tlangColumn = fieldConstant.english;\r\n\t\t\t\t\t}\r\n\t\t\t\t\tvar query4 = \"select \" + langColumn + \" from \" + fieldConstant.chapters + \" where \" + fieldConstant.id + \" = \" + bookId;\r\n\t\t\t\t\tconsole.log(query4);\r\n\t\t\t\t\tdb.query(query4, {}, function (err, result, next) {\r\n\t\t\t\t\t\tif (err) return (err);\r\n\t\t\t\t\t\tvar book = \"\";\r\n\t\t\t\t\t\tvar stringFormat = JSON.stringify(result);\r\n\t\t\t\t\t\tvar verseCountObj = JSON.parse(stringFormat);\r\n\t\t\t\t\t\tif (langReceived === 'ta') {\r\n\t\t\t\t\t\t\tbook = verseCountObj[0].tamil;\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t\telse {\r\n\t\t\t\t\t\t\tbook = verseCountObj[0].english;\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t\tvar bookList = {};\r\n\t\t\t\t\t\tbookList.bookId = bookId;\r\n\t\t\t\t\t\tlet chapterList = [];\r\n\t\t\t\t\t\tlet chapters = {};\r\n\t\t\t\t\t\tchapters.book = book;\r\n\t\t\t\t\t\tchapters.chapter = chapter;\r\n\t\t\t\t\t\tchapters.verseData = verseData;\r\n\t\t\t\t\t\tchapterList.push(chapters);\r\n\t\t\t\t\t\tbookList.chapters = chapterList;\r\n\t\t\t\t\t\tverseDetails.push(bookList);\r\n\t\t\t\t\t\tdata.verses = verseDetails;\r\n\t\t\t\t\t\tparallel_done();\r\n\t\t\t\t\t});\r\n\r\n\t\t\t\t}\r\n\t\t\t\t);\r\n\r\n\t\t\t});\r\n\t\t},\r\n\t\t// function (parallel_done) {\r\n\t\t// \tdb.query(query4, {}, function (err, results) {\r\n\t\t// \t\tif (err) return parallel_done(err);\r\n\t\t// \t\tdata.verses = results;\r\n\t\t// \t\tparallel_done();\r\n\t\t// \t});\r\n\t\t// }\r\n\r\n\t], function (err) {\r\n\t\tif (err) console.log(err);\r\n\t\t// db.end();\r\n\t\tres.status(200).json({ success: true, data });\r\n\t});\r\n});\r\n\r\nrouter.post('/getDynamicDetails', function (req, res, next) {\r\n\tvar url = require('url');\r\n\tvar url_parts = url.parse(req.url, true);\r\n\tvar limit = url_parts.query.limit;\r\n\tvar bookId = req.body.book;\r\n\tvar chapterId = req.body.chapter;\r\n\tvar verseId = req.body.verse;\r\n\tconsole.log(req.body.book);\r\n\tvar db = req.con;\r\n\tvar langReceived = url_parts.query.lang;\r\n\t\tvar data = {};\r\n\t\tasync.parallel([\r\n\t\t\tfunction (parallel_done) {\r\n\t\t\t\tlet query1 = \"select distinct \" + fieldConstant.Id + \" from \" + fieldConstant.bible_ + langReceived + \" where \" + fieldConstant.Book + \" = \" + bookId + \" and \" + fieldConstant.Chapter + \" = \" + chapterId + \" and \" + fieldConstant.VerseCount + \" = \" + verseId;\r\n\t\t\t\tdb.query(query1, {}, function (err, results) {\r\n\t\t\t\t\tif (err) return parallel_done(err);\r\n\t\t\t\t\tvar stringFormat = JSON.stringify(results);\r\n\t\t\t\t\tconsole.log(stringFormat);\r\n\t\t\t\t\tvar prevBook = {};\r\n\t\t\t\t\tasync.forEach(results, function (tempValue, callBack) {\r\n\t\t\t\t\t\tlet tempId = tempValue.Id - 1;\r\n\t\t\t\t\t\tif (tempId !== 0) {\r\n\t\t\t\t\t\t\tlet getBookQuery = \"select \" + fieldConstant.Book + \", \" + fieldConstant.Chapter + \" from \" + fieldConstant.bible_ + langReceived + \" where \" + fieldConstant.Id + \" = \" + tempId;\r\n\t\t\t\t\t\t\tdb.query(getBookQuery, {}, function (error, bookResult) {\r\n\t\t\t\t\t\t\t\tif (error) return parallel_done(error);\r\n\t\t\t\t\t\t\t\tif (bookResult.length !== 0) { \r\n\t\t\t\t\t\t\t\t\tprevBook.book = bookResult[0].Book;\r\n\t\t\t\t\t\t\t\t\tprevBook.chapter = bookResult[0].Chapter;\r\n\t\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t\t\tcallBack(null);\r\n\t\t\t\t\t\t\t})\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t\telse callBack(null);\r\n\t\t\t\t\t}, function () {\r\n\t\t\t\t\t\tdata.prevBook = prevBook;\r\n\t\t\t\t\t\tconsole.log(prevBook);\r\n\t\t\t\t\t\tparallel_done();\r\n\t\t\t\t\t});\r\n\r\n\t\t\t\t});\r\n\t\t\t},\r\n\t\t\tfunction (parallel_done) {\r\n\t\t\t\tlet query1 = \"select distinct \" + fieldConstant.Id + \" from \" + fieldConstant.bible_ + langReceived + \" where \" + fieldConstant.Book + \" = \" + bookId + \" and \" + fieldConstant.Chapter + \" = \" + chapterId + \" and \" + fieldConstant.VerseCount + \" = \" + verseId;\r\n\t\t\t\tdb.query(query1, {}, function (err, results) {\r\n\t\t\t\t\tif (err) return parallel_done(err);\r\n\t\t\t\t\tvar stringFormat = JSON.stringify(results);\r\n\t\t\t\t\tconsole.log(stringFormat);\r\n\t\t\t\t\tvar nextBook = {};\r\n\t\t\t\t\tasync.forEach(results, function (tempValue, callBack) {\r\n\t\t\t\t\t\tlet tempId = tempValue.Id + 1;\r\n\t\t\t\t\t\tif (tempId !== 0) {\r\n\t\t\t\t\t\t\tlet getBookQuery = \"select \" + fieldConstant.Book + \", \" + fieldConstant.Chapter + \" from \" + fieldConstant.bible_ + langReceived + \" where \" + fieldConstant.Id + \" = \" + tempId;\r\n\t\t\t\t\t\t\tdb.query(getBookQuery, {}, function (error, bookResult) {\r\n\t\t\t\t\t\t\t\tif (error) return parallel_done(error);\r\n\t\t\t\t\t\t\t\tif (bookResult.length !== 0) {\r\n\t\t\t\t\t\t\t\t\tnextBook.book = bookResult[0].Book;\r\n\t\t\t\t\t\t\t\t\tnextBook.chapter = bookResult[0].Chapter;\r\n\r\n\t\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t\t\tcallBack(null);\r\n\t\t\t\t\t\t\t})\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t\telse callBack(null);\r\n\t\t\t\t\t}, function () {\r\n\t\t\t\t\t\tdata.nextBook = nextBook;\r\n\t\t\t\t\t\tconsole.log(nextBook);\r\n\t\t\t\t\t\tparallel_done();\r\n\t\t\t\t\t});\r\n\r\n\t\t\t\t});\r\n\t\t\t},\r\n\t\t\tfunction (parallel_done) {\r\n\t\t\t\tlet query2 = \"select distinct \" + fieldConstant.Chapter + \" from \" + fieldConstant.bible_ + langReceived + \" where \" + fieldConstant.Book + \" = \" + bookId;\r\n\t\t\t\tconsole.log(query2);\r\n\t\t\t\tdb.query(query2, {}, function (err, results) {\r\n\t\t\t\t\tif (err) return parallel_done(err);\r\n\t\t\t\t\tvar chapList = [];\r\n\t\t\t\t\tvar chapObj = {};\r\n\t\t\t\t\tchapObj.bookId = fieldConstant.bookId + bookId;\r\n\t\t\t\t\tchapObj.bookNo = bookId;\r\n\t\t\t\t\tchapObj.chapters = results\r\n\t\t\t\t\tchapList.push(chapObj);\r\n\t\t\t\t\tdata.chapters = chapList;\r\n\t\t\t\t\tparallel_done();\r\n\t\t\t\t});\r\n\t\t\t},\r\n\t\t\tfunction (parallel_done) {\r\n\t\t\t\tlet query3 = \"select \" + fieldConstant.VerseCount + \" from \" + fieldConstant.bible_ + langReceived + \" where \" + fieldConstant.Book + \" = \" + bookId + \" and \" + fieldConstant.Chapter + \" = \" + chapterId;\r\n\t\t\t\tconsole.log(query3);\r\n\t\t\t\tdb.query(query3, {}, function (err, results) {\r\n\t\t\t\t\tif (err) return parallel_done(err);\r\n\t\t\t\t\tvar verseList = [];\r\n\t\t\t\t\tvar verseNoObj = {};\r\n\t\t\t\t\tverseNoObj.chapter = chapterId;\r\n\t\t\t\t\tverseNoObj.verseItems = results.map(res => {\r\n\t\t\t\t\t\tconsole.log('resultssss ',res);\r\n\t\t\t\t\t\tvar verseCount = {};\r\n\t\t\t\t\t\tverseCount.verseId= fieldConstant.verseId + res.VerseCount;\r\n\t\t\t\t\t\tverseCount.verseNo =res.VerseCount;\r\n\t\t\t\t\t\treturn verseCount;\r\n\t\t\t\t\t})\r\n\t\t\t\t\tverseList.push(verseNoObj);\r\n\t\t\t\t\tdata.versecounts = verseList;\r\n\t\t\t\t\t// data.versecounts = results;\r\n\t\t\t\t\tparallel_done();\r\n\t\t\t\t});\r\n\t\t\t},\r\n\t\t\tfunction (parallel_done) {\r\n\t\t\t\t// let query4 = \"select \" + fieldConstant.Verse + \" from \" + fieldConstant.bible_ + langReceived + \" where \" + fieldConstant.Book + \" = \" + bookId + \" limit \" + limit;\r\n\t\t\t\r\n\t\t\t\tlet query4 = \"select \" + fieldConstant.VerseCount + \" from \" + fieldConstant.bible_ + langReceived + \" where \" + fieldConstant.Book + \" = \" + bookId + \" and \" + fieldConstant.Chapter + \" = \" + chapterId;\r\n\t\t\t\tconsole.log(query4);\r\n\t\t\t\treturn db.query(query4, {}, function (err, results, fields) {\r\n\t\t\t\t\tif (err) return (err);\r\n\t\t\t\t\tvar stringFormat = JSON.stringify(results);\r\n\t\t\t\t\tvar verseObj = JSON.parse(stringFormat);\r\n\t\t\t\t\t// console.log(\"resultsss \" + JSON.stringify(verseObj));\r\n\t\t\t\t\tvar listCount = 0;\r\n\r\n\t\t\t\t\tvar verseDetails = [];\r\n\t\t\t\t\tlet verseData = [];\r\n\t\t\t\t\tasync.forEach(results, function (verse, callBack) {\r\n\t\t\t\t\t\tvar stringFormat = JSON.stringify(verse);\r\n\t\t\t\t\t\tvar verseCountObj = JSON.parse(stringFormat);\r\n\t\t\t\t\t\tvar sql = \"select \" + fieldConstant.Verse + \" from \" + fieldConstant.bible_ + langReceived + \" where Versecount = \" + verseCountObj.VerseCount + \" and \" + fieldConstant.Chapter + \" = \"+chapterId +\" and \" + fieldConstant.Book + \" = \" + bookId;\r\n\t\t\t\t\t\tconsole.log(verseCountObj);\r\n\t\t\t\t\t\t// data.sql =  sql;\r\n\t\t\t\t\t\tdb.query(sql, {}, function (err, result, next) {\r\n\t\t\t\t\t\t\tif (err) return (err);\r\n\t\t\t\t\t\t\tvar stringFormat = JSON.stringify(result);\r\n\t\t\t\t\t\t\tvar verseObj = JSON.parse(stringFormat);\r\n\t\t\t\t\t\t\tconsole.log(\"result \" + result);\r\n\t\t\t\t\t\t\tlistCount++;\r\n\t\t\t\t\t\t\tlet verseList = {};\r\n\t\t\t\t\t\t\t// verseList.book = 0;\r\n\t\t\t\t\t\t\t// verseList.chapter = 1;\r\n\t\t\t\t\t\t\tverseList.verseCount = verseCountObj.VerseCount;\r\n\t\t\t\t\t\t\tverseList.verse = result[0].Verse;\r\n\t\t\t\t\t\t\t// bookList.verse(verseList);\r\n\t\t\t\t\t\t\tverseData.push(verseList);\r\n\t\t\t\t\t\t\tcallBack(null);\r\n\t\t\t\t\t\t});\r\n\r\n\t\t\t\t\t\t// resolve(data);\r\n\t\t\t\t\t}, function (datas) {\r\n\t\t\t\t\t\tconsole.log(verseData);\r\n\t\t\t\t\t\tvar langColumn = '';\r\n\t\t\t\t\t\tif (langReceived === 'ta') {\r\n\t\t\t\t\t\t\tlangColumn = fieldConstant.tamil;\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t\telse {\r\n\t\t\t\t\t\t\tlangColumn = fieldConstant.english;\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t\tvar query5 = \"select \" + langColumn + \" from \" + fieldConstant.chapters + \" where \" + fieldConstant.id + \" = \" + bookId;\r\n\t\t\t\t\t\tconsole.log(query5);\r\n\t\t\t\t\t\tdb.query(query5, {}, function (err, result, next) {\r\n\t\t\t\t\t\t\tif (err) return (err);\r\n\t\t\t\t\t\t\tvar book = \"\";\r\n\t\t\t\t\t\t\tvar stringFormat = JSON.stringify(result);\r\n\t\t\t\t\t\t\tvar verseCountObj = JSON.parse(stringFormat);\r\n\t\t\t\t\t\t\tif (langReceived === 'ta') {\r\n\t\t\t\t\t\t\t\tbook = verseCountObj[0].tamil;\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t\telse {\r\n\t\t\t\t\t\t\t\tbook = verseCountObj[0].english;\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t\tvar bookList = {};\r\n\t\t\t\t\t\t\tbookList.bookId = bookId;\r\n\t\t\t\t\t\t\tlet chapterList = [];\r\n\t\t\t\t\t\t\tlet chapters = {};\r\n\t\t\t\t\t\t\tchapters.book = book;\r\n\t\t\t\t\t\t\tchapters.chapter = chapterId;\r\n\t\t\t\t\t\t\tchapters.verseData = verseData;\r\n\t\t\t\t\t\t\tchapterList.push(chapters);\r\n\t\t\t\t\t\t\tbookList.chapters = chapterList;\r\n\t\t\t\t\t\t\tverseDetails.push(bookList);\r\n\t\t\t\t\t\t\tdata.verses = verseDetails;\r\n\t\t\t\t\t\t\tparallel_done();\r\n\t\t\t\t\t\t});\r\n\r\n\t\t\t\t\t}\r\n\t\t\t\t\t);\r\n\r\n\t\t\t\t});\r\n\t\t\t},\r\n\r\n\t\t], function (err) {\r\n\t\t\tif (err) console.log(err);\r\n\t\t\t// db.end();\r\n\t\t\tres.status(200).json({ success: true, data });\r\n\t\t});\r\n\t//  else {\r\n\t// \tlet prevBookId = bookId - 1;\r\n\t// \tlet preChap = \"select distinct \" + fieldConstant.Chapter + \" from \" + fieldConstant.bible_ + lang + \" where \" + fieldConstant.Book + \" = \" + prevBookId;\r\n\t// \tlet curChap = \"select distinct \" + fieldConstant.Chapter + \" from \" + fieldConstant.bible_ + lang + \" where \" + fieldConstant.Book + \" = \" + bookId;\r\n\t// \tlet preVers = \"select distinct \" + fieldConstant.VerseCount + \" from \" + fieldConstant.bible_ + lang + \" where \" + fieldConstant.Book + \" = \" + prevBookId + \" and \" + fieldConstant.Chapter + \" = 1\";\r\n\t// \tlet curVers = \"select distinct \" + fieldConstant.VerseCount + \" from \" + fieldConstant.bible_ + lang + \" where \" + fieldConstant.Book + \" between \" + prevBookId + \" and \" + bookId;\r\n\t// \tlet query4 = \"select \" + fieldConstant.Verse + \" from \" + fieldConstant.bible_ + lang + \" where \" + fieldConstant.Book + \" between \" + prevBookId + \" and \" + bookId + \" limit \" + limit + \"\";\r\n\t// }\r\n});\r\n\r\n/* GET home page. */\r\nrouter.get('/apis', function (req, res, next) {\r\n\tres.send('Api Working');\r\n});\r\n\r\n\r\nasync function start(req, res) {\r\n\tawait change(req).then(query3 => {\r\n\t\tconsole.log(\"Wrapped setTimeout after 2000msss \" + query3);\r\n\r\n\t\tconsole.log(\"Wrapped setTimeout after 2000ms \" + JSON.stringify(query3));\r\n\t\tconsole.log(query3);\r\n\r\n\t\tres.json(query3);\r\n\t});\r\n}\r\n\r\nfunction change(req) {\r\n\tvar url = require('url');\r\n\tvar db = req.con;\r\n\tvar data = {};\r\n\tvar url_parts = url.parse(req.url, true);\r\n\tvar limit = url_parts.query.limit;\r\n\tvar lang = url_parts.query.lang;\r\n\treturn new Promise(function (resolve, reject) {\r\n\t\tvar query3 = \"select \" + fieldConstant.VerseCount + \" from \" + fieldConstant.bible_ + lang + \" where \" + fieldConstant.Book + \" = 0 and \" + fieldConstant.Chapter + \" = 1\";\r\n\t\t// Setting 2000 ms time \r\n\t\tdb.query(query3, {}, function (err, results, fields) {\r\n\t\t\tif (err) return (err);\r\n\t\t\t// var verseNoObj = {};\t\t\t\t\r\n\t\t\t// verseNoObj.chapter = 1;\r\n\t\t\t// verseNoObj.verse= results\r\n\t\t\t// data.versecounts = verseNoObj;\r\n\t\t\tconsole.log(results);\r\n\t\t\t// return (results);\r\n\t\t\tresolve(results);\r\n\t\t});\r\n\t\t// setTimeout(resolve, 0); \r\n\t});\r\n}\r\n\r\nconst promise1 = (req) => new Promise((resolve, reject) => {\r\n\r\n\tvar url = require('url');\r\n\tvar db = req.con;\r\n\tvar url_parts = url.parse(req.url, true);\r\n\tvar limit = url_parts.query.limit;\r\n\tvar lang = url_parts.query.lang;\r\n\tvar query3 = \"select \" + fieldConstant.VerseCount + \" from \" + fieldConstant.bible_ + lang + \" where \" + fieldConstant.Book + \" = 0 and \" + fieldConstant.Chapter + \" = 1\";\r\n\treturn db.query(query3, {}, function (err, results, fields) {\r\n\t\tif (err) return (err);\r\n\t\t// var verseNoObj = {};\t\t\t\t\r\n\t\t// verseNoObj.chapter = 1;\r\n\t\t// verseNoObj.verse= results\r\n\t\t// data.versecounts = verseNoObj;\r\n\t\tvar stringFormat = JSON.stringify(results);\r\n\t\tvar verseObj = JSON.parse(stringFormat);\r\n\t\t// console.log(\"resultsss \" + JSON.stringify(verseObj));\r\n\t\tvar listCount = 0;\r\n\r\n\t\tvar verseDetails = [];\r\n\t\tasync.forEach(results, function (verse, callBack) {\r\n\t\t\tvar stringFormat = JSON.stringify(verse);\r\n\t\t\tvar verseCountObj = JSON.parse(stringFormat);\r\n\t\t\tvar sql = \"select Verse from bible_en where Versecount = \" + verseCountObj.VerseCount + \" and Chapter = 1 and Book = 0\";\r\n\t\t\tconsole.log(verseCountObj);\r\n\t\t\t// data.sql =  sql;\r\n\t\t\tdb.query(sql, {}, function (err, result, next) {\r\n\t\t\t\tif (err) return (err);\r\n\t\t\t\tvar stringFormat = JSON.stringify(result);\r\n\t\t\t\tvar verseObj = JSON.parse(stringFormat);\r\n\t\t\t\tconsole.log(\"result \" + result);\r\n\t\t\t\tlistCount++;\r\n\t\t\t\tlet verses = {};\r\n\t\t\t\tverses.verseCount = verseCountObj.VerseCount;\r\n\t\t\t\tverses.verse = result[0].Verse;\r\n\t\t\t\tverseDetails.push(verses);\r\n\t\t\t\t// console.log(\"verse \"+JSON.stringify(versesss));\r\n\t\t\t\t// if(listCount == results.length){\r\n\t\t\t\t// \tresolve(results);\r\n\t\t\t\t//   }\r\n\r\n\t\t\t\tcallBack(null);\r\n\t\t\t});\r\n\r\n\t\t\t// resolve(data);\r\n\t\t}, function (datas) {\r\n\r\n\t\t\tresolve(verseDetails);\r\n\t\t}\r\n\t\t);\r\n\t});\r\n});\r\n\r\n\r\nmodule.exports = router;\r\n\r\n\r\n// db.query(query3, {}, function (err, results) {\r\n\t\t\t// \t\t\tif (err) return parallel_done(err);\r\n\t\t\t// \t\t\tvar verseNoObj = {};\t\t\t\t\r\n\t\t\t// \t\t\tverseNoObj.chapter = 1;\r\n\t\t\t// \t\t\tverseNoObj.verse= results\r\n\t\t\t// \t\t\tdata.versecounts = verseNoObj;\r\n\r\n\t\t\t// \t\t\tasync.forEach(results, function(verse, callBack)\r\n\t\t\t// \t{\r\n\t\t\t// \t\tvar stringFormat=JSON.stringify(verse);\t\r\n\t\t\t// \t\tvar verseCountObj =  JSON.parse(stringFormat);\r\n\t\t\t// \t\t\tvar sql = \"select Verse from bible_en where Versecount = \"+verseCountObj.VerseCount;\t\t\t\t\t\t\r\n\t\t\t// \t\t\tconsole.log(sql);\r\n\t\t\t// \t\t\t// data.sql =  sql;\r\n\t\t\t// \t\t\tdb.query(sql, {}, function (err, result, next) {\r\n\t\t\t// \t\t\t\tif (err) return (err);\r\n\t\t\t// \t\t\t\tvar verses = {};\r\n\t\t\t// \t\t\t\tverses.verseCount = verseCountObj.VerseCount;\r\n\t\t\t// \t\t\t\tverse.verse = result;\r\n\t\t\t// \t\t\t\tdata.verseList = verses;\t\t\t\t\t\r\n\t\t\t// \t\t\t\tconsole.log(\"result \"+result);\r\n\t\t\t// \t\t\t\tconsole.log(sql);\r\n\t\t\t// \t\t\t\t// if(listCount == results.length){\r\n\t\t\t// \t\t\t\t// \tresolve(results);\r\n\t\t\t// \t\t\t\t//   }\r\n\r\n\t\t\t// \t\t\t\tcallBack();\r\n\t\t\t// \t\t\t});\r\n\r\n\t\t\t// \t\t\t// resolve(data);\r\n\t\t\t// \t}\r\n\t\t\t// \t, function(datas)\r\n\t\t\t// \t{\r\n\t\t\t// \t\tparallel_done();\r\n\t\t\t// \t}\r\n\t\t\t// \t);\r\n\t\t\t// });\r\n\t\t\t// async.parallel([\r\n\t\t\t// \tfunction(callBack)\r\n\t\t\t// \t{\r\n\t\t\t// \t\tresults.map(verse => {\r\n\t\t\t// \t\t\tvar stringFormat=JSON.stringify(verse);\t\r\n\t\t\t// \t\t\tvar verseCountObj =  JSON.parse(stringFormat);\r\n\t\t\t// \t\t\t\tvar sql = \"select Verse from bible_en where Versecount = \"+verseCountObj.VerseCount;\t\t\t\t\t\t\r\n\t\t\t// \t\t\t\tconsole.log(sql);\r\n\t\t\t// \t\t\t\tdb.query(sql, {}, function (err, results) {\r\n\t\t\t// \t\t\t\t\tif (err) return parallel_done(err);\r\n\t\t\t// \t\t\t\t\t// console.log(results);\r\n\t\t\t// \t\t\t\t\tconsole.log(sql);\r\n\t\t\t// \t\t\t\t\tvar verses = {};\r\n\t\t\t// \t\t\t\t\tverses.verseCount = verseCountObj.VerseCount;\r\n\t\t\t// \t\t\t\t\tverse.verse = results;\r\n\t\t\t// \t\t\t\t\tdata.verseList = verses;\r\n\r\n\t\t\t// \t\t\t\t});\r\n\t\t\t// \t\t\t}\r\n\r\n\t\t\t// \t\t\t);\r\n\t\t\t// \t\t\tcallBack();\r\n\t\t\t// \t}\r\n\t\t\t// ]);\r\n\r\n\t\t\t// async.timesSeries(results, function (verse, next) {\r\n\t\t\t// \t// console.log(record);\r\n\t\t\t// \t// data.verseList = verse;\r\n\t\t\t// \tvar stringFormat=JSON.stringify(verse);\t\r\n\t\t\t// \tvar verseCountObj =  JSON.parse(stringFormat);\r\n\t\t\t// \t\tvar sql = \"select Verse from bible_en where Versecount = \"+verseCountObj.VerseCount;\t\t\t\t\t\t\r\n\t\t\t// \t\tconsole.log(sql);\r\n\t\t\t// \t\tdb.query(sql, {}, function (err, results) {\r\n\t\t\t// \t\t\tif (err) return parallel_done(err);\r\n\t\t\t// \t\t\t// console.log(results);\r\n\t\t\t// \t\t\tconsole.log(sql);\r\n\t\t\t// \t\t\tvar verses = {};\r\n\t\t\t// \t\t\tverses.verseCount = verseCountObj.VerseCount;\r\n\t\t\t// \t\t\tverse.verse = results;\r\n\t\t\t// \t\t\tdata.verseList = verses;\r\n\t\t\t// \t\t});\r\n\t\t\t// \tnext();\t\r\n\t\t\t// });\r\n\r\n\t\t\t// results.map(verse => {\r\n\t\t\t// \tvar stringFormat=JSON.stringify(verse);\t\r\n\t\t\t// \tvar verseCountObj =  JSON.parse(stringFormat);\r\n\t\t\t// \t\tvar sql = \"select Verse from bible_en where Versecount = \"+verseCountObj.VerseCount;\t\t\t\t\t\t\r\n\t\t\t// \t\tconsole.log(sql);\r\n\t\t\t// \t\tdata.sql =  sql;\r\n\t\t\t// \t\tdb.query(sql, {}, function (err, results, next) {\r\n\t\t\t// \t\t\tif (err) return parallel_done(err);\r\n\t\t\t// \t\t\t// console.log(results);\r\n\t\t\t// \t\t\tconsole.log(sql);\r\n\t\t\t// \t\t\tvar verses = {};\r\n\t\t\t// \t\t\tverses.verseCount = verseCountObj.VerseCount;\r\n\t\t\t// \t\t\tverse.verse = results;\r\n\t\t\t// \t\t\tdata.verseList = verses;\r\n\r\n\t\t\t// \t\t});\r\n\t\t\t// \t}\r\n\r\n\t\t\t// \t);\r\n\t\t\t// parallel_done(null, verseNoObj.verse);\r\n\t\t\t// });\r\n\r\n\t\t// function (result, parallel_done) {\r\n\t\t// console.log(verse);\r\n\r\n\t\t// result.map(verse => {\r\n\t\t// \t\tvar stringFormat=JSON.stringify(verse);\t\r\n\t\t// \t\tvar verseCountObj =  JSON.parse(stringFormat);\r\n\t\t// \t\t\tvar sql = \"select Verse from bible_en where Versecount = \"+verseCountObj.VerseCount;\t\t\t\t\t\t\r\n\t\t// \t\t\tconsole.log(sql);\r\n\t\t// \t\t\tdata.sql =  sql;\r\n\t\t// \t\t\tdb.query(sql, {}, function (err, results, next) {\r\n\t\t// \t\t\t\tif (err) return next(err);\r\n\t\t// \t\t\t\t// console.log(results);\r\n\t\t// \t\t\t\tconsole.log(sql);\r\n\t\t// \t\t\t\tvar verses = {};\r\n\t\t// \t\t\t\tverses.verseCount = verseCountObj.VerseCount;\r\n\t\t// \t\t\t\tverse.verse = results;\r\n\t\t// \t\t\t\tdata.verseList = verses;\r\n\t\t// \t\t\t\tnext();\r\n\t\t// \t\t\t});\r\n\t\t// \t\t}\r\n\r\n\t\t// \t\t);\r\n\r\n\t\t// async.forEach(result, function (verse, next) {\r\n\t\t// \t// console.log(record);\r\n\t\t// \t// data.verseList = verse;\r\n\t\t// \tvar stringFormat = JSON.stringify(verse);\r\n\t\t// \tvar verseCountObj = JSON.parse(stringFormat);\r\n\t\t// \tvar sql = \"select Verse from bible_en where Versecount = \" + verseCountObj.VerseCount;\r\n\t\t// \tconsole.log(sql);\r\n\t\t// \tdata.sql = sql;\r\n\r\n\t\t// \tdb.query(sql, function (err, results, t) {\r\n\t\t// \t\tif (err) return parallel_done(err);\r\n\t\t// \t\t// console.log(results);\r\n\t\t// \t\tconsole.log(t);\r\n\t\t// \t\tvar verses = {};\r\n\t\t// \t\tverses.verseCount = verseCountObj.VerseCount;\r\n\t\t// \t\tverse.verse = results;\r\n\t\t// \t\tdata.verseList = verses;\r\n\r\n\t\t// \t});\r\n\r\n\t\t// \tnext();\r\n\t\t// });\r\n\t\t// parallel_done();\r\n\t\t// db.query(query3, {}, function (err, results) {\r\n\t\t// \tif (err) return parallel_done(err);\r\n\t\t// \tresults.map(\r\n\t\t// \t\tchapter => {\r\n\t\t// \t\t\tdb.query(\"Select \"+fieldConstant.Verse+\" from \"+fieldConstant.bible_+lang+\" where book = 0 and \"+fieldConstant.Chapter +\" = \"+chapter,{}, function (err, result){\r\n\t\t// \t\t\tif (err) return parallel_done(err);\r\n\t\t// \t\t\tconsole.log(res);\r\n\t\t// \t\t})\r\n\t\t// \t\tconsole.log(chapter);\r\n\t\t// \t});\r\n\r\n\t\t// \t// var verseObj = {};\r\n\t\t// \t// verseObj.verseNo = 1;\r\n\t\t// \t// verseObj.verses= results\r\n\t\t// \t// data.verses = verseObj;\r\n\t\t// \tparallel_done();\r\n\t\t// });\r\n\r\n\t\t// db.query(query4, {}, function (err, results) {\r\n\t\t// \tif (err) return parallel_done(err);\r\n\t\t// \t// console.log(data);\r\n\t\t// \tvar verseObj = {};\r\n\t\t// \tverseObj.verseNo = 1;\r\n\t\t// \tverseObj.verses= results\r\n\t\t// \tdata.verses = verseObj;\r\n\t\t// \tparallel_done();\r\n\t\t// });\r\n\t\t// }\r\n\r\n\r\n// router.get('/getFullDetails', function(req, res, next)\r\n// {\r\n// \tvar url = require('url');\r\n// \tvar url_parts = url.parse(req.url, true);\r\n// \tvar limit = url_parts.query.limit;\r\n// \tvar lang = url_parts.query.lang;\r\n// \tvar db = req.con;\r\n// \tvar query1 = \"select \" + fieldConstant.english + \" from \" + fieldConstant.chapters;\r\n// \tvar query2 = \"select distinct \" + fieldConstant.Chapter + \" from \" + fieldConstant.bible_ + lang + \" where \" + fieldConstant.Book + \" = 0\";\r\n// \tvar query3 = \"select \" + fieldConstant.VerseCount + \" from \" + fieldConstant.bible_ + lang + \" where \" + fieldConstant.Book + \" = 0 and \" + fieldConstant.Chapter + \" = 1\";\r\n// \tvar query4 = \"select \" + fieldConstant.Verse + \" from \" + fieldConstant.bible_ + lang + \" where \" + fieldConstant.Book + \" = 0 LIMIT \" + limit + \"\";\r\n\r\n// \tvar data = {};\r\n// \tdb.query(query1, {}, function (err, results) {\r\n// \t\tif (err) return null;\r\n// \t\tvar result = results.map(function (chap) {\r\n// \t\t\tvar chapObj = {};\r\n// \t\t\tchapObj.user = chap.english;\r\n// \t\t\tchapObj.human = chap.english;\r\n// \t\t\tchapObj.id = chap.id;\r\n// \t\t\treturn chapObj;\r\n// \t\t})\r\n// \t\tdata.books = result;\r\n// \t});\r\n\r\n// \tdb.query(query2, {}, function (err, results) {\r\n// \t\tif (err) return null;\r\n// \t\tvar chapObj = {};\r\n// \t\tchapObj.bookId = 0;\r\n// \t\tchapObj.chapters= results\r\n// \t\tdata.chapters = chapObj;\r\n// \t});\r\n\r\n// })\r\n\r\n// var func = async function(parallel_done)\r\n// {\r\n// \tvar query1 = \"select \" + fieldConstant.english + \" from \" + fieldConstant.chapters;\r\n// \tdb.query(query1, {}, function (err, results) {\r\n// \t\t\t\tif (err) return parallel_done(err);\r\n// \t\t\t\tvar result = results.map(function (chap) {\r\n// \t\t\t\t\tvar chapObj = {};\r\n// \t\t\t\t\tchapObj.user = chap.english;\r\n// \t\t\t\t\tchapObj.human = chap.english;\r\n// \t\t\t\t\tchapObj.id = chap.id;\r\n// \t\t\t\t\treturn chapObj;\r\n// \t\t\t\t})\r\n// \t\t\t\tdata.books = result;\r\n// \t\t\t\tparallel_done();\r\n// \t\t\t});\r\n// }
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- api-proj/routes/api.js	(revision b4c465757ae1d1653ca329e7e4dacb106e73e6f0)
++++ api-proj/routes/api.js	(date 1596904715608)
+@@ -24,8 +24,8 @@
+ 		langColumn = fieldConstant.english;
+ 	}
+ 	var query1 = "select " + fieldConstant.english + " , " + langColumn + ", id from " + fieldConstant.chapters;
+-	var query2 = "select distinct " + fieldConstant.Chapter + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = 0";
+-	var query3 = "select " + fieldConstant.VerseCount + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = 0 and " + fieldConstant.Chapter + " = 1";
++	var query2 = "select distinct " + fieldConstant.Chapter + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = 42";
++	var query3 = "select " + fieldConstant.VerseCount + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = 42 and " + fieldConstant.Chapter + " = 1";
+ 	// var query4 = "select " + fieldConstant.Verse + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = 0 LIMIT " + limit + "";
+ 
+ 	var data = {};
+@@ -38,17 +38,18 @@
+ 			db.query(query1, {}, function (err, results) {
+ 				if (err) return parallel_done(err);
+ 				var result = results.map(function (chap) {
+-					var chapObj = {};
++					var book = {};
+ 					console.log(chap);
+-					chapObj.id = chap.id;
+-					chapObj.user = chap.english;
++					book.bookNo = chap.id;
++					book.user = chap.english;
++					book.bookId = fieldConstant.Book.substr(0,2) + chap.id;
+ 					if (langReceived === 'ta') {
+-						chapObj.human = chap.tamil;
++						book.human = chap.tamil;
+ 					}
+ 					else {
+-						chapObj.human = chap.english;
++						book.human = chap.english;
+ 					}
+-					return chapObj;
++					return book;
+ 				})
+ 				data.books = result;
+ 				parallel_done();
+@@ -59,8 +60,15 @@
+ 				if (err) return parallel_done(err);
+ 				var chapList = [];
+ 				var chapObj = {};
+-				chapObj.bookId = 0;
+-				chapObj.chapters = results
++				var bookId = 42;
++				chapObj.bookId = fieldConstant.Book.substr(0,2) + bookId;
++				chapObj.chapters = results.map(res =>{
++					var chapter = {};
++					chapter.chapterId =  fieldConstant.Chapter.substr(0,3) + bookId + res.Chapter;
++					chapter.verseMapId =  fieldConstant.Verse.substr(0,2) + bookId + 1;
++					chapter.chapterNo = res.Chapter;
++					return(chapter);
++				})
+ 				chapList.push(chapObj);
+ 				data.chapters = chapList;
+ 				parallel_done();
+@@ -71,11 +79,49 @@
+ 				if (err) return parallel_done(err);
+ 				var verseList = [];
+ 				var verseNoObj = {};
+-				verseNoObj.chapter = 1;
+-				verseNoObj.verse = results
++				var bookId = 42;
++				verseNoObj.chapterId = fieldConstant.Chapter.substr(0,2) + bookId + 1;
++				verseNoObj.chapterNo = 1;
++				verseNoObj.verse = results.map(res =>{
++					console.log('resulllltssss ',bookId);
++					var chapter = {};
++					chapter.verseId =  fieldConstant.Verse.substr(0,3) + bookId + res.VerseCount;
++					chapter.verseMapId =  fieldConstant.Verse.substr(0,2) + bookId + res.VerseCount;
++					chapter.verseNo = res.VerseCount;
++					return(chapter);
++				})
+ 				verseList.push(verseNoObj);
+ 				data.versecounts = verseList;
+ 				parallel_done();
++			});
++		},
++		function (parallel_done) {
++			let query1 = "select distinct " + fieldConstant.Id + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + 42 + " and " + fieldConstant.Chapter + " = " + 1 + " and " + fieldConstant.VerseCount + " = " + 1;
++			db.query(query1, {}, function (err, results) {
++				if (err) return parallel_done(err);
++				var stringFormat = JSON.stringify(results);
++				console.log(stringFormat);
++				var nextBook = {};
++				async.forEach(results, function (tempValue, callBack) {
++					let tempId = tempValue.Id;
++					if (tempId !== 0) {
++						let getBookQuery = "select " + fieldConstant.Book + ", " + fieldConstant.Chapter + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Id + " = " + tempId;
++						db.query(getBookQuery, {}, function (error, bookResult) {
++							if (error) return parallel_done(error);
++							if (bookResult.length !== 0) {
++								nextBook.book = bookResult[0].Book;
++								nextBook.chapter = bookResult[0].Chapter + 1;
++							}
++							callBack(null);
++						})
++					}
++					else callBack(null);
++				}, function () {
++					data.nextBook = nextBook;
++					console.log(nextBook);
++					parallel_done();
++				});
++
+ 			});
+ 		},
+ 		// function (parallel_done) {
+@@ -94,9 +140,9 @@
+ 		// 				parallel_done()
+ 		// 			}
+ 		// 		});
+-		// 	// 		
++		// 	//
+ 		// },
+-		//Works fine 
++		//Works fine
+ 		// function (parallel_done) {
+ 		// 	// var url = require('url');
+ 		// 	// var db = req.con;
+@@ -107,7 +153,7 @@
+ 		// 	console.log(query4);
+ 		// 	return db.query(query4, {}, function (err, results, fields) {
+ 		// 		if (err) return (err);
+-		// 		// var verseNoObj = {};				
++		// 		// var verseNoObj = {};
+ 		// 		// verseNoObj.chapter = 1;
+ 		// 		// verseNoObj.verse= results
+ 		// 		// data.versecounts = verseNoObj;
+@@ -152,7 +198,7 @@
+ 		// 	});
+ 		// },
+ 		function (parallel_done) {
+-			var query4 = "select " + fieldConstant.VerseCount + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = 0 and " + fieldConstant.Chapter + " = 1";
++			var query4 = "select " + fieldConstant.VerseCount + ", "+ fieldConstant.Verse +" from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = 42 and " + fieldConstant.Chapter + " = 1";
+ 			console.log(query4);
+ 			return db.query(query4, {}, function (err, results, fields) {
+ 				if (err) return (err);
+@@ -163,44 +209,47 @@
+ 
+ 				var verseDetails = [];
+ 				let verseData = [];
++				let bookId = 42;
+ 				async.forEach(results, function (verse, callBack) {
+ 					var stringFormat = JSON.stringify(verse);
+ 					var verseCountObj = JSON.parse(stringFormat);
+-					var sql = "select " + fieldConstant.Verse + " from " + fieldConstant.bible_ + langReceived + " where Versecount = " + verseCountObj.VerseCount + " and " + fieldConstant.Chapter + " = 1 and " + fieldConstant.Book + " = 0";
++					var sql = "select " + fieldConstant.Verse + " from " + fieldConstant.bible_ + langReceived + " where Versecount = " + verseCountObj.VerseCount + " and " + fieldConstant.Chapter + " = 1 and " + fieldConstant.Book + " = 42";
+ 					console.log(verseCountObj);
+ 					// data.sql =  sql;
+-					db.query(sql, {}, function (err, result, next) {
+-						if (err) return (err);
+-						var stringFormat = JSON.stringify(result);
+-						var verseObj = JSON.parse(stringFormat);
+-						console.log("result " + result);
+-						listCount++;
++					// db.query(sql, {}, function (err, result, next) {
++					// 	if (err) return (err);
++					// 	var stringFormat = JSON.stringify(result);
++					// 	var verseObj = JSON.parse(stringFormat);
++					// 	console.log("result " + result);
++					// 	listCount++;
+ 						let verseList = {};
+ 						// verseList.book = 0;
+ 						// verseList.chapter = 1;
+-						verseList.verseCount = verseCountObj.VerseCount;
+-						verseList.verse = result[0].Verse;
++						verseList.verseNo = verseCountObj.VerseCount;
++						verseList.verseId = fieldConstant.Verse.substr(0,2) + bookId + verseCountObj.VerseCount;;
++						verseList.verse = verseCountObj.Verse;
+ 						// bookList.verse(verseList);
+ 						verseData.push(verseList);
+ 						callBack(null);
+-					});
++					// });
+ 
+ 					// resolve(data);
+ 				}, function (datas) {
+ 					console.log(verseData);
+ 					var book = "";
+ 					if (langReceived === 'ta') {
+-						book = 'ஆதியாகமம்';
++						book = 'யோவான்';
+ 					}
+ 					else {
+-						book = 'Genesis';
++						book = 'John';
+ 					}
+ 					var bookList = {};
+-					bookList.bookId = 0;
++					bookList.bookId = fieldConstant.Book.substr(0,2) + bookId;
+ 					let chapterList = [];
+ 					let chapters = {};
+ 					chapters.book = book;
+-					chapters.chapter = 1;
++					chapters.chapterNo = 1;
++					chapters.chapterId = fieldConstant.Chapter.substr(0,2) + bookId + 1;
+ 					chapters.verseData = verseData;
+ 					chapterList.push(chapters);
+ 					bookList.chapters = chapterList;
+@@ -212,9 +261,6 @@
+ 
+ 			});
+ 		},
+-
+-
+-
+ 	], function (err) {
+ 		if (err) console.log(err);
+ 		// db.end();
+@@ -239,14 +285,75 @@
+ 	// 	langColumn = fieldConstant.english;
+ 	// }
+ 	// var query1 = "SELECT "+ fieldConstant.english + " FROM "+ fieldConstant.chapters;
+-	// if (bookId === 0) 
++	// if (bookId === 0)
+ 	{
+ 		let query2 = "select distinct " + fieldConstant.Chapter + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId;
+ 		let query3 = "select " + fieldConstant.VerseCount + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = 1";
+ 		let query4 = "select " + fieldConstant.Verse + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " limit " + limit;
+ 
+ 		var data = {};
+-		async.parallel([
++		async.parallel([function (parallel_done) {
++			let query1 = "select distinct " + fieldConstant.Id + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = " + 1 + " and " + fieldConstant.VerseCount + " = " + 1;
++			db.query(query1, {}, function (err, results) {
++				if (err) return parallel_done(err);
++				var stringFormat = JSON.stringify(results);
++				// console.log(stringFormat);
++				var prevBook = {};
++				async.forEach(results, function (tempValue, callBack) {
++					let tempId = tempValue.Id - 1;
++					if (tempId !== 0) {
++						let getBookQuery = "select " + fieldConstant.Book + ", " + fieldConstant.Chapter + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Id + " = " + tempId;
++						db.query(getBookQuery, {}, function (error, bookResult) {
++							if (error) return parallel_done(error);
++							if (bookResult.length !== 0) {
++								prevBook.book = bookResult[0].Book;
++								prevBook.chapter = bookResult[0].Chapter;
++							}
++							callBack(null);
++						})
++					}
++					else callBack(null);
++				}, function () {
++					data.prevBook = prevBook;
++					console.log(prevBook);
++					parallel_done();
++				});
++
++			});
++		},
++			function (parallel_done) {
++				let query1 = "select distinct " + fieldConstant.Id + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = " + 1 + " and " + fieldConstant.VerseCount + " = " + 1;
++				console.log(query1);
++				db.query(query1, {}, function (err, results) {
++					if (err) return parallel_done(err);
++					var stringFormat = JSON.stringify(results);
++					console.log(stringFormat);
++					var nextBook = {};
++					async.forEach(results, function (tempValue, callBack) {
++						let tempId = tempValue.Id;
++						console.log(tempId)
++						if (tempId !== 0) {
++							let getBookQuery = "select " + fieldConstant.Book + ", " + fieldConstant.Chapter + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Id + " = " + tempId;
++							console.log(getBookQuery)
++							db.query(getBookQuery, {}, function (error, bookResult) {
++								if (error) return parallel_done(error);
++								if (bookResult.length !== 0) {
++									console.log('bookres',bookResult)
++									nextBook.book = bookResult[0].Book;
++									nextBook.chapter = bookResult[0].Chapter + 1;
++								}
++								callBack(null);
++							})
++						}
++						else callBack(null);
++					}, function () {
++						data.nextBook = nextBook;
++						console.log(nextBook);
++						parallel_done();
++					});
++
++				});
++			},
+ 			function (parallel_done) {
+ 				console.log(query2);
+ 				console.log(query3);
+@@ -256,7 +363,14 @@
+ 					var chapList = [];
+ 					var chapObj = {};
+ 					chapObj.bookId = bookId;
+-					chapObj.chapters = results
++					chapObj.chapters = results.map(res =>{
++						var chapter = {};
++						chapter.chapterId =  fieldConstant.Chapter.substr(0,3) + bookId + res.Chapter;
++						chapter.verseMapId = fieldConstant.Verse.substr(0,2) + bookId + 1;
++						// fieldConstant.Chapter.substr(0,2) + bookId + res.Chapter;
++						chapter.chapterNo = res.Chapter;
++						return(chapter);
++					})
+ 					chapList.push(chapObj);
+ 					data.chapters = chapList;
+ 					parallel_done();
+@@ -267,8 +381,16 @@
+ 					if (err) return parallel_done(err);
+ 					var verseList = [];
+ 					var verseNoObj = {};
+-					verseNoObj.chapter = 1;
+-					verseNoObj.verse = results
++					verseNoObj.chapterNo = 1;
++					verseNoObj.chapterId = fieldConstant.Chapter.substr(0,2) + bookId + 1;;
++					verseNoObj.verse = results.map(res =>{
++						console.log('resulllltssss ',bookId);
++						var verse = {};
++						verse.verseId =  fieldConstant.Verse.substr(0,3) + bookId + res.VerseCount;
++						verse.verseMapId =  fieldConstant.Verse.substr(0,2) + bookId + res.VerseCount;
++						verse.verseNo = res.VerseCount;
++						return(verse);
++					})
+ 					verseList.push(verseNoObj);
+ 					data.versecounts = verseList;
+ 					// data.versecounts = results;
+@@ -276,7 +398,7 @@
+ 				});
+ 			},
+ 			function (parallel_done) {
+-				var query4 = "select " + fieldConstant.VerseCount + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = 1";
++				var query4 = "select " + fieldConstant.VerseCount + " , "+ fieldConstant.Verse + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = 1";
+ 				console.log(query4);
+ 				return db.query(query4, {}, function (err, results, fields) {
+ 					if (err) return (err);
+@@ -290,24 +412,25 @@
+ 					async.forEach(results, function (verse, callBack) {
+ 						var stringFormat = JSON.stringify(verse);
+ 						var verseCountObj = JSON.parse(stringFormat);
+-						var sql = "select " + fieldConstant.Verse + " from " + fieldConstant.bible_ + langReceived + " where Versecount = " + verseCountObj.VerseCount + " and " + fieldConstant.Chapter + " = 1 and " + fieldConstant.Book + " = " + bookId;
+-						console.log(verseCountObj);
++						var sql = "select " + fieldConstant.Verse +" from " + fieldConstant.bible_ + langReceived + " where Versecount = " + verseCountObj.VerseCount + " and " + fieldConstant.Chapter + " = 1 and " + fieldConstant.Book + " = " + bookId;
++						console.log('SSSqll',sql);
+ 						// data.sql =  sql;
+-						db.query(sql, {}, function (err, result, next) {
+-							if (err) return (err);
+-							var stringFormat = JSON.stringify(result);
+-							var verseObj = JSON.parse(stringFormat);
+-							console.log("result " + result);
+-							listCount++;
++						// db.query(sql, {}, function (err, result, next) {
++						// 	if (err) return (err);
++						// 	var stringFormat = JSON.stringify(result);
++						// 	var verseObj = JSON.parse(stringFormat);
++						// 	console.log("result " + result);
++						// 	listCount++;
+ 							let verseList = {};
+ 							// verseList.book = 0;
+ 							// verseList.chapter = 1;
+-							verseList.verseCount = verseCountObj.VerseCount;
+-							verseList.verse = result[0].Verse;
++							verseList.verseNo = verseCountObj.VerseCount;
++							verseList.verseId = fieldConstant.Verse.substr(0,2) + bookId + verseCountObj.VerseCount;;
++							verseList.verse = verseCountObj.Verse;
+ 							// bookList.verse(verseList);
+ 							verseData.push(verseList);
+ 							callBack(null);
+-						});
++						// });
+ 
+ 						// resolve(data);
+ 					}, function (datas) {
+@@ -337,7 +460,8 @@
+ 							let chapterList = [];
+ 							let chapters = {};
+ 							chapters.book = book;
+-							chapters.chapter = 1;
++							chapters.chapterNo = 1;
++							chapters.chapterId = fieldConstant.Chapter.substr(0,2) + bookId + 1;
+ 							chapters.verseData = verseData;
+ 							chapterList.push(chapters);
+ 							bookList.chapters = chapterList;
+@@ -382,14 +506,80 @@
+ 	var query4 = "SELECT " + fieldConstant.Verse + " FROM " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " LIMIT " + limit + "";
+ 	console.log(query3);
+ 	var data = {};
+-	async.parallel([
++	async.parallel([function (parallel_done) {
++		let query1 = "select distinct " + fieldConstant.Id + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = " + chapter + " and " + fieldConstant.VerseCount + " = " + 1;
++		db.query(query1, {}, function (err, results) {
++			if (err) return parallel_done(err);
++			var stringFormat = JSON.stringify(results);
++			console.log(stringFormat);
++			var prevBook = {};
++			async.forEach(results, function (tempValue, callBack) {
++				let tempId = tempValue.Id - 1;
++				if (tempId !== 0) {
++					let getBookQuery = "select " + fieldConstant.Book + ", " + fieldConstant.Chapter + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Id + " = " + tempId;
++					db.query(getBookQuery, {}, function (error, bookResult) {
++						if (error) return parallel_done(error);
++						if (bookResult.length !== 0) {
++							prevBook.book = bookResult[0].Book;
++							prevBook.chapter = bookResult[0].Chapter;
++						}
++						callBack(null);
++					})
++				}
++				else callBack(null);
++			}, function () {
++				data.prevBook = prevBook;
++				console.log(prevBook);
++				parallel_done();
++			});
++
++		});
++	},
++		function (parallel_done) {
++			let query1 = "select " + fieldConstant.Id + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = " + chapter + " ORDER BY ID DESC LIMIT 1";
++			console.log('query 1',query1)
++			db.query(query1, {}, function (err, results) {
++				if (err) return parallel_done(err);
++				var stringFormat = JSON.stringify(results);
++				console.log(stringFormat);
++				var nextBook = {};
++				async.forEach(results, function (tempValue, callBack) {
++					let tempId = tempValue.Id + 1;
++					if (tempId !== 0) {
++						let getBookQuery = "select " + fieldConstant.Book + ", " + fieldConstant.Chapter + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Id + " = " + tempId;
++						db.query(getBookQuery, {}, function (error, bookResult) {
++							if (error) return parallel_done(error);
++							if (bookResult.length !== 0) {
++								nextBook.book = bookResult[0].Book;
++								nextBook.chapter = bookResult[0].Chapter;
++							}
++							callBack(null);
++						})
++					}
++					else callBack(null);
++				}, function () {
++					data.nextBook = nextBook;
++					console.log(nextBook);
++					parallel_done();
++				});
++
++			});
++		},
+ 		function (parallel_done) {
+ 			db.query(query3, {}, function (err, results) {
+ 				if (err) return parallel_done(err);
+ 				var verseList = [];
+ 				var verseNoObj = {};
+-				verseNoObj.chapter = chapter;
+-				verseNoObj.verse = results
++				verseNoObj.chapterNo = chapter;
++				verseNoObj.chapterId = fieldConstant.Chapter.substr(0,2) + bookId + chapter;
++				verseNoObj.verse = results.map(res =>{
++					console.log('resulllltssss ',bookId);
++					var verse = {};
++					verse.verseId =  fieldConstant.Verse.substr(0,3) + bookId + res.VerseCount;
++					verse.verseMapId =  fieldConstant.Verse.substr(0,2) + bookId + res.VerseCount;
++					verse.verseNo = res.VerseCount;
++					return(verse);
++				})
+ 				verseList.push(verseNoObj);
+ 				data.versecounts = verseList;
+ 				// data.versecounts = results;
+@@ -397,7 +587,7 @@
+ 			});
+ 		},
+ 		function (parallel_done) {
+-			var query4 = "select " + fieldConstant.VerseCount + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = " + chapter;
++			var query4 = "select " + fieldConstant.VerseCount + " , "+ fieldConstant.Verse + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = " + chapter;
+ 			console.log(query4);
+ 			return db.query(query4, {}, function (err, results, fields) {
+ 				if (err) return (err);
+@@ -415,23 +605,24 @@
+ 					// console.log("verseCount" +verseCountObj);
+ 					console.log("sql" + sql);
+ 					// data.sql =  sql;
+-					db.query(sql, {}, function (err, result, next) {
+-						if (err) return (err);
+-						var stringFormat = JSON.stringify(result);
+-						var verseObj = JSON.parse(stringFormat);
+-						console.log("stringFormat " + stringFormat);
+-						console.log("verseObj " + verseObj);
+-						console.log("result " + result);
+-						listCount++;
++					// db.query(sql, {}, function (err, result, next) {
++					// 	if (err) return (err);
++					// 	var stringFormat = JSON.stringify(result);
++					// 	var verseObj = JSON.parse(stringFormat);
++					// 	console.log("stringFormat " + stringFormat);
++					// 	console.log("verseObj " + verseObj);
++					// 	console.log("result " + result);
++					// 	listCount++;
+ 						let verseList = {};
+ 						// verseList.book = 0;
+ 						// verseList.chapter = 1;
+-						verseList.verseCount = verseCountObj.VerseCount;
+-						verseList.verse = result[0].Verse;
++						verseList.verseNo = verseCountObj.VerseCount;
++						verseList.verseId = fieldConstant.Verse.substr(0,2) + bookId + verseCountObj.VerseCount;;
++						verseList.verse = verseCountObj.Verse;
+ 						// bookList.verse(verseList);
+ 						verseData.push(verseList);
+ 						callBack(null);
+-					});
++					// });
+ 
+ 					// resolve(data);
+ 				}, function (datas) {
+@@ -461,7 +652,8 @@
+ 						let chapterList = [];
+ 						let chapters = {};
+ 						chapters.book = book;
+-						chapters.chapter = chapter;
++						chapters.chapterNo = chapter;
++						chapters.chapterId = fieldConstant.Chapter.substr(0,2) + bookId + chapter;
+ 						chapters.verseData = verseData;
+ 						chapterList.push(chapters);
+ 						bookList.chapters = chapterList;
+@@ -497,7 +689,7 @@
+ 	var data = {};
+ 	async.parallel([
+ 		function (parallel_done) {
+-			var query4 = "select " + fieldConstant.VerseCount + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = " + chapter;
++			var query4 = "select " + fieldConstant.VerseCount + " , "+ fieldConstant.Verse + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = " + chapter;
+ 			console.log(query4);
+ 			return db.query(query4, {}, function (err, results, fields) {
+ 				if (err) return (err);
+@@ -515,23 +707,23 @@
+ 					// console.log("verseCount" +verseCountObj);
+ 					console.log("sql" + sql);
+ 					// data.sql =  sql;
+-					db.query(sql, {}, function (err, result, next) {
+-						if (err) return (err);
+-						var stringFormat = JSON.stringify(result);
+-						var verseObj = JSON.parse(stringFormat);
+-						console.log("stringFormat " + stringFormat);
+-						console.log("verseObj " + verseObj);
+-						console.log("result " + result);
+-						listCount++;
++					// db.query(sql, {}, function (err, result, next) {
++					// 	if (err) return (err);
++					// 	var stringFormat = JSON.stringify(result);
++					// 	var verseObj = JSON.parse(stringFormat);
++					// 	console.log("stringFormat " + stringFormat);
++					// 	console.log("verseObj " + verseObj);
++					// 	console.log("result " + result);
++					// 	listCount++;
+ 						let verseList = {};
+ 						// verseList.book = 0;
+ 						// verseList.chapter = 1;
+ 						verseList.verseCount = verseCountObj.VerseCount;
+-						verseList.verse = result[0].Verse;
++						verseList.verse = verseCountObj.Verse;
+ 						// bookList.verse(verseList);
+ 						verseData.push(verseList);
+ 						callBack(null);
+-					});
++					// });
+ 
+ 					// resolve(data);
+ 				}, function (datas) {
+@@ -615,7 +807,7 @@
+ 							let getBookQuery = "select " + fieldConstant.Book + ", " + fieldConstant.Chapter + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Id + " = " + tempId;
+ 							db.query(getBookQuery, {}, function (error, bookResult) {
+ 								if (error) return parallel_done(error);
+-								if (bookResult.length !== 0) { 
++								if (bookResult.length !== 0) {
+ 									prevBook.book = bookResult[0].Book;
+ 									prevBook.chapter = bookResult[0].Chapter;
+ 								}
+@@ -639,7 +831,7 @@
+ 					console.log(stringFormat);
+ 					var nextBook = {};
+ 					async.forEach(results, function (tempValue, callBack) {
+-						let tempId = tempValue.Id + 1;
++						let tempId = tempValue.Id;
+ 						if (tempId !== 0) {
+ 							let getBookQuery = "select " + fieldConstant.Book + ", " + fieldConstant.Chapter + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Id + " = " + tempId;
+ 							db.query(getBookQuery, {}, function (error, bookResult) {
+@@ -647,7 +839,6 @@
+ 								if (bookResult.length !== 0) {
+ 									nextBook.book = bookResult[0].Book;
+ 									nextBook.chapter = bookResult[0].Chapter;
+-
+ 								}
+ 								callBack(null);
+ 							})
+@@ -670,7 +861,13 @@
+ 					var chapObj = {};
+ 					chapObj.bookId = fieldConstant.bookId + bookId;
+ 					chapObj.bookNo = bookId;
+-					chapObj.chapters = results
++					chapObj.chapters = results.map(res =>{
++						console.log('resulllltssss ',bookId);
++						var chapter = {};
++						chapter.chapterId =  fieldConstant.Chapter.substr(0,2) + bookId + res.Chapter;
++						chapter.chapterNo = res.Chapter;
++						return(chapter);
++					})
+ 					chapList.push(chapObj);
+ 					data.chapters = chapList;
+ 					parallel_done();
+@@ -685,9 +882,8 @@
+ 					var verseNoObj = {};
+ 					verseNoObj.chapter = chapterId;
+ 					verseNoObj.verseItems = results.map(res => {
+-						console.log('resultssss ',res);
+ 						var verseCount = {};
+-						verseCount.verseId= fieldConstant.verseId + res.VerseCount;
++						verseCount.verseId= chapterId + fieldConstant.Verse.substr(0,2) + res.VerseCount;
+ 						verseCount.verseNo =res.VerseCount;
+ 						return verseCount;
+ 					})
+@@ -699,43 +895,69 @@
+ 			},
+ 			function (parallel_done) {
+ 				// let query4 = "select " + fieldConstant.Verse + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " limit " + limit;
+-			
+-				let query4 = "select " + fieldConstant.VerseCount + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = " + chapterId;
++
++				let query4 = "select " + fieldConstant.VerseCount + " , "+fieldConstant.Verse +" from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = " + chapterId;
+ 				console.log(query4);
+ 				return db.query(query4, {}, function (err, results, fields) {
+ 					if (err) return (err);
+ 					var stringFormat = JSON.stringify(results);
+ 					var verseObj = JSON.parse(stringFormat);
+ 					// console.log("resultsss " + JSON.stringify(verseObj));
+-					var listCount = 0;
+ 
+ 					var verseDetails = [];
+ 					let verseData = [];
+-					async.forEach(results, function (verse, callBack) {
+-						var stringFormat = JSON.stringify(verse);
+-						var verseCountObj = JSON.parse(stringFormat);
+-						var sql = "select " + fieldConstant.Verse + " from " + fieldConstant.bible_ + langReceived + " where Versecount = " + verseCountObj.VerseCount + " and " + fieldConstant.Chapter + " = "+chapterId +" and " + fieldConstant.Book + " = " + bookId;
+-						console.log(verseCountObj);
+-						// data.sql =  sql;
+-						db.query(sql, {}, function (err, result, next) {
+-							if (err) return (err);
+-							var stringFormat = JSON.stringify(result);
+-							var verseObj = JSON.parse(stringFormat);
+-							console.log("result " + result);
+-							listCount++;
+-							let verseList = {};
+-							// verseList.book = 0;
+-							// verseList.chapter = 1;
+-							verseList.verseCount = verseCountObj.VerseCount;
+-							verseList.verse = result[0].Verse;
+-							// bookList.verse(verseList);
+-							verseData.push(verseList);
+-							callBack(null);
+-						});
+-
+-						// resolve(data);
+-					}, function (datas) {
+-						console.log(verseData);
++					// async.forEach(results, function (verse, callBack) {
++					// 		var stringFormat = JSON.stringify(verse);
++					// 		var verseCountObj = JSON.parse(stringFormat);
++					// 		// var sql = "select " + fieldConstant.Verse + " from " + fieldConstant.bible_ + langReceived + " where Versecount = " + verseCountObj.VerseCount + " and " + fieldConstant.Chapter + " = "+chapterId +" and " + fieldConstant.Book + " = " + bookId;
++					// 		console.log(verseCountObj);
++					// 		// data.sql =  sql;
++					// 		// db.query(sql, {}, function (err, result, next) {
++					// 			if (err) return (err);
++					// 			// var stringFormat = JSON.stringify(result);
++					// 			// var verseObj = JSON.parse(stringFormat);
++					// 			// console.log("result " + result);
++					// 			listCount++;
++					// 			let verseList = {};
++					// 			// verseList.book = 0;
++					// 			// verseList.chapter = 1;
++					// 			verseList.verseNo = verseCountObj.VerseCount;
++					// 			verseList.verseId = fieldConstant.verseNoId + verseCountObj.VerseCount;
++					// 			verseList.verse = verseCountObj.Verse;
++					// 			// bookList.verse(verseList);
++					// 			verseData.push(verseList);
++					// 			callBack(null);
++					// 		// });
++					//
++					// 		// next(verseData);
++					// 	},
++					// async.forEach(results, function (verse, callBack) {
++					// 	var stringFormat = JSON.stringify(verse);
++					// 	var verseCountObj = JSON.parse(stringFormat);
++					// 	var sql = "select " + fieldConstant.Verse + " from " + fieldConstant.bible_ + langReceived + " where Versecount = " + verseCountObj.VerseCount + " and " + fieldConstant.Chapter + " = "+chapterId +" and " + fieldConstant.Book + " = " + bookId;
++					// 	console.log(verseCountObj);
++					// 	// data.sql =  sql;
++					// 	db.query(sql, {}, function (err, result, next) {
++					// 		if (err) return (err);
++					// 		var stringFormat = JSON.stringify(result);
++					// 		var verseObj = JSON.parse(stringFormat);
++					// 		console.log("result " + result);
++					// 		listCount++;
++					// 		let verseList = {};
++					// 		// verseList.book = 0;
++					// 		// verseList.chapter = 1;
++					// 		verseList.verseNo = verseCountObj.VerseCount;
++					// 		verseList.verseId = fieldConstant.verseNoId + verseCountObj.VerseCount;
++					// 		verseList.verse = result[0].Verse;
++					// 		// bookList.verse(verseList);
++					// 		verseData.push(verseList);
++					// 		callBack(null);
++					// 	});
++					//
++					// 	// next(verseData);
++					// }
++					//  function (datas) {
++					// 	console.log('data ',datas);
+ 						var langColumn = '';
+ 						if (langReceived === 'ta') {
+ 							langColumn = fieldConstant.tamil;
+@@ -756,22 +978,47 @@
+ 							else {
+ 								book = verseCountObj[0].english;
+ 							}
+-							var bookList = {};
+-							bookList.bookId = bookId;
+-							let chapterList = [];
+ 							let chapters = {};
+ 							chapters.book = book;
+-							chapters.chapter = chapterId;
++							chapters.chapterNo = chapterId;
++							chapters.chapterId = book.substr(0,3) + chapterId;
++
++							async.forEach(results, function (verse, callBack) {
++								var stringFormat = JSON.stringify(verse);
++								var verseCountObj = JSON.parse(stringFormat);
++								// var sql = "select " + fieldConstant.Verse + " from " + fieldConstant.bible_ + langReceived + " where Versecount = " + verseCountObj.VerseCount + " and " + fieldConstant.Chapter + " = "+chapterId +" and " + fieldConstant.Book + " = " + bookId;
++								console.log(verseCountObj);
++								// data.sql =  sql;
++								// db.query(sql, {}, function (err, result, next) {
++								if (err) return (err);
++								// var stringFormat = JSON.stringify(result);
++								// var verseObj = JSON.parse(stringFormat);
++								// console.log("result " + result);
++								let verseList = {};
++								// verseList.book = 0;
++								// verseList.chapter = 1;
++								verseList.verseNo = verseCountObj.VerseCount;
++								verseList.verseId = book.substr(0,3) + chapterId + verseCountObj.VerseCount;
++								verseList.verse = verseCountObj.Verse;
++								// bookList.verse(verseList);
++								verseData.push(verseList);
++								callBack(null);
++								// next(verseData);
++							})
++
++							let chapterList = [];
++							var bookList = {};
++							bookList.bookId = bookId;
+ 							chapters.verseData = verseData;
+ 							chapterList.push(chapters);
+ 							bookList.chapters = chapterList;
+ 							verseDetails.push(bookList);
+ 							data.verses = verseDetails;
+ 							parallel_done();
+-						});
++						})
+ 
+-					}
+-					);
++					// }
++					// );
+ 
+ 				});
+ 			},
+@@ -817,10 +1064,10 @@
+ 	var lang = url_parts.query.lang;
+ 	return new Promise(function (resolve, reject) {
+ 		var query3 = "select " + fieldConstant.VerseCount + " from " + fieldConstant.bible_ + lang + " where " + fieldConstant.Book + " = 0 and " + fieldConstant.Chapter + " = 1";
+-		// Setting 2000 ms time 
++		// Setting 2000 ms time
+ 		db.query(query3, {}, function (err, results, fields) {
+ 			if (err) return (err);
+-			// var verseNoObj = {};				
++			// var verseNoObj = {};
+ 			// verseNoObj.chapter = 1;
+ 			// verseNoObj.verse= results
+ 			// data.versecounts = verseNoObj;
+@@ -828,7 +1075,7 @@
+ 			// return (results);
+ 			resolve(results);
+ 		});
+-		// setTimeout(resolve, 0); 
++		// setTimeout(resolve, 0);
+ 	});
+ }
+ 
+@@ -842,7 +1089,7 @@
+ 	var query3 = "select " + fieldConstant.VerseCount + " from " + fieldConstant.bible_ + lang + " where " + fieldConstant.Book + " = 0 and " + fieldConstant.Chapter + " = 1";
+ 	return db.query(query3, {}, function (err, results, fields) {
+ 		if (err) return (err);
+-		// var verseNoObj = {};				
++		// var verseNoObj = {};
+ 		// verseNoObj.chapter = 1;
+ 		// verseNoObj.verse= results
+ 		// data.versecounts = verseNoObj;
+@@ -891,16 +1138,16 @@
+ 
+ // db.query(query3, {}, function (err, results) {
+ 			// 			if (err) return parallel_done(err);
+-			// 			var verseNoObj = {};				
++			// 			var verseNoObj = {};
+ 			// 			verseNoObj.chapter = 1;
+ 			// 			verseNoObj.verse= results
+ 			// 			data.versecounts = verseNoObj;
+ 
+ 			// 			async.forEach(results, function(verse, callBack)
+ 			// 	{
+-			// 		var stringFormat=JSON.stringify(verse);	
++			// 		var stringFormat=JSON.stringify(verse);
+ 			// 		var verseCountObj =  JSON.parse(stringFormat);
+-			// 			var sql = "select Verse from bible_en where Versecount = "+verseCountObj.VerseCount;						
++			// 			var sql = "select Verse from bible_en where Versecount = "+verseCountObj.VerseCount;
+ 			// 			console.log(sql);
+ 			// 			// data.sql =  sql;
+ 			// 			db.query(sql, {}, function (err, result, next) {
+@@ -908,7 +1155,7 @@
+ 			// 				var verses = {};
+ 			// 				verses.verseCount = verseCountObj.VerseCount;
+ 			// 				verse.verse = result;
+-			// 				data.verseList = verses;					
++			// 				data.verseList = verses;
+ 			// 				console.log("result "+result);
+ 			// 				console.log(sql);
+ 			// 				// if(listCount == results.length){
+@@ -930,9 +1177,9 @@
+ 			// 	function(callBack)
+ 			// 	{
+ 			// 		results.map(verse => {
+-			// 			var stringFormat=JSON.stringify(verse);	
++			// 			var stringFormat=JSON.stringify(verse);
+ 			// 			var verseCountObj =  JSON.parse(stringFormat);
+-			// 				var sql = "select Verse from bible_en where Versecount = "+verseCountObj.VerseCount;						
++			// 				var sql = "select Verse from bible_en where Versecount = "+verseCountObj.VerseCount;
+ 			// 				console.log(sql);
+ 			// 				db.query(sql, {}, function (err, results) {
+ 			// 					if (err) return parallel_done(err);
+@@ -954,9 +1201,9 @@
+ 			// async.timesSeries(results, function (verse, next) {
+ 			// 	// console.log(record);
+ 			// 	// data.verseList = verse;
+-			// 	var stringFormat=JSON.stringify(verse);	
++			// 	var stringFormat=JSON.stringify(verse);
+ 			// 	var verseCountObj =  JSON.parse(stringFormat);
+-			// 		var sql = "select Verse from bible_en where Versecount = "+verseCountObj.VerseCount;						
++			// 		var sql = "select Verse from bible_en where Versecount = "+verseCountObj.VerseCount;
+ 			// 		console.log(sql);
+ 			// 		db.query(sql, {}, function (err, results) {
+ 			// 			if (err) return parallel_done(err);
+@@ -967,13 +1214,13 @@
+ 			// 			verse.verse = results;
+ 			// 			data.verseList = verses;
+ 			// 		});
+-			// 	next();	
++			// 	next();
+ 			// });
+ 
+ 			// results.map(verse => {
+-			// 	var stringFormat=JSON.stringify(verse);	
++			// 	var stringFormat=JSON.stringify(verse);
+ 			// 	var verseCountObj =  JSON.parse(stringFormat);
+-			// 		var sql = "select Verse from bible_en where Versecount = "+verseCountObj.VerseCount;						
++			// 		var sql = "select Verse from bible_en where Versecount = "+verseCountObj.VerseCount;
+ 			// 		console.log(sql);
+ 			// 		data.sql =  sql;
+ 			// 		db.query(sql, {}, function (err, results, next) {
+@@ -996,9 +1243,9 @@
+ 		// console.log(verse);
+ 
+ 		// result.map(verse => {
+-		// 		var stringFormat=JSON.stringify(verse);	
++		// 		var stringFormat=JSON.stringify(verse);
+ 		// 		var verseCountObj =  JSON.parse(stringFormat);
+-		// 			var sql = "select Verse from bible_en where Versecount = "+verseCountObj.VerseCount;						
++		// 			var sql = "select Verse from bible_en where Versecount = "+verseCountObj.VerseCount;
+ 		// 			console.log(sql);
+ 		// 			data.sql =  sql;
+ 		// 			db.query(sql, {}, function (err, results, next) {
+Index: .idea/bible-app.iml
+===================================================================
+--- .idea/bible-app.iml	(date 1596785601209)
++++ .idea/bible-app.iml	(date 1596785601209)
+@@ -0,0 +1,12 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module type="WEB_MODULE" version="4">
++  <component name="NewModuleRootManager">
++    <content url="file://$MODULE_DIR$">
++      <excludeFolder url="file://$MODULE_DIR$/.tmp" />
++      <excludeFolder url="file://$MODULE_DIR$/temp" />
++      <excludeFolder url="file://$MODULE_DIR$/tmp" />
++    </content>
++    <orderEntry type="inheritedJdk" />
++    <orderEntry type="sourceFolder" forTests="false" />
++  </component>
++</module>
+\ No newline at end of file
+Index: .idea/vcs.xml
+===================================================================
+--- .idea/vcs.xml	(date 1596785601228)
++++ .idea/vcs.xml	(date 1596785601228)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="$PROJECT_DIR$" vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/misc.xml
+===================================================================
+--- .idea/misc.xml	(date 1596785601245)
++++ .idea/misc.xml	(date 1596785601245)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="JavaScriptSettings">
++    <option name="languageLevel" value="JSX" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/modules.xml
+===================================================================
+--- .idea/modules.xml	(date 1596785601258)
++++ .idea/modules.xml	(date 1596785601258)
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectModuleManager">
++    <modules>
++      <module fileurl="file://$PROJECT_DIR$/.idea/bible-app.iml" filepath="$PROJECT_DIR$/.idea/bible-app.iml" />
++    </modules>
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/.gitignore
+===================================================================
+--- .idea/.gitignore	(date 1596785601615)
++++ .idea/.gitignore	(date 1596785601615)
+@@ -0,0 +1,5 @@
++# Default ignored files
++/shelf/
++/workspace.xml
++# Editor-based HTTP Client requests
++/httpRequests/
+Index: src/screens/ChaperListScreen.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React from 'react';\r\n\r\nclass ChapterList extends React.Component {\r\n\r\n    state = {\r\n        activeIndex: 1\r\n    }\r\n\r\n    onClickHandler(itemId) {\r\n        this.setState({\r\n            activeIndex :itemId\r\n        })\r\n        this.props.onClick(itemId)\r\n    }\r\n\r\n    render() {\r\n        return (\r\n            <ul>\r\n                {this.props.chapters.map(chap => {\r\n                    const className = this.state.activeIndex === chap.Chapter ? 'active' : null;\r\n                    return (<li class={className} key={chap.Chapter} onClick={() => this.onClickHandler(chap.Chapter)}><span>{chap.Chapter}</span></li>);\r\n                })}\r\n                {/* <li>1</li>\r\n                <li>2</li>\r\n                <li>3</li>\r\n                <li>4</li>\r\n                <li>5</li>\r\n                <li>6</li>\r\n                <li>7</li>\r\n                <li class=\"active\">8</li>\r\n                <li>9</li>\r\n                <li>10</li>\r\n                <li>11</li>\r\n                <li>12</li>\r\n                <li>13</li>\r\n                <li>14</li>\r\n                <li>15</li>\r\n                <li>16</li>\r\n                <li>17</li>\r\n                <li>18</li>\r\n                <li>19</li>\r\n                <li>20</li>\r\n                <li>21</li>\r\n                <li>22</li>\r\n                <li>23</li>\r\n                <li>24</li>\r\n                <li>25</li>\r\n                <li>26</li>\r\n                <li>27</li>\r\n                <li>28</li> */}\r\n            </ul>\r\n        );\r\n    }\r\n}\r\n\r\nexport default ChapterList;
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/screens/ChaperListScreen.js	(revision b4c465757ae1d1653ca329e7e4dacb106e73e6f0)
++++ src/screens/ChaperListScreen.js	(date 1596885456009)
+@@ -6,19 +6,19 @@
+         activeIndex: 1
+     }
+ 
+-    onClickHandler(itemId) {
++    onClickHandler(itemId, itemNo) {
+         this.setState({
+-            activeIndex :itemId
++            activeIndex :itemNo
+         })
+-        this.props.onClick(itemId)
++        this.props.onClick(itemId, itemNo)
+     }
+ 
+     render() {
+         return (
+             <ul>
+                 {this.props.chapters.map(chap => {
+-                    const className = this.state.activeIndex === chap.Chapter ? 'active' : null;
+-                    return (<li class={className} key={chap.Chapter} onClick={() => this.onClickHandler(chap.Chapter)}><span>{chap.Chapter}</span></li>);
++                    const className = this.state.activeIndex === chap.chapterNo ? 'active' : null;
++                    return (<li class={className} id={chap.chapterId} key={chap.chapterId} onClick={() => this.onClickHandler(chap.verseMapId, chap.chapterNo)}><span>{chap.chapterNo}</span></li>);
+                 })}
+                 {/* <li>1</li>
+                 <li>2</li>
+Index: src/screens/VerseListScreen.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React from 'react';\r\n\r\nclass VerseList extends React.Component{\r\n\r\n\tstate = {\r\n        activeIndex: 1\r\n    }\r\n\r\n    onClickHandler(itemId) {\r\n        this.setState({\r\n            activeIndex :itemId\r\n        })\r\n        this.props.onClicks(itemId)\r\n    }\r\n\r\n    render(){\r\n        return(\r\n\t\t\t\t\t<ul>\r\n\t\t\t\t\t\t{this.props.verse.map(verseNos => {\r\n\t\t\t\t\t\t\tconst className = this.state.activeIndex === verseNos.VerseCount ? 'active' : null;\r\n\t\t\t\t\t\t\treturn (\r\n\t\t\t\t\t\t\t<li class={className} key={verseNos.VerseCount} onClick={() => this.onClickHandler(verseNos.VerseCount)}><span>{verseNos.VerseCount}</span></li>);\r\n\t\t\t\t\t\t\t})}\r\n\t\t\t\t\t\t{/* <li class=\"active\">1</li>\r\n\t\t\t\t\t\t<li>2</li>\r\n\t\t\t\t\t\t<li>3</li>\r\n\t\t\t\t\t\t<li>4</li>\r\n\t\t\t\t\t\t<li>5</li>\r\n\t\t\t\t\t\t<li>6</li>\r\n\t\t\t\t\t\t<li>7</li>\r\n\t\t\t\t\t\t<li>8</li>\r\n\t\t\t\t\t\t<li>9</li>\r\n\t\t\t\t\t\t<li>10</li>\r\n\t\t\t\t\t\t<li>11</li>\r\n\t\t\t\t\t\t<li>12</li>\r\n\t\t\t\t\t\t<li>13</li>\r\n\t\t\t\t\t\t<li>14</li>\r\n\t\t\t\t\t\t<li>15</li>\r\n\t\t\t\t\t\t<li>16</li>\r\n\t\t\t\t\t\t<li>17</li>\r\n\t\t\t\t\t\t<li>18</li>\r\n\t\t\t\t\t\t<li>19</li>\r\n\t\t\t\t\t\t<li>20</li>\r\n\t\t\t\t\t\t<li>21</li>\r\n\t\t\t\t\t\t<li>22</li>\r\n\t\t\t\t\t\t<li>23</li>\r\n\t\t\t\t\t\t<li>24</li>\r\n\t\t\t\t\t\t<li>25</li>\r\n\t\t\t\t\t\t<li>26</li>\r\n\t\t\t\t\t\t<li>27</li>\r\n\t\t\t\t\t\t<li>28</li>\r\n\t\t\t\t\t\t<li>29</li>\r\n\t\t\t\t\t\t<li>30</li>\r\n\t\t\t\t\t\t<li>31</li>\r\n\t\t\t\t\t\t<li>32</li>\r\n\t\t\t\t\t\t<li>33</li>\r\n\t\t\t\t\t\t<li>34</li>\r\n\t\t\t\t\t\t<li>35</li> */}\r\n\t\t\t\t\t</ul>\r\n        );\r\n    }\r\n}\r\n\r\nexport default VerseList;
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/screens/VerseListScreen.js	(revision b4c465757ae1d1653ca329e7e4dacb106e73e6f0)
++++ src/screens/VerseListScreen.js	(date 1596885954580)
+@@ -1,25 +1,33 @@
+ import React from 'react';
+ 
+-class VerseList extends React.Component{
++class VerseListScreen extends React.Component{
+ 
+ 	state = {
+         activeIndex: 1
+     }
+ 
+-    onClickHandler(itemId) {
++    onClickHandler(itemId, itemNo) {
+         this.setState({
+-            activeIndex :itemId
++            activeIndex :itemNo
+         })
++		console.log('itemNo',itemNo)
+         this.props.onClicks(itemId)
+     }
+ 
++	onChapterClickHandler() {
++		this.setState({
++			activeIndex :1
++		})
++	}
++
+     render(){
+         return(
+ 					<ul>
+-						{this.props.verse.map(verseNos => {
+-							const className = this.state.activeIndex === verseNos.VerseCount ? 'active' : null;
++						{
++							this.props.verse.map(verseNos => {
++							const className = this.state.activeIndex === verseNos.verseNo ? 'active' : null;
+ 							return (
+-							<li class={className} key={verseNos.VerseCount} onClick={() => this.onClickHandler(verseNos.VerseCount)}><span>{verseNos.VerseCount}</span></li>);
++							<li class={className} id={verseNos.verseId} key={verseNos.verseId} onClick={() => this.onClickHandler(verseNos.verseMapId, verseNos.verseNo)}><span>{verseNos.verseNo}</span></li>);
+ 							})}
+ 						{/* <li class="active">1</li>
+ 						<li>2</li>
+@@ -61,4 +69,4 @@
+     }
+ }
+ 
+-export default VerseList;
+\ No newline at end of file
++export default VerseListScreen;
+\ No newline at end of file
+Index: api-proj/.idea/api-proj.iml
+===================================================================
+--- api-proj/.idea/api-proj.iml	(date 1596809438302)
++++ api-proj/.idea/api-proj.iml	(date 1596809438302)
+@@ -0,0 +1,12 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module type="WEB_MODULE" version="4">
++  <component name="NewModuleRootManager">
++    <content url="file://$MODULE_DIR$">
++      <excludeFolder url="file://$MODULE_DIR$/.tmp" />
++      <excludeFolder url="file://$MODULE_DIR$/temp" />
++      <excludeFolder url="file://$MODULE_DIR$/tmp" />
++    </content>
++    <orderEntry type="inheritedJdk" />
++    <orderEntry type="sourceFolder" forTests="false" />
++  </component>
++</module>
+\ No newline at end of file
+Index: api-proj/.idea/vcs.xml
+===================================================================
+--- api-proj/.idea/vcs.xml	(date 1596809438318)
++++ api-proj/.idea/vcs.xml	(date 1596809438318)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="$PROJECT_DIR$/.." vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+Index: api-proj/.idea/misc.xml
+===================================================================
+--- api-proj/.idea/misc.xml	(date 1596809438332)
++++ api-proj/.idea/misc.xml	(date 1596809438332)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="JavaScriptSettings">
++    <option name="languageLevel" value="ES6" />
++  </component>
++</project>
+\ No newline at end of file
+Index: api-proj/.idea/modules.xml
+===================================================================
+--- api-proj/.idea/modules.xml	(date 1596809438344)
++++ api-proj/.idea/modules.xml	(date 1596809438344)
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectModuleManager">
++    <modules>
++      <module fileurl="file://$PROJECT_DIR$/.idea/api-proj.iml" filepath="$PROJECT_DIR$/.idea/api-proj.iml" />
++    </modules>
++  </component>
++</project>
+\ No newline at end of file
+Index: api-proj/.idea/.gitignore
+===================================================================
+--- api-proj/.idea/.gitignore	(date 1596809438528)
++++ api-proj/.idea/.gitignore	(date 1596809438528)
+@@ -0,0 +1,5 @@
++# Default ignored files
++/shelf/
++/workspace.xml
++# Editor-based HTTP Client requests
++/httpRequests/
+Index: api-proj/utils/fieldConstants.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>module.exports = {\r\n    //Tables\r\n    bible_ :\"bible_\",\r\n    bible_en :\"bible_en\",\r\n    bible_ta :\"bible_ta\",\r\n    chapters :\"chapters\",\r\n\r\n    // bible en & bible_ta columns\r\n    Id :\"Id\",\r\n    Book :\"Book\",\r\n    Chapter :\"Chapter\",\r\n    VerseCount: \"VerseCount\",\r\n    Verse:\"Verse\",\r\n\r\n    // Chapters columns\r\n    id :\"id\",\r\n    english :\"english\",\r\n    tamil: \"tamil\",\r\n\r\n    // Ids\r\n    bookId :\"B00\",\r\n    chapterId :\"C00\",\r\n    verseId: \"V00\",\r\n    versesId: \"Vs00\",\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- api-proj/utils/fieldConstants.js	(revision b4c465757ae1d1653ca329e7e4dacb106e73e6f0)
++++ api-proj/utils/fieldConstants.js	(date 1596774821219)
+@@ -21,6 +21,8 @@
+     bookId :"B00",
+     chapterId :"C00",
+     verseId: "V00",
+-    versesId: "Vs00",
++    chapterVersesId: "Cv00",
++    verseNoId: "Vn00"
++
+ 
+ }
+\ No newline at end of file

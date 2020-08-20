@@ -1,7 +1,7 @@
 import React, { Image } from 'react';
 import ProfileIcon from '../logo.svg'
 
-const nav = () => {
+const nav = (props) => {
     return (
         <header>
             <nav className="navbar">
@@ -17,7 +17,7 @@ const nav = () => {
                             <em className="svgIcon"><svg xmlns="http://www.w3.org/2000/svg"><use xlinkHref="#chevron-back-outline" /></svg></em>
                         </div>
                         <div className="chapter__nav__name">
-                            Psalm 91
+                           {props.header}
                         </div>
                         <div className="chapter__nav__next">
                             <em className="svgIcon"><svg xmlns="http://www.w3.org/2000/svg"><use xlinkHref="#chevron-forward-outline" /></svg></em>

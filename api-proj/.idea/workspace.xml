@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="161e7e3d-828c-41cf-b3ed-b922b8b34fe2" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../demo/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../demo/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public/css-rtl/maps/styles-rtl.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/../public/css-rtl/maps/styles-rtl.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public/css-rtl/styles-rtl.css" beforeDir="false" afterPath="$PROJECT_DIR$/../public/css-rtl/styles-rtl.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public/css/maps/styles.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/../public/css/maps/styles.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/../public/css/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/../public/js/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public/scss/components/_all_components.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../public/scss/components/_all_components.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public/scss/components/_navbar.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../public/scss/components/_navbar.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public/scss/layout/_app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../public/scss/layout/_app.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public/scss/layout/_basic.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../public/scss/layout/_basic.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public/scss/layout/_font.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../public/scss/layout/_font.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public/scss/layout/_sidebar.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../public/scss/layout/_sidebar.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public/scss/mixins/_all_mixins.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../public/scss/mixins/_all_mixins.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public/scss/variables/_all_variables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../public/scss/variables/_all_variables.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public/scss/variables/_colors.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../public/scss/variables/_colors.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public/scss/variables/_themeing.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../public/scss/variables/_themeing.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public/scss/variables/_variables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../public/scss/variables/_variables.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/screens/HomeScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/screens/HomeScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/screens/NavScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/screens/NavScreen.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1fm37UZmjyWc4wmGuMTGlgtfM6H" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="161e7e3d-828c-41cf-b3ed-b922b8b34fe2" name="Default Changelist" comment="" />
+      <created>1596809274147</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1596809274147</updated>
+      <workItem from="1596809277765" duration="10683000" />
+      <workItem from="1596862706090" duration="19697000" />
+      <workItem from="1597342086369" duration="674000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="568" y="231" key="#Notifications" timestamp="1596809304158">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="568" y="231" key="#Notifications/0.0.1366.738@0.0.1366.738" timestamp="1596809304158" />
+    <state x="463" y="123" key="FileChooserDialogImpl" timestamp="1596809703287">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="463" y="123" key="FileChooserDialogImpl/0.0.1366.738@0.0.1366.738" timestamp="1596809703287" />
+    <state x="484" y="157" key="git4idea.merge.GitMergeDialog" timestamp="1596810197054">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="484" y="157" key="git4idea.merge.GitMergeDialog/0.0.1366.738@0.0.1366.738" timestamp="1596810197054" />
+    <state x="339" y="165" key="run.anything.popup" timestamp="1596820424366">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="339" y="165" key="run.anything.popup/0.0.1366.738@0.0.1366.738" timestamp="1596820424366" />
+  </component>
+</project>

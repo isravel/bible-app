@@ -1,0 +1,116 @@
+.dropdown-el {
+	min-width: 12rem;
+	position: relative;
+	display: inline-block;
+	margin-right: 1rem;
+	min-height: 2.2rem;
+	max-height: 2.2rem;
+	overflow: hidden;
+	top: 0;
+	cursor: pointer;
+	text-align: left;
+	white-space: nowrap;
+	outline: none;
+	border-radius: 1rem;
+	transition: $timing all ease-in-out;
+
+	@include css4 {
+		border: .06rem solid var(--border-color);
+		background-color: var(--bg);
+	}
+
+	input:focus+label {
+		@include css4 {
+			background: var(--secondary-bg);
+		}
+	}
+
+	input {
+		width: 1px;
+		height: 1px;
+		display: inline-block;
+		position: absolute;
+		opacity: 0.01;
+	}
+
+	label {
+		display: block;
+		height: 2.2rem;
+		line-height: 2.2rem;
+		padding-left: 1rem;
+		padding-right: 3rem;
+		cursor: pointer;
+		position: relative;
+		transition: $timing color ease-in-out;
+
+		@include css4 {
+			border-top: .06rem solid var(--border-color);
+		}
+
+		&:nth-child(2) {
+			margin-top: 2.2rem;
+			@include css4 {
+				border-top: .06rem solid var(--border-color);
+			}
+		}
+	}
+
+	input:checked+label {
+		display: block;
+		border-top: none;
+		position: absolute;
+		top: 0;
+		width: 100%;
+
+		&:nth-child(2) {
+			margin-top: 0;
+			position: relative;
+		}
+	}
+
+	&::after {
+		content: "";
+		position: absolute;
+		right: 0.8rem;
+		top: 0.9rem;
+		transition: .4s all ease-in-out;
+
+		@include css4 {
+			border: .3rem solid var(--color);
+			border-color: var(--color) transparent transparent transparent;
+		}
+	}
+
+	&.expanded {
+		border-radius: .25rem;
+		padding: 0;
+		max-height: 15rem;
+		box-shadow: $box-shadow;
+
+		@include css4 {
+			border: .06rem solid var(--border-color);
+			background: var(--bg);
+		}
+
+		label {
+			@include css4 {
+				border-top: .06rem solid var(--border-color);
+			}
+
+			&:hover {
+				@include css4 {
+					color: var(--color);
+				}
+			}
+		}
+
+		input:checked+label {
+            font-weight: bold;
+		}
+
+		&::after {
+			transform: rotate(-180deg);
+			top: .55rem;
+		}
+	}
+}

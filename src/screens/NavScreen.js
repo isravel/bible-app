@@ -25,7 +25,7 @@ const nav = (props) => {
 							</em>
 						</div>
 						<div class="chapter__nav__name serif">
-							Psalm 91
+							{<div>dsfsd</div>}
 						</div>
 						<div class="chapter__nav__next">
 							<em class="svg-icon" role="button">

@@ -36,7 +36,7 @@ class HomeScreen extends React.Component {
 		chapters: [],
 		verseCount: [],
 		verses: [],
-		api: [{ "user": "Genesisss" }]
+		api: [{ "user": "Genesis" }]
 	}
 
 	apiUrl(method) {
@@ -67,9 +67,9 @@ class HomeScreen extends React.Component {
 							console.log('this.element1.current.scrollTop', this.element1.current.scrollTop);
 							console.log('this.element1.current.clientHeight', this.element1.current.clientHeight);
 							console.log('this.element1.current.scrollHeight', this.element1.current.scrollHeight);
-						}						
+						}
 						else if (this.element1.current.scrollTop + this.element1.current.clientHeight >= this.element1.current.scrollHeight) {
-							
+
 							console.log('this.element1.current', this.element1.current);
 							console.log('this.element1.current.scrollTop', this.element1.current.scrollTop);
 							console.log('this.element1.current.clientHeight', this.element1.current.clientHeight);
@@ -93,7 +93,7 @@ class HomeScreen extends React.Component {
 		// ReactDOM.findDOMNode(this.element).addEventListener("nv-enter", this.handleNvEnter);
 		// console.log('this element ', this.element1);
 		// if(this.element)
-		// this.element1.current.addEventListener("scroll", () => {			
+		// this.element1.current.addEventListener("scroll", () => {
 		// 	console.log('Scrolls');
 		// 	if (this.refs.iScroll.scrollTop + this.refs.iScroll.clientHeight >=this.refs.iScroll.scrollHeight){
 		// 	  console.log('Scrolls');
@@ -181,8 +181,8 @@ class HomeScreen extends React.Component {
 		// 	this.setState({
 		// 		isLoading : true,
 		// 		result : res.success,
-		// 		verses : res.data.verses,				
-		// 	});			
+		// 		verses : res.data.verses,
+		// 	});
 		// }).catch(res => {
 		// 	console.log(res);
 		// 	this.setState({
@@ -203,6 +203,7 @@ class HomeScreen extends React.Component {
 		let person = (
 		<div className="application fixed-layout">
 			<NavScreen header={this.state.verseHeader} />
+
 			<main className="verse-viewport">
 				<aside className="sidebar left">
 					<div className="books_list">
@@ -239,14 +240,14 @@ class HomeScreen extends React.Component {
 						{this.state.verses.map(verse => {
 							return (<VerseScreen
 								key={verse.bookId}
-								// ref="child" 
+								// ref="child"
 								ref={this.verseDetailRef}
 								// ref={el => this.element = el}
 								onVerseClickHandler={this.state.verseId}
 								verses={verse.chapters} />);
 						})}
 
-						
+
 					</div>
 				<div class="viewport-settings">
 					<div class="viewport-settings__wrapper">
@@ -348,7 +349,7 @@ class HomeScreen extends React.Component {
 					</div>
 				</div>
 
-					
+
 				</article>
 
 				<aside class="sidebar right">

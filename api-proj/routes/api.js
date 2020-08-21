@@ -36,7 +36,7 @@ router.get('/getFullDetails', function (req, res, next) {
 				var result = results.map(function (chap) {
 					var chapObj = {};
 					chapObj.id = chap.id;
-					chapObj.key = 'Bo'+chap.id;
+					chapObj.key = 'Boo'+chap.id;
 					chapObj.user = chap.english;
 					if (langReceived === 'ta') {
 						chapObj.human = chap.tamil;
@@ -49,14 +49,20 @@ router.get('/getFullDetails', function (req, res, next) {
 				data.books = result;
 				parallel_done();
 			});
-		},
+		}
+		,
 		function (parallel_done) {
 			db.query(query2, {}, function (err, results) {
 				if (err) return parallel_done(err);
 				var chapList = [];
 				var chapObj = {};
 				chapObj.bookId = 0;
-				chapObj.chapters = results
+				chapObj.chapters = results.map(res =>{
+					let chapterDetails = {}
+					chapterDetails.id = 'Cha'+res.Chapter
+					chapterDetails.Chapter = res.Chapter
+					return chapterDetails
+				})
 				chapList.push(chapObj);
 				data.chapters = chapList;
 				parallel_done();
@@ -67,8 +73,14 @@ router.get('/getFullDetails', function (req, res, next) {
 				if (err) return parallel_done(err);
 				var verseList = [];
 				var verseNoObj = {};
+				verseNoObj.chapterId = 'Cha'+1;
 				verseNoObj.chapter = 1;
-				verseNoObj.verse = results
+				verseNoObj.verse = results.map(res => {
+					let verseCountDetails = {}
+					verseCountDetails.id = 'Ver'+res.VerseCount
+					verseCountDetails.VerseCount = res.VerseCount
+					return verseCountDetails
+				})
 				verseList.push(verseNoObj);
 				data.versecounts = verseList;
 				parallel_done();
@@ -84,7 +96,6 @@ router.get('/getFullDetails', function (req, res, next) {
 		// 			catch
 		// 			{
 		// 				res.status(500).json({ success: false});
-
 		// 			}
 		// 			finally{
 		// 				parallel_done()
@@ -111,7 +122,6 @@ router.get('/getFullDetails', function (req, res, next) {
 		// 		var verseObj = JSON.parse(stringFormat);
 		// 		//
 		// 		var listCount = 0;
-
 		// 		var verseDetails = [];
 		// 		async.forEach(results, function (verse, callBack) {
 		// 			var stringFormat = JSON.stringify(verse);
@@ -135,7 +145,6 @@ router.get('/getFullDetails', function (req, res, next) {
 		// 				// if(listCount == results.length){
 		// 				// 	resolve(results);
 		// 				//   }
-
 		// 				callBack(null);
 		// 			});
 		// 			// resolve(data);
@@ -144,11 +153,10 @@ router.get('/getFullDetails', function (req, res, next) {
 		// 			parallel_done();
 		// 		}
 		// 		);
-
 		// 	});
 		// },
 		function (parallel_done) {
-			var query4 = "select " + fieldConstant.VerseCount + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = 0 and " + fieldConstant.Chapter + " = 1";
+			var query4 = "select " + fieldConstant.VerseCount +" , "+ fieldConstant.Verse + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = 0 and " + fieldConstant.Chapter + " = 1";
 
 			return db.query(query4, {}, function (err, results, fields) {
 				if (err) return (err);
@@ -163,23 +171,30 @@ router.get('/getFullDetails', function (req, res, next) {
 					var stringFormat = JSON.stringify(verse);
 					var verseCountObj = JSON.parse(stringFormat);
 					var sql = "select " + fieldConstant.Verse + " from " + fieldConstant.bible_ + langReceived + " where Versecount = " + verseCountObj.VerseCount + " and " + fieldConstant.Chapter + " = 1 and " + fieldConstant.Book + " = 0";
-
+					let verseList = {};
+					// verseList.book = 0;
+					// verseList.chapter = 1;
+					verseList.verseCount = verseCountObj.VerseCount;
+					verseList.verse = verseCountObj.Verse;
+					// bookList.verse(verseList);
+					verseData.push(verseList);
+					callBack(null);
 					// data.sql =  sql;
-					db.query(sql, {}, function (err, result, next) {
-						if (err) return (err);
-						var stringFormat = JSON.stringify(result);
-						var verseObj = JSON.parse(stringFormat);
-
-						listCount++;
-						let verseList = {};
-						// verseList.book = 0;
-						// verseList.chapter = 1;
-						verseList.verseCount = verseCountObj.VerseCount;
-						verseList.verse = result[0].Verse;
-						// bookList.verse(verseList);
-						verseData.push(verseList);
-						callBack(null);
-					});
+					// db.query(sql, {}, function (err, result, next) {
+					// 	if (err) return (err);
+					// 	var stringFormat = JSON.stringify(result);
+					// 	var verseObj = JSON.parse(stringFormat);
+					//
+					// 	listCount++;
+					// 	let verseList = {};
+					// 	// verseList.book = 0;
+					// 	// verseList.chapter = 1;
+					// 	verseList.verseCount = verseCountObj.VerseCount;
+					// 	verseList.verse = result[0].Verse;
+					// 	// bookList.verse(verseList);
+					// 	verseData.push(verseList);
+					// 	callBack(null);
+					// });
 
 					// resolve(data);
 				}, function (datas) {
@@ -209,10 +224,9 @@ router.get('/getFullDetails', function (req, res, next) {
 			});
 		},
 
-
-
 	], function (err) {
 		if (err)
+			console.log('error')
 		// db.end();
 		res.status(200).json({ success: true, data });
 	});

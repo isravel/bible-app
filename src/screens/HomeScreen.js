@@ -27,7 +27,7 @@ class HomeScreen extends React.Component {
 	state = {
 		result: false,
 		isLoading: false,
-		lang: 'en',
+		lang: 'ta',
 		limit: '100',
 		bookId: 0,
 		chapterId: 1,

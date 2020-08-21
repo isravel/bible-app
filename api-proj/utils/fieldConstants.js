@@ -3,7 +3,7 @@ module.exports = {
     bible_ :"bible_",
     bible_en :"bible_en",
     bible_ta :"bible_ta",
-    chapters :"chapters",
+    books :"books",
 
     // bible en & bible_ta columns
     Id :"Id",

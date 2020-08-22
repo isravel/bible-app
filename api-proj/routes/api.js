@@ -35,7 +35,8 @@ router.get('/getFullDetails', function (req, res, next) {
 				if (err) return parallel_done(err);
 				var result = results.map(function (chap) {
 					var chapObj = {};
-					chapObj.id = chap.id;
+					chapObj.bookId = chap.id;
+					chapObj.id = chap.english.substr(0,3)+chap.id;
 					chapObj.key = 'Boo'+chap.id;
 					chapObj.user = chap.english;
 					if (langReceived === 'ta') {
@@ -56,7 +57,8 @@ router.get('/getFullDetails', function (req, res, next) {
 				if (err) return parallel_done(err);
 				var chapList = [];
 				var chapObj = {};
-				chapObj.bookId = 0;
+				chapObj.book = 0;
+				chapObj.id = 'Boo'+0;
 				chapObj.chapters = results.map(res =>{
 					let chapterDetails = {}
 					chapterDetails.id = 'Cha'+res.Chapter
@@ -73,11 +75,12 @@ router.get('/getFullDetails', function (req, res, next) {
 				if (err) return parallel_done(err);
 				var verseList = [];
 				var verseNoObj = {};
-				verseNoObj.chapterId = 'Cha'+1;
+				verseNoObj.id = 'Cha'+1;
 				verseNoObj.chapter = 1;
 				verseNoObj.verse = results.map(res => {
 					let verseCountDetails = {}
-					verseCountDetails.id = 'Ver'+res.VerseCount
+					verseCountDetails.id = 'Cha'+ 1 +res.VerseCount
+					verseCountDetails.key = 'Ver'+res.VerseCount
 					verseCountDetails.VerseCount = res.VerseCount
 					return verseCountDetails
 				})
@@ -174,6 +177,7 @@ router.get('/getFullDetails', function (req, res, next) {
 					let verseList = {};
 					// verseList.book = 0;
 					// verseList.chapter = 1;
+					verseList.id = 'Ver'+verseCountObj.VerseCount;
 					verseList.verseCount = verseCountObj.VerseCount;
 					verseList.verse = verseCountObj.Verse;
 					// bookList.verse(verseList);
@@ -198,7 +202,6 @@ router.get('/getFullDetails', function (req, res, next) {
 
 					// resolve(data);
 				}, function (datas) {
-
 					var book = "";
 					if (langReceived === 'ta') {
 						book = 'ஆதியாகமம்';
@@ -212,6 +215,7 @@ router.get('/getFullDetails', function (req, res, next) {
 					let chapters = {};
 					chapters.book = book;
 					chapters.chapter = 1;
+					chapters.id = book.substr(0,book.length - 1) + 1;
 					chapters.verseData = verseData;
 					chapterList.push(chapters);
 					bookList.chapters = chapterList;
@@ -258,15 +262,18 @@ router.post('/getChapterAndDetails', function (req, res, next) {
 		var data = {};
 		async.parallel([
 			function (parallel_done) {
-
-
-
 				db.query(query2, {}, function (err, results) {
 					if (err) return parallel_done(err);
 					var chapList = [];
 					var chapObj = {};
-					chapObj.bookId = bookId;
-					chapObj.chapters = results
+					chapObj.book = bookId;
+					chapObj.bookId = 'Boo' + bookId;
+					chapObj.chapters = results.map(res =>{
+						let chapterDetails = {}
+						chapterDetails.id = 'Cha'+res.Chapter
+						chapterDetails.Chapter = res.Chapter
+						return chapterDetails
+					})
 					chapList.push(chapObj);
 					data.chapters = chapList;
 					parallel_done();
@@ -278,7 +285,14 @@ router.post('/getChapterAndDetails', function (req, res, next) {
 					var verseList = [];
 					var verseNoObj = {};
 					verseNoObj.chapter = 1;
-					verseNoObj.verse = results
+					verseNoObj.id = 'Cha' + 1;
+					verseNoObj.verse =  results.map(res => {
+						let verseCountDetails = {}
+						verseCountDetails.id = 'Cha'+ 1 +res.VerseCount
+						verseCountDetails.key = 'Ver'+res.VerseCount
+						verseCountDetails.VerseCount = res.VerseCount
+						return verseCountDetails
+					})
 					verseList.push(verseNoObj);
 					data.versecounts = verseList;
 					// data.versecounts = results;
@@ -286,7 +300,7 @@ router.post('/getChapterAndDetails', function (req, res, next) {
 				});
 			},
 			function (parallel_done) {
-				var query4 = "select " + fieldConstant.VerseCount + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = 1";
+				var query4 = "select " + fieldConstant.VerseCount + " , " + fieldConstant.Verse +" from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = 1";
 
 				return db.query(query4, {}, function (err, results, fields) {
 					if (err) return (err);
@@ -301,23 +315,31 @@ router.post('/getChapterAndDetails', function (req, res, next) {
 						var stringFormat = JSON.stringify(verse);
 						var verseCountObj = JSON.parse(stringFormat);
 						var sql = "select " + fieldConstant.Verse + " from " + fieldConstant.bible_ + langReceived + " where Versecount = " + verseCountObj.VerseCount + " and " + fieldConstant.Chapter + " = 1 and " + fieldConstant.Book + " = " + bookId;
-
-						// data.sql =  sql;
-						db.query(sql, {}, function (err, result, next) {
-							if (err) return (err);
-							var stringFormat = JSON.stringify(result);
-							var verseObj = JSON.parse(stringFormat);
-
-							listCount++;
 							let verseList = {};
 							// verseList.book = 0;
 							// verseList.chapter = 1;
+							verseList.id = 'Ver'+verseCountObj.VerseCount;
 							verseList.verseCount = verseCountObj.VerseCount;
-							verseList.verse = result[0].Verse;
+							verseList.verse = verseCountObj.Verse;
 							// bookList.verse(verseList);
 							verseData.push(verseList);
 							callBack(null);
-						});
+						// data.sql =  sql;
+						// db.query(sql, {}, function (err, result, next) {
+						// 	if (err) return (err);
+						// 	var stringFormat = JSON.stringify(result);
+						// 	var verseObj = JSON.parse(stringFormat);
+						//
+						// 	listCount++;
+						// 	let verseList = {};
+						// 	// verseList.book = 0;
+						// 	// verseList.chapter = 1;
+						// 	verseList.verseCount = verseCountObj.VerseCount;
+						// 	verseList.verse = result[0].Verse;
+						// 	// bookList.verse(verseList);
+						// 	verseData.push(verseList);
+						// 	callBack(null);
+						// });
 
 						// resolve(data);
 					}, function (datas) {
@@ -348,6 +370,7 @@ router.post('/getChapterAndDetails', function (req, res, next) {
 							let chapters = {};
 							chapters.book = book;
 							chapters.chapter = 1;
+							chapters.id = book.substr(0,book.length - 1) + 1;
 							chapters.verseData = verseData;
 							chapterList.push(chapters);
 							bookList.chapters = chapterList;
@@ -364,6 +387,7 @@ router.post('/getChapterAndDetails', function (req, res, next) {
 
 		], function (err) {
 			if (err)
+				res.status(400).json({ success: false, data });
 			// db.end();
 			res.status(200).json({ success: true, data });
 		});

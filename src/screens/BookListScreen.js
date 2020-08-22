@@ -21,12 +21,12 @@ class BookList extends React.Component {
                 {
                     this.props.books.map(item => {
                     	iterates++;
-                        const className = this.state.activeIndex === item.id ? 'active' : null;
+                        const className = this.state.activeIndex === item.bookId ? 'active' : null;
 
                         return (  <div>
 							{iterates === 40 ? <li className='divider'>New Testament</li>: null}
                             {/*// <li title={item.human} key={item.id} onClick={this.props.onClick.bind(this, item.id)}>{item.human}</li>);*/}
-                            <li className={className} title={item.human} key={item.id} onClick={() => this.onClickHandler(item.id, item.human)}><span>{item.human}</span></li>
+                            <li className={className} title={item.human} key={item.id} onClick={() => this.onClickHandler(item.bookId, item.human)}><span>{item.human}</span></li>
 							</div>
 							);
 

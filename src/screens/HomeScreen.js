@@ -116,7 +116,8 @@ class HomeScreen extends React.Component {
 		fetch(fieldConstants.baseUrl + this.apiUrl(fieldConstants.chapterAndDetails), requestOptions)
 			// fetch("http://localhost:5000/api/getFullDetails?lang=en&limit=50")
 			.then(result => result.json()).then(res => {
-				// console.log('url')
+				console.log('res', res.data)
+				console.log('url' +res)
 				this.setState({
 					isLoading: true,
 					result: res.success,
@@ -216,8 +217,9 @@ class HomeScreen extends React.Component {
 					<div className="chapters_list">
 						<div className="list_title">Chapter</div>
 						{this.state.chapters.map(chaps => {
+
 							return (<ChapterList
-								key={chaps.bookId}
+								key={chaps.book}
 								onClick={this.onChapterClickHandler}
 								chapters={chaps.chapters} />);
 						})}

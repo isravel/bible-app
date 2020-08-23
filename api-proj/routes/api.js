@@ -23,7 +23,7 @@ router.get('/getFullDetails', function (req, res, next) {
 	else {
 		langColumn = fieldConstant.english;
 	}
-	var query1 = "select " + fieldConstant.english + " , " + langColumn + ", id from " + fieldConstant.books;
+	var query1 = "select " + fieldConstant.english + " , " + langColumn + ", id from " + fieldConstant.chapters;
 	var query2 = "select distinct " + fieldConstant.Chapter + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = 0";
 	var query3 = "select " + fieldConstant.VerseCount + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = 0 and " + fieldConstant.Chapter + " = 1";
 	// var query4 = "select " + fieldConstant.Verse + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = 0 LIMIT " + limit + "";

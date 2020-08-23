@@ -11,12 +11,10 @@
     "react-scripts": "3.4.1"
   },
   "scripts": {
-    "_start": "concurrently \"gulp start\" \"react-app-rewired start\"",
-    "_build": "concurrently \"gulp build\" \"react-app-rewired build\"",
-    "start": "concurrently \"react-scripts start\" \"gulp start\"",
-    "build": "concurrently \"gulp build\" \"react-scripts build\"",
     "_start": "react-scripts start",
     "_build": "react-scripts build",
+    "start": "concurrently \"react-scripts start\" \"gulp start\"",
+    "build": "concurrently \"gulp build\" \"react-scripts build\"",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

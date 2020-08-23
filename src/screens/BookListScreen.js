@@ -1,7 +1,7 @@
 import React from 'react';
 
 class BookList extends React.Component {
-   
+
     state = {
         activeIndex: 0
     }
@@ -15,15 +15,22 @@ class BookList extends React.Component {
 
 
     render() {
+		let iterates = 0;
         return (
             <ul>
                 {
                     this.props.books.map(item => {
-                        const className = this.state.activeIndex === item.id ? 'active' : null;
-                        return (
-                            // <li title={item.human} key={item.id} onClick={this.props.onClick.bind(this, item.id)}>{item.human}</li>);
-                            <li className={className} title={item.human} key={item.id} onClick={() => this.onClickHandler(item.id, item.human)}>{item.human}</li>);
-                    })
+                    	iterates++;
+                        const className = this.state.activeIndex === item.bookId ? 'active' : null;
+
+                        return (  <div>
+							{iterates === 40 ? <li className='divider'>New Testament</li>: null}
+                            {/*// <li title={item.human} key={item.id} onClick={this.props.onClick.bind(this, item.id)}>{item.human}</li>);*/}
+                            <li className={className} title={item.human} key={item.id} onClick={() => this.onClickHandler(item.bookId, item.human)}><span>{item.human}</span></li>
+							</div>
+							);
+
+								})
                 }
                 {/* <li title='Genesis'>Genesis</li>
                 <li title='Exodus'>Exodus</li>

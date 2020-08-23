@@ -67,6 +67,7 @@ router.get('/getFullDetails', function (req, res, next) {
 					chapterDetails.Chapter = res.Chapter
 					return chapterDetails
 				})
+				chapList.push(chapObj);
 				data.chapters = chapList;
 				parallel_done();
 			});

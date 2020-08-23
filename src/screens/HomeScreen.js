@@ -32,6 +32,7 @@ class HomeScreen extends React.Component {
 		bookId: 0,
 		chapterId: 1,
 		verseId: 1,
+		book:'',
 		books: [],
 		chapters: [],
 		verseCount: [],
@@ -56,6 +57,7 @@ class HomeScreen extends React.Component {
 					chapters: res.data.chapters,
 					verseCount: res.data.versecounts,
 					verses: res.data.verses,
+					book:res.data.books[0].human,
 					verseHeader: res.data.books[0].human + ' ' + res.data.chapters[0].chapters[0].Chapter
 					// verseHeader : res.data.books[0].human
 				});
@@ -69,7 +71,6 @@ class HomeScreen extends React.Component {
 							console.log('this.element1.current.scrollHeight', this.element1.current.scrollHeight);
 						}
 						else if (this.element1.current.scrollTop + this.element1.current.clientHeight >= this.element1.current.scrollHeight) {
-
 							console.log('this.element1.current', this.element1.current);
 							console.log('this.element1.current.scrollTop', this.element1.current.scrollTop);
 							console.log('this.element1.current.clientHeight', this.element1.current.clientHeight);
@@ -79,7 +80,7 @@ class HomeScreen extends React.Component {
 						}
 					});
 				// this.element1.current.addEventListener("scroll", this.handleNvEnter);
-				window.scroll_into_view(1);
+				window.scroll_into_view('Ver1');
 
 			}).catch(res => {
 				console.log(res);
@@ -106,7 +107,10 @@ class HomeScreen extends React.Component {
 	}
 
 	onBookClickHandler = (bookId, book) => {
-		this.setState({ bookId: bookId })
+		this.setState({
+			bookId: bookId ,
+			book: book
+		})
 		const requestOptions = {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
@@ -126,7 +130,7 @@ class HomeScreen extends React.Component {
 					verses: res.data.verses,
 					verseHeader: book + " 1"
 				});
-				window.scroll_into_view(1);
+				window.scroll_into_view('Ver1');
 			}).catch(res => {
 				console.log(res);
 				this.setState({
@@ -155,8 +159,9 @@ class HomeScreen extends React.Component {
 					result: res.success,
 					verseCount: res.data.versecounts,
 					verses: res.data.verses,
+					verseHeader:this.state.book +' '+ chapId
 				});
-				window.scroll_into_view(1);
+				window.scroll_into_view('Ver1');
 			}).catch(res => {
 				console.log(res);
 				this.setState({
@@ -217,9 +222,8 @@ class HomeScreen extends React.Component {
 					<div className="chapters_list">
 						<div className="list_title">Chapter</div>
 						{this.state.chapters.map(chaps => {
-
 							return (<ChapterList
-								key={chaps.book}
+								key={chaps.bookId}
 								onClick={this.onChapterClickHandler}
 								chapters={chaps.chapters} />);
 						})}
@@ -229,7 +233,7 @@ class HomeScreen extends React.Component {
 						<div className="list_title">Verse</div>
 						{this.state.verseCount.map(verse => {
 							return (<VerseList
-								key={verse.chapter}
+								key={verse.id}
 								onClicks={this.onVerseClickHandler}
 								verse={verse.verse} />);
 						})}

@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="9033da75-5e6d-4905-a4ef-eb88fde08ad3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/fieldConstants.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/fieldConstants.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,13 +29,14 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="60607c55-0584-4770-a1dc-375ec14c7ad4" name="Default Changelist" comment="" />
+      <changelist id="9033da75-5e6d-4905-a4ef-eb88fde08ad3" name="Default Changelist" comment="" />
       <created>1598022800425</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1598022800425</updated>
       <workItem from="1598022801566" duration="889000" />
       <workItem from="1598026157280" duration="209000" />
+      <workItem from="1598466410563" duration="30000" />
     </task>
     <servers />
   </component>

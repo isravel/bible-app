@@ -1,38 +1,49 @@
 import React from 'react';
-
+var refs;
 class BookList extends React.Component {
 
-    state = {
-        activeIndex: 0
-    }
+	constructor(props) {
+		super(props);
+		refs = this.props.books.reduce((acc, value) => {
+			console.log('value',value)
+			acc[value.bookId] = React.createRef();
+			return acc;
+		}, {});
+	}
 
-    onClickHandler(itemId, book) {
-        this.setState({
-            activeIndex :itemId
-        })
-        this.props.onClick(itemId, book)
-    }
+	components(id) {
+		// console.log('id',this.bookRef.current)
+		refs[id].current.scrollIntoView({
+			behavior: 'smooth',
+			block: 'start',
+		});
+	}
+
+	state = {
+		activeIndex: 42
+	}
+
+	onClickHandler(bookNo, book, bookId) {
+		this.setState({
+			activeIndex :bookNo
+		})
+		this.props.onClick(bookNo, book, bookId)
+	}
 
 
-    render() {
-		let iterates = 0;
-        return (
-            <ul>
-                {
-                    this.props.books.map(item => {
-                    	iterates++;
-                        const className = this.state.activeIndex === item.bookId ? 'active' : null;
 
-                        return (  <div>
-							{iterates === 40 ? <li className='divider'>New Testament</li>: null}
-                            {/*// <li title={item.human} key={item.id} onClick={this.props.onClick.bind(this, item.id)}>{item.human}</li>);*/}
-                            <li className={className} title={item.human} key={item.id} onClick={() => this.onClickHandler(item.bookId, item.human)}><span>{item.human}</span></li>
-							</div>
-							);
-
-								})
-                }
-                {/* <li title='Genesis'>Genesis</li>
+	render() {
+		return (
+			<ul>
+				{
+					this.props.books.map(item => {
+						const className = this.state.activeIndex === item.bookNo ? 'active' : null;
+						return (
+							// <li title={item.human} key={item.id} onClick={this.props.onClick.bind(this, item.id)}>{item.human}</li>);
+							<li className={className} ref={refs[item.bookId]} id={item.bookId} title={item.human} key={item.bookId} onClick={() => this.onClickHandler(item.bookNo, item.human, item.bookId)}><span>{item.human}</span></li>);
+					})
+				}
+				{/* <li title='Genesis'>Genesis</li>
                 <li title='Exodus'>Exodus</li>
                 <li title='Leviticus'>Leviticus</li>
                 <li class="active" title='Numbers'>Numbers</li>
@@ -99,9 +110,9 @@ class BookList extends React.Component {
                 <li title='3 John'>3 John</li>
                 <li title='Jude'>Jude</li>
                 <li title='Revelation'>Revelation</li> */}
-            </ul>
-        );
-    }
+			</ul>
+		);
+	}
 }
 
 export default BookList;

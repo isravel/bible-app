@@ -1,27 +1,35 @@
 import React from 'react';
 
-class VerseList extends React.Component{
+class VerseListScreen extends React.Component{
 
 	state = {
-        activeIndex: 1
-    }
+		activeIndex: 1
+	}
 
-    onClickHandler(itemId) {
-        this.setState({
-            activeIndex :itemId
-        })
-        this.props.onClicks(itemId)
-    }
+	onClickHandler(itemId, itemNo) {
+		this.setState({
+			activeIndex :itemNo
+		})
+		console.log('itemNo',itemNo)
+		this.props.onClicks(itemId)
+	}
 
-    render(){
-        return(
-					<ul>
-						{this.props.verse.map(verseNos => {
-							const className = this.state.activeIndex === verseNos.VerseCount ? 'active' : null;
-							return (
-							<li class={className} id={verseNos.id}key={verseNos.id} onClick={() => this.onClickHandler(verseNos.key)}><span>{verseNos.VerseCount}</span></li>);
-							})}
-						{/* <li class="active">1</li>
+	onChapterClickHandler() {
+		this.setState({
+			activeIndex :1
+		})
+	}
+
+	render(){
+		return(
+			<ul>
+				{
+					this.props.verse.map(verseNos => {
+						const className = this.state.activeIndex === verseNos.verseNo ? 'active' : null;
+						return (
+							<li class={className} id={verseNos.verseId} key={verseNos.verseId} onClick={() => this.onClickHandler(verseNos.verseMapId, verseNos.verseNo)}><span>{verseNos.verseNo}</span></li>);
+					})}
+				{/* <li class="active">1</li>
 						<li>2</li>
 						<li>3</li>
 						<li>4</li>
@@ -56,9 +64,9 @@ class VerseList extends React.Component{
 						<li>33</li>
 						<li>34</li>
 						<li>35</li> */}
-					</ul>
-        );
-    }
+			</ul>
+		);
+	}
 }
 
-export default VerseList;
+export default VerseListScreen;

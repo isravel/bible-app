@@ -2,25 +2,25 @@ import React from 'react';
 
 class ChapterList extends React.Component {
 
-    state = {
-        activeIndex: 1
-    }
+	state = {
+		activeIndex: 1
+	}
 
-    onClickHandler(itemId) {
-        this.setState({
-            activeIndex :itemId
-        })
-        this.props.onClick(itemId)
-    }
+	onClickHandler(itemId, itemNo) {
+		this.setState({
+			activeIndex :itemNo
+		})
+		this.props.onClick(itemId, itemNo)
+	}
 
-    render() {
-        return (
-            <ul>
-                {this.props.chapters.map(chap => {console.log('chaps', chap)
-                    const className = this.state.activeIndex === chap.Chapter ? 'active' : null;
-                    return (<li class={className} id={chap.id} key={chap.id} onClick={() => this.onClickHandler(chap.Chapter)}><span>{chap.Chapter}</span></li>);
-                })}
-                {/* <li>1</li>
+	render() {
+		return (
+			<ul>
+				{this.props.chapters.map(chap => {
+					const className = this.state.activeIndex === chap.chapterNo ? 'active' : null;
+					return (<li class={className} id={chap.chapterId} key={chap.chapterId} onClick={() => this.onClickHandler(chap.verseMapId, chap.chapterNo)}><span>{chap.chapterNo}</span></li>);
+				})}
+				{/* <li>1</li>
                 <li>2</li>
                 <li>3</li>
                 <li>4</li>
@@ -48,9 +48,9 @@ class ChapterList extends React.Component {
                 <li>26</li>
                 <li>27</li>
                 <li>28</li> */}
-            </ul>
-        );
-    }
+			</ul>
+		);
+	}
 }
 
 export default ChapterList;

@@ -67,7 +67,7 @@ class HomeScreen extends React.Component {
 				chapters: res.data.chapters,
 				verseCount: res.data.versecounts,
 				verses: res.data.verses,
-				verseHeader: res.data.books[0].human + ' ' + res.data.chapters[0].chapters[0].Chapter,
+				verseHeader: res.data.verses[0].chapters[0].book + ' ' + res.data.chapters[0].chapters[0].chapterNo,
 				prevBook:res.data.prevBook,
 				// prevChapter:res.data.prevBook.chapter,
 				nextBook:res.data.nextBook,
@@ -161,7 +161,7 @@ class HomeScreen extends React.Component {
 		}
 	}
 	nextScrollListener = () => {
-		console.log('prevScrollListener',this.state.nextBook)
+		console.log('nextScrollListener',this.state.nextBook)
 		if(this.state.nextBook !== undefined && this.state.nextBook != {}) {
 			// const {nextBook} = this.state.nextBook;
 			// console.log(nextBook)

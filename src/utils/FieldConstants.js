@@ -7,6 +7,7 @@ module.exports = {
     chapterAndDetails : "getChapterAndDetails",
     verseAndDetails : "getVerseAndDetails",
     verseDetails : "getDetails",
+	dynamicDetails : "getDynamicDetails",
     // fullDetails : "getFullDetails?lang="+this.lang+"&limit="+this.limit,
     bible_ :"bible_",
     bible_en :"bible_en",

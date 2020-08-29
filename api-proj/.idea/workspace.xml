@@ -1,9 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="9033da75-5e6d-4905-a4ef-eb88fde08ad3" name="Default Changelist" comment="">
+    <list default="true" id="9033da75-5e6d-4905-a4ef-eb88fde08ad3" name="Default Changelist" comment="Infinite Scroll initiated">
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/screens/HomeScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/screens/HomeScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/screens/VerseScreens/VerseScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/screens/VerseScreens/VerseScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/utils/FieldConstants.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/utils/FieldConstants.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,11 +58,43 @@
       <updated>1598022800425</updated>
       <workItem from="1598022801566" duration="889000" />
       <workItem from="1598026157280" duration="209000" />
-      <workItem from="1598466410563" duration="30000" />
+      <workItem from="1598466410563" duration="347000" />
+      <workItem from="1598621768489" duration="1751000" />
+      <workItem from="1598701974286" duration="1260000" />
     </task>
+    <task id="LOCAL-00001" summary="Infinite Scroll initiated">
+      <created>1598466681922</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1598466681922</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Infinite Scroll initiated" />
+    <option name="LAST_COMMIT_MESSAGE" value="Infinite Scroll initiated" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="275" y="101" key="Vcs.Push.Dialog.v2" timestamp="1598466687086">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="275" y="101" key="Vcs.Push.Dialog.v2/0.0.1366.738@0.0.1366.738" timestamp="1598466687086" />
   </component>
 </project>

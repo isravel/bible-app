@@ -23,11 +23,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-proj/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/api-proj/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-proj/routes/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/api-proj/routes/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/BookListScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/BookListScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/ChaperListScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/ChaperListScreen.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/HomeScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/HomeScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/NavScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/NavScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/VerseListScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/VerseListScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/VerseScreens/VerseScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/VerseScreens/VerseScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/FieldConstants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/FieldConstants.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,6 +82,7 @@
       <updated>1598022745087</updated>
       <workItem from="1598022748634" duration="2432000" />
       <workItem from="1598026133223" duration="229000" />
+      <workItem from="1598621758243" duration="1382000" />
     </task>
     <task id="LOCAL-00001" summary="New Testament divider">
       <created>1598026022899</created>

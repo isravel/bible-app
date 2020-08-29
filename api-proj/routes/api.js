@@ -103,7 +103,7 @@ router.get('/getFullDetails', function (req, res, next) {
 				console.log(stringFormat);
 				var nextBook = {};
 				async.forEach(results, function (tempValue, callBack) {
-					let tempId = tempValue.Id;
+					let tempId = tempValue.Id + 1;
 					if (tempId !== 0) {
 						let getBookQuery = "select " + fieldConstant.Book + ", " + fieldConstant.Chapter + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Id + " = " + tempId;
 						db.query(getBookQuery, {}, function (error, bookResult) {
@@ -119,6 +119,35 @@ router.get('/getFullDetails', function (req, res, next) {
 				}, function () {
 					data.nextBook = nextBook;
 					console.log(nextBook);
+					parallel_done();
+				});
+
+			});
+		},
+		function (parallel_done) {
+			let query1 = "select distinct " + fieldConstant.Id + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + 42 + " and " + fieldConstant.Chapter + " = " + 1 + " and " + fieldConstant.VerseCount + " = " + 1;
+			db.query(query1, {}, function (err, results) {
+				if (err) return parallel_done(err);
+				var stringFormat = JSON.stringify(results);
+				console.log(stringFormat);
+				var prevBook = {};
+				async.forEach(results, function (tempValue, callBack) {
+					let tempId = tempValue.Id;
+					if (tempId !== 0) {
+						let getBookQuery = "select " + fieldConstant.Book + ", " + fieldConstant.Chapter + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Id + " = " + tempId;
+						db.query(getBookQuery, {}, function (error, bookResult) {
+							if (error) return parallel_done(error);
+							if (bookResult.length !== 0) {
+								prevBook.book = bookResult[0].Book;
+								prevBook.chapter = bookResult[0].Chapter + 1;
+							}
+							callBack(null);
+						})
+					}
+					else callBack(null);
+				}, function () {
+					data.prevBook = prevBook;
+					console.log(prevBook);
 					parallel_done();
 				});
 
@@ -330,7 +359,7 @@ router.post('/getChapterAndDetails', function (req, res, next) {
 					// console.log(stringFormat);
 					var nextBook = {};
 					async.forEach(results, function (tempValue, callBack) {
-						let tempId = tempValue.Id;
+						let tempId = tempValue.Id + 1;
 						// console.log(tempId)
 						if (tempId !== 0) {
 							let getBookQuery = "select " + fieldConstant.Book + ", " + fieldConstant.Chapter + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Id + " = " + tempId;
@@ -833,7 +862,7 @@ router.post('/getDynamicDetails', function (req, res, next) {
 				console.log(stringFormat);
 				var nextBook = {};
 				async.forEach(results, function (tempValue, callBack) {
-					let tempId = tempValue.Id;
+					let tempId = tempValue.Id + 1;
 					if (tempId !== 0) {
 						let getBookQuery = "select " + fieldConstant.Book + ", " + fieldConstant.Chapter + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Id + " = " + tempId;
 						db.query(getBookQuery, {}, function (error, bookResult) {

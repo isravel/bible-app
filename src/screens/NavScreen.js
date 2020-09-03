@@ -7,8 +7,7 @@ const nav = (props) => {
             <nav className="navbar">
                 <div className="left">
                     <div className="logo">
-                        <em className="svgIcon"><svg xmlns="http://www.w3.org/2000/svg"><use xlinkHref="#book" /></svg></em>
-                        BIBLE
+                        <img src={process.env.PUBLIC_URL + "/public/images/logo.svg"} alt="" />
                     </div>
                 </div>
                 <div className="center">

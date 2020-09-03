@@ -172,6 +172,7 @@ textarea{resize:vertical}
 .navbar .svg-icon{width:1.8rem;height:1.8rem;fill:#424242;fill:var(--icon-color)}
 .navbar .logo{display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;font-size:1.75rem}
 .navbar .logo .svg-icon{margin-right:1rem}
+.navbar .logo img{height:38px}
 .navbar .chapter__nav{display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}
 .navbar .chapter__nav__next,.navbar .chapter__nav__prev{cursor:pointer}
 .navbar .chapter__nav__name{margin:0 30px;font-size:1.5rem;font-weight:700}

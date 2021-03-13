@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="22f4ba94-8142-46e4-96a9-4c2185a8de68" name="Default Changelist" comment="Home screen work">
+      <change beforePath="$PROJECT_DIR$/public/css-rtl/maps/styles-rtl.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/css-rtl/maps/styles-rtl.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css-rtl/styles-rtl.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css-rtl/styles-rtl.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/maps/styles.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/maps/styles.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/HomeScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/HomeScreen.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="backend" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="hiddenUrls">
+      <set>
+        <option value="https://github.com/isravel/bible-app.git" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectId" id="1h5V8rnz5EixvhoGnEsUZRTCpS9" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="22f4ba94-8142-46e4-96a9-4c2185a8de68" name="Default Changelist" comment="" />
+      <created>1599300784256</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1599300784256</updated>
+      <workItem from="1599300787578" duration="1041000" />
+      <workItem from="1615628425734" duration="424000" />
+    </task>
+    <task id="LOCAL-00001" summary="Home screen work">
+      <created>1599301294438</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1599301294438</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Home screen work" />
+    <option name="LAST_COMMIT_MESSAGE" value="Home screen work" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="129" y="55" key="DiffContextDialog" timestamp="1615628795090">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="129" y="55" key="DiffContextDialog/0.0.1366.738@0.0.1366.738" timestamp="1615628795090" />
+    <state x="129" y="55" key="MergeDialog" timestamp="1615628825028">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="129" y="55" key="MergeDialog/0.0.1366.738@0.0.1366.738" timestamp="1615628825028" />
+    <state x="463" y="81" key="git4idea.branch.GitSmartOperationDialog" timestamp="1615628797633">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="463" y="81" key="git4idea.branch.GitSmartOperationDialog/0.0.1366.738@0.0.1366.738" timestamp="1615628797633" />
+  </component>
+</project>

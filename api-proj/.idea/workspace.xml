@@ -23,9 +23,6 @@
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/screens/HomeScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/screens/HomeScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/screens/VerseScreens/VerseScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/screens/VerseScreens/VerseScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/utils/FieldConstants.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/utils/FieldConstants.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +30,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="backend" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectId" id="1gPioFlbwizftLnEKnVRQEvW18J" />
@@ -61,6 +63,7 @@
       <workItem from="1598466410563" duration="347000" />
       <workItem from="1598621768489" duration="1751000" />
       <workItem from="1598701974286" duration="1260000" />
+      <workItem from="1615634592518" duration="604000" />
     </task>
     <task id="LOCAL-00001" summary="Infinite Scroll initiated">
       <created>1598466681922</created>
@@ -92,9 +95,13 @@
     <option name="LAST_COMMIT_MESSAGE" value="Infinite Scroll initiated" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="275" y="101" key="Vcs.Push.Dialog.v2" timestamp="1598466687086">
+    <state x="92" y="92" width="1182" height="554" maximized="true" key="DiffContextDialog" timestamp="1615630959562">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="275" y="101" key="Vcs.Push.Dialog.v2/0.0.1366.738@0.0.1366.738" timestamp="1598466687086" />
+    <state x="92" y="92" width="1182" height="554" maximized="true" key="DiffContextDialog/0.0.1366.738@0.0.1366.738" timestamp="1615630959562" />
+    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup" timestamp="1615630804809">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup/0.0.1366.738@0.0.1366.738" timestamp="1615630804809" />
   </component>
 </project>

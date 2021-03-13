@@ -23,23 +23,21 @@ router.get('/getFullDetails', function (req, res, next) {
 	else {
 		langColumn = fieldConstant.english;
 	}
+	//Query to load Books
 	var query1 = "select " + fieldConstant.english + " , " + langColumn + ", id from " + fieldConstant.books;
+	//Query to load chapters
 	var query2 = "select distinct " + fieldConstant.Chapter + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = 42";
+	//Query to load chapters with verse
 	var query3 = "select " + fieldConstant.VerseCount + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = 42 and " + fieldConstant.Chapter + " = 1";
 	// var query4 = "select " + fieldConstant.Verse + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = 0 LIMIT " + limit + "";
 
 	var data = {};
 	async.waterfall([
 		function (parallel_done) {
-			console.log(query1);
-			console.log(query2);
-			console.log(query3);
-			// console.log(query4);
 			db.query(query1, {}, function (err, results) {
 				if (err) return parallel_done(err);
 				var result = results.map(function (chap) {
 					var book = {};
-					console.log(chap);
 					book.bookNo = chap.id;
 					book.user = chap.english;
 					book.bookId = fieldConstant.Book.substr(0,2) + chap.id;
@@ -83,7 +81,6 @@ router.get('/getFullDetails', function (req, res, next) {
 				verseNoObj.chapterId = fieldConstant.Chapter.substr(0,2) + bookId + 1;
 				verseNoObj.chapterNo = 1;
 				verseNoObj.verse = results.map(res =>{
-					console.log('resulllltssss ',bookId);
 					var chapter = {};
 					chapter.verseId =  fieldConstant.Verse.substr(0,3) + bookId + res.VerseCount;
 					chapter.verseMapId =  fieldConstant.Verse.substr(0,2) + bookId + res.VerseCount;
@@ -100,7 +97,6 @@ router.get('/getFullDetails', function (req, res, next) {
 			db.query(query1, {}, function (err, results) {
 				if (err) return parallel_done(err);
 				var stringFormat = JSON.stringify(results);
-				console.log(stringFormat);
 				var nextBook = {};
 				async.forEach(results, function (tempValue, callBack) {
 					let tempId = tempValue.Id + 1;
@@ -118,7 +114,6 @@ router.get('/getFullDetails', function (req, res, next) {
 					else callBack(null);
 				}, function () {
 					data.nextBook = nextBook;
-					console.log(nextBook);
 					parallel_done();
 				});
 
@@ -129,7 +124,6 @@ router.get('/getFullDetails', function (req, res, next) {
 			db.query(query1, {}, function (err, results) {
 				if (err) return parallel_done(err);
 				var stringFormat = JSON.stringify(results);
-				console.log(stringFormat);
 				var prevBook = {};
 				async.forEach(results, function (tempValue, callBack) {
 					let tempId = tempValue.Id;
@@ -147,7 +141,6 @@ router.get('/getFullDetails', function (req, res, next) {
 					else callBack(null);
 				}, function () {
 					data.prevBook = prevBook;
-					console.log(prevBook);
 					parallel_done();
 				});
 
@@ -228,7 +221,7 @@ router.get('/getFullDetails', function (req, res, next) {
 		// },
 		function (parallel_done) {
 			var query4 = "select " + fieldConstant.VerseCount + ", "+ fieldConstant.Verse +" from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = 42 and " + fieldConstant.Chapter + " = 1";
-			console.log(query4);
+
 			return db.query(query4, {}, function (err, results, fields) {
 				if (err) return (err);
 				var stringFormat = JSON.stringify(results);
@@ -243,7 +236,7 @@ router.get('/getFullDetails', function (req, res, next) {
 						var stringFormat = JSON.stringify(verse);
 						var verseCountObj = JSON.parse(stringFormat);
 						var sql = "select " + fieldConstant.Verse + " from " + fieldConstant.bible_ + langReceived + " where Versecount = " + verseCountObj.VerseCount + " and " + fieldConstant.Chapter + " = 1 and " + fieldConstant.Book + " = 42";
-						console.log(verseCountObj);
+
 						// data.sql =  sql;
 						// db.query(sql, {}, function (err, result, next) {
 						// 	if (err) return (err);
@@ -264,7 +257,6 @@ router.get('/getFullDetails', function (req, res, next) {
 
 						// resolve(data);
 					}, function (datas) {
-						console.log(verseData);
 						var book = "";
 						if (langReceived === 'ta') {
 							book = '??????';
@@ -293,6 +285,7 @@ router.get('/getFullDetails', function (req, res, next) {
 	], function (err) {
 		if (err) console.log(err);
 		// db.end();
+		// console.log(data);
 		res.status(200).json({ success: true, data });
 	});
 });
@@ -323,6 +316,7 @@ router.post('/getChapterAndDetails', function (req, res, next) {
 		var data = {};
 		async.parallel([function (parallel_done) {
 			let query1 = "select distinct " + fieldConstant.Id + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = " + 1 + " and " + fieldConstant.VerseCount + " = " + 1;
+			console.log('Query 1', query1)
 			db.query(query1, {}, function (err, results) {
 				if (err) return parallel_done(err);
 				var stringFormat = JSON.stringify(results);
@@ -332,6 +326,7 @@ router.post('/getChapterAndDetails', function (req, res, next) {
 					let tempId = tempValue.Id - 1;
 					if (tempId !== 0) {
 						let getBookQuery = "select " + fieldConstant.Book + ", " + fieldConstant.Chapter + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Id + " = " + tempId;
+						console.log('Query 2', getBookQuery)
 						db.query(getBookQuery, {}, function (error, bookResult) {
 							if (error) return parallel_done(error);
 							if (bookResult.length !== 0) {
@@ -352,7 +347,7 @@ router.post('/getChapterAndDetails', function (req, res, next) {
 		},
 			function (parallel_done) {
 				let query1 = "select distinct " + fieldConstant.Id + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = " + 1 + " and " + fieldConstant.VerseCount + " = " + 1;
-				// console.log(query1);
+				console.log('Query 3', query1);
 				db.query(query1, {}, function (err, results) {
 					if (err) return parallel_done(err);
 					var stringFormat = JSON.stringify(results);
@@ -363,7 +358,7 @@ router.post('/getChapterAndDetails', function (req, res, next) {
 						// console.log(tempId)
 						if (tempId !== 0) {
 							let getBookQuery = "select " + fieldConstant.Book + ", " + fieldConstant.Chapter + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Id + " = " + tempId;
-							// console.log(getBookQuery)
+							console.log('Query 4',getBookQuery)
 							db.query(getBookQuery, {}, function (error, bookResult) {
 								if (error) return parallel_done(error);
 								if (bookResult.length !== 0) {
@@ -387,6 +382,7 @@ router.post('/getChapterAndDetails', function (req, res, next) {
 				// console.log(query2);
 				// console.log(query3);
 				// console.log(query4);
+				console.log('Query 5',query2)
 				db.query(query2, {}, function (err, results) {
 					if (err) return parallel_done(err);
 					var chapList = [];
@@ -407,13 +403,13 @@ router.post('/getChapterAndDetails', function (req, res, next) {
 			},
 			function (parallel_done) {
 				db.query(query3, {}, function (err, results) {
+					console.log('Query 6',query3)
 					if (err) return parallel_done(err);
 					var verseList = [];
 					var verseNoObj = {};
 					verseNoObj.chapterNo = 1;
 					verseNoObj.chapterId = fieldConstant.Chapter.substr(0,2) + bookId + 1;;
 					verseNoObj.verse = results.map(res =>{
-						// console.log('resulllltssss ',bookId);
 						var verse = {};
 						verse.verseId =  fieldConstant.Verse.substr(0,3) + bookId + res.VerseCount;
 						verse.verseMapId =  fieldConstant.Verse.substr(0,2) + bookId + res.VerseCount;
@@ -428,7 +424,7 @@ router.post('/getChapterAndDetails', function (req, res, next) {
 			},
 			function (parallel_done) {
 				var query4 = "select " + fieldConstant.VerseCount + " , "+ fieldConstant.Verse + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = 1";
-				// console.log(query4);
+				console.log('Query 7',query4);
 				return db.query(query4, {}, function (err, results, fields) {
 					if (err) return (err);
 					var stringFormat = JSON.stringify(results);
@@ -442,7 +438,7 @@ router.post('/getChapterAndDetails', function (req, res, next) {
 							var stringFormat = JSON.stringify(verse);
 							var verseCountObj = JSON.parse(stringFormat);
 							var sql = "select " + fieldConstant.Verse +" from " + fieldConstant.bible_ + langReceived + " where Versecount = " + verseCountObj.VerseCount + " and " + fieldConstant.Chapter + " = 1 and " + fieldConstant.Book + " = " + bookId;
-							console.log('SSSqll',sql);
+							console.log('Query 8',sql);
 							// data.sql =  sql;
 							// db.query(sql, {}, function (err, result, next) {
 							// 	if (err) return (err);
@@ -472,7 +468,7 @@ router.post('/getChapterAndDetails', function (req, res, next) {
 								langColumn = fieldConstant.english;
 							}
 							var query4 = "select " + langColumn + " from " + fieldConstant.books + " where " + fieldConstant.id + " = " + bookId;
-							console.log('query 4',query4);
+							console.log('Query 9',query4);
 							db.query(query4, {}, function (err, result, next) {
 								if (err) return (err);
 								var book = "";
@@ -604,7 +600,6 @@ router.post('/getVerseAndDetails', function (req, res, next) {
 				verseNoObj.chapterNo = chapter;
 				verseNoObj.chapterId = fieldConstant.Chapter.substr(0,2) + bookId + chapter;
 				verseNoObj.verse = results.map(res =>{
-					console.log('resulllltssss ',bookId);
 					var verse = {};
 					verse.verseId =  fieldConstant.Verse.substr(0,3) + bookId + res.VerseCount;
 					verse.verseMapId =  fieldConstant.Verse.substr(0,2) + bookId + res.VerseCount;
@@ -766,8 +761,8 @@ router.post('/getDetails', function (req, res, next) {
 						else {
 							langColumn = fieldConstant.english;
 						}
-						var query4 = "select " + langColumn + " from " + fieldConstant.chapters + " where " + fieldConstant.id + " = " + bookId;
-						console.log(query4);
+						var query4 = "select " + langColumn + " from " + fieldConstant.Chapter + " where " + fieldConstant.id + " = " + bookId;
+						console.log('Query...', query4);
 						db.query(query4, {}, function (err, result, next) {
 							if (err) return (err);
 							var book = "";
@@ -893,7 +888,6 @@ router.post('/getDynamicDetails', function (req, res, next) {
 				chapObj.bookId = fieldConstant.bookId + bookId;
 				chapObj.bookNo = bookId;
 				chapObj.chapters = results.map(res =>{
-					console.log('resulllltssss ',bookId);
 					var chapter = {};
 					chapter.chapterId =  fieldConstant.Chapter.substr(0,2) + bookId + res.Chapter;
 					chapter.chapterNo = res.Chapter;

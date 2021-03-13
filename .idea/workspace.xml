@@ -20,9 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2f76a260-64c7-4061-a801-45842942ca8c" name="Default Changelist" comment="Nav button action is pending">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-proj/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/api-proj/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-proj/routes/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/api-proj/routes/api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/HomeScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/HomeScreen.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

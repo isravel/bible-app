@@ -230,9 +230,9 @@ class HomeScreen extends React.Component {
 				nextBook:res.data.nextBook,
 			});
 			// console.log('book.substr(0,2)+ bookNo + 1', book.substr(0,2)+ bookNo + 1)
-			window.scroll_into_view('Ch'+ bookNo + 1)
+			// window.scroll_into_view('Ch'+ bookNo + 1)// uncommented
 			// setTimeout(()=>window.scroll_into_view('Ch'+ bookNo + 1),50)
-			setTimeout(()=>window.scroll_into_view('Ve'+ bookNo + 1),100)
+			// setTimeout(()=>window.scroll_into_view('Ve'+ bookNo + 1),100)// uncommented
 			// setTimeout(()=>window.scroll_into_view('Ch'+ bookNo + 1),500)
 
 		}).catch(res => {

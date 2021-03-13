@@ -3,8 +3,8 @@ import React from 'react';
 class VerseList extends React.Component{
 
 	state = {
-        activeIndex: 1
-    }
+		activeIndex: 1
+	}
 
     onClickHandler(itemId) {
         this.setState({
@@ -15,12 +15,16 @@ class VerseList extends React.Component{
 
     render(){
         return(
-					<ul>
-						{this.props.verse.map(verseNos => {
-							const className = this.state.activeIndex === verseNos.VerseCount ? 'active' : null;
-							return (
-							<li class={className} id={verseNos.id}key={verseNos.id} onClick={() => this.onClickHandler(verseNos.key)}><span>{verseNos.VerseCount}</span></li>);
-							})}
+			<ul>
+				{this.props.verse.map(verseNos =>
+					{
+						console.log('verse', verseNos.VerseCount)
+						const className = this.state.activeIndex === verseNos.VerseCount ? 'active' : null;
+						return (
+						<li class={className} id={verseNos.id}key={verseNos.id} onClick={() => this.onClickHandler(verseNos.key)}><span>{verseNos.VerseCount}</span></li>);
+
+					})
+				}
 						{/* <li class="active">1</li>
 						<li>2</li>
 						<li>3</li>

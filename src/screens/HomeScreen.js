@@ -27,7 +27,7 @@ class HomeScreen extends React.Component {
 	state = {
 		result: false,
 		isLoading: false,
-		lang: 'ta',
+		lang: 'en',
 		limit: '100',
 		bookId: 0,
 		chapterId: 1,
@@ -61,6 +61,7 @@ class HomeScreen extends React.Component {
 					verseHeader: res.data.books[0].human + ' ' + res.data.chapters[0].chapters[0].Chapter
 					// verseHeader : res.data.books[0].human
 				});
+
 				// console.log('this element ssss', this.element1);
 				if (this.element1)
 					this.element1.current.addEventListener("scroll", (e) => {
@@ -120,8 +121,6 @@ class HomeScreen extends React.Component {
 		fetch(fieldConstants.baseUrl + this.apiUrl(fieldConstants.chapterAndDetails), requestOptions)
 			// fetch("http://localhost:5000/api/getFullDetails?lang=en&limit=50")
 			.then(result => result.json()).then(res => {
-				console.log('res', res.data)
-				console.log('url' +res)
 				this.setState({
 					isLoading: true,
 					result: res.success,
@@ -169,7 +168,6 @@ class HomeScreen extends React.Component {
 					result: false
 				});
 			});
-
 	}
 
 	onVerseClickHandler = (verseId) => {

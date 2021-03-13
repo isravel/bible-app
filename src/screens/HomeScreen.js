@@ -123,16 +123,15 @@ class HomeScreen extends React.Component {
 
 	prevScrollListener = () => {
 		console.log('prevScrollListener',this.state.prevBook)
-		if(this.state.prevBook !== undefined && this.state.prevBook != {}) {
+		if(this.state.prevBook !== undefined && this.state.prevBook !== {}) {
 			const {prevBook} = this.state.prevBook;
+			console.log('prevBook',prevBook)
 			const requestOptions = {
 				method: 'POST',
 				headers: {'Content-Type': 'application/json'},
-				body: JSON.stringify({book: prevBook.book, chapter: prevBook.chapter})
+				body: JSON.stringify({book: this.state.prevBook.book, chapter: this.state.prevBook.chapter})
 			}
-
 			fetch(fieldConstants.baseUrl + this.apiUrl(fieldConstants.dynamicDetails), requestOptions)
-				// fetch("http://localhost:5000/api/getFullDetails?lang=en&limit=50")
 				.then(result => result.json()).then(res => {
 				console.log('res', res)
 				// this.setState({

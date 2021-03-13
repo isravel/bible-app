@@ -20,6 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2f76a260-64c7-4061-a801-45842942ca8c" name="Default Changelist" comment="Nav button action is pending">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-proj/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/api-proj/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/HomeScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/HomeScreen.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -94,7 +96,14 @@
       <option name="project" value="LOCAL" />
       <updated>1598026262142</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Auto Scroll issue with Id">
+      <created>1615647399440</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1615647399440</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -115,20 +124,13 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="New Testament divider" />
     <MESSAGE value="simply" />
-    <option name="LAST_COMMIT_MESSAGE" value="simply" />
+    <MESSAGE value="Auto Scroll issue with Id" />
+    <option name="LAST_COMMIT_MESSAGE" value="Auto Scroll issue with Id" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="552" y="279" key="#ESLint" timestamp="1598023382457">
+    <state x="275" y="101" key="Vcs.Push.Dialog.v2" timestamp="1615647404708">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="552" y="279" key="#ESLint/0.0.1366.738@0.0.1366.738" timestamp="1598023382457" />
-    <state x="275" y="101" key="Vcs.Push.Dialog.v2" timestamp="1598026272261">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state x="275" y="101" key="Vcs.Push.Dialog.v2/0.0.1366.738@0.0.1366.738" timestamp="1598026272261" />
-    <state x="492" y="282" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1598025984017">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state x="492" y="282" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.738@0.0.1366.738" timestamp="1598025984017" />
+    <state x="275" y="101" key="Vcs.Push.Dialog.v2/0.0.1366.738@0.0.1366.738" timestamp="1615647404708" />
   </component>
 </project>

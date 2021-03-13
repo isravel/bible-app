@@ -27,16 +27,17 @@ class HomeScreen extends React.Component {
 	state = {
 		result: false,
 		isLoading: false,
-		lang: 'en',
+		lang: 'ta',
 		limit: '100',
 		bookId: 0,
 		chapterId: 1,
 		verseId: 1,
+		book:'',
 		books: [],
 		chapters: [],
 		verseCount: [],
 		verses: [],
-		api: [{ "user": "Genesisss" }]
+		api: [{ "user": "Genesis" }]
 	}
 
 	apiUrl(method) {
@@ -56,6 +57,7 @@ class HomeScreen extends React.Component {
 					chapters: res.data.chapters,
 					verseCount: res.data.versecounts,
 					verses: res.data.verses,
+					book:res.data.books[0].human,
 					verseHeader: res.data.books[0].human + ' ' + res.data.chapters[0].chapters[0].Chapter
 					// verseHeader : res.data.books[0].human
 				});
@@ -67,9 +69,8 @@ class HomeScreen extends React.Component {
 							console.log('this.element1.current.scrollTop', this.element1.current.scrollTop);
 							console.log('this.element1.current.clientHeight', this.element1.current.clientHeight);
 							console.log('this.element1.current.scrollHeight', this.element1.current.scrollHeight);
-						}						
+						}
 						else if (this.element1.current.scrollTop + this.element1.current.clientHeight >= this.element1.current.scrollHeight) {
-							
 							console.log('this.element1.current', this.element1.current);
 							console.log('this.element1.current.scrollTop', this.element1.current.scrollTop);
 							console.log('this.element1.current.clientHeight', this.element1.current.clientHeight);
@@ -79,7 +80,7 @@ class HomeScreen extends React.Component {
 						}
 					});
 				// this.element1.current.addEventListener("scroll", this.handleNvEnter);
-				window.scroll_into_view(1);
+				// window.scroll_into_view('Ver1');
 
 			}).catch(res => {
 				console.log(res);
@@ -93,7 +94,7 @@ class HomeScreen extends React.Component {
 		// ReactDOM.findDOMNode(this.element).addEventListener("nv-enter", this.handleNvEnter);
 		// console.log('this element ', this.element1);
 		// if(this.element)
-		// this.element1.current.addEventListener("scroll", () => {			
+		// this.element1.current.addEventListener("scroll", () => {
 		// 	console.log('Scrolls');
 		// 	if (this.refs.iScroll.scrollTop + this.refs.iScroll.clientHeight >=this.refs.iScroll.scrollHeight){
 		// 	  console.log('Scrolls');
@@ -106,7 +107,10 @@ class HomeScreen extends React.Component {
 	}
 
 	onBookClickHandler = (bookId, book) => {
-		this.setState({ bookId: bookId })
+		this.setState({
+			bookId: bookId ,
+			book: book
+		})
 		const requestOptions = {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
@@ -116,7 +120,8 @@ class HomeScreen extends React.Component {
 		fetch(fieldConstants.baseUrl + this.apiUrl(fieldConstants.chapterAndDetails), requestOptions)
 			// fetch("http://localhost:5000/api/getFullDetails?lang=en&limit=50")
 			.then(result => result.json()).then(res => {
-				// console.log('url')
+				console.log('res', res.data)
+				console.log('url' +res)
 				this.setState({
 					isLoading: true,
 					result: res.success,
@@ -125,7 +130,7 @@ class HomeScreen extends React.Component {
 					verses: res.data.verses,
 					verseHeader: book + " 1"
 				});
-				window.scroll_into_view(1);
+				window.scroll_into_view('Ver1');
 			}).catch(res => {
 				console.log(res);
 				this.setState({
@@ -154,8 +159,9 @@ class HomeScreen extends React.Component {
 					result: res.success,
 					verseCount: res.data.versecounts,
 					verses: res.data.verses,
+					verseHeader:this.state.book +' '+ chapId
 				});
-				window.scroll_into_view(1);
+				window.scroll_into_view('Ver1');
 			}).catch(res => {
 				console.log(res);
 				this.setState({
@@ -175,14 +181,14 @@ class HomeScreen extends React.Component {
 		// }
 
 		// fetch(fieldConstants.baseUrl+this.apiUrl(fieldConstants.verseDetails), requestOptions)
-		/// fetch("http://localhost:5000/api/getFullDetails?lang=en&limit=50")
+		// // fetch("http://localhost:5000/api/getFullDetails?lang=en&limit=50")
 		// .then(result => result.json()).then(res => {
 		// 	// console.log('url')
 		// 	this.setState({
 		// 		isLoading : true,
 		// 		result : res.success,
-		// 		verses : res.data.verses,				
-		// 	});			
+		// 		verses : res.data.verses,
+		// 	});
 		// }).catch(res => {
 		// 	console.log(res);
 		// 	this.setState({
@@ -199,10 +205,18 @@ class HomeScreen extends React.Component {
 		this.verseDetailRef.current.callChildFunction(verseId);
 	}
 
+	prevHandler = () => {
+		console.log('Hi');
+	}
+	nextHandler = () => {
+		console.log('Hi');
+	}
+
 	render() {
 		let person = (
 		<div className="application fixed-layout">
-			<NavScreen header={this.state.verseHeader} />
+			<NavScreen onPrevHandler = {this.prevHandler} onNextHandler = {this.prevHandler} header={this.state.verseHeader} />
+
 			<main className="verse-viewport">
 				<aside className="sidebar left">
 					<div className="books_list">
@@ -226,7 +240,7 @@ class HomeScreen extends React.Component {
 						<div className="list_title">Verse</div>
 						{this.state.verseCount.map(verse => {
 							return (<VerseList
-								key={verse.chapter}
+								key={verse.id}
 								onClicks={this.onVerseClickHandler}
 								verse={verse.verse} />);
 						})}
@@ -235,136 +249,120 @@ class HomeScreen extends React.Component {
 				</aside>
 
 				<article className="bible__chapters" ref={this.element1} role="main">
-					<div class="viewport-settings">
-						<div class="viewport-settings__wrapper">
-							<button class="viewport-settings__toggle">
-								<em class="svg-icon">
-									<svg>
-										<use xlinkHref={process.env.PUBLIC_URL + "/svg/sprite-icons.svg#tune"} />
-									</svg>
-								</em>
-							</button>
-							<form class="viewport-settings__dropdown" id="viewport-settings">
-								<div class="settings-group alignment">
-									<div class="settings-group__label">Alignment</div>
-									<div class="settings-group__input-field">
-										<input type="radio" id="alignment-left" name="alignment" checked />
-										<label for="alignment-left">
-											<em class="svg-icon"><svg>
-													<use xlinkHref={"/public/svg/sprite-icons.svg#format-left"} /></svg></em>
-										</label>
-									</div>
-									<div class="settings-group__input-field">
-										<input type="radio" id="alignment-justify" name="alignment" />
-										<label for="alignment-justify">
-											<em class="svg-icon"><svg>
-													<use xlinkHref={process.env.PUBLIC_URL + "/svg/sprite-icons.svg#format-justify" }/>
-													</svg></em>
-										</label>
-									</div>
-									<div class="settings-group__input-field">
-										<input type="radio" id="alignment-center" name="alignment" />
-										<label for="alignment-center">
-											<em class="svg-icon"><svg>
-													<use xlinkHref={process.env.PUBLIC_URL + "/svg/sprite-icons.svg#format-center"} />
-													</svg></em>
-										</label>
-									</div>
-								</div>
-								<div class="settings-group text-size">
-									<div class="settings-group__label">Text size</div>
-									<div class="settings-group__input-field">
-										<input type="radio" id="font-size-14" name="font-size" />
-										<label for="font-size-14">
-											14
-										</label>
-									</div>
-									<div class="settings-group__input-field">
-										<input type="radio" id="font-size-16" name="font-size" />
-										<label for="font-size-16">
-											16
-										</label>
-									</div>
-									<div class="settings-group__input-field">
-										<input type="radio" id="font-size-18" name="font-size" checked />
-										<label for="font-size-18">
-											18
-										</label>
-									</div>
-									<div class="settings-group__input-field">
-										<input type="radio" id="font-size-20" name="font-size" />
-										<label for="font-size-20">
-											20
-										</label>
-									</div>
-									<div class="settings-group__input-field">
-										<input type="radio" id="font-size-22" name="font-size" />
-										<label for="font-size-22">
-											22
-										</label>
-									</div>
-								</div>
-								<div class="settings-group font-variant">
-									<div class="settings-group__label">Text size</div>
-									<div class="settings-group__input-field">
-										<input type="radio" id="font-variant-1" name="font-variant" checked />
-										<label for="font-variant-1">
-											EB Garamond
-										</label>
-									</div>
-									<div class="settings-group__input-field">
-										<input type="radio" id="font-variant-2" name="font-variant" />
-										<label for="font-variant-2">
-											Georgia
-										</label>
-									</div>
-									<div class="settings-group__input-field">
-										<input type="radio" id="font-variant-3" name="font-variant" />
-										<label for="font-variant-3">
-											Nunito Sans
-										</label>
-									</div>
-									<div class="settings-group__input-field">
-										<input type="radio" id="font-variant-4" name="font-variant" />
-										<label for="font-variant-4">
-											Arial
-										</label>
-									</div>
-								</div>
-								<div class="settings-group font-variant">
-									<div class="settings-group__label">Mode</div>
-									<div class="settings-group__input-field">
-										<input type="radio" id="night-mode-1" name="night-mode" checked />
-										<label for="night-mode-1">
-											Light mode
-										</label>
-									</div>
-									<div class="settings-group__input-field">
-										<input type="radio" id="night-mode-2" name="night-mode" />
-										<label for="night-mode-2">
-											Night mode
-										</label>
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-
-					<div className="container font-size alignment">
+					<div className="container">
 						{this.state.verses.map(verse => {
 							return (<VerseScreen
 								key={verse.bookId}
-								// ref="child" 
+								// ref="child"
 								ref={this.verseDetailRef}
 								// ref={el => this.element = el}
 								onVerseClickHandler={this.state.verseId}
 								verses={verse.chapters} />);
 						})}
 
-						
+
 					</div>
-				
-					
+				<div class="viewport-settings">
+					<div class="viewport-settings__wrapper">
+						<button class="viewport-settings__toggle">
+							<em class="svg-icon">
+								<svg>
+									<use xlinkHref={process.env.PUBLIC_URL + "/svg/sprite-icons.svg#tune"} />
+								</svg>
+							</em>
+						</button>
+						<div class="viewport-settings__dropdown">
+							<div class="settings-group alignment">
+								<div class="settings-group__label">Alignment</div>
+								<div class="settings-group__input-field">
+									<input type="radio" id="alignment-left" name="alignment" checked />
+									<label for="alignment-left">
+										<em class="svg-icon"><svg>
+												<use xlinkHref={"/public/svg/sprite-icons.svg#format-left"} /></svg></em>
+									</label>
+								</div>
+								<div class="settings-group__input-field">
+									<input type="radio" id="alignment-justify" name="alignment" />
+									<label for="alignment-justify">
+										<em class="svg-icon"><svg>
+												<use xlinkHref={process.env.PUBLIC_URL + "/svg/sprite-icons.svg#format-justify" }/>
+												</svg></em>
+									</label>
+								</div>
+								<div class="settings-group__input-field">
+									<input type="radio" id="alignment-center" name="alignment" />
+									<label for="alignment-center">
+										<em class="svg-icon"><svg>
+												<use xlinkHref={process.env.PUBLIC_URL + "/svg/sprite-icons.svg#format-center"} />
+												</svg></em>
+									</label>
+								</div>
+							</div>
+							<div class="settings-group text-size">
+								<div class="settings-group__label">Text size</div>
+								<div class="settings-group__input-field">
+									<input type="radio" id="font-size-10" name="font-size" />
+									<label for="font-size-10">
+										10
+									</label>
+								</div>
+								<div class="settings-group__input-field">
+									<input type="radio" id="font-size-12" name="font-size" />
+									<label for="font-size-12">
+										12
+									</label>
+								</div>
+								<div class="settings-group__input-field">
+									<input type="radio" id="font-size-14" name="font-size" checked />
+									<label for="font-size-14">
+										14
+									</label>
+								</div>
+								<div class="settings-group__input-field">
+									<input type="radio" id="font-size-16" name="font-size" />
+									<label for="font-size-16">
+										16
+									</label>
+								</div>
+								<div class="settings-group__input-field">
+									<input type="radio" id="font-size-18" name="font-size" />
+									<label for="font-size-18">
+										18
+									</label>
+								</div>
+							</div>
+							<div class="settings-group font-variant">
+								<div class="settings-group__label">Text size</div>
+								<div class="settings-group__input-field">
+									<input type="radio" id="font-variant-1" name="font-variant" checked />
+									<label for="font-variant-1">
+										EB Garamond
+									</label>
+								</div>
+								<div class="settings-group__input-field">
+									<input type="radio" id="font-variant-2" name="font-variant" />
+									<label for="font-variant-2">
+										Georgia
+									</label>
+								</div>
+								<div class="settings-group__input-field">
+									<input type="radio" id="font-variant-3" name="font-variant" />
+									<label for="font-variant-3">
+										Nunito Sans
+									</label>
+								</div>
+								<div class="settings-group__input-field">
+									<input type="radio" id="font-variant-4" name="font-variant" />
+									<label for="font-variant-4">
+										Arial
+									</label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
 				</article>
 
 				<aside class="sidebar right">

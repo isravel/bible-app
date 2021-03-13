@@ -20,10 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c2f4ecdb-dedb-4625-ac8c-2673ad7744a8" name="Default Changelist" comment="Infinite Scroll Next and prev data">
-      <change beforePath="$PROJECT_DIR$/../public/css-rtl/maps/styles-rtl.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/../public/css-rtl/maps/styles-rtl.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public/css-rtl/styles-rtl.css" beforeDir="false" afterPath="$PROJECT_DIR$/../public/css-rtl/styles-rtl.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../public/css/maps/styles.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/../public/css/maps/styles.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/screens/HomeScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/screens/HomeScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/shelf/Uncommitted_changes_before_Checkout_at_13-03-2021_15_16__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/shelf/Uncommitted_changes_before_Checkout_at_13-03-2021_15_16__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +55,7 @@
       <updated>1599300795214</updated>
       <workItem from="1599300796347" duration="904000" />
       <workItem from="1615628158442" duration="697000" />
+      <workItem from="1615641125942" duration="186000" />
     </task>
     <servers />
   </component>

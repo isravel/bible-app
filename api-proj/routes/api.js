@@ -23,9 +23,6 @@ router.get('/getFullDetails', function (req, res, next) {
 	else {
 		langColumn = fieldConstant.english;
 	}
-
-
-
 	// var query4 = "select " + fieldConstant.Verse + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = 0 LIMIT " + limit + "";
 
 	var data = {};
@@ -228,6 +225,64 @@ router.get('/getFullDetails', function (req, res, next) {
 
 			});
 		},
+		function (parallel_done) {
+			let query1 = "select distinct " + fieldConstant.Id + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + 1 + " and " + fieldConstant.Chapter + " = " + 1 + " and " + fieldConstant.VerseCount + " = " + 1;
+			db.query(query1, {}, function (err, results) {
+				if (err) return parallel_done(err);
+				var stringFormat = JSON.stringify(results);
+				console.log(stringFormat);
+				var nextBook = {};
+				async.forEach(results, function (tempValue, callBack) {
+					let tempId = tempValue.Id + 1;
+					if (tempId !== 0) {
+						let getBookQuery = "select " + fieldConstant.Book + ", " + fieldConstant.Chapter + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Id + " = " + tempId;
+						db.query(getBookQuery, {}, function (error, bookResult) {
+							if (error) return parallel_done(error);
+							if (bookResult.length !== 0) {
+								nextBook.book = bookResult[0].Book;
+								nextBook.chapter = bookResult[0].Chapter;
+							}
+							callBack(null);
+						})
+					}
+					else callBack(null);
+				}, function () {
+					data.nextBook = nextBook;
+					console.log(nextBook);
+					parallel_done();
+				});
+
+			});
+		},
+		function (parallel_done) {
+			let query1 = "select distinct " + fieldConstant.Id + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + -1 + " and " + fieldConstant.Chapter + " = " + 1 + " and " + fieldConstant.VerseCount + " = " + 1;
+			db.query(query1, {}, function (err, results) {
+				if (err) return parallel_done(err);
+				var stringFormat = JSON.stringify(results);
+				console.log(stringFormat);
+				var prevBook = {};
+				async.forEach(results, function (tempValue, callBack) {
+					let tempId = tempValue.Id;
+					if (tempId !== 0) {
+						let getBookQuery = "select " + fieldConstant.Book + ", " + fieldConstant.Chapter + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Id + " = " + tempId;
+						db.query(getBookQuery, {}, function (error, bookResult) {
+							if (error) return parallel_done(error);
+							if (bookResult.length !== 0) {
+								prevBook.book = bookResult[0].Book;
+								prevBook.chapter = bookResult[0].Chapter + 1;
+							}
+							callBack(null);
+						})
+					}
+					else callBack(null);
+				}, function () {
+					data.prevBook = prevBook;
+					console.log(prevBook);
+					parallel_done();
+				});
+
+			});
+		}
 
 	], function (err) {
 		if (err)
@@ -387,6 +442,64 @@ router.post('/getChapterAndDetails', function (req, res, next) {
 
 				});
 			},
+			function (parallel_done) {// next book
+				let query1 = "select distinct " + fieldConstant.Id + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + 1 + " and " + fieldConstant.Chapter + " = " + 1;
+				db.query(query1, {}, function (err, results) {
+					if (err) return parallel_done(err);
+					var stringFormat = JSON.stringify(results);
+					console.log(stringFormat);
+					var nextBook = {};
+					async.forEach(results, function (tempValue, callBack) {
+						let tempId = tempValue.Id + 1;
+						if (tempId !== 0) {
+							let getBookQuery = "select " + fieldConstant.Book + ", " + fieldConstant.Chapter + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Id + " = " + tempId;
+							db.query(getBookQuery, {}, function (error, bookResult) {
+								if (error) return parallel_done(error);
+								if (bookResult.length !== 0) {
+									nextBook.book = bookResult[0].Book;
+									nextBook.chapter = bookResult[0].Chapter;
+								}
+								callBack(null);
+							})
+						}
+						else callBack(null);
+					}, function () {
+						data.nextBook = nextBook;
+						console.log(nextBook);
+						parallel_done();
+					});
+
+				});
+			},
+			function (parallel_done) {// prev book
+				let query1 = "select distinct " + fieldConstant.Id + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + -1 + " and " + fieldConstant.Chapter + " = " + 1 + " and " + fieldConstant.VerseCount + " = " + 1;
+				db.query(query1, {}, function (err, results) {
+					if (err) return parallel_done(err);
+					var stringFormat = JSON.stringify(results);
+					console.log(stringFormat);
+					var prevBook = {};
+					async.forEach(results, function (tempValue, callBack) {
+						let tempId = tempValue.Id;
+						if (tempId !== 0) {
+							let getBookQuery = "select " + fieldConstant.Book + ", " + fieldConstant.Chapter + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Id + " = " + tempId;
+							db.query(getBookQuery, {}, function (error, bookResult) {
+								if (error) return parallel_done(error);
+								if (bookResult.length !== 0) {
+									prevBook.book = bookResult[0].Book;
+									prevBook.chapter = bookResult[0].Chapter + 1;
+								}
+								callBack(null);
+							})
+						}
+						else callBack(null);
+					}, function () {
+						data.prevBook = prevBook;
+						console.log(prevBook);
+						parallel_done();
+					});
+
+				});
+			}
 
 		], function (err) {
 			if (err)

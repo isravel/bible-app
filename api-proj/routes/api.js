@@ -294,27 +294,24 @@ router.get('/getFullDetails', function (req, res, next) {
 
 
 router.post('/getChapterAndDetails', function (req, res, next) {
-	var url = require('url');
-	var url_parts = url.parse(req.url, true);
-	var limit = url_parts.query.limit;
-	var bookId = req.body.book;
+	const url = require('url');
+	const url_parts = url.parse(req.url, true);
+	const limit = url_parts.query.limit;
+	const bookId = req.body.book;
+	const chapter = req.body.chapter;
 
-	var db = req.con;
-	var langReceived = url_parts.query.lang;
-	// var langColumn = '';
-	// if (langReceived === 'ta') {
-	// 	langColumn = fieldConstant.tamil;
-	// }
-	// else {
-	// 	langColumn = fieldConstant.english;
-	// }
+	const db = req.con;
+	const langReceived = url_parts.query.lang;
+	let langColumn = '';
+	if (langReceived === 'ta') {
+		langColumn = fieldConstant.tamil;
+	}
+	else {
+		langColumn = fieldConstant.english;
+	}
 	// var query1 = "SELECT "+ fieldConstant.english + " FROM "+ fieldConstant.chapters;
 	// if (bookId === 0)
 	{
-
-
-
-
 		var data = {};
 		async.parallel([
 			function (parallel_done) {
@@ -442,20 +439,56 @@ router.post('/getChapterAndDetails', function (req, res, next) {
 
 				});
 			},
-			function (parallel_done) {// next book
-				let query1 = "select distinct " + fieldConstant.Id + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + 1 + " and " + fieldConstant.Chapter + " = " + 1;
+			function (parallel_done) {
+				let query1 = "select distinct " + fieldConstant.Id + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = " + chapter + " and " + fieldConstant.VerseCount + " = " + 1;
+				console.log('Query 5', query1)
 				db.query(query1, {}, function (err, results) {
 					if (err) return parallel_done(err);
 					var stringFormat = JSON.stringify(results);
-					console.log(stringFormat);
-					var nextBook = {};
+					// console.log(stringFormat);
+					var prevBook = {};
 					async.forEach(results, function (tempValue, callBack) {
-						let tempId = tempValue.Id + 1;
+						let tempId = tempValue.Id - 1;
+						console.log('id ', tempValue.Id)
 						if (tempId !== 0) {
 							let getBookQuery = "select " + fieldConstant.Book + ", " + fieldConstant.Chapter + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Id + " = " + tempId;
+							console.log('Query 2', getBookQuery)
 							db.query(getBookQuery, {}, function (error, bookResult) {
 								if (error) return parallel_done(error);
 								if (bookResult.length !== 0) {
+									prevBook.book = bookResult[0].Book;
+									prevBook.chapter = bookResult[0].Chapter;
+								}
+								callBack(null);
+							})
+						}
+						else callBack(null);
+					}, function () {
+						data.prevBook = prevBook;
+						// console.log(prevBook);
+						parallel_done();
+					});
+
+				});
+			},
+			function (parallel_done) {
+				let query1 = "select distinct " + fieldConstant.Id + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = " + chapter +" ORDER BY ID DESC LIMIT 1";
+				console.log('Query 3', query1);
+				db.query(query1, {}, function (err, results) {
+					if (err) return parallel_done(err);
+					var stringFormat = JSON.stringify(results);
+					// console.log(stringFormat);
+					var nextBook = {};
+					async.forEach(results, function (tempValue, callBack) {
+						let tempId = tempValue.Id + 1;
+						// console.log(tempId)
+						if (tempId !== 0) {
+							let getBookQuery = "select " + fieldConstant.Book + ", " + fieldConstant.Chapter + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Id + " = " + tempId;
+							console.log('Query 4',getBookQuery)
+							db.query(getBookQuery, {}, function (error, bookResult) {
+								if (error) return parallel_done(error);
+								if (bookResult.length !== 0) {
+									// console.log('bookres',bookResult)
 									nextBook.book = bookResult[0].Book;
 									nextBook.chapter = bookResult[0].Chapter;
 								}
@@ -465,41 +498,35 @@ router.post('/getChapterAndDetails', function (req, res, next) {
 						else callBack(null);
 					}, function () {
 						data.nextBook = nextBook;
-						console.log(nextBook);
+						// console.log(nextBook);
 						parallel_done();
 					});
 
 				});
 			},
-			function (parallel_done) {// prev book
-				let query1 = "select distinct " + fieldConstant.Id + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + -1 + " and " + fieldConstant.Chapter + " = " + 1 + " and " + fieldConstant.VerseCount + " = " + 1;
+			function (parallel_done) {
+				let query1 = "select " + fieldConstant.english + ", "+ langColumn +" from " + fieldConstant.books + " where " + fieldConstant.Id + " = " + bookId;
+				console.log('Query 6', query1);
 				db.query(query1, {}, function (err, results) {
 					if (err) return parallel_done(err);
 					var stringFormat = JSON.stringify(results);
-					console.log(stringFormat);
-					var prevBook = {};
-					async.forEach(results, function (tempValue, callBack) {
-						let tempId = tempValue.Id;
-						if (tempId !== 0) {
-							let getBookQuery = "select " + fieldConstant.Book + ", " + fieldConstant.Chapter + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Id + " = " + tempId;
-							db.query(getBookQuery, {}, function (error, bookResult) {
-								if (error) return parallel_done(error);
-								if (bookResult.length !== 0) {
-									prevBook.book = bookResult[0].Book;
-									prevBook.chapter = bookResult[0].Chapter + 1;
-								}
-								callBack(null);
-							})
-						}
-						else callBack(null);
-					}, function () {
-						data.prevBook = prevBook;
-						console.log(prevBook);
-						parallel_done();
-					});
+					var jsonStruct = JSON.parse(stringFormat);
+					console.log('book value',jsonStruct);
+					const currentPage = {};
+					currentPage.chapter = chapter
+					currentPage.user = jsonStruct[0].english
+					if (langReceived === 'ta') {
+						currentPage.book = jsonStruct[0].tamil;
+					}
+					else {
+						currentPage.book = jsonStruct[0].english;
+					}
+					data.currentPage = currentPage;
+					console.log(data)
+					parallel_done();
 
 				});
-			}
+			},
 
 		], function (err) {
 			if (err)

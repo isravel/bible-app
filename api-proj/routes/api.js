@@ -298,7 +298,7 @@ router.post('/getChapterAndDetails', function (req, res, next) {
 	const url_parts = url.parse(req.url, true);
 	const limit = url_parts.query.limit;
 	const bookId = req.body.book;
-	const chapter = req.body.chapter;
+	// const chapter = req.body.chapter;
 
 	const db = req.con;
 	const langReceived = url_parts.query.lang;
@@ -439,94 +439,94 @@ router.post('/getChapterAndDetails', function (req, res, next) {
 
 				});
 			},
-			function (parallel_done) {
-				let query1 = "select distinct " + fieldConstant.Id + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = " + chapter + " and " + fieldConstant.VerseCount + " = " + 1;
-				console.log('Query 5', query1)
-				db.query(query1, {}, function (err, results) {
-					if (err) return parallel_done(err);
-					var stringFormat = JSON.stringify(results);
-					// console.log(stringFormat);
-					var prevBook = {};
-					async.forEach(results, function (tempValue, callBack) {
-						let tempId = tempValue.Id - 1;
-						console.log('id ', tempValue.Id)
-						if (tempId !== 0) {
-							let getBookQuery = "select " + fieldConstant.Book + ", " + fieldConstant.Chapter + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Id + " = " + tempId;
-							console.log('Query 2', getBookQuery)
-							db.query(getBookQuery, {}, function (error, bookResult) {
-								if (error) return parallel_done(error);
-								if (bookResult.length !== 0) {
-									prevBook.book = bookResult[0].Book;
-									prevBook.chapter = bookResult[0].Chapter;
-								}
-								callBack(null);
-							})
-						}
-						else callBack(null);
-					}, function () {
-						data.prevBook = prevBook;
-						// console.log(prevBook);
-						parallel_done();
-					});
-
-				});
-			},
-			function (parallel_done) {
-				let query1 = "select distinct " + fieldConstant.Id + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = " + chapter +" ORDER BY ID DESC LIMIT 1";
-				console.log('Query 3', query1);
-				db.query(query1, {}, function (err, results) {
-					if (err) return parallel_done(err);
-					var stringFormat = JSON.stringify(results);
-					// console.log(stringFormat);
-					var nextBook = {};
-					async.forEach(results, function (tempValue, callBack) {
-						let tempId = tempValue.Id + 1;
-						// console.log(tempId)
-						if (tempId !== 0) {
-							let getBookQuery = "select " + fieldConstant.Book + ", " + fieldConstant.Chapter + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Id + " = " + tempId;
-							console.log('Query 4',getBookQuery)
-							db.query(getBookQuery, {}, function (error, bookResult) {
-								if (error) return parallel_done(error);
-								if (bookResult.length !== 0) {
-									// console.log('bookres',bookResult)
-									nextBook.book = bookResult[0].Book;
-									nextBook.chapter = bookResult[0].Chapter;
-								}
-								callBack(null);
-							})
-						}
-						else callBack(null);
-					}, function () {
-						data.nextBook = nextBook;
-						// console.log(nextBook);
-						parallel_done();
-					});
-
-				});
-			},
-			function (parallel_done) {
-				let query1 = "select " + fieldConstant.english + ", "+ langColumn +" from " + fieldConstant.books + " where " + fieldConstant.Id + " = " + bookId;
-				console.log('Query 6', query1);
-				db.query(query1, {}, function (err, results) {
-					if (err) return parallel_done(err);
-					var stringFormat = JSON.stringify(results);
-					var jsonStruct = JSON.parse(stringFormat);
-					console.log('book value',jsonStruct);
-					const currentPage = {};
-					currentPage.chapter = chapter
-					currentPage.user = jsonStruct[0].english
-					if (langReceived === 'ta') {
-						currentPage.book = jsonStruct[0].tamil;
-					}
-					else {
-						currentPage.book = jsonStruct[0].english;
-					}
-					data.currentPage = currentPage;
-					console.log(data)
-					parallel_done();
-
-				});
-			},
+			// function (parallel_done) {
+			// 	let query1 = "select distinct " + fieldConstant.Id + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = " + chapter + " and " + fieldConstant.VerseCount + " = " + 1;
+			// 	console.log('Query 5', query1)
+			// 	db.query(query1, {}, function (err, results) {
+			// 		if (err) return parallel_done(err);
+			// 		var stringFormat = JSON.stringify(results);
+			// 		// console.log(stringFormat);
+			// 		var prevBook = {};
+			// 		async.forEach(results, function (tempValue, callBack) {
+			// 			let tempId = tempValue.Id - 1;
+			// 			console.log('id ', tempValue.Id)
+			// 			if (tempId !== 0) {
+			// 				let getBookQuery = "select " + fieldConstant.Book + ", " + fieldConstant.Chapter + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Id + " = " + tempId;
+			// 				console.log('Query 2', getBookQuery)
+			// 				db.query(getBookQuery, {}, function (error, bookResult) {
+			// 					if (error) return parallel_done(error);
+			// 					if (bookResult.length !== 0) {
+			// 						prevBook.book = bookResult[0].Book;
+			// 						prevBook.chapter = bookResult[0].Chapter;
+			// 					}
+			// 					callBack(null);
+			// 				})
+			// 			}
+			// 			else callBack(null);
+			// 		}, function () {
+			// 			data.prevBook = prevBook;
+			// 			// console.log(prevBook);
+			// 			parallel_done();
+			// 		});
+			//
+			// 	});
+			// },
+			// function (parallel_done) {
+			// 	let query1 = "select distinct " + fieldConstant.Id + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = " + chapter +" ORDER BY ID DESC LIMIT 1";
+			// 	console.log('Query 3', query1);
+			// 	db.query(query1, {}, function (err, results) {
+			// 		if (err) return parallel_done(err);
+			// 		var stringFormat = JSON.stringify(results);
+			// 		// console.log(stringFormat);
+			// 		var nextBook = {};
+			// 		async.forEach(results, function (tempValue, callBack) {
+			// 			let tempId = tempValue.Id + 1;
+			// 			// console.log(tempId)
+			// 			if (tempId !== 0) {
+			// 				let getBookQuery = "select " + fieldConstant.Book + ", " + fieldConstant.Chapter + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Id + " = " + tempId;
+			// 				console.log('Query 4',getBookQuery)
+			// 				db.query(getBookQuery, {}, function (error, bookResult) {
+			// 					if (error) return parallel_done(error);
+			// 					if (bookResult.length !== 0) {
+			// 						// console.log('bookres',bookResult)
+			// 						nextBook.book = bookResult[0].Book;
+			// 						nextBook.chapter = bookResult[0].Chapter;
+			// 					}
+			// 					callBack(null);
+			// 				})
+			// 			}
+			// 			else callBack(null);
+			// 		}, function () {
+			// 			data.nextBook = nextBook;
+			// 			// console.log(nextBook);
+			// 			parallel_done();
+			// 		});
+			//
+			// 	});
+			// },
+			// function (parallel_done) {
+			// 	let query1 = "select " + fieldConstant.english + ", "+ langColumn +" from " + fieldConstant.books + " where " + fieldConstant.Id + " = " + bookId;
+			// 	console.log('Query 6', query1);
+			// 	db.query(query1, {}, function (err, results) {
+			// 		if (err) return parallel_done(err);
+			// 		var stringFormat = JSON.stringify(results);
+			// 		var jsonStruct = JSON.parse(stringFormat);
+			// 		console.log('book value',jsonStruct);
+			// 		const currentPage = {};
+			// 		currentPage.chapter = chapter
+			// 		currentPage.user = jsonStruct[0].english
+			// 		if (langReceived === 'ta') {
+			// 			currentPage.book = jsonStruct[0].tamil;
+			// 		}
+			// 		else {
+			// 			currentPage.book = jsonStruct[0].english;
+			// 		}
+			// 		data.currentPage = currentPage;
+			// 		console.log(data)
+			// 		parallel_done();
+			//
+			// 	});
+			// },
 
 		], function (err) {
 			if (err)

@@ -27,7 +27,7 @@ class HomeScreen extends React.Component {
 	state = {
 		result: false,
 		isLoading: false,
-		lang: 'ta',
+		lang: 'en',
 		limit: '100',
 		bookId: 0,
 		chapterId: 1,
@@ -37,6 +37,8 @@ class HomeScreen extends React.Component {
 		chapters: [],
 		verseCount: [],
 		verses: [],
+		bookNo: '',
+		chapterNo:'',
 		api: [{ "user": "Genesis" }]
 	}
 
@@ -58,9 +60,12 @@ class HomeScreen extends React.Component {
 					verseCount: res.data.versecounts,
 					verses: res.data.verses,
 					book:res.data.books[0].human,
-					verseHeader: res.data.books[0].human + ' ' + res.data.chapters[0].chapters[0].Chapter
+					verseHeader: res.data.books[0].human + ' ' + res.data.chapters[0].chapters[0].Chapter,
+					bookNo:res.data.books[0].bookId,
+					chapterNo:res.data.chapters[0].chapters[0].Chapter
 					// verseHeader : res.data.books[0].human
 				});
+
 				// console.log('this element ssss', this.element1);
 				if (this.element1)
 					this.element1.current.addEventListener("scroll", (e) => {
@@ -108,7 +113,9 @@ class HomeScreen extends React.Component {
 
 	onBookClickHandler = (bookId, book) => {
 		this.setState({
-			bookId: bookId ,
+			bookId: bookId,
+			bookNo: bookId,
+			chapterNo: 0,
 			book: book
 		})
 		const requestOptions = {
@@ -120,8 +127,6 @@ class HomeScreen extends React.Component {
 		fetch(fieldConstants.baseUrl + this.apiUrl(fieldConstants.chapterAndDetails), requestOptions)
 			// fetch("http://localhost:5000/api/getFullDetails?lang=en&limit=50")
 			.then(result => result.json()).then(res => {
-				console.log('res', res.data)
-				console.log('url' +res)
 				this.setState({
 					isLoading: true,
 					result: res.success,
@@ -131,6 +136,7 @@ class HomeScreen extends React.Component {
 					verseHeader: book + " 1"
 				});
 				window.scroll_into_view('Ver1');
+				// window.scroll_into_view('Cha11');
 			}).catch(res => {
 				console.log(res);
 				this.setState({
@@ -142,7 +148,8 @@ class HomeScreen extends React.Component {
 
 	onChapterClickHandler = (chapId) => {
 		this.setState({
-			chapterId: chapId
+			chapterId: chapId,
+			chapterNo: 0,
 		})
 		const requestOptions = {
 			method: 'POST',
@@ -169,7 +176,6 @@ class HomeScreen extends React.Component {
 					result: false
 				});
 			});
-
 	}
 
 	onVerseClickHandler = (verseId) => {
@@ -235,6 +241,7 @@ class HomeScreen extends React.Component {
 							return (<VerseList
 								key={verse.id}
 								onClicks={this.onVerseClickHandler}
+								indexActive = {1}
 								verse={verse.verse} />);
 						})}
 

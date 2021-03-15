@@ -29,8 +29,7 @@ class BookList extends React.Component {
                             <li className={className} title={item.human} key={item.id} onClick={() => this.onClickHandler(item.bookId, item.human)}><span>{item.human}</span></li>
 							</div>
 							);
-
-								})
+                    })
                 }
                 {/* <li title='Genesis'>Genesis</li>
                 <li title='Exodus'>Exodus</li>

@@ -6,7 +6,7 @@ class ChapterList extends React.Component {
         activeIndex: 1
     }
 
-    onClickHandler(itemId) {
+	onClickHandler(itemId) {
         this.setState({
             activeIndex :itemId
         })
@@ -16,7 +16,8 @@ class ChapterList extends React.Component {
     render() {
         return (
             <ul>
-                {this.props.chapters.map(chap => {console.log('chaps', chap)
+                {this.props.chapters.map(chap => {
+                	console.log('chaps', this.state.activeIndex)
                     const className = this.state.activeIndex === chap.Chapter ? 'active' : null;
                     return (<li class={className} id={chap.id} key={chap.id} onClick={() => this.onClickHandler(chap.Chapter)}><span>{chap.Chapter}</span></li>);
                 })}

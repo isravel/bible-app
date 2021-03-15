@@ -1,26 +1,44 @@
 import React from 'react';
+var refs;
 
 class VerseList extends React.Component{
 
-	state = {
-        activeIndex: 1
-    }
+	constructor(props) {
+		super(props);
+		refs = this.props.verse.reduce((acc, value) => {
+			// console.log('value',value)
+			acc[value.verseCount] = React.createRef();
+			return acc;
+		}, {});
+	}
 
-    onClickHandler(itemId) {
+	state = {
+		indexActive: 1
+	}
+
+    onClickHandler(itemId, itemCount) {
         this.setState({
-            activeIndex :itemId
+            indexActive :itemCount
         })
         this.props.onClicks(itemId)
     }
 
+
     render(){
+		const {indexActive} = this.state
         return(
-					<ul>
-						{this.props.verse.map(verseNos => {
-							const className = this.state.activeIndex === verseNos.VerseCount ? 'active' : null;
-							return (
-							<li class={className} id={verseNos.id}key={verseNos.id} onClick={() => this.onClickHandler(verseNos.key)}><span>{verseNos.VerseCount}</span></li>);
-							})}
+			<ul>
+				{
+					this.props.verse.map(verseNos =>
+					{
+						console.log('verseNos.VerseCount',verseNos.VerseCount % 2 === 0)
+						const className = indexActive === verseNos.VerseCount ? 'active' : null;
+						return (
+						<li class={className} id={verseNos.id}key={verseNos.id} ref={refs[verseNos.id]} onClick={() => this.onClickHandler(verseNos.key, verseNos.VerseCount )}><span>{verseNos.VerseCount}</span></li>
+						);
+					})
+
+				}
 						{/* <li class="active">1</li>
 						<li>2</li>
 						<li>3</li>

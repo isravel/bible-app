@@ -39,6 +39,8 @@ class HomeScreen extends React.Component {
 		verses: [],
 		bookNo: '',
 		chapterNo:'',
+		prevBook:{},
+		nextBook:{},
 		api: [{ "user": "Genesis" }]
 	}
 
@@ -60,7 +62,8 @@ class HomeScreen extends React.Component {
 					verseCount: res.data.versecounts,
 					verses: res.data.verses,
 					book:res.data.books[0].human,
-					verseHeader: res.data.books[0].human + ' ' + res.data.chapters[0].chapters[0].Chapter,
+					// verseHeader: res.data.books[0].human + ' ' + res.data.chapters[0].chapters[0].Chapter,
+					verseHeader: res.data.currentPage.book + ' ' + res.data.currentPage.chapter,
 					bookNo:res.data.books[0].bookId,
 					chapterNo:res.data.chapters[0].chapters[0].Chapter
 					// verseHeader : res.data.books[0].human
@@ -115,13 +118,13 @@ class HomeScreen extends React.Component {
 		this.setState({
 			bookId: bookId,
 			bookNo: bookId,
-			chapterNo: 0,
+			chapterNo: 1,
 			book: book
 		})
 		const requestOptions = {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ book: bookId })
+			body: JSON.stringify({ book: bookId, chapter: 1 })
 		}
 
 		fetch(fieldConstants.baseUrl + this.apiUrl(fieldConstants.chapterAndDetails), requestOptions)
@@ -133,7 +136,8 @@ class HomeScreen extends React.Component {
 					chapters: res.data.chapters,
 					verseCount: res.data.versecounts,
 					verses: res.data.verses,
-					verseHeader: book + " 1"
+					// verseHeader: book + " 1"
+					verseHeader: res.data.currentPage.book + ' ' + res.data.currentPage.chapter
 				});
 				window.scroll_into_view('Ver1');
 				// window.scroll_into_view('Cha11');
@@ -149,7 +153,7 @@ class HomeScreen extends React.Component {
 	onChapterClickHandler = (chapId) => {
 		this.setState({
 			chapterId: chapId,
-			chapterNo: 0,
+			chapterNo: chapId,
 		})
 		const requestOptions = {
 			method: 'POST',

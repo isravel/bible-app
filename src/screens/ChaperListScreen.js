@@ -6,11 +6,11 @@ class ChapterList extends React.Component {
         activeIndex: 1
     }
 
-	onClickHandler(itemId) {
+	onClickHandler(chapter) {
         this.setState({
-            activeIndex :itemId
+            activeIndex :chapter
         })
-        this.props.onClick(itemId)
+        this.props.onClick(chapter)
     }
 
     render() {

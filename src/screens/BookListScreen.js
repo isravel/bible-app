@@ -22,7 +22,6 @@ class BookList extends React.Component {
                     this.props.books.map(item => {
                     	iterates++;
                         const className = this.state.activeIndex === item.bookId ? 'active' : null;
-
                         return (  <div>
 							{iterates === 40 ? <li className='divider'>New Testament</li>: null}
                             {/*// <li title={item.human} key={item.id} onClick={this.props.onClick.bind(this, item.id)}>{item.human}</li>);*/}

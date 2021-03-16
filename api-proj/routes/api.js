@@ -226,7 +226,7 @@ router.get('/getFullDetails', function (req, res, next) {
 			});
 		},
 		function (parallel_done) {
-			let query1 = "select distinct " + fieldConstant.Id + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + 1 + " and " + fieldConstant.Chapter + " = " + 1 + " and " + fieldConstant.VerseCount + " = " + 1;
+			let query1 = "select distinct " + fieldConstant.Id + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + 0 + " and " + fieldConstant.Chapter + " = " + 2 + " and " + fieldConstant.VerseCount + " = " + 1;
 			db.query(query1, {}, function (err, results) {
 				if (err) return parallel_done(err);
 				var stringFormat = JSON.stringify(results);

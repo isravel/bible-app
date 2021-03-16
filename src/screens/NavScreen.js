@@ -2,7 +2,16 @@ import React, { Image } from 'react';
 import ProfileIcon from '../logo.svg'
 
 const nav = (props) => {
+	function onPrevClickHandler() {
+		console.log('Previous clicked')
+		// props.onPrevClick
+	}
+	function onNextClickHandler() {
+		// console.log('Next clicked')
+		// props.onNextClick()
+	}
     return (
+
         <header>
             <nav className="navbar">
                 <div className="left">
@@ -13,14 +22,14 @@ const nav = (props) => {
                 </div>
                 <div className="center">
                     <div className="chapter__nav">
-                        <div className="chapter__nav__prev">
-                            <em className="svgIcon"><svg xmlns="http://www.w3.org/2000/svg"><use xlinkHref={process.env.PUBLIC_URL + "/svg/sprite-icons.svg#chevron-left"} /></svg></em>
+                        <div className="chapter__nav__prev" >
+                            <em className="svgIcon" onClick={props.prevClick}><svg xmlns="http://www.w3.org/2000/svg"><use xlinkHref={process.env.PUBLIC_URL + "/svg/sprite-icons.svg#chevron-left"} /></svg></em>
                         </div>
                         <div className="chapter__nav__name">
                            {props.header}
                         </div>
                         <div className="chapter__nav__next">
-                            <em className="svgIcon"><svg xmlns="http://www.w3.org/2000/svg"><use xlinkHref={process.env.PUBLIC_URL + "/svg/sprite-icons.svg#chevron-right"} /></svg></em>
+                            <em className="svgIcon" onClick={props.nextClick}><svg xmlns="http://www.w3.org/2000/svg"><use xlinkHref={process.env.PUBLIC_URL + "/svg/sprite-icons.svg#chevron-right"} /></svg></em>
                         </div>
                     </div>
                 </div>

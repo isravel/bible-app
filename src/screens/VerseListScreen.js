@@ -31,7 +31,7 @@ class VerseList extends React.Component{
 				{
 					this.props.verse.map(verseNos =>
 					{
-						console.log('verseNos.VerseCount',verseNos.VerseCount % 2 === 0)
+						// console.log('verseNos.VerseCount',verseNos.VerseCount % 2 === 0)
 						const className = indexActive === verseNos.VerseCount ? 'active' : null;
 						return (
 						<li class={className} id={verseNos.id}key={verseNos.id} ref={refs[verseNos.id]} onClick={() => this.onClickHandler(verseNos.key, verseNos.VerseCount )}><span>{verseNos.VerseCount}</span></li>

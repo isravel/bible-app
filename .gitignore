@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+/.idea
 
 # testing
 /coverage
@@ -79,6 +80,10 @@ Thumbs.db
 desktop.ini
 
 .cache
-*.map
-*.css.map
 /Design Files
+*.map
+**.css.map
+public/css-rtl/maps/styles-rtl.css.map
+public/css/maps/styles.css.map
+.sass-cache
+.sass-cache/*

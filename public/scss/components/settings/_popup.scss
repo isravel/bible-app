@@ -4,8 +4,9 @@
 	#{$self}__wrapper {
 		position: relative;
 	}
-
+	user-select: none;
 	position: absolute;
+	position: sticky;
 	font-size: 14px;
 	right: 1em;
 	top: 1em;

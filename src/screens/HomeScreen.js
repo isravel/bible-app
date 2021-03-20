@@ -9,13 +9,16 @@ import ChapterList from './ChaperListScreen';
 import VerseList from './VerseListScreen';
 import VerseScreen from './VerseScreens/VerseScreen';
 import fieldConstants from '../utils/FieldConstants';
+import cookies from '../services/CookieServices';
+
 
 class HomeScreen extends React.Component {
 	constructor(props) {
-		super(props);
-
+		super(props)
 		this.element1 = React.createRef()
 		this.verseDetailRef = React.createRef()
+		// this.setLanguageCookie()
+		//
 		// this.myRef = React.createRef();
 		// this.myRef = element => {
 		// 	this.verselist = element;
@@ -48,6 +51,33 @@ class HomeScreen extends React.Component {
 		return (method + '?lang=' + this.state.lang + '&limit=' + this.state.limit);
 	}
 
+	setLanguageCookie()
+	{
+		const expiresAt = 60 * 24 * 2 * 365
+		let d = new Date();
+		d.setTime(d.getTime() + (expiresAt * 60 * 1000));
+		console.log('Time', expiresAt * 60 * 1000)
+		const options = { path: '/', expires: d }
+		cookies.set("lang", 'ta', options)
+
+	}
+
+	changeLanguageState()
+	{
+		let langCookie = cookies.get('lang')
+		if(langCookie)
+		{
+			this.setState({
+				lang: langCookie
+			})
+		}
+		console.log(langCookie, this.state.lang)
+	}
+
+	componentWillMount(): void {
+		this.changeLanguageState()
+	}
+
 	componentDidMount() {
 		fetch(fieldConstants.baseUrl + this.apiUrl(fieldConstants.fullDetails))
 			// fetch("http://localhost:5000/api/getFullDetails?lang=en&limit=50")
@@ -71,7 +101,7 @@ class HomeScreen extends React.Component {
 					// verseHeader : res.data.books[0].human
 				});
 
-				console.log('this element ssss', this.state.prevBook);
+				console.log('this element ssss', this.state.lang);
 				if (this.element1)
 					this.element1.current.addEventListener("scroll", (e) => {
 						if(this.element1.current.scrollTop === 1){
@@ -218,8 +248,9 @@ class HomeScreen extends React.Component {
 			verseId: verseId
 		})
 		// this.refs.child.callChildFunction(verseId);
-		console.log('verseDetailRef', this.verseDetailRef)
+		// console.log('verseDetailRef', this.verseDetailRef)
 		this.verseDetailRef.current.callChildFunction(verseId);
+		// window.scroll_into_view(verseId);
 	}
 
 	onPrevClick = () =>{
@@ -285,7 +316,7 @@ class HomeScreen extends React.Component {
 								// ref="child"
 								ref={this.verseDetailRef}
 								// ref={el => this.element = el}
-								onVerseClickHandler={this.state.verseId}
+								// onVerseClickHandler={this.state.verseId}
 								verses={verse.chapters} />);
 						})}
 

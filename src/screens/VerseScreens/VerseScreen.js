@@ -36,7 +36,7 @@ class VerseScreen extends React.Component {
                         this.props.verses.map(res => {
                             return (<div id={res.id} key={res.id} >
                                 <div className="bible__chapters__title bold" >{res.book + ' ' + (res.chapter)}</div>
-                                <VerseItem ref={this.myRef} onVerseClick={this.props.onVerseClickHandler} verse={res.verseData} />
+                                <VerseItem ref={this.myRef}  verse={res.verseData} />
                             </div>);
                         })
 

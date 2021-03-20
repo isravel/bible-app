@@ -12,19 +12,18 @@
 	text-shadow: none;
 }
 
-html {
+html,
+body {
 	font-size: 14px;
 	line-height: 1.4;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	
 	@include css4 {
 		font-family: var(--font);
 		color: var(--color);
 	}
-}
-
-body {
+	font-family: var(--font);
+	color: var(--color);
 	margin: 0;
 }
 

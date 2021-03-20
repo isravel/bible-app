@@ -9,10 +9,12 @@
 	height: 100%;
 	overflow: auto;
 	position: relative;
-	.container{
+
+	.container {
 		max-width: 500px;
 		width: 100%;
 	}
+
 	&__chapter {
 		font-size: 1.3rem;
 		line-height: 1.6;
@@ -34,6 +36,7 @@
 			margin-bottom: 1.4rem;
 			line-height: 1.8rem;
 			cursor: pointer;
+			position: relative;
 
 			.verse_number {
 				opacity: 0.7;
@@ -50,6 +53,38 @@
 					}
 				}
 			}
+
+			&.highlight {
+				&:before {
+					position: absolute;
+					top: -4px;
+					bottom: -10px;
+					left: -10px;
+					right: -10px;
+					content: '';
+					background-color: $primary-color;
+					border-radius: 10px;
+					opacity: 0;
+					animation-name: highlight-animation;
+					animation-duration: 4s;
+					animation-iteration-count: 1;
+
+				}
+			}
 		}
+	}
+}
+
+@keyframes highlight-animation {
+	0% {
+		opacity: 0;
+	}
+
+	10% {
+		opacity: 0.2;
+	}
+
+	100% {
+		opacity: 0;
 	}
 }

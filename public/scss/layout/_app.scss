@@ -8,11 +8,12 @@
 	&.fixed-layout {
 		header {
 			position: fixed;
+			position: sticky;
 			top: 0;
 		}
 
 		.verse-viewport {
-			margin-top: $navbar-height;
+			// margin-top: $navbar-height;
 			overflow: hidden;
 
 			.sidebar {
@@ -40,7 +41,7 @@ footer {
 	user-select: none;
 	@include css4 {
 		border-top: 1px solid var(--border-color);
-		background-color: var(--bg);
+		background-color: var(--secondary-bg);
 	}
 
 	.foot__credits {

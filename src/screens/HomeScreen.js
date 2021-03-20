@@ -65,11 +65,13 @@ class HomeScreen extends React.Component {
 					// verseHeader: res.data.books[0].human + ' ' + res.data.chapters[0].chapters[0].Chapter,
 					verseHeader: res.data.currentPage.book + ' ' + res.data.currentPage.chapter,
 					bookNo:res.data.books[0].bookId,
-					chapterNo:res.data.chapters[0].chapters[0].Chapter
+					chapterNo:res.data.chapters[0].chapters[0].Chapter,
+					prevBook: res.data.prevBook,
+					nextBook: res.data.nextBook
 					// verseHeader : res.data.books[0].human
 				});
 
-				// console.log('this element ssss', this.element1);
+				console.log('this element ssss', this.state.prevBook);
 				if (this.element1)
 					this.element1.current.addEventListener("scroll", (e) => {
 						if(this.element1.current.scrollTop === 1){
@@ -137,7 +139,9 @@ class HomeScreen extends React.Component {
 					verseCount: res.data.versecounts,
 					verses: res.data.verses,
 					// verseHeader: book + " 1"
-					verseHeader: res.data.currentPage.book + ' ' + res.data.currentPage.chapter
+					verseHeader: res.data.currentPage.book + ' ' + res.data.currentPage.chapter,
+					prevBook: res.data.prevBook,
+					nextBook: res.data.nextBook
 				});
 				window.scroll_into_view('Ver1');
 				// window.scroll_into_view('Cha11');
@@ -151,6 +155,7 @@ class HomeScreen extends React.Component {
 	}
 
 	onChapterClickHandler = (chapId) => {
+		console.log('onChapterClickHandler')
 		this.setState({
 			chapterId: chapId,
 			chapterNo: chapId,
@@ -170,7 +175,9 @@ class HomeScreen extends React.Component {
 					result: res.success,
 					verseCount: res.data.versecounts,
 					verses: res.data.verses,
-					verseHeader:this.state.book +' '+ chapId
+					verseHeader:this.state.book +' '+ chapId,
+					prevBook: res.data.prevBook,
+					nextBook: res.data.nextBook
 				});
 				window.scroll_into_view('Ver1');
 			}).catch(res => {
@@ -215,10 +222,28 @@ class HomeScreen extends React.Component {
 		this.verseDetailRef.current.callChildFunction(verseId);
 	}
 
+	onPrevClick = () =>{
+		const {prevBook, chapterNo} = this.state
+		console.log('Prev clicked ' + Object.keys(prevBook).length)
+		if(Object.keys(prevBook).length != 0)
+		{
+			this.onChapterClickHandler(prevBook.chapter)
+		}
+
+	}
+	onNextClick = () =>{
+		const {nextBook} = this.state
+		console.log('Next clicked '+nextBook.book)
+		if(Object.keys(nextBook).length != 0)
+		{
+			this.onChapterClickHandler(nextBook.chapter)
+		}
+	}
+
 	render() {
 		let person = (
 		<div className="application fixed-layout">
-			<NavScreen header={this.state.verseHeader} />
+			<NavScreen header={this.state.verseHeader} prevClick ={this.onPrevClick} nextClick = {this.onNextClick}/>
 
 			<main className="verse-viewport">
 				<aside className="sidebar left">

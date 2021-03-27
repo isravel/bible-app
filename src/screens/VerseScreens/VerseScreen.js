@@ -18,14 +18,11 @@ class VerseScreen extends React.Component {
     }
 
     callChildFunction = (id) => {
-        console.log("verse screen", id);
         // this.refs.child.handleClick(id);
         this.verseItem.handleClick(id);
 
         // this.child.handleActionParent();  ///calling a child function here
     }
-
-
 
 
     render() {

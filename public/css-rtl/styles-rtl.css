@@ -39,13 +39,12 @@ textarea{overflow:auto}
 optgroup{font-weight:700}
 table{border-collapse:collapse;border-spacing:0}
 td,th{padding:0}
-:root{--font:"Nunito Sans",Arial,Helvetica,sans-serif;--bg:#fff;--color:#212121;--primary-color:#E53935;--bg-secondary:#f5f5f5;--border-color:#eeeeee;--hover-color:#e0e0e0;--icon-color:#424242;--navbar-bg:#fff;--scrollbar-bg:#e0e0e0;--list-line-height:2rem;--label-color:#bdbdbd;--footer-line-height:2.4rem}
+:root{--font:Muli,"Nunito Sans",Arial,Helvetica,sans-serif;--bg:#fff;--color:#212121;--primary-color:#E53935;--bg-secondary:#f5f5f5;--border-color:#eeeeee;--hover-color:#e0e0e0;--icon-color:#424242;--navbar-bg:#fff;--scrollbar-bg:#e0e0e0;--list-line-height:2rem;--label-color:#bdbdbd;--footer-line-height:2.4rem}
 .flex-center,.settings-group,.settings-group .settings-group__input-field label{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center}
 *{-webkit-box-sizing:border-box;box-sizing:border-box}
 ::-moz-selection{background:#b3d4fc;text-shadow:none}
 ::selection{background:#b3d4fc;text-shadow:none}
-html{font-size:14px;line-height:1.4;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-family:"Nunito Sans",Arial,Helvetica,sans-serif;color:#212121;font-family:var(--font);color:var(--color)}
-body{margin:0}
+body,html{font-size:14px;line-height:1.4;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-family:Muli,"Nunito Sans",Arial,Helvetica,sans-serif;color:#212121;font-family:var(--font);color:var(--color);font-family:var(--font);color:var(--color);margin:0}
 audio,canvas,iframe,img,svg,video{vertical-align:middle}
 .browserupgrade{margin:.2em 0;padding:.2em 0;background:#fff;color:#212121;background:var(--bg);color:var(--color)}
 ul{list-style-type:none;margin:0;padding:0}
@@ -118,10 +117,10 @@ img{max-width:100%!important}
 h2,h3,p{orphans:3;widows:3}
 h2,h3{page-break-after:avoid}
 }
-.sidebar{max-width:300px;width:100%;padding-top:2rem;background-color:#fff;padding-top:var(--list-line-height);background-color:var(--bg)}
+.sidebar{max-width:360px;width:100%;padding-top:2rem;background-color:#fff;padding-top:var(--list-line-height);background-color:var(--bg)}
 .sidebar.left{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}
 .sidebar.left ul{list-style-type:none;padding:0;margin:0;width:100%;height:100%;overflow:auto;padding:8px 0 12px}
-.sidebar.left ul li{padding:0;margin:0;display:block;padding:2px 8px;white-space:nowrap;overflow:hidden;-o-text-overflow:ellipsis;text-overflow:ellipsis;line-height:2rem;line-height:var(--list-line-height)}
+.sidebar.left ul li{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;padding:0;margin:0;display:block;padding:2px 8px;white-space:nowrap;overflow:hidden;-o-text-overflow:ellipsis;text-overflow:ellipsis;line-height:2rem;line-height:var(--list-line-height)}
 .sidebar.left ul li span{display:inline-block;padding:0 12px;border-radius:3rem}
 .sidebar.left ul li.active{font-weight:700}
 .sidebar.left ul li.active span{background-color:#e53935;color:#fff;background-color:var(--primary-color);color:var(--bg)}
@@ -131,18 +130,18 @@ h2,h3{page-break-after:avoid}
 .sidebar.left ul li:hover{cursor:pointer}
 .sidebar.left ul li:hover span{background-color:#e0e0e0;color:#212121;background-color:var(--hover-color);color:var(--color)}
 .sidebar.left .books_list,.sidebar.left .chapters_list,.sidebar.left .verses_list{display:inline-block;height:100%;position:relative;border-left:1px solid #eee;border-left:1px solid var(--border-color)}
-.sidebar.left .books_list .list_title,.sidebar.left .chapters_list .list_title,.sidebar.left .verses_list .list_title{padding:0 8px;font-weight:700;position:absolute;width:calc(100% + 1px);right:0;white-space:nowrap;overflow:hidden;-o-text-overflow:ellipsis;text-overflow:ellipsis;top:calc(-1 * 2rem);top:calc(-1 * var(--list-line-height));line-height:2rem;border-bottom:1px solid #eee;border-left:1px solid #eee;top:calc(-1 * var(--list-line-height));line-height:var(--list-line-height);border-bottom:1px solid var(--border-color);border-left:1px solid var(--border-color)}
-.sidebar.left .books_list{width:180px}
+.sidebar.left .books_list .list_title,.sidebar.left .chapters_list .list_title,.sidebar.left .verses_list .list_title{padding:0 8px;font-weight:700;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;right:0;position:absolute;top:calc(-1 * 2rem);width:calc(100% + 1px);white-space:nowrap;overflow:hidden;-o-text-overflow:ellipsis;text-overflow:ellipsis;top:calc(-1 * var(--list-line-height));line-height:2rem;border-bottom:1px solid #eee;border-left:1px solid #eee;top:calc(-1 * var(--list-line-height));line-height:var(--list-line-height);border-bottom:1px solid var(--border-color);border-left:1px solid var(--border-color)}
+.sidebar.left .books_list{width:200px}
 .sidebar.left .books_list li{padding:2px 8px}
 .sidebar.left .books_list .list_title{padding:0 16px}
-.sidebar.left .chapters_list,.sidebar.left .verses_list{width:60px}
+.sidebar.left .chapters_list,.sidebar.left .verses_list{width:80px}
 .sidebar.right{margin-right:auto;border-right:1px solid var(--border-color)}
 .application{background-color:#fff;background-color:var(--bg)}
-.application.fixed-layout header{position:fixed;top:0}
-.application.fixed-layout .verse-viewport{margin-top:52px;overflow:hidden}
+.application.fixed-layout header{position:fixed;position:-webkit-sticky;position:sticky;top:0}
+.application.fixed-layout .verse-viewport{overflow:hidden}
 .application.fixed-layout .verse-viewport .sidebar{height:100%}
 header{height:52px;width:100%}
-footer{position:fixed;bottom:0;width:100%;text-align:center;line-height:var(--footer-line-height);font-size:.8rem;text-transform:uppercase;letter-spacing:.4rem;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;border-top:1px solid #eee;background-color:#fff;border-top:1px solid var(--border-color);background-color:var(--bg)}
+footer{position:fixed;bottom:0;width:100%;text-align:center;line-height:var(--footer-line-height);font-size:.8rem;text-transform:uppercase;letter-spacing:.4rem;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;border-top:1px solid #eee;border-top:1px solid var(--border-color);background-color:var(--secondary-bg)}
 footer .foot__credits .svg-icon{color:#e53935;width:1rem;height:1rem;margin:0 .4rem 0 .6rem}
 footer .foot__credits .svg-icon svg{vertical-align:middle}
 button{background-color:transparent;border:transparent}
@@ -153,7 +152,7 @@ textarea{resize:vertical}
 .navbar>.right{margin-right:auto;display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex}
 .navbar>.center{margin:0 auto}
 .navbar .svg-icon{width:1.8rem;height:1.8rem;fill:#424242;fill:var(--icon-color)}
-.navbar .logo{display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;font-size:1.75rem}
+.navbar .logo{display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;font-size:1.75rem;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
 .navbar .logo .svg-icon{margin-left:1rem}
 .navbar .chapter__nav{display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}
 .navbar .chapter__nav__next,.navbar .chapter__nav__prev{cursor:pointer}
@@ -161,7 +160,7 @@ textarea{resize:vertical}
 .navbar .nav__icons{display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}
 .navbar .nav__icons>[class*='__icon']{display:inherit}
 .navbar .nav__icons .svg-icon{margin:0 1rem}
-.viewport-settings{position:absolute;font-size:14px;left:1em;top:1em}
+.viewport-settings{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;position:absolute;position:-webkit-sticky;position:sticky;font-size:14px;left:1em;top:1em}
 .viewport-settings .viewport-settings__wrapper{position:relative}
 .viewport-settings .viewport-settings__toggle{display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;width:3em;height:3em;border-radius:50%;position:absolute;left:0;top:0;background-color:#f5f5f5;background-color:var(--bg-secondary)}
 .viewport-settings .viewport-settings__toggle .svg-icon{width:1.5em;height:1.5em}
@@ -190,9 +189,20 @@ textarea{resize:vertical}
 .bible__chapters__chapter{font-size:1.3rem;line-height:1.6}
 .bible__chapters__title{text-align:center;font-weight:700;font-size:1.6rem;line-height:1;margin:.8rem 0}
 .bible__chapters__verses{margin:1.6rem 0}
-.bible__chapters__verses li{display:block;margin-bottom:1.4rem;line-height:1.8rem;cursor:pointer}
+.bible__chapters__verses li{display:block;margin-bottom:1.4rem;line-height:1.8rem;cursor:pointer;position:relative}
 .bible__chapters__verses li .verse_number{opacity:.7;font-size:1rem;margin-left:.5rem}
 .bible__chapters__verses li.selected .verse_number,.bible__chapters__verses li.selected .verse_text{border-bottom:2px dashed #212121;border-bottom:2px dashed var(--color)}
+.bible__chapters__verses li.highlight:before{position:absolute;top:-4px;bottom:-10px;right:-10px;left:-10px;content:'';background-color:#e53935;border-radius:10px;opacity:0;-webkit-animation-name:highlight-animation;animation-name:highlight-animation;-webkit-animation-duration:4s;animation-duration:4s;-webkit-animation-iteration-count:1;animation-iteration-count:1}
+@-webkit-keyframes highlight-animation{
+0%{opacity:0}
+10%{opacity:.2}
+100%{opacity:0}
+}
+@keyframes highlight-animation{
+0%{opacity:0}
+10%{opacity:.2}
+100%{opacity:0}
+}
 .search-coming-soon{height:100%;text-align:center;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
 .search-coming-soon img{width:150px;opacity:1}
 .search-coming-soon .svg-icon{width:2rem;height:2rem;margin-left:.7rem}

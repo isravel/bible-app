@@ -63,3 +63,17 @@ function scroll_into_view(id) {
 	elmnt.scrollIntoView();
 }
 
+function double_scroll(id1, id2) {
+	// var id1_parent_st = $([id1 parent]).scrollTop();
+	// var id2_parent_st = $([id2 parent]).scrollTop();
+	// $([id1 parent]).animate({
+	// 	scrollTop: $(id1).position().top + id1_parent_st
+	// }, 500, function(){
+	// });
+	// $([id2 parent]).animate({
+	// 	scrollTop: $(id2).position().top + id2_parent_st
+	// }, 500, function(){
+	// });
+}
+
+

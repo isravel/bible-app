@@ -14,13 +14,13 @@ const nav = (props) => {
                 <div className="center">
                     <div className="chapter__nav">
                         <div className="chapter__nav__prev">
-                            <em className="svg-icon"><svg xmlns="http://www.w3.org/2000/svg"><use xlinkHref={process.env.PUBLIC_URL + "/svg/sprite-icons.svg#chevron-left"} /></svg></em>
+                            <em className="svg-icon"  onClick={props.prevClick}><svg xmlns="http://www.w3.org/2000/svg"><use xlinkHref={process.env.PUBLIC_URL + "/svg/sprite-icons.svg#chevron-left"} /></svg></em>
                         </div>
                         <div className="chapter__nav__name">
                            {props.header}
                         </div>
                         <div className="chapter__nav__next">
-                            <em className="svg-icon"><svg xmlns="http://www.w3.org/2000/svg"><use xlinkHref={process.env.PUBLIC_URL + "/svg/sprite-icons.svg#chevron-right"} /></svg></em>
+                            <em className="svg-icon" onClick={props.nextClick}><svg xmlns="http://www.w3.org/2000/svg"><use xlinkHref={process.env.PUBLIC_URL + "/svg/sprite-icons.svg#chevron-right"} /></svg></em>
                         </div>
                     </div>
                 </div>

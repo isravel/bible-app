@@ -1,6 +1,7 @@
 import React from 'react';
 var refs;
 
+let activeIndex = 1
 class VerseList extends React.Component{
 
 	constructor(props) {
@@ -15,14 +16,29 @@ class VerseList extends React.Component{
 	state = {
 		indexActive: 1
 	}
+	// componentWillReceiveProps(nextProps) {
+	// 	console.log('next props', nextProps)
+	// 	this.setState({
+	// 		indexActive :nextProps.indexActive
+	// 	})
+	// }
 
-    onClickHandler(itemId, itemCount) {
+	onClickHandler(itemId, itemCount) {
+		activeIndex = itemCount
         this.setState({
             indexActive :itemCount
         })
         this.props.onClicks(itemId)
     }
 
+	verseForceUpdateHandler(itemCount){
+		console.log('verse change handler', itemCount)
+		activeIndex = itemCount
+		this.setState({
+				activeIndex :itemCount
+			}
+		)
+	};
 
     render(){
 		const {indexActive} = this.state
@@ -31,7 +47,7 @@ class VerseList extends React.Component{
 				{
 					this.props.verse.map(verseNos =>
 					{
-						// console.log('verseNos.VerseCount',verseNos.VerseCount % 2 === 0)
+						// console.log('verseNos.VerseCount',indexActive, 'verse count', verseNos.VerseCount)
 						const className = indexActive === verseNos.VerseCount ? 'active' : null;
 						return (
 						<li class={className} id={verseNos.id}key={verseNos.id} ref={refs[verseNos.id]} onClick={() => this.onClickHandler(verseNos.key, verseNos.VerseCount )}><span>{verseNos.VerseCount}</span></li>

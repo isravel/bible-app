@@ -17,6 +17,9 @@ class HomeScreen extends React.Component {
 		super(props)
 		this.element1 = React.createRef()
 		this.verseDetailRef = React.createRef()
+		this.bookListRef = React.createRef()
+		this.chapterListRef = React.createRef()
+		this.onVerseChangeRef = React.createRef()
 		// this.setLanguageCookie()
 		//
 		// this.myRef = React.createRef();
@@ -35,16 +38,12 @@ class HomeScreen extends React.Component {
 		bookId: 0,
 		chapterId: 1,
 		verseId: 1,
-		book:'',
 		books: [],
 		chapters: [],
 		verseCount: [],
 		verses: [],
-		bookNo: '',
-		chapterNo:'',
 		prevBook:{},
-		nextBook:{},
-		api: [{ "user": "Genesis" }]
+		nextBook:{}
 	}
 
 	apiUrl(method) {
@@ -62,73 +61,67 @@ class HomeScreen extends React.Component {
 
 	}
 
-	changeLanguageState()
-	{
+	componentDidMount() {
 		let langCookie = cookies.get('lang')
 		if(langCookie)
 		{
 			this.setState({
 				lang: langCookie
-			})
+			}, () => this.fetchAllDetails())
 		}
-		console.log(langCookie, this.state.lang)
+		else this.fetchAllDetails()
 	}
 
-	componentWillMount(): void {
-		this.changeLanguageState()
-	}
-
-	componentDidMount() {
+	fetchAllDetails = () => {
 		fetch(fieldConstants.baseUrl + this.apiUrl(fieldConstants.fullDetails))
 			// fetch("http://localhost:5000/api/getFullDetails?lang=en&limit=50")
 			.then(result => result.json()).then(res => {
-				// console.log('url')
-				// console.log(res);
-				this.setState({
-					isLoading: true,
-					result: res.success,
-					books: res.data.books,
-					chapters: res.data.chapters,
-					verseCount: res.data.versecounts,
-					verses: res.data.verses,
-					book:res.data.books[0].human,
-					// verseHeader: res.data.books[0].human + ' ' + res.data.chapters[0].chapters[0].Chapter,
-					verseHeader: res.data.currentPage.book + ' ' + res.data.currentPage.chapter,
-					bookNo:res.data.books[0].bookId,
-					chapterNo:res.data.chapters[0].chapters[0].Chapter,
-					prevBook: res.data.prevBook,
-					nextBook: res.data.nextBook
-					// verseHeader : res.data.books[0].human
-				});
-
-				console.log('this element ssss', this.state.lang);
-				if (this.element1)
-					this.element1.current.addEventListener("scroll", (e) => {
-						if(this.element1.current.scrollTop === 1){
-							console.log('event ', e);
-							console.log('this.element1.current.scrollTop', this.element1.current.scrollTop);
-							console.log('this.element1.current.clientHeight', this.element1.current.clientHeight);
-							console.log('this.element1.current.scrollHeight', this.element1.current.scrollHeight);
-						}
-						else if (this.element1.current.scrollTop + this.element1.current.clientHeight >= this.element1.current.scrollHeight) {
-							console.log('this.element1.current', this.element1.current);
-							console.log('this.element1.current.scrollTop', this.element1.current.scrollTop);
-							console.log('this.element1.current.clientHeight', this.element1.current.clientHeight);
-							console.log('this.element1.current.scrollHeight', this.element1.current.scrollHeight);
-						} else if (this.element1.current.scrollBottom + this.element1.current.clientHeight >= this.element1.current.scrollHeight) {
-							console.log('Scrollssss');
-						}
-					});
-				// this.element1.current.addEventListener("scroll", this.handleNvEnter);
+			// console.log('url')
+			// console.log(res);
+			this.setState({
+				isLoading: true,
+				result: res.success,
+				books: res.data.books,
+				chapters: res.data.chapters,
+				verseCount: res.data.versecounts,
+				verses: res.data.verses,
+				bookId:res.data.books[0].bookId,
+				// verseHeader: res.data.books[0].human + ' ' + res.data.chapters[0].chapters[0].Chapter,
+				verseHeader: res.data.currentPage.book + ' ' + res.data.currentPage.chapter,
+				prevBook: res.data.prevBook,
+				nextBook: res.data.nextBook
+				// verseHeader : res.data.books[0].human
+			}, ()=>{
 				window.scroll_into_view('Ver1');
-
-			}).catch(res => {
-				console.log(res);
-				this.setState({
-					isLoading: true,
-					result: false
-				});
 			});
+
+			// if (this.element1)
+			// 	this.element1.current.addEventListener("scroll", (e) => {
+			// 		if(this.element1.current.scrollTop === 1){
+			// 			console.log('event ', e);
+			// 			console.log('this.element1.current.scrollTop', this.element1.current.scrollTop);
+			// 			console.log('this.element1.current.clientHeight', this.element1.current.clientHeight);
+			// 			console.log('this.element1.current.scrollHeight', this.element1.current.scrollHeight);
+			// 		}
+			// 		else if (this.element1.current.scrollTop + this.element1.current.clientHeight >= this.element1.current.scrollHeight) {
+			// 			console.log('this.element1.current', this.element1.current);
+			// 			console.log('this.element1.current.scrollTop', this.element1.current.scrollTop);
+			// 			console.log('this.element1.current.clientHeight', this.element1.current.clientHeight);
+			// 			console.log('this.element1.current.scrollHeight', this.element1.current.scrollHeight);
+			// 		} else if (this.element1.current.scrollBottom + this.element1.current.clientHeight >= this.element1.current.scrollHeight) {
+			// 			console.log('Scrollssss');
+			// 		}
+			// 	});
+			// this.element1.current.addEventListener("scroll", this.handleNvEnter);
+
+
+		}).catch(res => {
+			console.log(res);
+			this.setState({
+				isLoading: true,
+				result: false
+			});
+		});
 
 
 		// ReactDOM.findDOMNode(this.element).addEventListener("nv-enter", this.handleNvEnter);
@@ -146,13 +139,11 @@ class HomeScreen extends React.Component {
 		console.log("Nv Enter:", event);
 	}
 
-	onBookClickHandler = (bookId, book) => {
+	onBookClickHandler = (bookId) => {
 		this.setState({
-			bookId: bookId,
-			bookNo: bookId,
-			chapterNo: 1,
-			book: book
+			bookId: bookId
 		})
+
 		const requestOptions = {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
@@ -162,19 +153,83 @@ class HomeScreen extends React.Component {
 		fetch(fieldConstants.baseUrl + this.apiUrl(fieldConstants.chapterAndDetails), requestOptions)
 			// fetch("http://localhost:5000/api/getFullDetails?lang=en&limit=50")
 			.then(result => result.json()).then(res => {
+				if(res.success) {
+					this.setState({
+							isLoading: true,
+							result: res.success,
+							verseCount: res.data.versecounts,
+							chapters: res.data.chapters,
+							verses: res.data.verses,
+							// verseHeader: book + " 1"
+							verseHeader: res.data.currentPage.book + ' ' + res.data.currentPage.chapter,
+							prevBook: res.data.prevBook,
+							nextBook: res.data.nextBook
+						},() =>{
+							this.onVerseChangeRef.current.verseForceUpdateHandler(1)
+						}, () => {
+							window.scroll_into_view('Ver1');
+						}
+					);
+
+					// window.scroll_into_view('Cha11');
+				}
+				else {
+					//Bad response
+				}
+			}).catch(res => {
+				console.log(res);
 				this.setState({
 					isLoading: true,
-					result: res.success,
-					chapters: res.data.chapters,
-					verseCount: res.data.versecounts,
-					verses: res.data.verses,
-					// verseHeader: book + " 1"
-					verseHeader: res.data.currentPage.book + ' ' + res.data.currentPage.chapter,
-					prevBook: res.data.prevBook,
-					nextBook: res.data.nextBook
+					result: false
 				});
-				window.scroll_into_view('Ver1');
-				// window.scroll_into_view('Cha11');
+			});
+	}
+
+	onPrevNextClickHandler = (bookId, chapterId, cb) => {
+		// if(chapterId === undefined)
+		// {
+		// 	chapterId = 1
+		// }
+
+		this.setState({
+			bookId: bookId
+		})
+
+
+		const requestOptions = {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ book: bookId, chapter: chapterId })
+		}
+
+		fetch(fieldConstants.baseUrl + this.apiUrl(fieldConstants.chapterAndDetails), requestOptions)
+			// fetch("http://localhost:5000/api/getFullDetails?lang=en&limit=50")
+			.then(result => result.json()).then(res => {
+				if(res.success) {
+					console.log('res', res)
+					this.setState({
+							isLoading: true,
+							result: res.success,
+							chapters: res.data.chapters,
+							verseCount: res.data.versecounts,
+							verses: res.data.verses,
+							// verseHeader: book + " 1"
+							verseHeader: res.data.currentPage.book + ' ' + res.data.currentPage.chapter,
+							prevBook: res.data.prevBook,
+							nextBook: res.data.nextBook
+						}, () => {
+							cb()
+						console.log('Book id', this.state.bookId)
+						window.scroll_into_view('Ver1');
+						}
+					);
+
+
+					// window.scroll_into_view('Cha11');
+				}
+				else {
+					//Bad response
+				}
 			}).catch(res => {
 				console.log(res);
 				this.setState({
@@ -188,7 +243,6 @@ class HomeScreen extends React.Component {
 		console.log('onChapterClickHandler')
 		this.setState({
 			chapterId: chapId,
-			chapterNo: chapId,
 		})
 		const requestOptions = {
 			method: 'POST',
@@ -199,17 +253,19 @@ class HomeScreen extends React.Component {
 		fetch(fieldConstants.baseUrl + this.apiUrl(fieldConstants.verseAndDetails), requestOptions)
 			// fetch("http://localhost:5000/api/getFullDetails?lang=en&limit=50")
 			.then(result => result.json()).then(res => {
-				// console.log('url')
 				this.setState({
 					isLoading: true,
 					result: res.success,
 					verseCount: res.data.versecounts,
 					verses: res.data.verses,
-					verseHeader:this.state.book +' '+ chapId,
+					verseHeader: res.data.currentPage.book +' '+ chapId,
 					prevBook: res.data.prevBook,
 					nextBook: res.data.nextBook
-				});
-				window.scroll_into_view('Ver1');
+				},
+					() => {
+						window.scroll_into_view('Ver1');
+					});
+
 			}).catch(res => {
 				console.log(res);
 				this.setState({
@@ -249,25 +305,51 @@ class HomeScreen extends React.Component {
 		})
 		// this.refs.child.callChildFunction(verseId);
 		// console.log('verseDetailRef', this.verseDetailRef)
-		this.verseDetailRef.current.callChildFunction(verseId);
-		// window.scroll_into_view(verseId);
+		// this.verseDetailRef.current.callChildFunction(verseId);
+		window.scroll_into_view(verseId);
+		window.scroll_into_view(this.state.bookId);
+	}
+
+	onBookStateChangeListener = (bookNo, chapterNo) =>{
+		this.bookListRef.current.forceUpdateHandler(bookNo)
+		this.chapterListRef.current.forceUpdateHandler(chapterNo)
 	}
 
 	onPrevClick = () =>{
-		const {prevBook, chapterNo} = this.state
-		console.log('Prev clicked ' + Object.keys(prevBook).length)
+		const {prevBook} = this.state
 		if(Object.keys(prevBook).length != 0)
 		{
-			this.onChapterClickHandler(prevBook.chapter)
+			// this.setState({
+			// 	bookId:prevBook.book
+			// },
+			// () => {
+				this.onPrevNextClickHandler(prevBook.book, prevBook.chapter, ()=>{
+					this.onBookStateChangeListener(prevBook.book, prevBook.chapter)
+					window.scroll_into_view(this.state.bookId);
+				})
+
+			 // }
+			 // )
+
 		}
 
 	}
 	onNextClick = () =>{
 		const {nextBook} = this.state
-		console.log('Next clicked '+nextBook.book)
 		if(Object.keys(nextBook).length != 0)
 		{
-			this.onChapterClickHandler(nextBook.chapter)
+			// this.setState({
+			// 	bookId:nextBook.book
+			// }, () => {
+			console.log('Next click', nextBook)
+				this.onPrevNextClickHandler(nextBook.book, nextBook.chapter, () => {
+					this.onBookStateChangeListener(nextBook.book, nextBook.chapter)
+					console.log('Book',this.state.bookId )
+					window.scroll_into_view(this.state.bookId);
+				})
+			// }
+		// )
+
 		}
 	}
 
@@ -281,6 +363,7 @@ class HomeScreen extends React.Component {
 					<div className="books_list">
 						<div className="list_title">Books</div>
 						<BookList
+							ref={this.bookListRef}
 							books={this.state.books}
 							onClick={this.onBookClickHandler} />
 					</div>
@@ -289,9 +372,10 @@ class HomeScreen extends React.Component {
 						<div className="list_title">Chapter</div>
 						{this.state.chapters.map(chaps => {
 							return (<ChapterList
+								ref={this.chapterListRef}
 								key={chaps.bookId}
 								onClick={this.onChapterClickHandler}
-								chapters={chaps.chapters} />);
+								chapters={chaps} />);
 						})}
 					</div>
 
@@ -299,6 +383,7 @@ class HomeScreen extends React.Component {
 						<div className="list_title">Verse</div>
 						{this.state.verseCount.map(verse => {
 							return (<VerseList
+								ref={this.onVerseChangeRef}
 								key={verse.id}
 								onClicks={this.onVerseClickHandler}
 								indexActive = {1}
@@ -419,8 +504,6 @@ class HomeScreen extends React.Component {
 								onVerseClickHandler={this.state.verseId}
 								verses={verse.chapters} />);
 						})}
-
-
 					</div>
 
 				</article>

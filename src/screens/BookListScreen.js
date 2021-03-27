@@ -6,26 +6,39 @@ class BookList extends React.Component {
         activeIndex: 0
     }
 
-    onClickHandler(itemId, book) {
+    onClickHandler(itemId) {
         this.setState({
             activeIndex :itemId
         })
-        this.props.onClick(itemId, book)
+        this.props.onClick(itemId)
     }
 
+	forceUpdateHandler(bookNo){
+		this.setState({
+			activeIndex :bookNo
+		}, () => this.forceUpdate())
 
-    render() {
+	};
+
+
+
+	render() {
 		let iterates = 0;
         return (
+
             <ul>
+
                 {
                     this.props.books.map(item => {
                     	iterates++;
                         const className = this.state.activeIndex === item.bookId ? 'active' : null;
-                        return (  <div>
+                        return (
+                        	<div>
+							{/*{iterates === 1 ? <li className='divider'>Old Testament</li>: null}*/}
 							{iterates === 40 ? <li className='divider'>New Testament</li>: null}
                             {/*// <li title={item.human} key={item.id} onClick={this.props.onClick.bind(this, item.id)}>{item.human}</li>);*/}
-                            <li className={className} title={item.human} key={item.id} onClick={() => this.onClickHandler(item.bookId, item.human)}><span>{item.human}</span></li>
+                            <li className={className} id={item.bookId } title={item.human} key={item.id} onClick={() => this.onClickHandler(item.bookId)}><span>{item.human}</span></li>
+
 							</div>
 							);
                     })
@@ -98,6 +111,7 @@ class BookList extends React.Component {
                 <li title='Jude'>Jude</li>
                 <li title='Revelation'>Revelation</li> */}
             </ul>
+
         );
     }
 }

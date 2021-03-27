@@ -1,6 +1,16 @@
 import React from 'react';
 
+var refs;
 class ChapterList extends React.Component {
+
+	constructor(props) {
+		super(props);
+		refs = this.props.chapters.chapters.reduce((acc, value) => {
+			// console.log('value',value)
+			acc[value.verseCount] = React.createRef();
+			return acc;
+		}, {});
+	}
 
     state = {
         activeIndex: 1
@@ -10,16 +20,24 @@ class ChapterList extends React.Component {
         this.setState({
             activeIndex :chapter
         })
-        this.props.onClick(chapter)
+        this.props.onClick(chapter, this.props.book)
     }
 
-    render() {
+	forceUpdateHandler(chapterNo){
+		this.setState({
+			activeIndex :chapterNo
+		}
+		// , () => this.forceUpdate()
+		)
+	};
+
+	render() {
         return (
             <ul>
-                {this.props.chapters.map(chap => {
-                	console.log('chaps', this.state.activeIndex)
+                {this.props.chapters.chapters.map(chap => {
+					// console.log('chap id', chap.id)
                     const className = this.state.activeIndex === chap.Chapter ? 'active' : null;
-                    return (<li class={className} id={chap.id} key={chap.id} onClick={() => this.onClickHandler(chap.Chapter)}><span>{chap.Chapter}</span></li>);
+                    return (<li class={className} id={chap.id} ref={refs[chap.id]} key={chap.id} onClick={() => this.onClickHandler(chap.Chapter)}><span>{chap.Chapter}</span></li>);
                 })}
                 {/* <li>1</li>
                 <li>2</li>

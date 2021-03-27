@@ -38,11 +38,16 @@ class VerseItemScreen extends React.Component {
         //     block: 'start',
         //     });}
         return (
+
             <div>
+
                 <ul className="bible__chapters__verses">
                     {
                     this.props.verse.map(res => {
-						return (<li id={res.id} key={res.id} ref={refs[res.id]} ><span className="verse_number">{res.verseCount}</span><span class='verse_text'>{res.verse}</span></li>);
+						return (
+
+
+							<li id={res.id} key={res.id} ref={refs[res.id]} ><span className="verse_number">{res.verseCount}</span><span class='verse_text'>{res.verse}</span></li>);
                     })
 
                     }

@@ -28,19 +28,19 @@ router.get('/getFullDetails', function (req, res, next) {
 	var data = {};
 	async.waterfall([
 		function (parallel_done) {
+		try {
 			let query1 = "select " + fieldConstant.english + " , " + langColumn + ", id from " + fieldConstant.books;
 			db.query(query1, {}, function (err, results) {
 				if (err) return parallel_done(err);
 				var result = results.map(function (chap) {
 					var chapObj = {};
 					chapObj.bookId = chap.id;
-					chapObj.id = chap.english.substr(0,3)+chap.id;
-					chapObj.key = 'Boo'+chap.id;
+					chapObj.id = chap.english.substr(0, 3) + chap.id;
+					chapObj.key = 'Boo' + chap.id;
 					chapObj.user = chap.english;
 					if (langReceived === 'ta') {
 						chapObj.human = chap.tamil;
-					}
-					else {
+					} else {
 						chapObj.human = chap.english;
 					}
 					return chapObj;
@@ -48,19 +48,28 @@ router.get('/getFullDetails', function (req, res, next) {
 				data.books = result;
 				parallel_done();
 			});
+		}catch (e)
+		{
+			console.log("error", e)
+			let msg = e.message
+			data.message = msg
+			res.status(400).json({success: false, data});
+			return
+		}
 		}
 		,
 		function (parallel_done) {
+		try {
 			var query2 = "select distinct " + fieldConstant.Chapter + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = 0";
 			db.query(query2, {}, function (err, results) {
 				if (err) return parallel_done(err);
 				var chapList = [];
 				var chapObj = {};
 				chapObj.book = 0;
-				chapObj.bookId = 'Boo'+0;
-				chapObj.chapters = results.map(res =>{
+				chapObj.bookId = 'Boo' + 0;
+				chapObj.chapters = results.map(res => {
 					let chapterDetails = {}
-					chapterDetails.id = 'Cha'+res.Chapter
+					chapterDetails.id = 'Cha' + res.Chapter
 					chapterDetails.Chapter = res.Chapter
 					return chapterDetails
 				})
@@ -68,19 +77,28 @@ router.get('/getFullDetails', function (req, res, next) {
 				data.chapters = chapList;
 				parallel_done();
 			});
+		}catch (e)
+		{
+			console.log("error", e)
+			let msg = e.message
+			data.message = msg
+			res.status(400).json({success: false, data});
+			return
+		}
 		},
 		function (parallel_done) {
+		try {
 			var query3 = "select " + fieldConstant.VerseCount + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = 0 and " + fieldConstant.Chapter + " = 1";
 			db.query(query3, {}, function (err, results) {
 				if (err) return parallel_done(err);
 				var verseList = [];
 				var verseNoObj = {};
-				verseNoObj.id = 'Cha'+1;
+				verseNoObj.id = 'Cha' + 1;
 				verseNoObj.chapter = 1;
 				verseNoObj.verse = results.map(res => {
 					let verseCountDetails = {}
-					verseCountDetails.id = 'Cha'+ 1 +res.VerseCount
-					verseCountDetails.key = 'Ver'+res.VerseCount
+					verseCountDetails.id = 'Cha' + 1 + res.VerseCount
+					verseCountDetails.key = 'Ver' + res.VerseCount
 					verseCountDetails.VerseCount = res.VerseCount
 					return verseCountDetails
 				})
@@ -88,6 +106,14 @@ router.get('/getFullDetails', function (req, res, next) {
 				data.versecounts = verseList;
 				parallel_done();
 			});
+		}catch (e)
+		{
+			console.log("error", e)
+			let msg = e.message
+			data.message = msg
+			res.status(400).json({success: false, data});
+			return
+		}
 		},
 		// function (parallel_done) {
 		// 	Promise.all([promise1(req)])
@@ -159,7 +185,8 @@ router.get('/getFullDetails', function (req, res, next) {
 		// 	});
 		// },
 		function (parallel_done) {
-			var query4 = "select " + fieldConstant.VerseCount +" , "+ fieldConstant.Verse + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = 0 and " + fieldConstant.Chapter + " = 1";
+		try {
+			var query4 = "select " + fieldConstant.VerseCount + " , " + fieldConstant.Verse + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = 0 and " + fieldConstant.Chapter + " = 1";
 
 			return db.query(query4, {}, function (err, results, fields) {
 				if (err) return (err);
@@ -175,7 +202,7 @@ router.get('/getFullDetails', function (req, res, next) {
 						var verseCountObj = JSON.parse(stringFormat);
 						var sql = "select " + fieldConstant.Verse + " from " + fieldConstant.bible_ + langReceived + " where Versecount = " + verseCountObj.VerseCount + " and " + fieldConstant.Chapter + " = 1 and " + fieldConstant.Book + " = 0";
 						let verseList = {};
-						verseList.id = 'Ver'+verseCountObj.VerseCount;
+						verseList.id = 'Ver' + verseCountObj.VerseCount;
 						verseList.verseCount = verseCountObj.VerseCount;
 						verseList.verse = verseCountObj.Verse;
 						// bookList.verse(verseList);
@@ -203,8 +230,7 @@ router.get('/getFullDetails', function (req, res, next) {
 						var book = "";
 						if (langReceived === 'ta') {
 							book = 'ஆதியாகமம்';
-						}
-						else {
+						} else {
 							book = 'Genesis';
 						}
 						var bookList = {};
@@ -213,7 +239,7 @@ router.get('/getFullDetails', function (req, res, next) {
 						let chapters = {};
 						chapters.book = book;
 						chapters.chapter = 1;
-						chapters.id = book.substr(0,book.length - 1) + 1;
+						chapters.id = book.substr(0, book.length - 1) + 1;
 						chapters.verseData = verseData;
 						chapterList.push(chapters);
 						bookList.chapters = chapterList;
@@ -224,8 +250,17 @@ router.get('/getFullDetails', function (req, res, next) {
 				);
 
 			});
+		}catch (e)
+		{
+			console.log("error", e)
+			let msg = e.message
+			data.message = msg
+			res.status(400).json({success: false, data});
+			return
+		}
 		},
 		function (parallel_done) {
+		try {
 			let query1 = "select distinct " + fieldConstant.Id + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + 0 + " and " + fieldConstant.Chapter + " = " + 2 + " and " + fieldConstant.VerseCount + " = " + 1;
 			db.query(query1, {}, function (err, results) {
 				if (err) return parallel_done(err);
@@ -244,8 +279,7 @@ router.get('/getFullDetails', function (req, res, next) {
 							}
 							callBack(null);
 						})
-					}
-					else callBack(null);
+					} else callBack(null);
 				}, function () {
 					data.nextBook = nextBook;
 					console.log(nextBook);
@@ -253,8 +287,17 @@ router.get('/getFullDetails', function (req, res, next) {
 				});
 
 			});
+		}catch (e)
+		{
+			console.log("error", e)
+			let msg = e.message
+			data.message = msg
+			res.status(400).json({success: false, data});
+			return
+		}
 		},
 		function (parallel_done) {
+		try {
 			let query1 = "select distinct " + fieldConstant.Id + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + -1 + " and " + fieldConstant.Chapter + " = " + 1 + " and " + fieldConstant.VerseCount + " = " + 1;
 			db.query(query1, {}, function (err, results) {
 				if (err) return parallel_done(err);
@@ -273,8 +316,7 @@ router.get('/getFullDetails', function (req, res, next) {
 							}
 							callBack(null);
 						})
-					}
-					else callBack(null);
+					} else callBack(null);
 				}, function () {
 					data.prevBook = prevBook;
 					console.log(prevBook);
@@ -282,22 +324,30 @@ router.get('/getFullDetails', function (req, res, next) {
 				});
 
 			});
+		}catch (e)
+		{
+			console.log("error", e)
+			let msg = e.message
+			data.message = msg
+			res.status(400).json({success: false, data});
+			return
+		}
 		},
 		function (parallel_done) {
-			let query1 = "select " + fieldConstant.english + ", "+ langColumn +" from " + fieldConstant.books + " where " + fieldConstant.Id + " = " + 0;
+		try {
+			let query1 = "select " + fieldConstant.english + ", " + langColumn + " from " + fieldConstant.books + " where " + fieldConstant.Id + " = " + 0;
 			console.log('Query 6', query1);
 			db.query(query1, {}, function (err, results) {
 				if (err) return parallel_done(err);
 				var stringFormat = JSON.stringify(results);
 				var jsonStruct = JSON.parse(stringFormat);
-				console.log('book value',jsonStruct);
+				console.log('book value', jsonStruct);
 				const currentPage = {};
 				currentPage.chapter = 1
 				currentPage.user = jsonStruct[0].english
 				if (langReceived === 'ta') {
 					currentPage.book = jsonStruct[0].tamil;
-				}
-				else {
+				} else {
 					currentPage.book = jsonStruct[0].english;
 				}
 				data.currentPage = currentPage;
@@ -305,11 +355,24 @@ router.get('/getFullDetails', function (req, res, next) {
 				parallel_done();
 
 			});
+		}catch (e)
+		{
+			console.log("error", e)
+			let msg = e.message
+			data.message = msg
+			res.status(400).json({success: false, data});
+			return
+		}
 		},
 
 	], function (err) {
-		if (err)
-			console.log('error')
+		if (err) {
+			console.log("error", err)
+			let msg = err.message
+			data.message = msg
+			res.status(400).json({success: false, data});
+			return
+		}
 		// db.end();
 		res.status(200).json({ success: true, data });
 	});
@@ -337,26 +400,38 @@ router.post('/getChapterAndDetails', function (req, res, next) {
 	{
 		var data = {};
 		async.parallel([
-			function (parallel_done) {
-				let query2 = "select distinct " + fieldConstant.Chapter + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId;
-				db.query(query2, {}, function (err, results) {
-					if (err) return parallel_done(err);
-					var chapList = [];
-					var chapObj = {};
-					chapObj.book = bookId;
-					chapObj.bookId = 'Boo' + bookId;
-					chapObj.chapters = results.map(res =>{
-						let chapterDetails = {}
-						chapterDetails.id = 'Cha'+res.Chapter
-						chapterDetails.Chapter = res.Chapter
-						return chapterDetails
-					})
-					chapList.push(chapObj);
-					data.chapters = chapList;
-					parallel_done();
-				});
+			function (parallel_done)
+			{
+				try {
+					let query2 = "select distinct " + fieldConstant.Chapter + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId;
+					db.query(query2, {}, function (err, results) {
+						if (err) return parallel_done(err);
+						var chapList = [];
+						var chapObj = {};
+						chapObj.book = bookId;
+						chapObj.bookId = 'Boo' + bookId;
+						chapObj.chapters = results.map(res => {
+							let chapterDetails = {}
+							chapterDetails.id = 'Cha' + res.Chapter
+							chapterDetails.Chapter = res.Chapter
+							return chapterDetails
+						})
+						chapList.push(chapObj);
+						data.chapters = chapList;
+						parallel_done();
+					});
+				}
+				catch (e)
+				{
+					console.log("error", e)
+					let msg = e.message
+					data.message = msg
+					res.status(400).json({success: false, data});
+					return
+				}
 			},
 			function (parallel_done) {
+			try{
 				let query3 = "select " + fieldConstant.VerseCount + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = "+chapter;
 				db.query(query3, {}, function (err, results) {
 					if (err) return parallel_done(err);
@@ -376,10 +451,20 @@ router.post('/getChapterAndDetails', function (req, res, next) {
 					// data.versecounts = results;
 					parallel_done();
 				});
+			}
+			catch (e)
+				{
+					console.log("error", e)
+					let msg = e.message
+					data.message = msg
+					res.status(400).json({success: false, data});
+					return
+				}
 			},
 			function (parallel_done) {
+			try {
 				// let query4 = "select " + fieldConstant.Verse + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " limit " + limit;
-				var query4 = "select " + fieldConstant.VerseCount + " , " + fieldConstant.Verse +" from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = "+chapter;
+				var query4 = "select " + fieldConstant.VerseCount + " , " + fieldConstant.Verse + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = " + chapter;
 
 				return db.query(query4, {}, function (err, results, fields) {
 					if (err) return (err);
@@ -393,11 +478,11 @@ router.post('/getChapterAndDetails', function (req, res, next) {
 					async.forEach(results, function (verse, callBack) {
 							var stringFormat = JSON.stringify(verse);
 							var verseCountObj = JSON.parse(stringFormat);
-							var sql = "select " + fieldConstant.Verse + " from " + fieldConstant.bible_ + langReceived + " where Versecount = " + verseCountObj.VerseCount + " and " + fieldConstant.Chapter + " = "+chapter+" and " + fieldConstant.Book + " = " + bookId;
+							var sql = "select " + fieldConstant.Verse + " from " + fieldConstant.bible_ + langReceived + " where Versecount = " + verseCountObj.VerseCount + " and " + fieldConstant.Chapter + " = " + chapter + " and " + fieldConstant.Book + " = " + bookId;
 							let verseList = {};
 							// verseList.book = 0;
 							// verseList.chapter = 1;
-							verseList.id = 'Ver'+verseCountObj.VerseCount;
+							verseList.id = 'Ver' + verseCountObj.VerseCount;
 							verseList.verseCount = verseCountObj.VerseCount;
 							verseList.verse = verseCountObj.Verse;
 							// bookList.verse(verseList);
@@ -425,8 +510,7 @@ router.post('/getChapterAndDetails', function (req, res, next) {
 							var langColumn = '';
 							if (langReceived === 'ta') {
 								langColumn = fieldConstant.tamil;
-							}
-							else {
+							} else {
 								langColumn = fieldConstant.english;
 							}
 							var query4 = "select " + langColumn + " from " + fieldConstant.books + " where " + fieldConstant.id + " = " + bookId;
@@ -438,8 +522,7 @@ router.post('/getChapterAndDetails', function (req, res, next) {
 								var verseCountObj = JSON.parse(stringFormat);
 								if (langReceived === 'ta') {
 									book = verseCountObj[0].tamil;
-								}
-								else {
+								} else {
 									book = verseCountObj[0].english;
 								}
 								var bookList = {};
@@ -448,7 +531,7 @@ router.post('/getChapterAndDetails', function (req, res, next) {
 								let chapters = {};
 								chapters.book = book;
 								chapters.chapter = chapter;
-								chapters.id = book.substr(0,book.length - 1) + 1;
+								chapters.id = book.substr(0, book.length - 1) + 1;
 								chapters.verseData = verseData;
 								chapterList.push(chapters);
 								bookList.chapters = chapterList;
@@ -461,8 +544,18 @@ router.post('/getChapterAndDetails', function (req, res, next) {
 					);
 
 				});
+			}
+			catch (e)
+			{
+				console.log("error", e)
+				let msg = e.message
+				data.message = msg
+				res.status(400).json({success: false, data});
+				return
+			}
 			},
 			function (parallel_done) {
+			try {
 				let query1 = "select distinct " + fieldConstant.Id + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = " + chapter + " and " + fieldConstant.VerseCount + " = " + 1;
 				console.log('Query 5', query1)
 				db.query(query1, {}, function (err, results) {
@@ -484,8 +577,7 @@ router.post('/getChapterAndDetails', function (req, res, next) {
 								}
 								callBack(null);
 							})
-						}
-						else callBack(null);
+						} else callBack(null);
 					}, function () {
 						data.prevBook = prevBook;
 						// console.log(prevBook);
@@ -493,9 +585,19 @@ router.post('/getChapterAndDetails', function (req, res, next) {
 					});
 
 				});
+			}
+			catch (e)
+			{
+				console.log("error", e)
+				let msg = e.message
+				data.message = msg
+				res.status(400).json({success: false, data});
+				return
+			}
 			},
 			function (parallel_done) {
-				let query1 = "select distinct " + fieldConstant.Id + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = " + chapter +" ORDER BY ID DESC LIMIT 1";
+			try {
+				let query1 = "select distinct " + fieldConstant.Id + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = " + chapter + " ORDER BY ID DESC LIMIT 1";
 				console.log('Query 3', query1);
 				db.query(query1, {}, function (err, results) {
 					if (err) return parallel_done(err);
@@ -507,7 +609,7 @@ router.post('/getChapterAndDetails', function (req, res, next) {
 						// console.log(tempId)
 						if (tempId !== 0) {
 							let getBookQuery = "select " + fieldConstant.Book + ", " + fieldConstant.Chapter + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Id + " = " + tempId;
-							console.log('Query 4',getBookQuery)
+							console.log('Query 4', getBookQuery)
 							db.query(getBookQuery, {}, function (error, bookResult) {
 								if (error) return parallel_done(error);
 								if (bookResult.length !== 0) {
@@ -517,8 +619,7 @@ router.post('/getChapterAndDetails', function (req, res, next) {
 								}
 								callBack(null);
 							})
-						}
-						else callBack(null);
+						} else callBack(null);
 					}, function () {
 						data.nextBook = nextBook;
 						// console.log(nextBook);
@@ -526,22 +627,31 @@ router.post('/getChapterAndDetails', function (req, res, next) {
 					});
 
 				});
+			}
+			catch (e)
+			{
+				console.log("error", e)
+				let msg = e.message
+				data.message = msg
+				res.status(400).json({success: false, data});
+				return
+			}
 			},
 			function (parallel_done) {
-				let query1 = "select " + fieldConstant.english + ", "+ langColumn +" from " + fieldConstant.books + " where " + fieldConstant.Id + " = " + bookId;
+			try {
+				let query1 = "select " + fieldConstant.english + ", " + langColumn + " from " + fieldConstant.books + " where " + fieldConstant.Id + " = " + bookId;
 				console.log('Query 6', query1);
 				db.query(query1, {}, function (err, results) {
 					if (err) return parallel_done(err);
 					var stringFormat = JSON.stringify(results);
 					var jsonStruct = JSON.parse(stringFormat);
-					console.log('book value',jsonStruct);
+					console.log('book value', jsonStruct);
 					const currentPage = {};
 					currentPage.chapter = chapter
 					currentPage.user = jsonStruct[0].english
 					if (langReceived === 'ta') {
 						currentPage.book = jsonStruct[0].tamil;
-					}
-					else {
+					} else {
 						currentPage.book = jsonStruct[0].english;
 					}
 					data.currentPage = currentPage;
@@ -549,11 +659,25 @@ router.post('/getChapterAndDetails', function (req, res, next) {
 					parallel_done();
 
 				});
+			}
+			catch (e)
+			{
+				console.log("error", e)
+				let msg = e.message
+				data.message = msg
+				res.status(400).json({success: false, data});
+				return
+			}
 			},
 
 		], function (err) {
-			if (err)
-				res.status(400).json({ success: false, data });
+			if (err) {
+				console.log("error", err)
+				let msg = err.message
+				data.message = msg
+				res.status(400).json({success: false, data});
+				return
+			}
 			// db.end();
 			res.status(200).json({ success: true, data });
 		});
@@ -591,6 +715,7 @@ router.post('/getVerseAndDetails', function (req, res, next) {
 	var data = {};
 	async.parallel([
 		function (parallel_done) {
+		try {
 			var query3 = "SELECT " + fieldConstant.VerseCount + " FROM " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = " + chapter;
 			db.query(query3, {}, function (err, results) {
 				if (err) return parallel_done(err);
@@ -598,10 +723,10 @@ router.post('/getVerseAndDetails', function (req, res, next) {
 				var verseNoObj = {};
 				verseNoObj.chapter = chapter;
 				verseNoObj.id = 'Cha' + chapter;
-				verseNoObj.verse =  results.map(res => {
+				verseNoObj.verse = results.map(res => {
 					let verseCountDetails = {}
-					verseCountDetails.id = 'Cha'+ chapter +res.VerseCount
-					verseCountDetails.key = 'Ver'+res.VerseCount
+					verseCountDetails.id = 'Cha' + chapter + res.VerseCount
+					verseCountDetails.key = 'Ver' + res.VerseCount
 					verseCountDetails.VerseCount = res.VerseCount
 					return verseCountDetails
 				})
@@ -610,9 +735,19 @@ router.post('/getVerseAndDetails', function (req, res, next) {
 				// data.versecounts = results;
 				parallel_done();
 			});
+		}
+		catch (e)
+		{
+			console.log("error", e)
+			let msg = e.message
+			data.message = msg
+			res.status(400).json({success: false, data});
+			return
+		}
 		},
 		function (parallel_done) {
-			let query4 = "select " + fieldConstant.VerseCount + " , " + fieldConstant.Verse +" from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = " + chapter;
+		try {
+			let query4 = "select " + fieldConstant.VerseCount + " , " + fieldConstant.Verse + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = " + chapter;
 
 			return db.query(query4, {}, function (err, results, fields) {
 				if (err) return (err);
@@ -630,7 +765,7 @@ router.post('/getVerseAndDetails', function (req, res, next) {
 						let verseList = {};
 						// verseList.book = 0;
 						// verseList.chapter = 1;
-						verseList.id = 'Ver'+verseCountObj.VerseCount;
+						verseList.id = 'Ver' + verseCountObj.VerseCount;
 						verseList.verseCount = verseCountObj.VerseCount;
 						verseList.verse = verseCountObj.Verse;
 						// bookList.verse(verseList);
@@ -661,8 +796,7 @@ router.post('/getVerseAndDetails', function (req, res, next) {
 						var langColumn = '';
 						if (langReceived === 'ta') {
 							langColumn = fieldConstant.tamil;
-						}
-						else {
+						} else {
 							langColumn = fieldConstant.english;
 						}
 						var query4 = "select " + langColumn + " from " + fieldConstant.books + " where " + fieldConstant.id + " = " + bookId;
@@ -674,8 +808,7 @@ router.post('/getVerseAndDetails', function (req, res, next) {
 							var verseCountObj = JSON.parse(stringFormat);
 							if (langReceived === 'ta') {
 								book = verseCountObj[0].tamil;
-							}
-							else {
+							} else {
 								book = verseCountObj[0].english;
 							}
 							var bookList = {};
@@ -684,7 +817,7 @@ router.post('/getVerseAndDetails', function (req, res, next) {
 							let chapters = {};
 							chapters.book = book;
 							chapters.chapter = chapter;
-							chapters.id = book.substr(0,book.length - 1) + 1;
+							chapters.id = book.substr(0, book.length - 1) + 1;
 							chapters.verseData = verseData;
 							chapterList.push(chapters);
 							bookList.chapters = chapterList;
@@ -697,8 +830,18 @@ router.post('/getVerseAndDetails', function (req, res, next) {
 				);
 
 			});
+		}
+		catch (e)
+		{
+			console.log("error", e)
+			let msg = e.message
+			data.message = msg
+			res.status(400).json({success: false, data});
+			return
+		}
 		},
 		function (parallel_done) {
+		try {
 			let query1 = "select distinct " + fieldConstant.Id + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = " + chapter + " and " + fieldConstant.VerseCount + " = " + 1;
 			console.log('Query 5', query1)
 			db.query(query1, {}, function (err, results) {
@@ -720,8 +863,7 @@ router.post('/getVerseAndDetails', function (req, res, next) {
 							}
 							callBack(null);
 						})
-					}
-					else callBack(null);
+					} else callBack(null);
 				}, function () {
 					data.prevBook = prevBook;
 					// console.log(prevBook);
@@ -729,9 +871,19 @@ router.post('/getVerseAndDetails', function (req, res, next) {
 				});
 
 			});
+		}
+		catch (e)
+		{
+			console.log("error", e)
+			let msg = e.message
+			data.message = msg
+			res.status(400).json({success: false, data});
+			return
+		}
 		},
 		function (parallel_done) {
-			let query1 = "select distinct " + fieldConstant.Id + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = " + chapter +" ORDER BY ID DESC LIMIT 1";
+		try {
+			let query1 = "select distinct " + fieldConstant.Id + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = " + chapter + " ORDER BY ID DESC LIMIT 1";
 			console.log('Query 3', query1);
 			db.query(query1, {}, function (err, results) {
 				if (err) return parallel_done(err);
@@ -743,7 +895,7 @@ router.post('/getVerseAndDetails', function (req, res, next) {
 					// console.log(tempId)
 					if (tempId !== 0) {
 						let getBookQuery = "select " + fieldConstant.Book + ", " + fieldConstant.Chapter + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Id + " = " + tempId;
-						console.log('Query 4',getBookQuery)
+						console.log('Query 4', getBookQuery)
 						db.query(getBookQuery, {}, function (error, bookResult) {
 							if (error) return parallel_done(error);
 							if (bookResult.length !== 0) {
@@ -753,8 +905,7 @@ router.post('/getVerseAndDetails', function (req, res, next) {
 							}
 							callBack(null);
 						})
-					}
-					else callBack(null);
+					} else callBack(null);
 				}, function () {
 					data.nextBook = nextBook;
 					// console.log(nextBook);
@@ -762,22 +913,31 @@ router.post('/getVerseAndDetails', function (req, res, next) {
 				});
 
 			});
+		}
+		catch (e)
+		{
+			console.log("error", e)
+			let msg = e.message
+			data.message = msg
+			res.status(400).json({success: false, data});
+			return
+		}
 		},
 		function (parallel_done) {
-			let query1 = "select " + fieldConstant.english + ", "+ langColumn +" from " + fieldConstant.books + " where " + fieldConstant.Id + " = " + bookId;
+		try {
+			let query1 = "select " + fieldConstant.english + ", " + langColumn + " from " + fieldConstant.books + " where " + fieldConstant.Id + " = " + bookId;
 			console.log('Query 6', query1);
 			db.query(query1, {}, function (err, results) {
 				if (err) return parallel_done(err);
 				var stringFormat = JSON.stringify(results);
 				var jsonStruct = JSON.parse(stringFormat);
-				console.log('book value',jsonStruct);
+				console.log('book value', jsonStruct);
 				const currentPage = {};
 				currentPage.chapter = chapter
 				currentPage.user = jsonStruct[0].english
 				if (langReceived === 'ta') {
 					currentPage.book = jsonStruct[0].tamil;
-				}
-				else {
+				} else {
 					currentPage.book = jsonStruct[0].english;
 				}
 				data.currentPage = currentPage;
@@ -785,11 +945,24 @@ router.post('/getVerseAndDetails', function (req, res, next) {
 				parallel_done();
 
 			});
+		}
+		catch (e)
+		{
+			console.log("error", e)
+			let msg = e.message
+			data.message = msg
+			res.status(400).json({success: false, data});
+			return
+		}
 		},
 	], function (err) {
-		if (err)
-			res.status(400).json({ success: false });
-		// db.end();
+		if (err) {
+			console.log("error", err.message)
+			let msg = err.message
+			data.message = msg
+			res.status(400).json({success: false, data});
+			return
+		}
 		res.status(200).json({ success: true, data });
 	});
 });
@@ -816,6 +989,7 @@ router.post('/getDetails', function (req, res, next) {
 	var data = {};
 	async.parallel([
 		function (parallel_done) {
+		try {
 			var query4 = "select " + fieldConstant.VerseCount + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = " + chapter;
 
 			return db.query(query4, {}, function (err, results, fields) {
@@ -838,7 +1012,6 @@ router.post('/getDetails', function (req, res, next) {
 							if (err) return (err);
 							var stringFormat = JSON.stringify(result);
 							var verseObj = JSON.parse(stringFormat);
-
 
 
 							listCount++;
@@ -865,8 +1038,7 @@ router.post('/getDetails', function (req, res, next) {
 							var verseCountObj = JSON.parse(stringFormat);
 							if (langReceived === 'ta') {
 								book = verseCountObj[0].tamil;
-							}
-							else {
+							} else {
 								book = verseCountObj[0].english;
 							}
 							var bookList = {};
@@ -887,6 +1059,14 @@ router.post('/getDetails', function (req, res, next) {
 				);
 
 			});
+		}catch (e)
+		{
+			console.log("error", e)
+			let msg = e.message
+			data.message = msg
+			res.status(400).json({success: false, data});
+			return
+		}
 		},
 		// function (parallel_done) {
 		// 	let query1 = "select distinct " + fieldConstant.Id + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = " + chapter + " and " + fieldConstant.VerseCount + " = " + 1;
@@ -986,8 +1166,13 @@ router.post('/getDetails', function (req, res, next) {
 
 	], function (err) {
 		if (err)
-			// db.end();
-			res.status(200).json({ success: true, data });
+		{
+			let msg = err.message
+			data.message = msg
+			res.status(400).json({success: false, data});
+
+		}
+		res.status(200).json({ success: true, data });
 	});
 });
 
@@ -1004,6 +1189,7 @@ router.post('/getDynamicDetails', function (req, res, next) {
 	var data = {};
 	async.parallel([
 		function (parallel_done) {
+		try {
 			let query1 = "select distinct " + fieldConstant.Id + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = " + chapterId + " and " + fieldConstant.VerseCount + " = " + verseId;
 			db.query(query1, {}, function (err, results) {
 				if (err) return parallel_done(err);
@@ -1022,8 +1208,7 @@ router.post('/getDynamicDetails', function (req, res, next) {
 							}
 							callBack(null);
 						})
-					}
-					else callBack(null);
+					} else callBack(null);
 				}, function () {
 					data.prevBook = prevBook;
 
@@ -1031,8 +1216,17 @@ router.post('/getDynamicDetails', function (req, res, next) {
 				});
 
 			});
+		}
+		catch (e)
+		{
+			let msg = e.message
+			data.message = msg
+			res.status(400).json({success: false, data});
+			return
+		}
 		},
 		function (parallel_done) {
+		try {
 			let query1 = "select distinct " + fieldConstant.Id + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = " + chapterId + " and " + fieldConstant.VerseCount + " = " + verseId;
 			db.query(query1, {}, function (err, results) {
 				if (err) return parallel_done(err);
@@ -1052,8 +1246,7 @@ router.post('/getDynamicDetails', function (req, res, next) {
 							}
 							callBack(null);
 						})
-					}
-					else callBack(null);
+					} else callBack(null);
 				}, function () {
 					data.nextBook = nextBook;
 
@@ -1061,8 +1254,17 @@ router.post('/getDynamicDetails', function (req, res, next) {
 				});
 
 			});
+		}
+		catch (e)
+		{
+			let msg = e.message
+			data.message = msg
+			res.status(400).json({success: false, data});
+			return
+		}
 		},
 		function (parallel_done) {
+		try {
 			let query2 = "select distinct " + fieldConstant.Chapter + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId;
 
 			db.query(query2, {}, function (err, results) {
@@ -1076,8 +1278,17 @@ router.post('/getDynamicDetails', function (req, res, next) {
 				data.chapters = chapList;
 				parallel_done();
 			});
+		}
+		catch (e)
+		{
+			let msg = e.message
+			data.message = msg
+			res.status(400).json({success: false, data});
+			return
+		}
 		},
 		function (parallel_done) {
+		try {
 			let query3 = "select " + fieldConstant.VerseCount + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = " + chapterId;
 
 			db.query(query3, {}, function (err, results) {
@@ -1088,8 +1299,8 @@ router.post('/getDynamicDetails', function (req, res, next) {
 				verseNoObj.verseItems = results.map(res => {
 
 					var verseCount = {};
-					verseCount.verseId= fieldConstant.verseId + res.VerseCount;
-					verseCount.verseNo =res.VerseCount;
+					verseCount.verseId = fieldConstant.verseId + res.VerseCount;
+					verseCount.verseNo = res.VerseCount;
 					return verseCount;
 				})
 				verseList.push(verseNoObj);
@@ -1097,8 +1308,17 @@ router.post('/getDynamicDetails', function (req, res, next) {
 				// data.versecounts = results;
 				parallel_done();
 			});
+		}
+		catch (e)
+		{
+			let msg = e.message
+			data.message = msg
+			res.status(400).json({success: false, data});
+			return
+		}
 		},
 		function (parallel_done) {
+		try {
 			// let query4 = "select " + fieldConstant.Verse + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " limit " + limit;
 
 			let query4 = "select " + fieldConstant.VerseCount + " from " + fieldConstant.bible_ + langReceived + " where " + fieldConstant.Book + " = " + bookId + " and " + fieldConstant.Chapter + " = " + chapterId;
@@ -1115,7 +1335,7 @@ router.post('/getDynamicDetails', function (req, res, next) {
 				async.forEach(results, function (verse, callBack) {
 						var stringFormat = JSON.stringify(verse);
 						var verseCountObj = JSON.parse(stringFormat);
-						var sql = "select " + fieldConstant.Verse + " from " + fieldConstant.bible_ + langReceived + " where Versecount = " + verseCountObj.VerseCount + " and " + fieldConstant.Chapter + " = "+chapterId +" and " + fieldConstant.Book + " = " + bookId;
+						var sql = "select " + fieldConstant.Verse + " from " + fieldConstant.bible_ + langReceived + " where Versecount = " + verseCountObj.VerseCount + " and " + fieldConstant.Chapter + " = " + chapterId + " and " + fieldConstant.Book + " = " + bookId;
 
 						// data.sql =  sql;
 						db.query(sql, {}, function (err, result, next) {
@@ -1140,8 +1360,7 @@ router.post('/getDynamicDetails', function (req, res, next) {
 						var langColumn = '';
 						if (langReceived === 'ta') {
 							langColumn = fieldConstant.tamil;
-						}
-						else {
+						} else {
 							langColumn = fieldConstant.english;
 						}
 						var query5 = "select " + langColumn + " from " + fieldConstant.books + " where " + fieldConstant.id + " = " + bookId;
@@ -1153,8 +1372,7 @@ router.post('/getDynamicDetails', function (req, res, next) {
 							var verseCountObj = JSON.parse(stringFormat);
 							if (langReceived === 'ta') {
 								book = verseCountObj[0].tamil;
-							}
-							else {
+							} else {
 								book = verseCountObj[0].english;
 							}
 							var bookList = {};
@@ -1175,10 +1393,24 @@ router.post('/getDynamicDetails', function (req, res, next) {
 				);
 
 			});
+		}
+		catch (e)
+		{
+			let msg = e.message
+			data.message = msg
+			res.status(400).json({success: false, data});
+			return
+		}
 		},
 
 	], function (err) {
 		if (err)
+		{
+			let msg = err.message
+			data.message = msg
+			res.status(400).json({success: false, data});
+			return
+		}
 			// db.end();
 			res.status(200).json({ success: true, data });
 	});

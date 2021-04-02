@@ -42,6 +42,7 @@ class VerseList extends React.Component{
 
     render(){
 		const {indexActive} = this.state
+
         return(
 			<ul>
 				{

@@ -10,6 +10,7 @@ import VerseList from './VerseListScreen';
 import VerseScreen from './VerseScreens/VerseScreen';
 import fieldConstants from '../utils/FieldConstants';
 import cookies from '../services/CookieServices';
+import i18next from '../i18n';
 
 
 class HomeScreen extends React.Component {
@@ -20,7 +21,7 @@ class HomeScreen extends React.Component {
 		this.bookListRef = React.createRef()
 		this.chapterListRef = React.createRef()
 		this.onVerseChangeRef = React.createRef()
-		// this.setLanguageCookie()
+		this.setLanguageCookie()
 		//
 		// this.myRef = React.createRef();
 		// this.myRef = element => {
@@ -67,7 +68,11 @@ class HomeScreen extends React.Component {
 		{
 			this.setState({
 				lang: langCookie
-			}, () => this.fetchAllDetails())
+			}, () => {
+				this.fetchAllDetails()
+				i18next.changeLanguage(langCookie)
+				}
+			)
 		}
 		else this.fetchAllDetails()
 	}
@@ -361,7 +366,7 @@ class HomeScreen extends React.Component {
 			<main className="verse-viewport">
 				<aside className="sidebar left">
 					<div className="books_list">
-						<div className="list_title">Books</div>
+						<div className="list_title">{i18next.t("Books")}</div>
 						<BookList
 							ref={this.bookListRef}
 							books={this.state.books}
@@ -369,7 +374,7 @@ class HomeScreen extends React.Component {
 					</div>
 
 					<div className="chapters_list">
-						<div className="list_title">Chapter</div>
+						<div className="list_title">{i18next.t("Chapters")}</div>
 						{this.state.chapters.map(chaps => {
 							return (<ChapterList
 								ref={this.chapterListRef}
@@ -380,7 +385,7 @@ class HomeScreen extends React.Component {
 					</div>
 
 					<div className="verses_list">
-						<div className="list_title">Verse</div>
+						<div className="list_title">{i18next.t("Verse")}</div>
 						{this.state.verseCount.map(verse => {
 							return (<VerseList
 								ref={this.onVerseChangeRef}
@@ -520,7 +525,7 @@ class HomeScreen extends React.Component {
 								</em>
 								Search
 							</h1>
-							<p>Coming soon</p>
+							<p>{i18next.t("Comming_Soon")}</p>
 						</div>
 					</div>
 				</aside>

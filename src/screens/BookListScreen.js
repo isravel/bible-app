@@ -1,4 +1,5 @@
 import React from 'react';
+import i18next from '../i18n';
 
 class BookList extends React.Component {
 
@@ -11,6 +12,7 @@ class BookList extends React.Component {
             activeIndex :itemId
         })
         this.props.onClick(itemId)
+
     }
 
 	forceUpdateHandler(bookNo){
@@ -18,24 +20,27 @@ class BookList extends React.Component {
 			activeIndex :bookNo
 		}, () => this.forceUpdate())
 
+
+
 	};
 
 
 
 	render() {
-		let iterates = 0;
+		let iterates = 0
         return (
 
             <ul>
 
                 {
                     this.props.books.map(item => {
+
                     	iterates++;
                         const className = this.state.activeIndex === item.bookId ? 'active' : null;
                         return (
                         	<div>
 							{/*{iterates === 1 ? <li className='divider'>Old Testament</li>: null}*/}
-							{iterates === 40 ? <li className='divider'>New Testament</li>: null}
+							{iterates === 40 ? <li className='divider'>{i18next.t("New_Testament")}</li>: null}
                             {/*// <li title={item.human} key={item.id} onClick={this.props.onClick.bind(this, item.id)}>{item.human}</li>);*/}
                             <li className={className} id={item.bookId } title={item.human} key={item.id} onClick={() => this.onClickHandler(item.bookId)}><span>{item.human}</span></li>
 

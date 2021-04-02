@@ -1,14 +1,17 @@
 import React, { Image } from 'react';
 import ProfileIcon from '../logo.svg'
+import i18next from '../i18n';
 
-const nav = (props) => {
+function nav (props){
+	// const [t, i18n] = useTranslation();
     return (
+
         <header>
             <nav className="navbar">
                 <div className="left">
                     <div className="logo">
                         <em className="svg-icon"><svg xmlns="http://www.w3.org/2000/svg"><use xlinkHref={process.env.PUBLIC_URL + "/svg/sprite-icons.svg#album"} /></svg></em>
-                        BIBLE
+						{i18next.t("Bible")}
                     </div>
                 </div>
                 <div className="center">

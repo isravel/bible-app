@@ -3,6 +3,7 @@ import {initReactI18next} from "react-i18next";
 
 import en_translation from './locales/en/en_translation.json'
 import ta_translation from './locales/ta/ta_translation.json'
+import fieldConstants from './utils/FieldConstants';
 
 const resources = {
 	en:{
@@ -17,7 +18,7 @@ i18n
 	.use(initReactI18next) // passes i18n down to react-i18next
 	.init({
 		resources,
-		lng: "ta",
+		lng: fieldConstants.lang,
 
 		keySeparator: false, // we do not use keys in form messages.welcome
 

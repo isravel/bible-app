@@ -1,6 +1,6 @@
 import React from 'react';
 
-var refs;
+let refs;
 class ChapterList extends React.Component {
 
 	constructor(props) {

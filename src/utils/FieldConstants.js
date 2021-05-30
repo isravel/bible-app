@@ -1,7 +1,7 @@
 module.exports = {
     //Root Url
     baseUrl : "http://localhost:5000/api/",
-    lang:"en",
+    lang:"ta",
     limit:"50",
     fullDetails : "getFullDetails",
     chapterAndDetails : "getChapterAndDetails",
@@ -23,5 +23,8 @@ module.exports = {
     id :"id",
     english :"english",
     tamil: "tamil",
+
+	//language
+	selected_lang: "lang-select"
 
 }

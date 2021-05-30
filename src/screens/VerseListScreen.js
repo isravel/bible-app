@@ -24,6 +24,7 @@ class VerseList extends React.Component{
 	// }
 
 	onClickHandler(itemId, itemCount) {
+		console.log('verse change handler itemId', itemId)
 		activeIndex = itemCount
         this.setState({
             indexActive :itemCount

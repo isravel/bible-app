@@ -6,6 +6,7 @@
 		"@testing-library/jest-dom": "^4.2.4",
 		"@testing-library/react": "^9.5.0",
 		"@testing-library/user-event": "^7.2.1",
+		"caniuse-lite": "^1.0.30001228",
 		"i18next": "^20.1.0",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
@@ -38,6 +39,8 @@
 		]
 	},
 	"devDependencies": {
+		"@babel/helper-define-map": "^7.13.12",
+		"@babel/helper-regex": "^7.10.5",
 		"cheerio": "^1.0.0-rc.3",
 		"child_process": "^1.0.2",
 		"concurrently": "^5.2.0",
@@ -54,7 +57,7 @@
 		"gulp-svgmin": "^2.2.0",
 		"gulp-svgstore": "^7.0.1",
 		"gulp-webserver": "^0.9.1",
-		"node-sass": "^4.14.1",
+		"node-sass": "^6.0.0",
 		"path": "^0.12.7",
 		"postcss-scss": "^2.1.1",
 		"postcss-strip-inline-comments": "^0.1.5",

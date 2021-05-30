@@ -10,6 +10,7 @@
 	font-size: 14px;
 	right: 1em;
 	top: 1em;
+	z-index: 1;
 
 	#{$self}__toggle {
 		display: inline-flex;

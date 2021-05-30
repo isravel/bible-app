@@ -87,3 +87,5 @@ public/css-rtl/maps/styles-rtl.css.map
 public/css/maps/styles.css.map
 .sass-cache
 .sass-cache/*
+*.map
+*.map

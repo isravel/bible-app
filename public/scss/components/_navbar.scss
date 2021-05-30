@@ -38,6 +38,7 @@
     align-items: center;
     &__next, &__prev{
       cursor: pointer;
+      line-height: 0;
     }
     &__name{
       margin: 0 30px;

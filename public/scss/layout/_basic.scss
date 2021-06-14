@@ -21,9 +21,8 @@ body {
 	@include css4 {
 		font-family: var(--font);
 		color: var(--color);
+		background-color: var(--bg);
 	}
-	font-family: var(--font);
-	color: var(--color);
 	margin: 0;
 }
 

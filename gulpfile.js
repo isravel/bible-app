@@ -21,6 +21,7 @@ var svgstore = require('gulp-svgstore');
 var through2 = require('through2');
 var postcss = require('gulp-postcss');
 var postcss_scss = require('postcss-scss');
+var mmq = require('gulp-merge-media-queries');
 var scss;
 sass.compiler = require('node-sass');
 var stripInlineComments = require('postcss-strip-inline-comments');
@@ -72,6 +73,8 @@ gulp.task('sass', done => {
       overrideBrowserslist: autoprefixBrowsers,
       grid: true
     }))
+    // media Query Combile 
+    // .pipe(mmq())
     .pipe(cleanCSS({
       format: 'keep-breaks',
       afterComment: true,
@@ -95,6 +98,7 @@ gulp.task('rtl', done => {
             overrideBrowserslist: autoprefixBrowsers,
             grid: true
         }))
+        .pipe(mmq())
         .pipe(cleanCSS({
             format: 'keep-breaks',
             afterComment: true,

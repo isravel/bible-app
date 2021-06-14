@@ -375,7 +375,7 @@ class HomeScreen extends React.Component {
 				/>
 
 				<main className="verse-viewport">
-					<aside className="sidebar left">
+					<aside className="sidebar left verse-selection">
 						<div className="books_list">
 							<div className="list_title">{i18next.t("Books")}</div>
 							<BookList
@@ -425,7 +425,7 @@ class HomeScreen extends React.Component {
 									<div className="settings-group alignment">
 										<div className="settings-group__label">Alignment</div>
 										<div className="settings-group__input-field">
-											<input type="radio" id="alignment-left" name="alignment" checked/>
+											<input type="radio" id="alignment-left" name="alignment" value="left" checked/>
 											<label for="alignment-left">
 												<em className="svg-icon">
 													<svg>
@@ -436,7 +436,7 @@ class HomeScreen extends React.Component {
 											</label>
 										</div>
 										<div className="settings-group__input-field">
-											<input type="radio" id="alignment-justify" name="alignment"/>
+											<input type="radio" id="alignment-justify" name="alignment" value="justify"/>
 											<label for="alignment-justify">
 												<em className="svg-icon">
 													<svg>
@@ -447,7 +447,7 @@ class HomeScreen extends React.Component {
 											</label>
 										</div>
 										<div className="settings-group__input-field">
-											<input type="radio" id="alignment-center" name="alignment"/>
+											<input type="radio" id="alignment-center" name="alignment" value="center"/>
 											<label for="alignment-center">
 												<em className="svg-icon">
 													<svg>
@@ -461,31 +461,25 @@ class HomeScreen extends React.Component {
 									<div className="settings-group text-size">
 										<div className="settings-group__label">Text size</div>
 										<div className="settings-group__input-field">
-											<input type="radio" id="font-size-10" name="font-size"/>
-											<label for="font-size-10">
-												10
-											</label>
-										</div>
-										<div className="settings-group__input-field">
-											<input type="radio" id="font-size-12" name="font-size"/>
+											<input type="radio" id="font-size-12" name="font-size" value="12"/>
 											<label for="font-size-12">
 												12
 											</label>
 										</div>
 										<div className="settings-group__input-field">
-											<input type="radio" id="font-size-14" name="font-size" checked/>
+											<input type="radio" id="font-size-14" name="font-size" value="14" checked/>
 											<label for="font-size-14">
 												14
 											</label>
 										</div>
 										<div className="settings-group__input-field">
-											<input type="radio" id="font-size-16" name="font-size"/>
+											<input type="radio" id="font-size-16" value="16" name="font-size"/>
 											<label for="font-size-16">
 												16
 											</label>
 										</div>
 										<div className="settings-group__input-field">
-											<input type="radio" id="font-size-18" name="font-size"/>
+											<input type="radio" id="font-size-18" value="18" name="font-size"/>
 											<label for="font-size-18">
 												18
 											</label>
@@ -494,25 +488,19 @@ class HomeScreen extends React.Component {
 									<div className="settings-group font-variant">
 										<div className="settings-group__label">Text size</div>
 										<div className="settings-group__input-field">
-											<input type="radio" id="font-variant-1" name="font-variant" checked/>
-											<label for="font-variant-1">
-												EB Garamond
-											</label>
-										</div>
-										<div className="settings-group__input-field">
-											<input type="radio" id="font-variant-2" name="font-variant"/>
+											<input type="radio" id="font-variant-1" name="font-variant"/>
 											<label for="font-variant-2">
 												Georgia
 											</label>
 										</div>
 										<div className="settings-group__input-field">
-											<input type="radio" id="font-variant-3" name="font-variant"/>
+											<input type="radio" id="font-variant-2" name="font-variant"/>
 											<label for="font-variant-3">
 												Nunito Sans
 											</label>
 										</div>
 										<div className="settings-group__input-field">
-											<input type="radio" id="font-variant-4" name="font-variant"/>
+											<input type="radio" id="font-variant-3" name="font-variant"/>
 											<label for="font-variant-4">
 												Arial
 											</label>
@@ -535,7 +523,7 @@ class HomeScreen extends React.Component {
 
 					</article>
 
-					<aside className="sidebar right">
+					<aside className="sidebar right search-section">
 						<div className="search-coming-soon flex-center">
 							<div>
 								<img src={process.env.PUBLIC_URL + "/images/search_illustration.svg"}/>
@@ -568,7 +556,7 @@ class HomeScreen extends React.Component {
 			<div>{
 
 				<div>
-					{this.state.result ? person : <div className="preloader">Loading...</div>}
+					{this.state.result ? person : <div className="preloader"><div className="preloader-container"><span className="animated-preloader"></span></div></div>}
 				</div>}
 			</div>);
 	}

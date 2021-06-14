@@ -1,3 +1,54 @@
-.langSelector{
-	width: 120px;
+.langSelector {
+	width: 160px;
+	position: relative;
+
+	.svg-icon {
+		width: 1rem;
+		height: 1rem;
+		position: absolute;
+		bottom: 0.8rem;
+		left: 0.8rem;
+		z-index: 1;
+	}
+
+
+
+	.select {
+		&__value-container {
+			padding-left: 2.5rem;
+		}
+
+		&__control {
+			@include css4 {
+				background-color: var(--bg-secondary);
+				border-color: var(--bg);
+			}
+		}
+
+		&__single-value, &__placeholder {
+			@include css4 {
+				color: var(--color);
+			}
+		}
+
+		&__menu {
+			@include css4 {
+				background-color: var(--bg-secondary);
+			}
+		}
+
+		&__option {
+			&:active {
+				@include css4 {
+					background-color: var(--primary-color);
+				}
+			}
+			&--is-selected{
+				@include css4 {
+					background-color: var(--primary-color);
+				}
+			}
+
+		}
+	}
 }

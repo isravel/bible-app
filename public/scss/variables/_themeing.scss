@@ -1,16 +1,33 @@
-/* colors */
-$bg: $white;
-$bg-secondary: color("grey", "lighten-4");
-$text-color: color('grey','darken-4');
+/* Font */
+$font: Muli, 'Nunito Sans', Arial, Helvetica, sans-serif;
 
-$primary-color: color('red', 'darken-1');
+/* Colors */
+$bg: color('shades', 'white');
+$bg-secondary: color("grey", "lighten-4");
+$text-color: color('grey', 'darken-4');
+
+$primary-color: color('red', 'darken-2');
 
 $hover_color: color('grey', 'lighten-2');
-$border-color: color("grey","lighten-3");
+$border-color: color("grey", "lighten-3");
 
 $icon-color: color("grey", "darken-3");
 $scrollbar-bg: color('grey', 'lighten-2');
 
 $label-color: color('grey', 'lighten-1');
 
-$font: Muli, 'Nunito Sans', Arial, Helvetica, sans-serif;
+
+/* Night Mode Colors */
+$night-bg: color('blue-grey', 'darken-4');
+$night-bg-secondary: color("blue-grey", "darken-4");
+$night-text-color: color('grey', 'lighten-4');
+
+$night-primary-color: color('blue-grey', 'lighten-1');
+
+$night-hover_color: color('blue-grey', 'darken-2');
+$night-border-color: color("blue-grey", "darken-4");
+
+$night-icon-color: color("blue-grey", "lighten-3");
+$night-scrollbar-bg: color('blue-grey', 'darken-3');
+
+$night-label-color: color('blue-grey', 'darken-1');

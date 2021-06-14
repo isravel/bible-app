@@ -1,59 +1,108 @@
-.navbar{
-  display: flex;
-  align-items: center;
-  padding: 0.6rem 1.2rem;
-  height: $navbar-height;
-  width: 100%;
-  @include css4{
-    border-bottom: 1px solid var(--border-color);
-    background: var(--navbar-bg);
-  };
-  > .left{
-    margin-right: auto;
-    line-height: 1;
-  }
-  > .right{
-    margin-left: auto;
-    display: inline-flex;
-  }
-  >.center{
-    margin: 0 auto;
-  }
-  .svg-icon{
-    width: 1.8rem;
-    height: 1.8rem;
-    @include css4{fill: var(--icon-color);}
-  }
-  .logo{
-    display: inline-flex;
-    align-items: center;
-    font-size: 1.75rem;
-    user-select: none;
-    .svg-icon{
-      margin-right: 1rem;
-    }
-  }
-  .chapter__nav{
-    display: inline-flex;
-    align-items: center;
-    &__next, &__prev{
-      cursor: pointer;
-      line-height: 0;
-    }
-    &__name{
-      margin: 0 30px;
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
-  }
-  .nav__icons{
-    display: inline-flex;
-    align-items: center;
-    > [class*='__icon']{
-      display: inherit;
-    }
-    .svg-icon{
-      margin: 0 1rem;
-    }
-  }
+.navbar {
+	display: flex;
+	align-items: center;
+	padding: 0.6rem 1.2rem;
+	height: $navbar-height;
+	width: 100%;
+
+	@include css4 {
+		border-bottom: 1px solid var(--border-color);
+		background: var(--navbar-bg);
+	}
+
+	> {
+
+		.left {
+			margin-right: auto;
+			line-height: 1;
+		}
+
+		.right {
+			margin-left: auto;
+			display: inline-flex;
+			justify-content: flex-end;
+		}
+
+		.center {
+			margin: 0 auto;
+			text-align: center;
+		}
+
+		.left,
+		.right {
+			width: 40px;
+		}
+
+		.center,
+		.left,
+		.right {
+			@include MQ(L) {
+				flex: 0 0 33.3%;
+			}
+		}
+
+	}
+
+	.svg-icon {
+		width: 1.8rem;
+		height: 1.8rem;
+
+		@include css4 {
+			fill: var(--icon-color);
+		}
+	}
+
+	.logo {
+		align-items: center;
+		font-size: 1.75rem;
+		user-select: none;
+		display: none;
+
+		.svg-icon {
+			margin-right: 1rem;
+		}
+
+		@include MQ(L) {
+			display: inline-flex;
+		}
+	}
+
+	.menu-icon {
+		display: inline-block;
+		cursor: pointer;
+
+		@include MQ(L) {
+			display: none;
+		}
+	}
+
+	.chapter__nav {
+		display: inline-flex;
+		align-items: center;
+
+		&__next,
+		&__prev {
+			cursor: pointer;
+			line-height: 0;
+		}
+
+		&__name {
+			margin: 0 30px;
+			font-size: 1.5rem;
+			font-weight: bold;
+		}
+	}
+
+	.nav__icons {
+		display: inline-flex;
+		align-items: center;
+
+		>[class*='__icon'] {
+			display: inherit;
+		}
+
+		.svg-icon {
+			margin: 0 1rem;
+		}
+	}
 }

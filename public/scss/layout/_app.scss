@@ -18,6 +18,10 @@
 
 			.sidebar {
 				height: 100%;
+				display: none;
+				@include MQ(L) {
+					display: block;
+				}
 			}
 		}
 	}
@@ -41,7 +45,7 @@ footer {
 	user-select: none;
 	@include css4 {
 		border-top: 1px solid var(--border-color);
-		background-color: var(--secondary-bg);
+		background-color: var(--bg-secondary);
 	}
 
 	.foot__credits {

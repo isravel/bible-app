@@ -2,37 +2,60 @@
 $navbar_height: 52px;
 $list-line-height: 2rem;
 $footer-line-height: 2.4rem;
+$scrollbar-width: 10px;
+$scrollbar-full-width: 14px;
 //it is nessesary to define the variables in sass map instead of :root, for compatibility reasons.
+$commonvariables:(--font: $font,
+	--list-line-height: $list-line-height,
+	--footer-line-height: $footer-line-height,
+);
 $variables: (
-	
-	// Basic
-	--font: $font,
 	--bg: $bg,
 	--color: $text-color,
 	--primary-color: $primary-color,
 	--bg-secondary: $bg-secondary,
-	
+
 	// Global
 	--border-color: $border-color,
 	--hover-color: $hover_color,
-	
+
 	// Icons
 	--icon-color: $icon-color,
-	
+
 	// components color specific
-	
+
 	// Navbar
 	--navbar-bg: $bg,
-	
+
 	// Scrollbar
 	--scrollbar-bg: $scrollbar-bg,
 
-	// Sidebar
-	--list-line-height: $list-line-height,
-
 	// Viewport settings 
 	--label-color: $label-color,
-
-	// Footer
-	--footer-line-height: $footer-line-height, 
 );
+
+
+$nightvariables: (
+	--bg: darken($night-bg, 10%),
+	--color: $night-text-color,
+	--primary-color: $night-primary-color,
+	--bg-secondary: $night-bg-secondary,
+
+	// Global
+	--border-color: $night-border-color,
+	--hover-color: $night-hover_color,
+
+	// Icons
+	--icon-color: $night-icon-color,
+
+	// components color specific
+
+	// Navbar
+	--navbar-bg: $night-bg,
+
+	// Scrollbar
+	--scrollbar-bg: $night-scrollbar-bg,
+
+	// Viewport settings 
+	--label-color: $night-label-color,
+)

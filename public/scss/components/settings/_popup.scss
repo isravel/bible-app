@@ -4,6 +4,7 @@
 	#{$self}__wrapper {
 		position: relative;
 	}
+
 	user-select: none;
 	position: absolute;
 	position: sticky;
@@ -30,6 +31,12 @@
 		.svg-icon {
 			width: 1.5em;
 			height: 1.5em;
+
+			svg {
+				@include css4 {
+					fill: var(--color);
+				}
+			}
 		}
 	}
 
@@ -42,12 +49,13 @@
 		right: 0;
 		padding: 0.5rem 0;
 		border-radius: 6px;
-		box-shadow: 0px 11px 15px transparentize($text-color, 0.8);
+		box-shadow: 0px 11px 15px transparentize(black, 0.7);
 
 		@include css4 {
 			background-color: var(--bg);
 		}
-		&.active{
+
+		&.active {
 			display: block;
 		}
 	}
@@ -79,6 +87,7 @@
 			font-size: 0.8em;
 			line-height: 1;
 			cursor: pointer;
+
 			.svg-icon {
 				width: 1.3em;
 				height: 1.3em;
@@ -135,20 +144,15 @@
 			label {
 				width: 100%;
 				font-size: 1em;
-
 				&[for*='1'] {
-					font-family: "EB Garamond", Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-				}
-
-				&[for*='2'] {
 					font-family: Georgia, 'Times New Roman', Times, serif;
 				}
 
-				&[for*='3'] {
+				&[for*='2'] {
 					font-family: 'Nunito sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 				}
 
-				&[for*='4'] {
+				&[for*='3'] {
 					font-family: Arial, Helvetica, sans-serif;
 				}
 			}

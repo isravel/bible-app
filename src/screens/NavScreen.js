@@ -40,6 +40,11 @@ function nav(props) {
 						</em>
 						{i18next.t("Bible")}
 					</div>
+					<em className="svg-icon menu-icon">
+						<svg xmlns="http://www.w3.org/2000/svg">
+							<use xlinkHref={process.env.PUBLIC_URL + "/svg/sprite-icons.svg#menu"}/>
+						</svg>
+					</em>
 				</div>
 				<div className="center">
 					<div className="chapter__nav">
@@ -81,10 +86,29 @@ function nav(props) {
 						</div>
 					</div>
 					<div className="langSelector">
+						<em className="svg-icon">
+							<svg xmlns="http://www.w3.org/2000/svg">
+								<use xlinkHref={process.env.PUBLIC_URL + "/svg/sprite-icons.svg#translate"}/>
+							</svg>
+						</em>
 						<Select
 							placeholder={props.defaultLanguage}
 							options={options}
 							onChange={onLanguageChange}
+							classNamePrefix = "select"
+							theme = {
+								theme => ({
+									...theme,
+									borderRadius: 5,
+									colors: {
+										...theme.colors,
+										primary: '#333',
+										primary25: '#00000033',
+										primary50: '#00000077',
+										primary75: '#000000aa',
+									},
+								})
+							}
 						/>
 					</div>
 				</div>
